@@ -1,9 +1,0 @@
-{{ $author := .Params.author }}
-
-{{ with .Site.GetPage "/team"}}
-{{ with .GetPage $author }}
-
-{{ partial "team/member-info" . }}
-
-{{ end }}
-{{ end }}

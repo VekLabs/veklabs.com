@@ -1,13 +1,10 @@
+node_modules
 
-/public
-/node_modules
+/.cache
+/build
+/public/build
+.env
+!.env.template
 
-/functions
-/resources
+app/styles/app.css
 .DS_Store
-
-/dist
-# Local Netlify folder
-.netlify
-scripts/cache.json
-yarn-error.log

@@ -1,0 +1,22 @@
+html {
+  background-color: #111111;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+#app {
+  height: 100vh;
+  max-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
