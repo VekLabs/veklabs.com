@@ -4,8 +4,11 @@ import { take } from "lodash-es"
 import VideoCard from "./VideoCard.tsx"
 import { Image } from "astro:assets"
 import { ChevronRight } from "lucide-astro"
+import home from "../home.json"
 
-const videos = await getCollection("videos")
+const videos = await getCollection("videos", ({ id }) =>
+  home.videos.includes(id.replace(".md", "")),
+)
 ---
 
 <section class="mx-auto w-container">

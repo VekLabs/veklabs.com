@@ -47,8 +47,9 @@ collections:
               widget: "relation",
               multiple: true,
               collection: "videos",
+              display_fields: ["title"],
               search_fields: ["title"],
-              value_field: "title",
+              value_field: "{{slug}}",
             }
           - { name: TEAM_TITLE, label: Team Title, widget: string }
           - { name: PROJECTS_FILMED, label: Projects Filmed, widget: number }
@@ -76,8 +77,9 @@ collections:
               widget: "relation",
               multiple: true,
               collection: "videos",
+              display_fields: ["title"],
               search_fields: ["title"],
-              value_field: "title",
+              value_field: "{{slug}}",
             }
 
       - label: Clients
@@ -160,7 +162,7 @@ collections:
           collection: "categories",
           hint: "Select the category for this video. [Create a new category](/admin#/collections/categories/new) if needed.",
           required: true,
-          value_field: "title",
+          value_field: "{{slug}}",
           search_fields: ["title"],
         }
       - { name: "image", label: "image", widget: "image", required: true }
