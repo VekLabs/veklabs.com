@@ -4,7 +4,7 @@ import VideoCard from "./VideoCard.tsx"
 import { render } from "astro:content"
 import { Image } from "astro:assets"
 
-type Props = CollectionEntry<"features">
+type Props = CollectionEntry<"videos">
 const feature = Astro.props
 const { Content } = await render(feature)
 ---

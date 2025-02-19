@@ -159,23 +159,21 @@ export function VideoInformationPopup({
                     </div>
                   )}
                   {meta &&
-                    Object.entries(meta as Record<string, string>).map(
-                      ([key, value]) => (
-                        <motion.div
-                          key={key}
-                          className="flex flex-col"
-                          variants={{
-                            hidden: { opacity: 0 },
-                            visible: { opacity: 1 },
-                          }}
-                        >
-                          <span className="text-xxs uppercase tracking-widest text-accent-300">
-                            {key}
-                          </span>
-                          <span>{value}</span>
-                        </motion.div>
-                      ),
-                    )}
+                    meta.map(({ label, value }) => (
+                      <motion.div
+                        key={label}
+                        className="flex flex-col"
+                        variants={{
+                          hidden: { opacity: 0 },
+                          visible: { opacity: 1 },
+                        }}
+                      >
+                        <span className="text-xxs uppercase tracking-widest text-accent-300">
+                          {label}
+                        </span>
+                        <span>{value}</span>
+                      </motion.div>
+                    ))}
                 </div>
               ) : null}
             </div>

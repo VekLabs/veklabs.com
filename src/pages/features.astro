@@ -2,10 +2,12 @@
 import { getCollection, render } from "astro:content"
 import FeatureCard from "../components/FeatureCard.astro"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
+import featuresConfig from "../features.json"
+import { kebabCase } from "lodash-es"
 
-const features = (await getCollection("features")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-)
+const features = (await getCollection("videos"))
+  .filter((video) => featuresConfig.videos.includes(video.data.title))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 ---
 
 <DefaultLayout>

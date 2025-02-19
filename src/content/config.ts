@@ -75,35 +75,38 @@ const videos = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      videoID: z.string(),
+      videoID: z.union([z.string(), z.number()]),
       videoURL: z.string(),
       previewURL: z.string(),
       image: image(),
       type: z.string(),
+      meta: z
+        .array(
+          z.object({
+            label: z.string(),
+            value: z.string(),
+          }),
+        )
+        .optional(),
+      publishDate: z.coerce.date().optional(),
+      site: z.string().url().optional(),
     }),
 })
 
-const features = defineCollection({
+const categories = defineCollection({
   type: "content",
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      category: z.string(),
-      videoURL: z.string().url().startsWith("https://player.vimeo.com/"),
-      videoID: z.number(),
-      publishDate: z.coerce.date(),
-      image: image(),
-      site: z.string().url().optional(),
-      meta: z.record(z.string()).optional(),
     }),
 })
 
 export const collections = {
+  categories,
   reports,
   videos,
   services,
   offerings,
-  features,
   team,
   testimonials,
 }
