@@ -1,8 +1,55 @@
 ---
-import ClientsSection from "../components/ClientsSection.astro"
+import { Image } from "astro:assets"
+import config from "../config.json"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
+import { ChevronRight } from "lucide-astro"
+import { getCollection } from "astro:content"
+import TestimonialCard from "../components/TestimonialCard.astro"
+
+const logos = Object.values(
+  import.meta.glob("/src/images/logos/*", { eager: true }),
+).map((file) => (file as { default: { src: string } }).default)
+
+const testimonials = await getCollection("testimonials")
 ---
 
 <DefaultLayout title="Clients">
-  <ClientsSection />
+  <section class="mx-auto w-container max-w-7xl py-14">
+    <div class="flex flex-col justify-center gap-6 px-4 pb-24">
+      <h2 class="max-w-xl text-pretty text-3xl font-medium">
+        {config.CLIENT_SUB_TITLE}
+      </h2>
+      <div class="flex items-center gap-4">
+        <a class="mt-1 flex items-center gap-1.5 text-lg" href="/contact">
+          {config.cta.title}
+          <ChevronRight class="size-5" />
+        </a>
+
+        <a class="mt-1 flex items-center gap-1.5 text-lg" href="/contact">
+          Google Reviews
+          <ChevronRight class="size-5" />
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="grid gap-6"
+      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(36rem, 1fr))" }}
+    >
+      {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
+    </div>
+
+    <div class="flex items-center gap-6 py-4 pt-36">
+      <span class="text-3xl">
+        Cutting-edge Film & Storytelling For Businesses.
+      </span>
+      <a class="ml-auto mt-1 flex items-center gap-1.5 text-lg" href="/contact">
+        Get Started
+        <ChevronRight class="size-5" />
+      </a>
+    </div>
+  </section>
+  <!-- <div class="flex flex-row items-center justify-center">
+      {logos.map((logo) => <Image class="w-16" src={logo} alt="" />)}
+    </div> -->
 </DefaultLayout>

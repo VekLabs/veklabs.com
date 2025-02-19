@@ -19,7 +19,7 @@ import {
   type VideoData,
 } from "./videoConstants"
 import { VideoInformationPopup } from "./VideoPopup"
-import { useVideoOpenState as useVideoOpenState } from "../hooks/uesVideoOpenState"
+import { useVideoOpenState as useVideoOpenState } from "../hooks/useVideoOpenState"
 
 export type VideoCardProps = VideoData & {
   className?: string

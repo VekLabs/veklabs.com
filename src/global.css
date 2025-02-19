@@ -34,3 +34,8 @@ h3,
 a {
   @apply text-accent-400 no-underline;
 }
+
+.linear-gradient-mask {
+  --mask-start-deg: 45deg;
+  mask: linear-gradient(var(--mask-start-deg), rgba(0, 0, 0, 0) 0%, #000 100%);
+}

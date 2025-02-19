@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+export type Props = CollectionEntry<"testimonials">
+
+const testimonial = Astro.props
+const { Content } = await testimonial.render()
+---
+
+<div class="relative rounded-xl bg-gray-900/70 p-8 ring-1 ring-gray-800">
+  <div class="flex flex-col justify-center gap-6">
+    {
+      testimonial.data.image && (
+        <div class="linear-gradient-mask absolute right-0 top-0 -z-10">
+          <Image
+            class="aspect-square w-56 opacity-50"
+            src={testimonial.data.image}
+            alt={testimonial.data.title}
+          />
+        </div>
+      )
+    }
+    {
+      testimonial.data.image && (
+        <div class="aspect-square max-w-12 rounded bg-gray-800 p-2">
+          <Image
+            class="aspect-square w-full"
+            src={testimonial.data.image}
+            alt={testimonial.data.title}
+          />
+        </div>
+      )
+    }
+    <div class="flex flex-col gap-2">
+      <p class="mt-auto max-w-xl text-pretty text-lg">
+        <Content />
+      </p>
+      <div class="flex gap-2">
+        <span class="text-sm text-gray-400">
+          {[testimonial.data.title, testimonial.data.subtitle].join(" • ")}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-import { createGlobalState } from "react-use"
+import { signal } from "@preact/signals"
 
-export const useGlobalVideoOpenId = createGlobalState<string | number>()
+export const globalOpenVideo = signal<string | number>(0)
 
 export function useVideoOpenState(
   videoId: string | number,
@@ -9,7 +9,10 @@ export function useVideoOpenState(
   setOpen: (isOpen: boolean) => void,
   otherVideoOpen: boolean,
 ] {
-  const [globalVideoId, setGlobalVideoId] = useGlobalVideoOpenId()
+  const globalVideoId = globalOpenVideo.value
+  const setGlobalVideoId = (newId: string | number) => {
+    globalOpenVideo.value = newId
+  }
 
   let isOpen = globalVideoId === videoId
   const setIsOpen = (isOpen: boolean) => {

@@ -4,10 +4,6 @@ import config from "../config.json"
 import { useEffect, useRef, useState } from "react"
 import { useVideo } from "../hooks/useVideo"
 import heroVideoImage from "../images/tempHero.jpg?url"
-import {
-  useVideoOpenState,
-  useGlobalVideoOpenId,
-} from "../hooks/uesVideoOpenState"
 
 const buttonClasses = `size-3 lg:size-4 rounded-lg lg:rounded-xl py-3 px-4 box-content duration-200 fill-white bg-background/65 hover:bg-background/95 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-white/10`
 
@@ -15,7 +11,6 @@ export default function HeroVideo() {
   const video = useRef<HTMLVideoElement>(null)
   const [isLowerPowerMode, setIsLowPowerMode] = useState(false)
   const { play, pause, isPlaying, isMuted, mute, unmute } = useVideo(video)
-  const [videoOpenId] = useGlobalVideoOpenId()
 
   useEffect(() => {
     video.current?.play().catch((error) => {
@@ -25,20 +20,19 @@ export default function HeroVideo() {
     })
   }, [video])
 
-  useEffect(() => {
-    if (Boolean(videoOpenId)) {
-      pause()
-      console.log("pause")
-    } else {
-      play()
-    }
-  }, [videoOpenId])
+  // useEffect(() => {
+  //   if (Boolean(videoOpenId)) {
+  //     pause()
+  //     console.log("pause")
+  //   } else {
+  //     play()
+  //   }
+  // }, [videoOpenId])
 
   return (
     <div className="mx-auto w-container">
       <div className="rounded-3 relative max-h-[80vh] overflow-hidden shadow-lg duration-200 lg:shadow-2xl">
         <video
-          style={{ contentVisibility: videoOpenId ? "hidden" : "visible" }}
           ref={video}
           className={cx(
             "size-full max-h-[80vh] rounded-xl border-0.5 border-white/10 object-cover object-center",
