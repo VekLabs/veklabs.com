@@ -2,7 +2,7 @@ local_backend: true
 
 backend:
   name: git-gateway
-  branch: master
+  branch: hennessyevan/issue78
 logo_url: /assets/logo-black.svg
 locale: en
 media_folder: assets/images

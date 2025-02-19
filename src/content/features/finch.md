@@ -2,12 +2,12 @@
 title: "Finch"
 category: "Short Film - Ambient"
 awards:
-  - "images/finch_award_1.png"
-  - "images/finch_award_2.png"
-  - "images/GNIFF_LAUREL_2020_white.png"
-  - "images/caff-official-selection.png"
-  - "images/Award-Winner---Film-for-Peace---2020.png"
-  - "images/okotoksfilmfestival.png"
+  - "/src/images/finch_award_1.png"
+  - "/src/images/finch_award_2.png"
+  - "/src/images/GNIFF_LAUREL_2020_white.png"
+  - "/src/images/caff-official-selection.png"
+  - "/src/images/Award-Winner---Film-for-Peace---2020.png"
+  - "/src/images/okotoksfilmfestival.png"
 videoURL: "https://player.vimeo.com/external/399816003.hd.mp4?s=4ce954e0683daad7dc02835375570b51104ac617&profile_id=175"
 videoID: 399816003
 publishDate: 2020-04-01
