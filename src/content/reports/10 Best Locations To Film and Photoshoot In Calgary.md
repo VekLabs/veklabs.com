@@ -1,10 +1,10 @@
 ---
-author: "Andrew Peloso"
-category: "Production"
-date: 2020-05-21T00:00:00Z
-image: "/src/images/Calgary_Video_Production_VL.jpg"
-keywords: "calgary video production, video production calgary, calgary video company"
-title: "10 Best Locations to Film and Photoshoot In Calgary"
+image: /src/images/Calgary_Video_Production_VL.jpg
+category: Production
+date: 2020-05-21T00:00:00.000Z
+title: 10 Best Locations to Film and Photoshoot In Calgary
+author: Alea Chen
+keywords: calgary video production, video production calgary, calgary video company
 ---
 
 We have all seen those amazing photos and videos capturing iconic scenes of Calgary, Alberta. Whether along the Bow River, in one of the many urban cores, or heading towards the mountains.

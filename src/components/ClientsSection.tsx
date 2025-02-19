@@ -2,7 +2,7 @@ import { chunk } from "lodash-es"
 import { AnimatePresence, motion, steps } from "motion/react"
 import { useState } from "react"
 import { useInterval } from "usehooks-ts"
-import config from "../config.json"
+import config from "../home.json"
 
 const logos = Object.values(
   import.meta.glob("/src/images/logos/*", { eager: true }),

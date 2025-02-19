@@ -1,12 +1,12 @@
-local_backend: true
+# local_backend: true
 
 backend:
   name: git-gateway
   branch: hennessyevan/issue78
 logo_url: /assets/logo-black.svg
 locale: en
-media_folder: assets/images
-public_folder: images
+media_folder: src/images
+public_folder: src/images
 collections:
   - name: "reports"
     label: "Reports"
@@ -25,7 +25,7 @@ collections:
         widget: "relation"
         collection: "team"
         search_fields: ["name"]
-        value_field: "name"
+        value_field: "{{slug}}"
         display_fields: ["name"]
       - { name: "keywords", label: "keywords", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -34,29 +34,35 @@ collections:
     files:
       - label: Home
         name: home
-        file: content/_index.md
+        file: "src/home.json"
         editor: { preview: false }
+        create: false
+        delete: false
+        format: json
         fields:
-          - { name: title, label: Title, widget: string }
-          - name: featured
-            label: Featured
-            widget: list
-            fields:
-              - { name: brand, label: Brand Name, widget: string }
-              - { name: logo, label: Logo Image, widget: image }
-          - name: offerings
-            label: Offerings
-            widget: list
-            fields:
-              - { name: title, label: Title, widget: string }
-              - { name: image, label: Image, widget: image }
-              - {
-                  name: tag,
-                  label: Heading Level,
-                  widget: select,
-                  options: ["h1", "h2", "h3"],
-                }
-              - { name: description, label: Description, widget: text }
+          - { name: HERO_EXCERPT, label: Hero Excerpt, widget: string }
+          - { name: TEAM_TITLE, label: Team Title, widget: string }
+          - { name: PROJECTS_FILMED, label: Projects Filmed, widget: number }
+          - { name: VIDEOS_RENDERED, label: Videos Rendered, widget: number }
+          - {
+              name: FOOTAGE_PROCESSED_TB,
+              label: Footage Processed Tb,
+              widget: number,
+            }
+          - { name: TOTAL_VIEWS, label: Total Views, widget: number }
+          - { name: CLIENT_TITLE, label: Client Title, widget: string }
+          - { name: CLIENT_SUB_TITLE, label: Client Sub Title, widget: string }
+      - label: Clients
+        name: clients
+        file: "src/clients.json"
+        editor: { preview: false }
+        create: false
+        delete: false
+        format: json
+        fields:
+          - { name: "title", label: "Title", widget: "string" }
+          - { name: "subtitle", label: "Subtitle", widget: "string" }
+          - { name: "contact_link", label: "Contact Link", widget: "string" }
   - name: "team"
     label: "Team"
     folder: "src/content/team"
@@ -64,7 +70,7 @@ collections:
     identifier_field: name
     slug: "{{name}}"
     label_singular: "Team Member"
-    editor: { preview: true }
+    editor: { preview: false }
     fields:
       - { name: "name", label: "name", widget: "string" }
       - { name: "image", label: "image", widget: "image" }
@@ -84,26 +90,40 @@ collections:
     create: true
     slug: "{{title}}"
     label_singular: "Video"
-    editor: { preview: true }
+    editor: { preview: false }
     fields:
-      - { name: "title", label: "title", widget: "string" }
+      - { name: "title", label: "title", widget: "string", required: true }
       - { name: "videoID", label: "videoID", widget: "string" }
-      - { name: "videoURL", label: "videoURL", widget: "string" }
+      - {
+          name: "videoURL",
+          label: "videoURL",
+          widget: "string",
+          required: true,
+        }
       - { name: "previewURL", label: "previewURL", widget: "string" }
-      - { name: "image", label: "image", widget: "image" }
+      - {
+          name: meta,
+          label: Metadata,
+          widget: list,
+          summary: "{{fields.label}}",
+          fields:
+            [
+              { name: label, label: Label, widget: string },
+              { name: value, label: Value, widget: string },
+            ],
+        }
       - {
           name: "type",
           label: "type",
-          widget: "select",
-          options:
-            [
-              "Entertainment",
-              "Promotional",
-              "Social Media",
-              "Corporate",
-              "Short Documentary",
-            ],
+          widget: "relation",
+          collection: "categories",
+          hint: "Select the category for this video. [Create a new category](/admin#/collections/categories/new) if needed.",
+          required: true,
+          value_field: "title",
+          search_fields: ["title"],
         }
+      - { name: "image", label: "image", widget: "image", required: true }
+      - { name: "body", label: "Body", widget: "markdown" }
 
   - name: "features"
     label: "Features"
@@ -115,6 +135,14 @@ collections:
     fields:
       - { name: "title", label: "title", widget: "string" }
       - { name: "category", label: "category", widget: "string" }
+      - {
+          name: "video",
+          label: "Video",
+          widget: "relation",
+          collection: "videos",
+          value_field: "title",
+          search_fields: ["title"],
+        }
       - { name: "videoURL", label: "videoURL", widget: "string" }
       - { name: "videoID", label: "videoID", widget: "string" }
       - {
@@ -149,12 +177,23 @@ collections:
       - { name: "summary", label: "summary", widget: "text" }
       - { name: "body", label: "Body", widget: "markdown" }
 
+  - name: "categories"
+    label: "Categories"
+    folder: "src/content/categories"
+    create: true
+    slug: "{{title}}"
+    label_singular: "Category"
+    identifier_field: title
+    editor: { preview: false }
+    fields:
+      - { name: "title", label: "title", widget: "string" }
+
   - name: "settings"
     label: "Settings"
     files:
       - label: "Site Settings"
         name: "config"
-        file: "src/content/site-settings.json"
+        file: "src/config.json"
         editor: { preview: false }
         create: false
         delete: false
@@ -178,91 +217,25 @@ collections:
             }
           - { name: subtitle, label: Subtitle, widget: string }
           - { name: description, label: Description, widget: string }
-          - { name: HERO_EXCERPT, label: Hero Excerpt, widget: string }
-          - { name: TEAM_TITLE, label: Team Title, widget: string }
-          - { name: PROJECTS_FILMED, label: Projects Filmed, widget: number }
-          - { name: VIDEOS_RENDERED, label: Videos Rendered, widget: number }
-          - {
-              name: FOOTAGE_PROCESSED_TB,
-              label: Footage Processed Tb,
-              widget: number,
-            }
-          - { name: TOTAL_VIEWS, label: Total Views, widget: number }
-          - { name: CLIENT_TITLE, label: Client Title, widget: string }
-          - { name: CLIENT_SUB_TITLE, label: Client Sub Title, widget: string }
           - { name: FOOTER_PRETEXT, label: Footer Pretext, widget: string }
           - { required: true, "Site Title", name: "title", widget: "string" }
           - { label: Site URL, name: baseURL, widget: string }
-          - title: "Parameters"
-            name: "params"
-            widget: "object"
-            fields:
-              - { label: Site Description, name: description, widget: string }
-              - { label: Subtitle, name: subtitle, widget: string }
-              - {
-                  label: Items per page,
-                  name: Paginate,
-                  widget: number,
-                  hint: Number of items to show per page,
-                }
-              - label: Call to Action
-                name: cta
-                hint: This is the call to action that appears across the site
-                widget: object
-                summary: "{{fields.title}} - {{fields.description}}"
-                fields:
-                  - { label: Title, name: title, widget: string }
-                  - { label: Description, name: description, widget: string }
-                  - { label: Button Text, name: button_title, widget: string }
-                  - { label: Button URL, name: button_link, widget: string }
-              - {
-                  label: Google Analytics ID,
-                  name: googleAnalytics,
-                  widget: string,
-                }
-              - {
-                  label: Banner Shown Time,
-                  name: bannerShow,
-                  widget: number,
-                  hint: Time that the banner is shown for in milliseconds,
-                }
-              - {
-                  label: Open Graph Images,
-                  name: images,
-                  widget: "list",
-                  label_singular: "Image",
-                  fields: [{ label: Image, name: image, widget: "image" }],
-                }
-              - {
-                  label: Open Graph Videos,
-                  name: videos,
-                  widget: "list",
-                  label_singular: "Video",
-                  fields: [{ label: URL, name: url, widget: "string" }],
-                }
-      - name: footer-settings
-        label: Footer Settings
-        file: data/footer.toml
-        editor: { preview: false }
-        create: false
-        delete: false
-        format: toml
-        fields:
-          - { name: mail, label: Mailing Address, widget: string }
-          - name: social
-            label: Social Media
-            widget: object
-            fields:
-              - name: channel
-                label: Channels
-                widget: list
-                summary: "{{fields.name}} - {{fields.url}}"
-                fields:
-                  - { name: name, label: Name, widget: string }
-                  - {
-                      name: url,
-                      label: URL,
-                      widget: string,
-                      pattern: ["https://.*", "Must be a valid URL"],
-                    }
-                  - { name: icon, label: Icon, widget: image }
+          - {
+              label: Google Analytics ID,
+              name: googleAnalytics,
+              widget: string,
+            }
+          - {
+              label: Open Graph Images,
+              name: images,
+              widget: "list",
+              label_singular: "Image",
+              fields: [{ label: Image, name: image, widget: "image" }],
+            }
+          - {
+              label: Open Graph Videos,
+              name: videos,
+              widget: "list",
+              label_singular: "Video",
+              fields: [{ label: URL, name: url, widget: "string" }],
+            }

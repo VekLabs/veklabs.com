@@ -10,6 +10,7 @@ export default defineConfig({
   prefetch: true,
   experimental: { clientPrerender: true },
   output: "static",
+  server: { port: 3000 },
   site: "https://veklabs.com",
   integrations: [readingTime(), mdx(), sitemap(), tailwind(), react()],
 })

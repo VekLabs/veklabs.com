@@ -1,6 +1,6 @@
 import { Play, Pause, VolumeX, Volume2 } from "lucide-react"
 import cx from "classnames"
-import config from "../config.json"
+import config from "../home.json"
 import { useEffect, useRef, useState } from "react"
 import { useVideo } from "../hooks/useVideo"
 import heroVideoImage from "../images/tempHero.jpg?url"
@@ -19,15 +19,6 @@ export default function HeroVideo() {
       }
     })
   }, [video])
-
-  // useEffect(() => {
-  //   if (Boolean(videoOpenId)) {
-  //     pause()
-  //     console.log("pause")
-  //   } else {
-  //     play()
-  //   }
-  // }, [videoOpenId])
 
   return (
     <div className="mx-auto w-container">
