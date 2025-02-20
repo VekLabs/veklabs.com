@@ -1,14 +1,86 @@
 ---
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 import ContactForm from "../components/ContactForm.tsx"
+import { getCollection } from "astro:content"
+import ContactPart from "../components/ContactPart.astro"
+import { MapPinned, MessagesSquare, Phone } from "lucide-astro"
+import siteConfig from "../content/config.json"
+
+const socialLogos = import.meta.glob("../images/*.svg")
+const socialLogoKeys = Object.keys(socialLogos)
+
+const services = (await getCollection("services")).map((service) => ({
+  data: {
+    title: service.data.title,
+  },
+}))
 ---
 
 <DefaultLayout title="Contact">
   <section class="mx-auto w-container py-14">
-    <div class="flex items-center gap-6 px-4 pb-4">
-      <h2 class="text-3xl">Contact</h2>
-    </div>
+    <div class="flex flex-col lg:flex-row">
+      <div class="basis-2/5">
+        <div
+          class="flex flex-wrap gap-8 px-8 lg:min-h-[80vh] lg:flex-col lg:flex-nowrap lg:gap-20"
+        >
+          <ContactPart
+            title="Chat to us"
+            description="Our team is here to help."
+            link={{ href: "mailto:info@veklabs.com", text: "info@veklabs.com" }}
+          >
+            <MessagesSquare size="20" />
+          </ContactPart>
+          <ContactPart
+            title="Send Mail to Us"
+            description="We love letters."
+            link={{
+              href: "map:PO Box 46068 Inglewood, Calgary, AB T2G5H7",
+              text: "PO Box 46068 Inglewood, Calgary, AB T2G5H7",
+            }}
+          >
+            <MapPinned size="20" />
+          </ContactPart>
+          <ContactPart
+            title="Call us"
+            description="Mon-Sat from 8am to 6pm."
+            link={{ href: "tel:+14036901291", text: "+1 (403) 690-1291" }}
+          >
+            <Phone size="20" />
+          </ContactPart>
+        </div>
 
-    <ContactForm />
+        <div
+          class="mb-8 mt-8 inline-flex basis-1/3 flex-wrap gap-3 px-8 text-right lg:mt-auto lg:gap-4"
+        >
+          {
+            siteConfig.social.channel.map(async ({ url, name, icon }) => {
+              const socialIconKey = socialLogoKeys.find((key) =>
+                key.includes(icon),
+              )
+              if (!socialIconKey) return
+
+              const path = (await socialLogos[socialIconKey]()) as {
+                default: { src: string }
+              }
+              if (!path?.default?.src) return
+              const socialIcon = path?.default?.src
+
+              return (
+                <a
+                  href={url}
+                  target="_blank"
+                  class="aspect-square rounded border border-white/30 p-2 font-semibold text-white hover:bg-white/10"
+                >
+                  <img loading="lazy" src={socialIcon} alt={name} class="h-4" />
+                </a>
+              )
+            })
+          }
+        </div>
+      </div>
+      <div class="basis-3/5">
+        <ContactForm services={services} client:load />
+      </div>
+    </div>
   </section>
 </DefaultLayout>

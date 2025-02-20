@@ -1,5 +1,5 @@
 import NumberFlow from "@number-flow/react"
-import config from "../home.json"
+import config from "../content/home.json"
 import { useEffect, useRef, useState } from "react"
 import { useInView, motion } from "motion/react"
 

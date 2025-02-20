@@ -2,7 +2,7 @@ import { chunk } from "lodash-es"
 import { AnimatePresence, motion, steps } from "motion/react"
 import { useState } from "react"
 import { useInterval } from "usehooks-ts"
-import config from "../home.json"
+import config from "../content/home.json"
 import { ChevronRight } from "lucide-react"
 
 const logos = Object.values(

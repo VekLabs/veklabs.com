@@ -1,5 +1,5 @@
 import { motion } from "motion/react"
-import { baseURL } from "../config.json"
+import { baseURL } from "../content/config.json"
 import { useHeaderContext } from "../context/headerContext"
 
 type HeaderLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {

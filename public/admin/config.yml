@@ -34,7 +34,7 @@ collections:
     files:
       - label: Home
         name: home
-        file: "src/home.json"
+        file: "src/content/home.json"
         editor: { preview: false }
         create: false
         delete: false
@@ -65,7 +65,7 @@ collections:
 
       - label: Features
         name: features
-        file: "src/features.json"
+        file: "src/content/features.json"
         editor: { preview: false }
         create: false
         delete: false
@@ -84,7 +84,7 @@ collections:
 
       - label: Clients
         name: clients
-        file: "src/clients.json"
+        file: "src/content/clients.json"
         editor: { preview: false }
         create: false
         delete: false
@@ -201,7 +201,7 @@ collections:
     files:
       - label: "Site Settings"
         name: "config"
-        file: "src/config.json"
+        file: "src/content/config.json"
         editor: { preview: false }
         create: false
         delete: false

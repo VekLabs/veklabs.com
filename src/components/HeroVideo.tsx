@@ -1,6 +1,6 @@
 import { Play, Pause, VolumeX, Volume2 } from "lucide-react"
 import cx from "classnames"
-import config from "../home.json"
+import config from "../content/home.json"
 import { useEffect, useRef, useState } from "react"
 import { useVideo } from "../hooks/useVideo"
 import heroVideoImage from "../images/tempHero.jpg?url"

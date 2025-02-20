@@ -1,4 +1,7 @@
 import z from "zod"
+import { BackgroundGradientAnimation } from "./BackgroundGradient"
+import type { CollectionEntry } from "astro:content"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -8,80 +11,114 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>
 
-const inputClasses =
-  "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 bg-gray-800"
-
-export default function ContactForm() {
+export default function ContactForm({
+  services,
+}: {
+  services: { data: { title: string } }[]
+}) {
   return (
-    <form
-      name="contact"
-      method="POST"
-      data-netlify="true"
-      onChange={console.log}
-      netlify-honeypot="bot-field"
-      className="space-y-6 rounded-lg bg-black p-6 shadow-md"
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Don’t fill this out if you're human:{" "}
-          <input name="bot-field" className="hidden" />
-        </label>
+    <section className="relative isolate flex h-full w-full flex-col space-y-6 p-10 lg:p-20">
+      <BackgroundGradientAnimation containerClassName=" absolute rounded-2xl shadow-md ring-1 ring-gray-100/20 ring-inset size-full z-[-1]" />
+      <h2 className="max-w-2xl text-pretty text-3xl font-medium leading-snug lg:text-5xl">
+        Got a project in mind? We've got the skills. Let's team up.
+      </h2>
+      <p className="font-[450] text-gray-200">
+        Tell us more about yourself and what you've got in mind.
       </p>
-      <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          pattern="[A-Za-z ]{3,}"
-          required
-          className={inputClasses}
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          className={inputClasses}
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Message
-        </label>
-        <textarea
-          name="message"
-          id="message"
-          rows={4}
-          required
-          className={inputClasses}
-        ></textarea>
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Send
-        </button>
-      </div>
-    </form>
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        onChange={console.log}
+        className="flex flex-col space-y-6"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p className="hidden">
+          <label>
+            Don’t fill this out if you're human:{" "}
+            <input name="bot-field" className="hidden" />
+          </label>
+        </p>
+        <div className="input-group">
+          <label htmlFor="name" className="input-label">
+            Name
+          </label>
+          <input
+            placeholder="Your Name"
+            type="text"
+            name="name"
+            id="name"
+            pattern="[A-Za-z ]{3,}"
+            required
+            className="input"
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="email" className="input-label">
+            Email
+          </label>
+          <input
+            placeholder="you@company.com"
+            type="email"
+            name="email"
+            id="email"
+            required
+            className="input"
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="message" className="input-label">
+            About the project
+          </label>
+          <textarea
+            placeholder="Tell us a little about the project..."
+            name="message"
+            id="message"
+            rows={4}
+            required
+            className="input resize-none"
+            style={{ fieldSizing: "content" } as CSSProperties}
+          />
+        </div>
+        <div data-spacer className="h-3" />
+        {services.length > 0 && (
+          <fieldset className="input-group">
+            <legend className="input-label mb-4">
+              How can we help? (optional)
+            </legend>
+            <ul className="grid max-w-lg grid-cols-2 gap-y-4">
+              {services.map((service) => (
+                <li>
+                  <label
+                    key={service.data.title}
+                    htmlFor={service.data.title}
+                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 before:mr-2 before:size-4 before:rounded-sm before:border hover:text-gray-300 peer-checked:text-gray-600 peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400"
+                  >
+                    {service.data.title}
+                  </label>
+                  <input
+                    type="checkbox"
+                    name="services"
+                    id={service.data.title}
+                    value={service.data.title}
+                    className="peer hidden"
+                  />
+                </li>
+              ))}
+            </ul>
+          </fieldset>
+        )}
+        <div data-spacer className="h-3" />
+        <div>
+          <button
+            type="submit"
+            className="inline-flex w-full justify-center rounded-lg border border-transparent bg-black/30 px-6 py-3 text-sm font-medium text-white shadow-sm duration-150 hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Let's Get Started
+          </button>
+        </div>
+      </form>
+    </section>
   )
 }

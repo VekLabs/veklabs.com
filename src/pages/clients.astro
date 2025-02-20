@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 import { ChevronRight } from "lucide-astro"
-import config from "../clients.json"
+import config from "../content/clients.json"
 import TestimonialCard from "../components/TestimonialCard.astro"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 
@@ -24,7 +24,10 @@ const testimonials = await getCollection("testimonials")
           <ChevronRight class="size-5" />
         </a>
 
-        <a class="mt-1 flex items-center gap-1.5 text-lg" href="/contact">
+        <a
+          class="mt-1 flex items-center gap-1.5 text-lg"
+          href={config.google_reviews_link}
+        >
           Google Reviews
           <ChevronRight class="size-5" />
         </a>

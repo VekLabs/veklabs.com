@@ -1,5 +1,5 @@
 import { Menu } from "lucide-react"
-import { baseURL, menu, title } from "../config.json"
+import { baseURL, menu, title } from "../content/config.json"
 import { HeaderProvider } from "../context/headerContext"
 import logoFullSVG from "../images/logo-full.svg?url"
 import HeaderLink from "./HeaderLink"

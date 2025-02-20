@@ -4,7 +4,7 @@ import { take } from "lodash-es"
 import VideoCard from "./VideoCard.tsx"
 import { Image } from "astro:assets"
 import { ChevronRight } from "lucide-astro"
-import home from "../home.json"
+import home from "../content/home.json"
 
 const videos = await getCollection("videos", ({ id }) =>
   home.videos.includes(id.replace(".md", "")),
