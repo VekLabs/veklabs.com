@@ -93,7 +93,7 @@ export default function ContactForm({
                   <label
                     key={service.data.title}
                     htmlFor={service.data.title}
-                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 before:mr-2 before:size-4 before:rounded-sm before:border hover:text-gray-300 peer-checked:text-gray-600 peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400"
+                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 before:mr-2 before:size-4 before:rounded-xs before:border hover:text-gray-300 peer-checked:text-gray-600 peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400"
                   >
                     {service.data.title}
                   </label>
@@ -113,7 +113,7 @@ export default function ContactForm({
         <div>
           <button
             type="submit"
-            className="inline-flex w-full justify-center rounded-lg border border-transparent bg-black/30 px-6 py-3 text-sm font-medium text-white shadow-sm duration-150 hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="inline-flex w-full justify-center rounded-lg border border-transparent bg-black/30 px-6 py-3 text-sm font-medium text-white shadow-xs duration-150 hover:bg-black/80 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Let's Get Started
           </button>

@@ -10,7 +10,7 @@ const { href, active = false, disabled = false } = Astro.props
 <a
   aria-disabled={disabled}
   class:list={[
-    "flex size-8 cursor-pointer items-center justify-center rounded bg-black/50 fill-foreground text-xs text-foreground duration-100 hover:text-foreground",
+    "flex size-8 cursor-pointer items-center justify-center rounded-sm bg-black/50 fill-foreground text-xs text-foreground duration-100 hover:text-foreground",
     {
       "hover:bg-black hover:text-foreground hover:ring-2 hover:ring-foreground/10":
         !disabled && !active,

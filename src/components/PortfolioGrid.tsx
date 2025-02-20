@@ -80,7 +80,7 @@ export function PortfolioGrid({ videos }: PortfolioGridProps) {
         </div>
       ))}
 
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(300px,1fr))] gap-2 px-4 sm:gap-5 xl:grid-cols-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 px-4 sm:gap-5 xl:grid-cols-4">
         <AnimatePresence initial={false}>
           {videos
             .filter((video) => {

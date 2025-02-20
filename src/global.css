@@ -1,3 +1,9 @@
+@import "tailwindcss";
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/preflight" layer(base);
+
+@config '../tailwind.config.ts';
+
 body {
   font-family: var(--body-font);
   background-color: var(--gray6);
@@ -53,14 +59,14 @@ a {
 }
 
 .input {
-  @apply my-1 block min-h-9 w-full border-b border-white/40 bg-transparent text-white/80 outline-none;
+  @apply my-1 block min-h-9 w-full border-b border-white/40 bg-transparent text-white/80 outline-hidden;
 }
 
 .input-group {
   @apply text-sm;
 
   .input::placeholder {
-    @apply text-white/70 opacity-0 spring-bounce-40 spring-duration-300;
+    @apply spring-bounce-40 spring-duration-300 text-white/70 opacity-0;
   }
 
   &:has(.input:placeholder-shown:not(:focus)) {
@@ -74,5 +80,5 @@ a {
   }
 }
 .input-label {
-  @apply block font-normal text-white/80 spring-bounce-40 spring-duration-300;
+  @apply spring-bounce-40 spring-duration-300 block font-normal text-white/80;
 }

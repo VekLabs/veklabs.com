@@ -1,7 +1,7 @@
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import tailwind from "@astrojs/tailwind"
+import tailwindcss from "@tailwindcss/vite"
 import readingTime from "astro-reading-time"
 import { defineConfig } from "astro/config"
 
@@ -12,5 +12,6 @@ export default defineConfig({
   output: "static",
   server: { port: 3000 },
   site: "https://veklabs.com",
-  integrations: [readingTime(), mdx(), sitemap(), tailwind(), react()],
+  integrations: [readingTime(), mdx(), sitemap(), react()],
+  vite: { plugins: [tailwindcss()] },
 })
