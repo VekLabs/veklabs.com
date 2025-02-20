@@ -3,6 +3,7 @@ import { AnimatePresence, motion, steps } from "motion/react"
 import { useState } from "react"
 import { useInterval } from "usehooks-ts"
 import config from "../home.json"
+import { ChevronRight } from "lucide-react"
 
 const logos = Object.values(
   import.meta.glob("/src/images/logos/*", { eager: true }),
@@ -28,12 +29,16 @@ export function ClientsSection() {
   }, 3000)
 
   return (
-    <section className="py-8 text-center md:pb-20 md:pt-12">
-      <div className="flex flex-col gap-2">
+    <section className="mx-auto w-container py-8 text-center md:pb-20 md:pt-12">
+      <div className="flex flex-col items-center gap-2">
         <h2 className="m-0">{config.CLIENT_TITLE}</h2>
         <h4 className="m-0 font-normal text-accent-500">
           {config.CLIENT_SUB_TITLE}
         </h4>
+        <a className="mt-1 flex items-center gap-1.5 text-lg" href="/clients">
+          All Clients
+          <ChevronRight className="size-5" />
+        </a>
       </div>
 
       <div className="container relative mx-auto py-6">

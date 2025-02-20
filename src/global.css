@@ -39,3 +39,17 @@ a {
   --mask-start-deg: 45deg;
   mask: linear-gradient(var(--mask-start-deg), rgba(0, 0, 0, 0) 0%, #000 100%);
 }
+
+.scroll-gradient-mask {
+  position: relative;
+
+  &::before {
+    content: "";
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+  }
+}

@@ -1,10 +1,9 @@
 ---
-import { Image } from "astro:assets"
-import config from "../clients.json"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
-import { ChevronRight } from "lucide-astro"
 import { getCollection } from "astro:content"
+import { ChevronRight } from "lucide-astro"
+import config from "../clients.json"
 import TestimonialCard from "../components/TestimonialCard.astro"
+import DefaultLayout from "../layouts/DefaultLayout.astro"
 
 const logos = Object.values(
   import.meta.glob("/src/images/logos/*", { eager: true }),
@@ -34,22 +33,19 @@ const testimonials = await getCollection("testimonials")
 
     <div
       class="grid gap-6"
-      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(36rem, 1fr))" }}
+      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(450px, 1fr))" }}
     >
       {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
     </div>
 
     <div class="flex items-center gap-6 py-4 pt-36">
       <span class="text-3xl">
-        Cutting-edge Film & Storytelling For Businesses.
+        {config.cta_text}
       </span>
       <a class="ml-auto mt-1 flex items-center gap-1.5 text-lg" href="/contact">
-        Get Started
+        {config.cta_link}
         <ChevronRight class="size-5" />
       </a>
     </div>
   </section>
-  <!-- <div class="flex flex-row items-center justify-center">
-      {logos.map((logo) => <Image class="w-16" src={logo} alt="" />)}
-    </div> -->
 </DefaultLayout>

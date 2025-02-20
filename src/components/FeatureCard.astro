@@ -12,7 +12,7 @@ const { Content } = await render(feature)
 <div class="snap-center">
   <VideoCard
     {...feature.data}
-    className="h-[80svh] min-h-96 w-full"
+    className="aspect-video w-full md:h-[80svh] md:min-h-96"
     client:load
   >
     <Content slot="body" />

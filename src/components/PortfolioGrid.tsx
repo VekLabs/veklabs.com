@@ -45,9 +45,11 @@ export function PortfolioGrid({ videos }: PortfolioGridProps) {
       {Object.entries(filters).map(([key, values]) => (
         <div
           key={key}
-          className="flex w-full flex-col gap-2 overflow-x-auto px-4 py-1 no-scrollbar"
+          className="scroll-gradient-mask flex w-full flex-col gap-2 overflow-x-auto px-4 py-1 no-scrollbar"
         >
-          <h4 className="text-xs uppercase text-accent-300">{key}</h4>
+          <h4 className="sticky left-0 text-xs uppercase text-accent-300">
+            {key}
+          </h4>
           <ul className="flex w-full gap-2">
             {values.map((value) => (
               <li key={value}>
