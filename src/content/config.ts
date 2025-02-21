@@ -95,7 +95,7 @@ const videos = defineCollection({
 
 const categories = defineCollection({
   type: "content",
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       title: z.string(),
     }),

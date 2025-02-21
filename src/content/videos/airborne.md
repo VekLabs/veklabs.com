@@ -11,11 +11,11 @@ meta:
   - label: Editor
     value: Jon Cubid
 publishDate: 2022-09-21
-site: ""
 type: documentary
 image: /src/images/jonathan-rip.jpg
 ---
-This documentary is a heartfelt tribute to a cherished friend, Jonathan Klimow. Through glimpses into his everyday life flying the skies, we we able to capture the essence of his adventurous spirit and the genuine love he brought to every relationship. 
+
+This documentary is a heartfelt tribute to a cherished friend, Jonathan Klimow. Through glimpses into his everyday life flying the skies, we we able to capture the essence of his adventurous spirit and the genuine love he brought to every relationship.
 
 Tragically, Jonathan’s life came to an end in a paragliding accident last year. In the wake of his passing, this film has become a celebration of the joy Jonathan spread to all of us that had the honour of spending time with him. Every story told within these frames underscores not only the depth of his character, but also the powerful influence he had on all who crossed his path.
 
