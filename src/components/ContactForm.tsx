@@ -18,8 +18,8 @@ export default function ContactForm({
 }) {
   return (
     <section className="relative isolate flex h-full w-full flex-col space-y-6 p-10 lg:p-20">
-      <BackgroundGradientAnimation containerClassName=" absolute rounded-2xl shadow-md ring-1 ring-gray-100/20 ring-inset size-full z-[-1]" />
-      <h2 className="max-w-2xl text-pretty text-3xl font-medium leading-snug lg:text-5xl">
+      <BackgroundGradientAnimation containerClassName="opacity-50 absolute rounded-2xl shadow-md ring-1 ring-gray-100/20 ring-inset size-full z-[-1]" />
+      <h2 className="max-w-2xl text-3xl leading-snug font-medium text-pretty lg:text-5xl">
         Got a project in mind? We've got the skills. Let's team up.
       </h2>
       <p className="font-[450] text-gray-200">
@@ -29,7 +29,6 @@ export default function ContactForm({
         name="contact"
         method="POST"
         data-netlify="true"
-        onChange={console.log}
         className="flex flex-col space-y-6"
         netlify-honeypot="bot-field"
       >
@@ -93,7 +92,7 @@ export default function ContactForm({
                   <label
                     key={service.data.title}
                     htmlFor={service.data.title}
-                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 before:mr-2 before:size-4 before:rounded-xs before:border hover:text-gray-300 peer-checked:text-gray-600 peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400"
+                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 peer-checked:text-gray-600 before:mr-2 before:size-4 before:rounded-xs before:border peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400 hover:text-gray-300"
                   >
                     {service.data.title}
                   </label>
@@ -113,7 +112,7 @@ export default function ContactForm({
         <div>
           <button
             type="submit"
-            className="inline-flex w-full justify-center rounded-lg border border-transparent bg-black/30 px-6 py-3 text-sm font-medium text-white shadow-xs duration-150 hover:bg-black/80 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="inline-flex w-full justify-center rounded-lg border border-transparent bg-black/30 px-6 py-3 text-sm font-medium text-white shadow-xs duration-150 hover:bg-black/80 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-hidden"
           >
             Let's Get Started
           </button>
