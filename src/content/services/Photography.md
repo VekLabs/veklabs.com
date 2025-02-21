@@ -1,7 +1,7 @@
 ---
 title: PHOTOGRAPHY
 page_title: PHOTOGRAPHY
-image: /src/images/Event-Video.png
+image: /src/images/drone-1.jpg
 order: 1
 speed: 6
 summary_image: /src/images/Event-Video.png
