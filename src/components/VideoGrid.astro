@@ -1,18 +1,17 @@
 ---
 import { getCollection } from "astro:content"
-import { take } from "lodash-es"
 import VideoCard from "./VideoCard.tsx"
 import { Image } from "astro:assets"
 import { ChevronRight } from "lucide-astro"
 import home from "../content/home.json"
 
-const videos = await getCollection("videos", ({ id }) =>
-  home.videos.includes(id.replace(".md", "")),
+const videos = await getCollection("videos", ({ data }) =>
+  home.videos.includes(data.title),
 )
 ---
 
 <section class="w-container mx-auto">
-  <div class="flex items-center gap-6 px-4 py-4">
+  <div class="flex items-center gap-6 py-4">
     <h2 class="text-3xl">Portfolio</h2>
     <a class="link mt-1 flex items-center gap-1.5 text-lg" href="/portfolio">
       See All
@@ -23,7 +22,7 @@ const videos = await getCollection("videos", ({ id }) =>
     class="xs:grid-cols-[repeat(auto-fit,_minmax(400px,1fr))] grid grid-cols-2 gap-2 sm:gap-5 lg:grid-cols-3"
   >
     {
-      take(videos, 6).map((video, i, videos) => (
+      videos.map((video, i, videos) => (
         <VideoCard
           {...video.data}
           nextVideo={

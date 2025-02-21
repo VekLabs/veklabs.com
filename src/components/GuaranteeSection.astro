@@ -4,6 +4,7 @@ import blackPaper from "../images/black-paper.jpg"
 import blackWall from "../images/black-wall.jpg"
 import getImageUrl from "../utils/getImageUrl"
 import { GlowingEffect } from "./GlowingEffect"
+import home from "../content/home.json"
 
 const logos = [
   {
@@ -49,7 +50,9 @@ const logos = [
         />
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-6">
-            <h2 class="text-2xl font-semibold lg:text-6xl">Awards</h2>
+            <h2 class="text-2xl font-semibold lg:text-6xl">
+              {home.awards_title}
+            </h2>
             <div class="z-10 flex w-full flex-wrap gap-8">
               {
                 logos.map((logo) => (
@@ -84,12 +87,11 @@ const logos = [
         />
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-6">
-            <h2 class="text-2xl font-semibold lg:text-6xl">Our Guarantee</h2>
+            <h2 class="text-2xl font-semibold lg:text-6xl">
+              {home.guarantee_title}
+            </h2>
             <p class="text-xl">
-              When specified, we deliver a curated-RAW video render of all
-              usable content to you within 24 hours of filming <strong
-                >at no additional cost.</strong
-              >
+              {home.guarantee}
             </p>
           </div>
         </div>
@@ -119,18 +121,13 @@ const logos = [
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-4">
             <h2 class="max-w-prose text-2xl font-bold text-pretty lg:text-4xl">
-              Cutting-edge Film & Storytelling For Businesses.
+              {home.trust_title}
             </h2>
             <h4 class="text-xl text-pretty text-gray-400">
-              Premium Video. Painless Production.
+              {home.trust_subtitle}
             </h4>
             <p class="max-w-prose text-pretty">
-              At Vek Labs, we are a video production company that prides
-              ourselves by offering production services to agencies, companies
-              and organizations who want to create cinematic productions without
-              hassle. We reverse-engineer a custom solution for your video
-              project; consulting your budget, timeline and creative vision
-              throughout the entire process.
+              {home.trust_description}
             </p>
           </div>
         </div>

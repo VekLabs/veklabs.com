@@ -8,10 +8,18 @@ import type { CollectionEntry } from "astro:content"
 import { AnimatePresence, motion, MotionConfig } from "motion/react"
 import { kebabCase } from "lodash-es"
 import { useState, type ComponentProps } from "react"
+import { cn } from "../utils/cn"
 
 type Props = CollectionEntry<"team">
 
-function CrewImage({ id, src, width, height, alt }: ComponentProps<"img">) {
+function CrewImage({
+  id,
+  src,
+  width,
+  height,
+  alt,
+  full = false,
+}: ComponentProps<"img"> & { full?: boolean }) {
   return (
     <motion.img
       layoutId={id}
@@ -21,7 +29,10 @@ function CrewImage({ id, src, width, height, alt }: ComponentProps<"img">) {
       decoding="async"
       loading="lazy"
       alt={alt}
-      className="aspect-square w-40 cursor-pointer rounded-full object-cover shadow-2xl ring-1 ring-gray-50/10 lg:w-52"
+      className={cn(
+        "aspect-square w-20 cursor-pointer rounded-full object-cover ring-1 shadow-2xl ring-gray-50/10 md:w-40 lg:w-52",
+        { "w-40 lg:w-52": full },
+      )}
     />
   )
 }
@@ -49,7 +60,7 @@ export default function CrewComponent(member: Props) {
     <MotionConfig transition={{ type: "spring", bounce: 0.2 }}>
       <motion.div
         layoutId={id + "container"}
-        className="group relative flex min-w-36 snap-center flex-col items-center gap-6 py-0.5 md:snap-start md:py-10"
+        className="group relative flex w-full min-w-20 snap-center items-center gap-6 py-0.5 md:w-auto md:min-w-36 md:snap-start md:flex-col md:py-10"
         onClick={() => setModalIsOpen(true)}
       >
         <CrewImage
@@ -59,7 +70,7 @@ export default function CrewComponent(member: Props) {
         />
         <motion.div
           layoutId={id + "text"}
-          className="center flex flex-col gap-2 text-center"
+          className="center flex flex-col gap-2 md:text-center"
         >
           <motion.h3
             layoutId={id + "name-title"}
@@ -69,7 +80,7 @@ export default function CrewComponent(member: Props) {
           </motion.h3>
           <motion.p
             layoutId={id + "competencies"}
-            className="max-w-52 break-words text-sm text-accent-400"
+            className="text-accent-400 max-w-52 text-sm break-words"
           >
             {listFormatter.format(member.data.competencies)}
           </motion.p>
@@ -87,7 +98,7 @@ export default function CrewComponent(member: Props) {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed left-0 top-0 z-50 flex h-screen min-h-screen w-screen items-center justify-center overscroll-contain bg-black/30 backdrop-blur-lg"
+            className="fixed top-0 left-0 z-50 flex h-screen min-h-screen w-screen items-center justify-center overscroll-contain bg-black/30 backdrop-blur-lg"
           >
             <motion.div
               {...getFloatingProps()}
@@ -100,9 +111,10 @@ export default function CrewComponent(member: Props) {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="my-0 flex w-container max-w-[800px] flex-wrap items-center justify-center gap-8 p-10 text-center text-lg font-medium text-white md:flex-nowrap md:justify-start md:text-start"
+              className="w-container my-0 flex max-w-[800px] flex-wrap items-center justify-center gap-8 p-10 text-center text-lg font-medium text-white md:flex-nowrap md:justify-start md:text-start"
             >
               <CrewImage
+                full
                 id={id + "image"}
                 src={member.data.image.src}
                 alt={member.data.name}
@@ -120,7 +132,7 @@ export default function CrewComponent(member: Props) {
                 </motion.h3>
                 <motion.p
                   layoutId={id + "competencies"}
-                  className="text-sm text-accent-400"
+                  className="text-accent-400 text-sm"
                 >
                   {listFormatter.format(member.data.competencies)}
                 </motion.p>

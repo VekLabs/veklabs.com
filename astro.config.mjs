@@ -12,6 +12,14 @@ export default defineConfig({
   output: "static",
   server: { port: 3000 },
   site: "https://veklabs.com",
-  integrations: [readingTime(), mdx(), sitemap(), react()],
+  integrations: [
+    readingTime(),
+    mdx(),
+    sitemap(),
+    react({ babel: { plugins: [["module:@preact/signals-react-transform"]] } }),
+  ],
   vite: { plugins: [tailwindcss()] },
+  redirects: {
+    "/reports": "/reports/page/1",
+  },
 })

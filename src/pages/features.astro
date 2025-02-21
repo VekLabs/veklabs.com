@@ -1,9 +1,9 @@
 ---
-import { getCollection, render } from "astro:content"
-import FeatureCard from "../components/FeatureCard.astro"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
-import featuresConfig from "../content/features.json"
+import { getCollection } from "astro:content"
 import { kebabCase } from "lodash-es"
+import FeatureCard from "../components/FeatureCard.astro"
+import featuresConfig from "../content/features.json"
+import DefaultLayout from "../layouts/DefaultLayout.astro"
 
 const features = (
   await getCollection("videos", ({ id }) =>
@@ -13,8 +13,11 @@ const features = (
 ---
 
 <DefaultLayout>
-  <section class="mx-auto w-container py-8 md:py-14">
-    <h1 class="mx-auto max-w-7xl py-4 md:py-16">Features</h1>
+  <section class="w-container mx-auto py-8 md:py-14">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 py-4 md:py-16">
+      <h1 class="mx-auto max-w-7xl">{featuresConfig.title}</h1>
+      <p class="">{featuresConfig.description}</p>
+    </div>
     <div
       class="mx-auto grid max-w-7xl snap-y snap-mandatory grid-flow-row grid-cols-1 gap-14 overflow-y-auto py-10"
     >

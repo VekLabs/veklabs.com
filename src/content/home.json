@@ -5,6 +5,7 @@
   "FOOTER_PRETEXT": "Proudly based in Canada",
   "FOOTAGE_PROCESSED_TB": 72,
   "TOTAL_VIEWS": 13,
+  "metrics_title": "Lab Metrics",
   "TEAM_TITLE": "Core Team",
   "videos": [
     "10 Years | CDN Controls Ltd.",
@@ -21,5 +22,11 @@
   },
   "stats_disclaimer": "Statistics updated annually after review of all projects worked on at Vek Labs from December 2017 to current year-end.",
   "VIDEOS_RENDERED": 1687,
-  "HERO_EXCERPT": "We are a team of award-winning videographers and editors working with people and on productions that inspire us | Welcome to the lab."
+  "HERO_EXCERPT": "We are a team of award-winning videographers and editors working with people and on productions that inspire us | Welcome to the lab.",
+  "awards_title": "Awards",
+  "guarantee_title": "Our Guarantee",
+  "guarantee": "When specified, we deliver a curated-RAW video render of all usable content to you within 24 hours of filming at no additional cost.",
+  "trust_title": "Cutting-edge Film & Storytelling For Businesses.",
+  "trust_subtitle": "Premium Video. Painless Production.",
+  "trust_description": "At Vek Labs, we are a video production company that prides ourselves by offering production services to agencies, companies and organizations who want to create cinematic productions without hassle. We reverse-engineer a custom solution for your video project; consulting your budget, timeline and creative vision throughout the entire process."
 }

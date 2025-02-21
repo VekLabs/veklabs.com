@@ -19,7 +19,9 @@
     "@astrojs/tailwind": "^5.1.5",
     "@floating-ui/react": "^0.27.3",
     "@number-flow/react": "^0.5.4",
+    "@preact-signals/safe-react": "^0.8.1",
     "@preact/signals": "^2.0.1",
+    "@preact/signals-react": "^3.0.1",
     "@sanity/astro": "^3.2.1",
     "@sanity/client": "^6.28.0",
     "@sanity/visual-editing": "^2.13.3",
@@ -49,6 +51,7 @@
   },
   "devDependencies": {
     "@adam.plesnik/tailwindcss-scroll-driven-animations": "^0.2.7",
+    "@preact/signals-react-transform": "^0.5.1",
     "@types/lodash-es": "^4.17.12",
     "astro-reading-time": "^0.1.13",
     "prettier": "^3.4.2",

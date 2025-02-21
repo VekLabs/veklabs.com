@@ -76,7 +76,7 @@ export default function Metrics() {
     <section className="relative bg-black px-6 py-24 lg:py-40">
       <div className="container mx-auto max-w-[1200px]">
         <h3 className="mb-6 text-3xl font-semibold md:mb-12 md:text-5xl">
-          Lab Metrics
+          {config.metrics_title}
         </h3>
 
         <ul className="grid max-w-[1000px] grid-cols-[repeat(auto-fit,minmax(160px,1fr))] items-start justify-start gap-10">
@@ -92,7 +92,7 @@ export default function Metrics() {
                 initial={{ opacity: 0, width: 0, x: -10 }}
                 whileInView={{ opacity: 1, width: "100%", x: 0 }}
                 transition={{ type: "spring", duration: 1, delay: i * 0.15 }}
-                className="mt-2 overflow-clip whitespace-nowrap text-accent-500 md:mt-4 md:text-xl"
+                className="text-accent-500 mt-2 overflow-clip whitespace-nowrap md:mt-4 md:text-xl"
               >
                 {" "}
                 {key}
@@ -101,7 +101,7 @@ export default function Metrics() {
           ))}
         </ul>
 
-        <span className="absolute bottom-6 right-6 ml-6 text-xxs text-neutral-400 md:text-xs">
+        <span className="text-xxs absolute right-6 bottom-6 ml-6 text-neutral-400 md:text-xs">
           {stats_disclaimer}
         </span>
       </div>

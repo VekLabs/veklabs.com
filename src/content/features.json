@@ -1,8 +1,5 @@
 {
-  "videos": [
-    "airborne",
-    "finch",
-    "ella",
-    "simon"
-  ]
+  "title": "Features",
+  "description": "A few of our feature-length videos.",
+  "videos": ["airborne", "finch", "ella", "simon"]
 }
