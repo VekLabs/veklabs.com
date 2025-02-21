@@ -1,7 +1,7 @@
 ---
 title: PRE-PRODUCTION
 page_title: "PRE-PRODUCTION: Strategy & Creative"
-image: /src/images/Pre-Production-Video.png
+image: /src/images/pre-production.jpg
 order: 2
 speed: 2
 summary: Our pre-production planning process creates a foundation for your
