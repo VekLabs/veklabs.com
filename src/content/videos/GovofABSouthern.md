@@ -5,7 +5,7 @@ videoURL: https://player.vimeo.com/external/502745045.hd.mp4?s=8a98b7b2c5638ce19
 previewURL: https://player.vimeo.com/external/502745045.sd.mp4?s=7cc13964b218e8ad81c44fa1a6c3dcd5fb0c5c84&profile_id=165
 publishDate: 2020-11-21
 type: corporate
-image: /src/images/southern_alberta.jpg
+image: /src/images/souther-alberta.jpg
 ---
 In 2020, we had the privilege of working with the Government of Alberta to produce media celebrating the spectacular landscapes of southern Alberta. Our journey took us through rolling foothills, expansive prairies, and rugged badlands, capturing cinematic shots that highlight the province’s breathtaking variety of terrain. From the serene waters of Waterton Lakes National Park to the striking sandstone formations of Writing-on-Stone Provincial Park, every frame was an opportunity to showcase the distinct character and grandeur of this region.
 
