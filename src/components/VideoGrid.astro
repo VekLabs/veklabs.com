@@ -5,8 +5,8 @@ import { Image } from "astro:assets"
 import { ChevronRight } from "lucide-astro"
 import home from "../content/home.json"
 
-const videos = await getCollection("videos", ({ data }) =>
-  home.videos.includes(data.title),
+const videos = await getCollection("videos", ({ id }) =>
+  home.videos.includes(id.replace(".md", "")),
 )
 ---
 
