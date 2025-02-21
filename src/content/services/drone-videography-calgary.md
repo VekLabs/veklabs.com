@@ -1,11 +1,13 @@
 ---
-title: "Drone Videography"
-page_title: "Aerial Drone Video and Photography Services"
+title: DRONE/AERIAL
+page_title: Aerial Drone Video & Photography
+image: /src/images/drone-video-calgary.png
 order: 5
 speed: 3
-image: "/src/images/drone-video-calgary.png"
-summary_image: "/src/images/drone-video-calgary.png"
-summary: "All Vek Labs team members are fully-licensed, Commercial Drone Pilots within Canada. From approved flight plans, photo and video capture, we have you covered."
+summary_image: /src/images/drone-video-calgary.png
+summary: All Vek Labs team members are fully-licensed, Commercial Drone Pilots
+  within Canada. From approved flight plans, photo and video capture, we have
+  you covered.
 ---
 
 Take your next video or photo project to new heights! Every member of our team is a fully-licensed drone pilot (RPAS Advanced License).
