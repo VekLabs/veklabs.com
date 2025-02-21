@@ -38,7 +38,11 @@ h3,
 }
 
 a {
-  @apply text-accent-400 no-underline;
+  @apply no-underline;
+
+  &.link {
+    @apply text-accent-400;
+  }
 }
 
 .linear-gradient-mask {

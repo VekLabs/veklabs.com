@@ -1,9 +1,9 @@
 ---
 import Image from "astro/components/Image.astro"
-import checkImage from "../images/3d/Flag 1.png"
-import cupImage from "../images/3d/Cup 2.png"
-import cameraImage from "../images/3d/Video camera 1.png"
+import blackPaper from "../images/black-paper.jpg"
+import blackWall from "../images/black-wall.jpg"
 import getImageUrl from "../utils/getImageUrl"
+import { GlowingEffect } from "./GlowingEffect"
 
 const logos = [
   {
@@ -25,47 +25,106 @@ const logos = [
 ] as const
 ---
 
-<section class="mx-auto my-16 w-container">
-  <div class="flex flex-col items-stretch gap-6 lg:flex-row">
-    <div class="w-full lg:max-w-[500px]">
-      <div
-        class="relative flex aspect-video flex-col gap-4 overflow-clip rounded-3xl bg-black/70 px-12 py-14 ring-1 ring-white/5 lg:aspect-4/5 lg:px-16 lg:py-20"
-      >
-        <div class="z-10 mb-auto flex flex-col gap-4">
-          <h2 class="text-2xl font-bold lg:text-4xl">Our Guarantee</h2>
-          <p class="guarantee-text">
-            When specified, we deliver a curated-RAW video render of all usable
-            content to you within 24 hours of filming <strong
-              >at no additional cost.</strong
-            >
-          </p>
-        </div>
+<section class="w-container mx-auto my-16">
+  <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3">
+    <div
+      class="col-span-1 h-full min-h-[500px] bg-black lg:col-span-2 lg:min-h-[300px]"
+    >
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
         <Image
-          src={checkImage}
+          src={blackPaper}
           alt=""
-          class="-mb--24 parallax-start-30 absolute -left-12 bottom-0 animate-parallax opacity-30 mix-blend-difference parallax-end-40 timeline-root"
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-40"
         />
+        <GlowingEffect
+          client:load
+          blur={0.5}
+          variant="white"
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={200}
+          inactiveZone={0.01}
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
+          <div class="flex flex-col gap-6">
+            <h2 class="text-2xl font-semibold lg:text-6xl">Awards</h2>
+            <div class="z-10 flex w-full flex-wrap gap-8">
+              {
+                logos.map((logo) => (
+                  <a href={logo.href} class="w-5/12 max-w-32 shrink">
+                    <img alt="" src={logo.src} loading="lazy" />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="w-full">
-      <div
-        class="relative flex h-full w-full gap-4 overflow-clip rounded-3xl bg-black px-12 py-14 ring-1 ring-white/5 lg:p-20 lg:px-16"
-      >
+    <div class="col-span-1 min-h-[300px] bg-black">
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
         <Image
-          src={cameraImage}
+          src={blackWall}
           alt=""
-          class="absolute -right-36 -top-24 w-full max-w-[700px] animate-parallax opacity-35 mix-blend-difference -parallax-start-48 parallax-end-48 [animation-timeline:scroll(root)]"
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-40"
         />
-        <div class="z-10 mr-auto mt-auto flex w-full">
+        <GlowingEffect
+          client:load
+          blur={0.5}
+          variant="white"
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={200}
+          inactiveZone={0.01}
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
+          <div class="flex flex-col gap-6">
+            <h2 class="text-2xl font-semibold lg:text-6xl">Our Guarantee</h2>
+            <p class="text-xl">
+              When specified, we deliver a curated-RAW video render of all
+              usable content to you within 24 hours of filming <strong
+                >at no additional cost.</strong
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-span-1 min-h-[500px] bg-black lg:col-span-3 lg:min-h-[600px] xl:min-h-[300px]"
+    >
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
+        <Image
+          src={blackWall}
+          alt=""
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-40"
+        />
+        <GlowingEffect
+          client:load
+          blur={0.5}
+          variant="white"
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={200}
+          inactiveZone={0.01}
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-4">
-            <h2 class="max-w-96 text-pretty text-2xl font-bold lg:text-4xl">
+            <h2 class="max-w-prose text-2xl font-bold text-pretty lg:text-4xl">
               Cutting-edge Film & Storytelling For Businesses.
             </h2>
-            <h4 class="text-pretty text-xl text-gray-400">
+            <h4 class="text-xl text-pretty text-gray-400">
               Premium Video. Painless Production.
             </h4>
-            <p class="max-w-96 text-pretty">
+            <p class="max-w-prose text-pretty">
               At Vek Labs, we are a video production company that prides
               ourselves by offering production services to agencies, companies
               and organizations who want to create cinematic productions without
@@ -75,28 +134,6 @@ const logos = [
             </p>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div
-      class="relative flex aspect-video flex-col gap-12 overflow-clip rounded-3xl bg-black/70 p-12 ring-1 ring-white/5 lg:aspect-4/5"
-    >
-      <h2 class="text-2xl font-light uppercase tracking-widest lg:text-4xl">
-        Awards
-      </h2>
-      <Image
-        src={cupImage}
-        alt=""
-        class="absolute -bottom-0 -right-6 w-full max-w-[300px] animate-parallax opacity-35 mix-blend-difference -parallax-start-40 parallax-end-24 [animation-timeline:scroll(root)]"
-      />
-      <div class="z-10 flex w-full flex-wrap gap-8">
-        {
-          logos.map((logo) => (
-            <a href={logo.href} class="w-5/12 max-w-32 shrink">
-              <img alt="" src={logo.src} loading="lazy" />
-            </a>
-          ))
-        }
       </div>
     </div>
   </div>
