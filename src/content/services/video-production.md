@@ -1,6 +1,6 @@
 ---
 title: PRODUCTION
-page_title: Video Production Services Calgary
+page_title: PRODUCTION
 image: /src/images/Video-Production-Vek.png
 order: 4
 speed: -8
