@@ -148,6 +148,7 @@ collections:
           label: "publishDate",
           widget: "datetime",
           date_format: "YYYY-MM-DD",
+          required: false,
         }
       - { name: "site", label: "site", widget: "string", required: false }
       - {
