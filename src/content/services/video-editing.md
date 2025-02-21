@@ -1,7 +1,7 @@
 ---
 title: POST-PRODUCTION
 page_title: "POST-PRODUCTION: Editorial"
-image: /src/images/video-editing.png
+image: /src/images/editing.jpg
 order: 8
 speed: 5
 summary: Our team utilizes the finest in video editing technology and
