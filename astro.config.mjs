@@ -4,14 +4,16 @@ import sitemap from "@astrojs/sitemap"
 import tailwindcss from "@tailwindcss/vite"
 import readingTime from "astro-reading-time"
 import { defineConfig } from "astro/config"
+import netlify from "@astrojs/netlify"
 
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
   experimental: { clientPrerender: true },
   output: "static",
-  server: { port: 3000 },
+  server: { port: 3000, host: true },
   site: "https://veklabs.com",
+  adapter: netlify(),
   integrations: [
     readingTime(),
     mdx(),

@@ -4,7 +4,6 @@ import { motion } from "motion/react"
 import { type Ref } from "react"
 import { globalOpenVideo } from "../hooks/useVideoOpenState"
 import { POPUP_DURATION, type VideoData } from "./videoConstants"
-import { cn } from "../utils/cn"
 
 type VideoInformationPopupProps = VideoData & {
   isOpen: boolean
@@ -63,8 +62,6 @@ export function VideoInformationPopup({
             className="absolute scale-150 blur-2xl brightness-150 saturate-150 md:-m-5"
           />
 
-          {/* <NextPrevVideo video={prevVideo} side="prev" /> */}
-
           <motion.video
             layoutId={`video-${title}`}
             controls
@@ -113,7 +110,7 @@ export function VideoInformationPopup({
             >
               {title}
             </motion.span>
-            <NextPrevVideo video={nextVideo} side="next" />
+            {/* <NextPrevVideo video={nextVideo} side="next" /> */}
           </div>
           <motion.div
             variants={{

@@ -12,6 +12,23 @@ const videos = await getCollection("videos")
       <h2 class="text-3xl">Portfolio</h2>
     </div>
 
-    <PortfolioGrid videos={videos} client:load />
+    <PortfolioGrid
+      videos={videos.map((video, i, videos) => ({
+        ...video,
+        data: {
+          ...video.data,
+
+          nextVideo:
+            i + 1 === videos.length
+              ? videos.at(0)?.data
+              : videos.at(i + 1)?.data,
+          prevVideo:
+            i === 0
+              ? videos.at(videos.length - 1)?.data
+              : videos.at(i - 1)?.data,
+        },
+      }))}
+      client:load
+    />
   </section>
 </DefaultLayout>

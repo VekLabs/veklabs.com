@@ -45,9 +45,9 @@ export function PortfolioGrid({ videos }: PortfolioGridProps) {
       {Object.entries(filters).map(([key, values]) => (
         <div
           key={key}
-          className="scroll-gradient-mask flex w-full flex-col gap-2 overflow-x-auto px-4 py-1 no-scrollbar"
+          className="no-scrollbar flex w-full flex-col gap-2 overflow-x-auto px-4 py-1"
         >
-          <h4 className="sticky left-0 text-xs uppercase text-accent-300">
+          <h4 className="text-accent-300 sticky left-0 text-xs uppercase">
             {key}
           </h4>
           <ul className="flex w-full gap-2">
@@ -59,7 +59,7 @@ export function PortfolioGrid({ videos }: PortfolioGridProps) {
                   }
                   className={classNames([
                     getCategoryColor(value),
-                    "whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium uppercase duration-200",
+                    "rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200",
                   ])}
                   onClick={() => {
                     setFiltersState((prev) => {
