@@ -1,7 +1,7 @@
 ---
 title: DRONE/AERIAL
 page_title: Aerial Drone Video & Photography
-image: /src/images/drone-video-calgary.png
+image: /src/images/drone.jpg
 order: 5
 speed: 3
 summary_image: /src/images/drone-video-calgary.png
