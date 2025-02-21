@@ -23,7 +23,7 @@ awards:
   - /src/images/okotoksfilmfestival.png
 publishDate: 2020-04-01
 type: short-film
-image: /src/images/FinchThumbnail.jpg
+image: /src/images/finch-short-film.jpg
 ---
 **Finch** (Written & Directed by James McLane) is an award-winning short film that explores themes of perseverance, identity, and human connection. Set against a visually striking backdrop, this narrative follows its central character on a quest of self-discovery—one that resonates with the universal desire to find purpose and belong. The film’s understated storytelling, punctuated by moments of raw emotion, allows viewers to share in Finch’s triumphs and challenges, ultimately leaving them with a sense of hope and reflection.
 
