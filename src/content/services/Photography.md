@@ -1,11 +1,13 @@
 ---
-title: "Photography"
-page_title: "Professional Photography Services Calgary"
+title: PHOTOGRAPHY
+page_title: PHOTOGRAPHY
+image: /src/images/Event-Video.png
 order: 1
 speed: 6
-image: "/src/images/Event-Video.png"
-summary_image: "/src/images/Event-Video.png"
-summary: "Professional photography services for companies looking for corporate photography, live event coverage, press conference or for your next creative marketing project"
+summary_image: /src/images/Event-Video.png
+summary: Professional photography services for companies looking for corporate
+  photography, live event coverage, press conference or for your next creative
+  marketing project
 ---
 
 Based in Calgary, Alberta but open to frequent travel; Vek Labs provides a wide range of photography services. Whether in the studio, on-site or areal we have you covered. We pride ourselves in being a nimble team of talented creatives, who can easily interpret your vision and craft the best visual possible for internal or external needs.
