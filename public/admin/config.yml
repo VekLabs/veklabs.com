@@ -5,8 +5,8 @@ backend:
   branch: hennessyevan/issue78
 logo_url: /assets/logo-black.svg
 locale: en
-media_folder: src/images
-public_folder: src/images
+media_folder: /src/images
+public_folder: /src/images
 collections:
   - name: "reports"
     label: "Reports"
