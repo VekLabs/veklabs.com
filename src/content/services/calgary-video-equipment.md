@@ -1,7 +1,7 @@
 ---
 title: CINEMA GEAR
 page_title: CINEMA GEAR
-image: /src/images/video-rentals.png
+image: /src/images/gear.jpg
 order: 7
 speed: -5
 summary: When our equipment is not in use, Vek Labs offers pro-level camera gear
