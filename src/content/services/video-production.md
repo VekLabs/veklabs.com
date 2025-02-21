@@ -1,7 +1,7 @@
 ---
 title: PRODUCTION
 page_title: PRODUCTION
-image: /src/images/Video-Production-Vek.png
+image: /src/images/production.jpg
 order: 4
 speed: -8
 summary: Calgary video production services that captivate viewers and invigorate
