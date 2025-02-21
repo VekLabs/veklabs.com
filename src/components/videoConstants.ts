@@ -6,6 +6,7 @@ export type VideoData = PropsWithChildren<
   CollectionEntry<"videos">["data"] | CollectionEntry<"features">["data"]
 >
 
+export const VIDEO_PREVIEW_START_OFFSET = 10 as const
 export const SPEED_MULTIPLIER = 1
 export const POPUP_DURATION = 0.75 / SPEED_MULTIPLIER
 export const HOVER_DURATION = 0.75 / SPEED_MULTIPLIER

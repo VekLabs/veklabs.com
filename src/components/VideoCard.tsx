@@ -15,6 +15,7 @@ import {
   HOVER_DURATION,
   POPUP_DURATION,
   titleVariants,
+  VIDEO_PREVIEW_START_OFFSET,
   videoVariants,
   type VideoData,
 } from "./videoConstants"
@@ -149,6 +150,9 @@ export default function VideoCard({
                     }
                   })
                 }}
+                onPlay={(e) => {
+                  e.currentTarget.currentTime = VIDEO_PREVIEW_START_OFFSET
+                }}
                 className="size-full overflow-hidden rounded-xl object-cover"
                 src={previewURL}
                 variants={videoVariants}
@@ -164,8 +168,11 @@ export default function VideoCard({
                 ref={video}
                 onLoadedData={() => setLoaded(true)}
                 onTimeUpdate={(e) => {
-                  if (e.currentTarget.currentTime > 10) {
-                    e.currentTarget.currentTime = 0
+                  if (
+                    e.currentTarget.currentTime >
+                    VIDEO_PREVIEW_START_OFFSET + 10
+                  ) {
+                    e.currentTarget.currentTime = VIDEO_PREVIEW_START_OFFSET
                   }
                 }}
                 onError={(e) => console.error(e)}
