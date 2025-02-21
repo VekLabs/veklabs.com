@@ -26,13 +26,13 @@ export default function ContactForm({
         Tell us more about yourself and what you've got in mind.
       </p>
       <form
-        name="contact"
+        name="contact-form"
         method="POST"
         data-netlify="true"
         className="flex flex-col space-y-6"
         netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="contact-form" />
         <p className="hidden">
           <label>
             Don’t fill this out if you're human:{" "}
