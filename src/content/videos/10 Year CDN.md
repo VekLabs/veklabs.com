@@ -5,7 +5,7 @@ videoURL: https://player.vimeo.com/external/519771160.hd.mp4?s=1742441a0d30b12f2
 previewURL: https://player.vimeo.com/external/519771160.sd.mp4?s=c4a8776cde0f5ee014c3792cb52520d4fc9bee5b&profile_id=165
 publishDate: 2022-05-21
 type: corporate
-image: /src/images/cdn-10-year.jpg
+image: /src/images/cdn-10-year-1.jpg
 ---
 The “10 Years of CDN” video was our very first collaboration with [CDN ](https://cdncontrols.ca/en-ca/)and remains a milestone project in our portfolio. We had the privilege of spotlighting the founders’ genuine passion and determination that fueled the company from its early days to its current success. Through interviews, archival photos, and evocative footage of the team in action, this video captured the spirit that drives CDN’s culture of innovation and service.
 
