@@ -149,12 +149,7 @@ collections:
           widget: "datetime",
           date_format: "YYYY-MM-DD",
         }
-      - {
-          name: "site",
-          label: "site",
-          widget: "string",
-          pattern: ["https://.*", "Must be a valid URL"],
-        }
+      - { name: "site", label: "site", widget: "string", required: false }
       - {
           name: "type",
           label: "type",
