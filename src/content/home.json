@@ -1,19 +1,23 @@
 {
-  "CLIENT_TITLE": "Clients",
+  "guarantee_title": "Our Guarantee",
+  "CLIENT_TITLE": "CLIENTS",
   "CLIENT_SUB_TITLE": "We've worked with some of the very best from around the world.",
-  "PROJECTS_FILMED": 687,
+  "PROJECTS_FILMED": 789,
+  "guarantee": "When specified, we deliver a curated-RAW video render of all usable content to you within 24 hours of filming at no additional cost.",
   "FOOTER_PRETEXT": "Proudly based in Canada",
-  "FOOTAGE_PROCESSED_TB": 72,
-  "TOTAL_VIEWS": 13,
-  "metrics_title": "Lab Metrics",
-  "TEAM_TITLE": "Core Team",
+  "FOOTAGE_PROCESSED_TB": 232,
+  "awards_title": "Awards",
+  "trust_title": "Cutting-edge Film & Storytelling For Businesses.",
+  "TOTAL_VIEWS": 22,
+  "trust_description": "At Vek Labs, we are a video production company that prides ourselves by offering production services to agencies, companies and organizations who want to create cinematic productions without hassle. We reverse-engineer a custom solution for your video project; consulting your budget, timeline and creative vision throughout the entire process.",
+  "TEAM_TITLE": "CORE TEAM",
   "videos": [
-    "10 Years | CDN Controls Ltd.",
-    "Alberta Carbon Trunk Line",
-    "Banff & Lake Louise Tourism | REEL",
-    "Police Memorial",
-    "Budo Brothers",
-    "Calgary Flames X Jarod Joseph"
+    "10 Year CDN",
+    "LFGaming",
+    "dwk-interiors",
+    "finch",
+    "ella",
+    "RES"
   ],
   "hero": {
     "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f",
@@ -23,10 +27,6 @@
   "stats_disclaimer": "Statistics updated annually after review of all projects worked on at Vek Labs from December 2017 to current year-end.",
   "VIDEOS_RENDERED": 1687,
   "HERO_EXCERPT": "We are a team of award-winning videographers and editors working with people and on productions that inspire us | Welcome to the lab.",
-  "awards_title": "Awards",
-  "guarantee_title": "Our Guarantee",
-  "guarantee": "When specified, we deliver a curated-RAW video render of all usable content to you within 24 hours of filming at no additional cost.",
-  "trust_title": "Cutting-edge Film & Storytelling For Businesses.",
-  "trust_subtitle": "Premium Video. Painless Production.",
-  "trust_description": "At Vek Labs, we are a video production company that prides ourselves by offering production services to agencies, companies and organizations who want to create cinematic productions without hassle. We reverse-engineer a custom solution for your video project; consulting your budget, timeline and creative vision throughout the entire process."
+  "metrics_title": "Lab Metrics",
+  "trust_subtitle": "Premium Video. Painless Production."
 }
