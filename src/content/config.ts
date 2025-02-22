@@ -89,7 +89,7 @@ const videos = defineCollection({
         )
         .optional(),
       publishDate: z.coerce.date().optional(),
-      site: z.string(),
+      site: z.string().optional(),
     }),
 })
 
