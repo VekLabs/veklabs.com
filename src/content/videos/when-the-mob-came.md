@@ -1,7 +1,7 @@
 ---
 title: When The Mob Came
 videoID: "496728918"
-videoURL: https://player.vimeo.com/external/496728918.m3u8?s=b82f471907a09f7e2f7a4ed4e8f12f5625807887&logging=false
+videoURL: https://player.vimeo.com/progressive_redirect/playback/496728918/rendition/2160p/file.mp4?loc=external&signature=7987d242be260028f7b38f08aa8bffe94301e2e4378c0230da87b81e5a048882&user_id=222329173
 previewURL: https://player.vimeo.com/progressive_redirect/playback/496728918/rendition/1080p/file.mp4?loc=external&signature=4e43f49e3489d7f31584e23c58cbdcdac8fa7c9d854d1652d374eef320c2dc58&user_id=222329173
 publishDate: 2023-05-05
 site: https://vimeo.com/ondemand/whenthemobcame/824135680
