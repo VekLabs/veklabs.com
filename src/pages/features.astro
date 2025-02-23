@@ -9,7 +9,7 @@ const features = (
   await getCollection("videos", ({ id }) =>
     featuresConfig.videos.includes(kebabCase(id.replace(".md", ""))),
   )
-).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+)
 ---
 
 <DefaultLayout>
