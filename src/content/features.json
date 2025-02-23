@@ -1,5 +1,11 @@
 {
   "title": "Features",
   "description": "A few of our feature-length videos.",
-  "videos": ["airborne", "finch", "ella", "simon"]
+  "videos": [
+    "airborne",
+    "finch",
+    "ella",
+    "simon",
+    "dying-to-meet-you"
+  ]
 }
