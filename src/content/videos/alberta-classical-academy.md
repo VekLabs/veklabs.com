@@ -1,0 +1,11 @@
+---
+title: Alberta Classical Academy
+videoID: "794638673"
+videoURL: https://player.vimeo.com/progressive_redirect/playback/794638673/rendition/1080p/file.mp4?loc=external&signature=dc8803df10eab9cbdb91860a802015da1607e2a9f6418f2f9414a12148836643&user_id=222329173
+previewURL: https://player.vimeo.com/progressive_redirect/playback/794638673/rendition/540p/file.mp4?loc=external&signature=a91e87bd802510a363480709c0d4f046f750ce40aab0be3c42f7154848273951&user_id=222329173
+type: corporate
+image: /src/images/aca.jpg
+---
+The Classical Academy is a Alberta-based educational institution dedicated to revitalizing the art of learning through a time-honored, classical approach. Rooted in a curriculum that emphasizes core knowledge, critical thinking, and character development, the Academy integrates subjects like history, literature, math, and the sciences with timeless methods of instruction. By combining a liberal arts foundation with a focus on moral and intellectual growth, The Classical Academy fosters a rich environment where students are empowered to explore, question, and engage deeply with the world around them. Whether they are studying ancient civilizations, honing their writing skills, or practicing logical reasoning, learners are encouraged to develop both mastery and humility—two qualities essential for thoughtful, well-rounded graduates. With a dedicated faculty and a tight-knit community of families, The Classical Academy strives to elevate educational standards, preserve the best of our shared heritage, and nurture students who are both knowledgeable and gracious in all their pursuits.
+
+It was an absolute honor to collaborate with The Classical Academy on the creation of their promotional video and subsequent educational videos for prospective families. Bringing their vision to life through film allowed us to capture the heart of their mission—merging rigorous academics with character development in a nurturing environment. From conceptualization to the final edit, every step offered a glimpse into the dedication and passion that drive The Classical Academy’s approach. We hope these videos reflect the vibrant spirit of the school and inspire prospective families and students to join in their journey of holistic, classical education.
