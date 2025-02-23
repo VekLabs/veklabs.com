@@ -1,3 +1,3 @@
 ---
-title: arts & culture
+title: Arts & Culture
 ---
