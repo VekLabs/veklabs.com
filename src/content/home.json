@@ -28,5 +28,13 @@
   "VIDEOS_RENDERED": 1687,
   "HERO_EXCERPT": "We are a team of award-winning videographers and editors working with people and on productions that inspire us | Welcome to the lab.",
   "metrics_title": "Lab Metrics",
-  "trust_subtitle": "Premium Video. Painless Production."
+  "trust_subtitle": "Premium Video. Painless Production.",
+  "awards": [
+    { "image": "/src/images/finch_award_1.png" },
+    { "image": "/src/images/finch_award_2.png" },
+    { "image": "/src/images/GNIFF_LAUREL_2020_white.png" },
+    { "image": "/src/images/caff-official-selection.png" },
+    { "image": "/src/images/Award-Winner---Film-for-Peace---2020.png" },
+    { "image": "/src/images/okotoksfilmfestival.png" }
+  ]
 }

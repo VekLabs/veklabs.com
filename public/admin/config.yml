@@ -51,6 +51,20 @@ collections:
               search_fields: ["title"],
               value_field: "{{slug}}",
             }
+          - name: "awards"
+            label: "Award Images"
+            required: false
+            widget: "list"
+            summary: "{{fields.image}}"
+            fields:
+              - { label: Image, name: image, widget: image }
+              - {
+                  label: Site,
+                  hint: "Optionally link this award to the site that it comes from",
+                  name: href,
+                  widget: string,
+                  required: false,
+                }
           - { name: TEAM_TITLE, label: Team Title, widget: string }
           - { name: PROJECTS_FILMED, label: Projects Filmed, widget: number }
           - { name: VIDEOS_RENDERED, label: Videos Rendered, widget: number }
@@ -142,6 +156,14 @@ collections:
               { name: label, label: Label, widget: string },
               { name: value, label: Value, widget: string },
             ],
+        }
+      - {
+          name: "awards",
+          label: "Award Images",
+          widget: "list",
+          summary: "{{fields.image}}",
+          required: false,
+          field: { label: Image, name: image, widget: image },
         }
       - {
           name: "publishDate",

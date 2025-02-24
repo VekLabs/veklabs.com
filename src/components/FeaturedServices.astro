@@ -8,7 +8,7 @@ const offerings = await getCollection("offerings")
 <section class="py-8">
   <div>
     <div
-      class="grid snap-x snap-proximity grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none no-scrollbar [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
+      class="no-scrollbar grid snap-x snap-proximity grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
     >
       <div
         class="grid grid-cols-[repeat(var(--cards),90%)] content-start gap-(--gap) lg:grid-cols-[repeat(var(--cards),clamp(800px,40vw,1600px))]"
@@ -33,8 +33,8 @@ const offerings = await getCollection("offerings")
                 <p class="text-sm text-gray-500">{offering.data.description}</p>
 
                 <a
-                  class="ml-auto mt-auto rounded-md px-4 py-2 text-sm shadow-xs shadow-accent-600 ring-1 ring-accent-500 duration-200 hover:bg-accent-400/15"
-                  href={`/services/${offering.data.rel.slug}`}
+                  class="shadow-accent-600 ring-accent-500 hover:bg-accent-400/15 mt-auto ml-auto rounded-md px-4 py-2 text-sm ring-1 shadow-xs duration-200"
+                  href={`/services/${offering.data.rel.id}`}
                 >
                   Learn More
                 </a>

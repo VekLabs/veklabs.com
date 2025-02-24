@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+type Props = { videos: CollectionEntry<"videos">[] }
+
+const { videos } = Astro.props
+
+// Construct the JSON-LD object
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Video Portfolio",
+  description: "A curated list of our latest video content",
+  itemListElement: videos.map((video, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "VideoObject",
+      name: video.data.title,
+      url: video.data.videoURL,
+    },
+  })),
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

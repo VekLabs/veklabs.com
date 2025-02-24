@@ -4,6 +4,7 @@ import { getCollection } from "astro:content"
 import DefaultLayout from "../../layouts/DefaultLayout.astro"
 import { getEntry } from "astro:content"
 import VideoJSONLD from "../../components/VideoJSONLD.astro"
+import { Image } from "astro:assets"
 
 export async function getStaticPaths() {
   const posts = await getCollection("videos")
@@ -24,13 +25,13 @@ const { Content } = await render()
 <DefaultLayout>
   <VideoJSONLD {...Astro.props} />
   <div
-    class="fixed inset-0 z-50 h-full overflow-y-scroll bg-neutral-950/70 pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
+    class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
   >
     <div class="grid w-full grid-cols-[1fr_auto_1fr]">
       <div>
         <a
           class="text-foreground hover:text-foreground sticky top-4 left-4 z-20 flex w-max translate-x-0 items-center gap-1 rounded-full bg-black/50 px-4 py-2 text-sm opacity-100 backdrop-blur-md transition-all delay-300 duration-300 hover:bg-black hover:ring-1 hover:ring-white/20 starting:translate-x-2 starting:opacity-0"
-          href="/"
+          href="javascript:history.back()"
         >
           <svg viewBox="0 0 24 24" class="w-[0.65rem] fill-current">
             <use href="/assets/arrow-left.svg#icon"></use>
@@ -80,29 +81,42 @@ const { Content } = await render()
                 )
               }
             </div>
-            {
-              category?.data.title || data.meta ? (
-                <div class="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
-                  {category?.data.title && (
-                    <div class="flex flex-col gap-3">
-                      <span class="text-xs font-bold tracking-widest uppercase">
-                        Category
-                      </span>
-                      <span>{category?.data.title}</span>
-                    </div>
-                  )}
-                  {data.meta &&
-                    data.meta.map(({ label, value }) => (
-                      <div class="flex flex-col">
-                        <span class="text-xxs text-accent-300 tracking-widest uppercase">
-                          {label}
+            <div class="flex flex-col flex-wrap gap-4">
+              {
+                category?.data.title || data.meta ? (
+                  <div class="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
+                    {category?.data.title && (
+                      <div class="flex flex-col gap-3">
+                        <span class="text-xs font-bold tracking-widest uppercase">
+                          Category
                         </span>
-                        <span>{value}</span>
+                        <span>{category?.data.title}</span>
                       </div>
-                    ))}
-                </div>
-              ) : null
-            }
+                    )}
+                    {data.meta &&
+                      data.meta.map(({ label, value }) => (
+                        <div class="flex flex-col">
+                          <span class="text-xxs text-accent-300 tracking-widest uppercase">
+                            {label}
+                          </span>
+                          <span>{value}</span>
+                        </div>
+                      ))}
+                    {(data.awards?.length ?? 0) > 0 && (
+                      <div class="flex flex-wrap">
+                        {data.awards!.map((awardImage) => (
+                          <Image
+                            src={awardImage}
+                            alt=""
+                            class="spring-duration-200 spring-bounce-20 w-20 rounded-2xl hover:z-10 hover:scale-200 hover:bg-black"
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : null
+              }
+            </div>
           </div>
         </div>
       </div>

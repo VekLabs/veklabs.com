@@ -5,25 +5,12 @@ import blackWall from "../images/black-wall.jpg"
 import getImageUrl from "../utils/getImageUrl"
 import home from "../content/home.json"
 import { GlowingEffect } from "./GlowingEffect"
+import { getImage } from "astro:assets"
 
-const logos = [
-  {
-    href: "https://upcity.com/profiles/vek-labs",
-    src: getImageUrl("../images/local-excellence-badge.png"),
-  },
-  {
-    href: "https://upcity.com/profiles/vek-labs",
-    src: getImageUrl("../images/video-winner-2021.png"),
-  },
-  {
-    href: "https://upcity.com/profiles/vek-labs",
-    src: "https://upcity-marketplace.s3.amazonaws.com/badges/fb2e7d64b3c931ed6e964e74f1c3d1f8.png",
-  },
-  {
-    href: "https://communo.com",
-    src: getImageUrl("../images/communo-badge.png"),
-  },
-] as const
+const logos = home.awards.map((awardImage) => ({
+  href: awardImage["href"],
+  src: awardImage.image,
+}))
 ---
 
 <section class="w-container mx-auto my-16">
@@ -55,9 +42,14 @@ const logos = [
             </h2>
             <div class="z-10 flex w-full flex-wrap gap-8">
               {
-                logos.map((logo) => (
+                logos.map(async (logo) => (
                   <a href={logo.href} class="w-5/12 max-w-32 shrink">
-                    <img alt="" src={logo.src} loading="lazy" />
+                    <Image
+                      alt=""
+                      width={200}
+                      src={await import(`${logo.src}`).then((m) => m.default)}
+                      loading="lazy"
+                    />
                   </a>
                 ))
               }
