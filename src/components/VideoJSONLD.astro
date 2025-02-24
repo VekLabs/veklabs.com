@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+type Props = CollectionEntry<"videos">
+
+const {
+  data: {
+    title,
+    videoID,
+    videoURL,
+    previewURL,
+    image,
+    type,
+    meta,
+    publishDate,
+    site,
+  },
+} = Astro.props
+
+// Format date to ISO 8601 if it exists
+const formattedDate = publishDate
+  ? publishDate.toISOString().split("T")[0]
+  : undefined
+
+// Construct the JSON-LD object
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: title,
+  identifier: videoID,
+  url: videoURL,
+  thumbnailUrl: previewURL,
+  image: {
+    "@type": "ImageObject",
+    url: image.src,
+  },
+  contentUrl: videoURL,
+  encodingFormat: type,
+  ...(meta && {
+    about: meta.map((item) => ({
+      "@type": "Thing",
+      name: item.label,
+      description: item.value,
+    })),
+  }),
+  ...(formattedDate && { datePublished: formattedDate }),
+  ...(site && {
+    publisher: {
+      "@type": "Organization",
+      name: site,
+    },
+  }),
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
