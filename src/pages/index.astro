@@ -11,10 +11,10 @@ import DefaultLayout from "../layouts/DefaultLayout.astro"
 
 <DefaultLayout>
   <div class="my-6 flex flex-col gap-6">
-    <HeroVideo client:idle />
+    <HeroVideo client:load />
     <VideoGrid />
     <GuaranteeSection />
-    <Metrics client:idle />
+    <Metrics client:visible />
     <FeaturedServices />
     <CrewSection />
     <ClientsSection client:idle />

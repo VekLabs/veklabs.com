@@ -15,10 +15,10 @@ export default function Header({ currentPath }: HeaderProps) {
   return (
     <HeaderProvider currentPath={currentPath}>
       <header
-        className="sticky top-0 z-20 border-b-0.5 border-white/10 bg-background/65 py-3 backdrop-blur-xl backdrop-saturate-150 md:py-4"
+        className="border-b-0.5 bg-background/65 sticky top-0 z-40 border-white/10 py-3 backdrop-blur-xl backdrop-saturate-150 md:py-4"
         role="banner"
       >
-        <div className="mx-auto w-container">
+        <div className="w-container mx-auto">
           <div className="relative hidden h-8 items-center justify-between md:flex">
             <a href={baseURL}>
               <img
@@ -74,7 +74,7 @@ function MobileHeader({ currentPath }: HeaderProps) {
                 type: "tween",
                 ease: easeInOut,
               }}
-              className="fixed left-0 top-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-8 bg-background/90 p-4 pb-14 backdrop-blur-lg"
+              className="bg-background/90 fixed top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg"
             >
               {currentPath !== "/" && <HeaderLink href="/">Home</HeaderLink>}
               {menu.main.map((menuItem) => (

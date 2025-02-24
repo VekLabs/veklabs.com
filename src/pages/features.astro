@@ -1,14 +1,12 @@
 ---
 import { getCollection } from "astro:content"
 import { kebabCase } from "lodash-es"
-import FeatureCard from "../components/FeatureCard.astro"
 import featuresConfig from "../content/features.json"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
+import VideoCard from "../components/VideoCard.astro"
 
-const features = (
-  await getCollection("videos", ({ id }) =>
-    featuresConfig.videos.includes(kebabCase(id.replace(".md", ""))),
-  )
+const features = await getCollection("videos", ({ id }) =>
+  featuresConfig.videos.includes(kebabCase(id.replace(".md", ""))),
 )
 ---
 
@@ -21,7 +19,14 @@ const features = (
     <div
       class="mx-auto grid max-w-7xl snap-y snap-mandatory grid-flow-row grid-cols-1 gap-14 overflow-y-auto py-10"
     >
-      {features.map(async (feature) => <FeatureCard {...feature} />)}
+      {
+        features.map(async (feature) => (
+          <VideoCard
+            className="aspect-video w-full md:h-[80svh] md:min-h-96"
+            {...feature}
+          />
+        ))
+      }
     </div>
   </section>
 </DefaultLayout>

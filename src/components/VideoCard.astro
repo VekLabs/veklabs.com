@@ -48,21 +48,23 @@ const { className, data, slug } = Astro.props
   </div>
 
   <video
-    controls={false}
-    class="invisible size-full overflow-hidden rounded-xl object-cover group-hover:visible"
+    transition:name={`video-${slug}`}
+    class="size-full overflow-hidden rounded-xl object-cover opacity-0 duration-700 group-hover:opacity-100"
     src={data.previewURL}
     poster={data.image.src}
     preload="auto"
     muted
     playsinline
-    loop
-    oncanplay="this.currentTarget.currentTime = 10;"
-    ontimeupdate="if (this.currentTime > 20) { this.currentTime = 10; }"
-  ></video>
+    loop></video>
 
   <div
     class="absolute inset-0 aspect-video size-full overflow-hidden rounded-xl object-cover opacity-100 duration-700 group-hover:opacity-0"
   >
-    <Image src={data.image} alt={data.title} class="object-cover" />
+    <Image
+      width={600}
+      src={data.image}
+      alt={data.title}
+      class="w-full object-cover"
+    />
   </div>
 </a>

@@ -1,6 +1,6 @@
-import classNames, { type Value } from "classnames"
+import classNames, { type Argument } from "classnames"
 import { twMerge } from "tailwind-merge"
 
-export function cn(...inputs: Value[]) {
+export function cn(...inputs: Argument[]) {
   return twMerge(classNames(inputs))
 }
