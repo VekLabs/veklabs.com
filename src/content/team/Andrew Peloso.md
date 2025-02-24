@@ -2,9 +2,7 @@
 name: ANDREW
 image: /src/images/vek-team-4.jpg
 competencies:
-  - Cinematography
-  - Writing
-  - Direction
+  - Direction/Writing
 title: Executive Producer, Director
 order: 1
 channel:
