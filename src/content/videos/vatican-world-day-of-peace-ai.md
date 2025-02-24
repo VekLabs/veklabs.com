@@ -1,5 +1,5 @@
 ---
-title: "Vatican: World Day of Peace & AI"
+title: "VATICAN: World Day of Peace"
 videoID: "890075938"
 videoURL: https://player.vimeo.com/progressive_redirect/playback/890075938/rendition/1080p/file.mp4?loc=external&signature=1314caf01412589454c415c196d735caf33d6031eeee7b92b73d83c9c2d5c6a7&user_id=222329173
 previewURL: https://player.vimeo.com/progressive_redirect/playback/890075938/rendition/540p/file.mp4?loc=external&signature=76405979ef1e67678b276072aada2e359919181effe705fdfafa079eb3576758&user_id=222329173
