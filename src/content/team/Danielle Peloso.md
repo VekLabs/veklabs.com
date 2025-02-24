@@ -2,7 +2,7 @@
 name: DANIELLE
 image: /src/images/danielle.jpg
 competencies:
-  - Storytelling/Tone/Voice
+  - Tone/Quality-Control
 title: Research & Development
 order: 2
 channel:
