@@ -2,7 +2,7 @@
 name: JAMES
 image: /src/images/vek-team-5.jpg
 competencies:
-  - Camera-Ops/Lighting/Stills
+  - Cinematography/Photography
 title: Cinematographer
 order: 5
 ---
