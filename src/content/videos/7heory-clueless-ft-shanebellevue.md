@@ -1,5 +1,5 @@
 ---
-title: 7HEORY - Clueless ft Shanebellevue
+title: 7HEORY - Clueless
 videoID: "605192100"
 videoURL: https://player.vimeo.com/progressive_redirect/playback/605192100/rendition/1080p/file.mp4?loc=external&signature=132863d0d0d9771bd8826f7b62ccdba6f1876a9f44ec21135b3fa354f3eb6575&user_id=222329173
 previewURL: https://player.vimeo.com/progressive_redirect/playback/605192100/rendition/540p/file.mp4?loc=external&signature=389675327a177ec06b40cabdf78d2d8642c449da074ec90b2e6aca8443842327&user_id=222329173
