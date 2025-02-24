@@ -2,7 +2,7 @@
 name: RILEY
 image: /src/images/346784909_3139121103053562_150843381601736395_n.jpg
 competencies:
-  - Planning/Creative/Line-Producing
+  - Producing/Direction/Logistics
 title: Producer, Director
 order: 2
 ---
