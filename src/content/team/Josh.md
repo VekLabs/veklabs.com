@@ -2,7 +2,7 @@
 name: JOSH
 image: /src/images/josh240202_141211.jpg
 competencies:
-  - Composition/Motion/Technician
+  - Cinematography/Technician
 title: Cinematographer
 order: 6
 ---
