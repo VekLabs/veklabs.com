@@ -1,11 +1,10 @@
 ---
 import Image from "astro/components/Image.astro"
+import home from "../content/home.json"
 import blackPaper from "../images/black-paper.jpg"
 import blackWall from "../images/black-wall.jpg"
 import getImageUrl from "../utils/getImageUrl"
-import home from "../content/home.json"
 import { GlowingEffect } from "./GlowingEffect"
-import { getImage } from "astro:assets"
 
 const logos = home.awards.map((awardImage) => ({
   href: awardImage["href"],
@@ -44,12 +43,7 @@ const logos = home.awards.map((awardImage) => ({
               {
                 logos.map(async (logo) => (
                   <a href={logo.href} class="w-5/12 max-w-32 shrink">
-                    <Image
-                      alt=""
-                      width={200}
-                      src={await import(`${logo.src}`).then((m) => m.default)}
-                      loading="lazy"
-                    />
+                    <img alt="" src={getImageUrl(logo.src)} loading="lazy" />
                   </a>
                 ))
               }

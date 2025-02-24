@@ -1,5 +1,5 @@
 const images: Record<string, { default: ImageMetadata }> = import.meta.glob(
-  "../images/*.{jpg,jpeg,png}",
+  "/src/images/*.{jpg,jpeg,png}",
   { eager: true },
 )
 
