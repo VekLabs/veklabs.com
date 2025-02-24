@@ -2,8 +2,7 @@
 name: JON
 image: /src/images/vek-team-2.jpg
 competencies:
-  - Post-Production and Narrative
-  - Motion Graphics
+  - Post-Production/Advisor
 title: Advisor
 order: 7
 channel:
