@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content"
-import VideoCard from "./VideoCard"
+import VideoCard from "./VideoCardReact"
 import { useMemo, useState } from "react"
 import classNames from "classnames"
 import { AnimatePresence } from "motion/react"

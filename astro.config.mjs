@@ -11,7 +11,7 @@ export default defineConfig({
   prefetch: true,
   experimental: { clientPrerender: true },
   output: "static",
-  server: { port: 3000, host: true },
+  server: { host: true },
   site: "https://veklabs.com",
   adapter: netlify(),
   integrations: [

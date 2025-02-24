@@ -1,9 +1,8 @@
 ---
 import { getCollection } from "astro:content"
-import VideoCard from "./VideoCard.tsx"
-import { Image } from "astro:assets"
 import { ChevronRight } from "lucide-astro"
 import home from "../content/home.json"
+import VideoCard from "./VideoCard.astro"
 
 const videos = await getCollection("videos", ({ id }) =>
   home.videos.includes(id.replace(".md", "")),
@@ -21,25 +20,6 @@ const videos = await getCollection("videos", ({ id }) =>
   <div
     class="xs:grid-cols-[repeat(auto-fit,_minmax(400px,1fr))] grid grid-cols-2 gap-2 sm:gap-5 lg:grid-cols-3"
   >
-    {
-      videos.map((video, i, videos) => (
-        <VideoCard
-          {...video.data}
-          nextVideo={
-            i + 1 === videos.length
-              ? videos.at(0)?.data
-              : videos.at(i + 1)?.data
-          }
-          prevVideo={
-            i === 0
-              ? videos.at(videos.length - 1)?.data
-              : videos.at(i - 1)?.data
-          }
-          client:idle
-        >
-          <Image src={video.data.image} alt="" />
-        </VideoCard>
-      ))
-    }
+    {videos.map((video) => <VideoCard {...video} />)}
   </div>
 </section>

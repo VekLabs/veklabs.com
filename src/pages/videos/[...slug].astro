@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+import { getCollection } from "astro:content"
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+
+export async function getStaticPaths() {
+  const posts = await getCollection("videos")
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
+}
+
+type Props = CollectionEntry<"videos">
+const { slug, data, render } = Astro.props
+
+const { Content } = await render()
+---
+
+<DefaultLayout>
+  <div
+    class="fixed inset-0 z-50 h-full overflow-y-scroll bg-neutral-950/70 pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
+  >
+    <div class="grid w-full grid-cols-[1fr_auto_1fr]">
+      <div></div>
+      <div class="w-container relative mx-auto max-w-7xl md:p-10">
+        <video
+          transition:persist
+          transition:name={`video-${slug}`}
+          autoplay
+          controls
+          class="absolute aspect-video rounded-xl object-cover ring-2 shadow-lg shadow-neutral-950 ring-white/5 ring-inset md:w-[calc(100%-5rem)]"
+          src={data.videoURL}
+          poster={data.image.src}
+          preload="none"
+          playsinline></video>
+
+        <div class="mb-20 aspect-video w-full"></div>
+        <div
+          class="flex w-full flex-col flex-wrap justify-between gap-8 md:flex-row md:items-center"
+        >
+          <span
+            class="pointer-events-none z-50 order-2 flex h-5 items-center text-2xl font-semibold shadow-neutral-950 md:order-1"
+            transition:name={`video-title-${slug}`}
+          >
+            {data.title}
+          </span>
+          {/* <NextPrevVideo video={nextVideo} side="next" /> */}
+        </div>
+        <div class="flex flex-col gap-6 pt-14">
+          <div class="flex flex-col justify-between gap-5 md:flex-row">
+            <div class="flex max-w-prose flex-col gap-3">
+              {
+                Content && (
+                  <>
+                    <span class="text-xs font-bold tracking-widest uppercase">
+                      Description
+                    </span>
+                    <p>
+                      <Content />
+                    </p>
+                  </>
+                )
+              }
+            </div>
+            {
+              data.type || data.meta ? (
+                <div class="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
+                  {data.type && (
+                    <div class="flex flex-col gap-3">
+                      <span class="text-xs font-bold tracking-widest uppercase">
+                        Category
+                      </span>
+                      <span>{data.type}</span>
+                    </div>
+                  )}
+                  {data.meta &&
+                    data.meta.map(({ label, value }) => (
+                      <div class="flex flex-col">
+                        <span class="text-xxs text-accent-300 tracking-widest uppercase">
+                          {label}
+                        </span>
+                        <span>{value}</span>
+                      </div>
+                    ))}
+                </div>
+              ) : null
+            }
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</DefaultLayout>

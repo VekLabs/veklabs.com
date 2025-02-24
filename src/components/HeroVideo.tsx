@@ -1,9 +1,9 @@
 import cx from "classnames"
 import { Pause, Play, Volume2, VolumeX } from "lucide-react"
+import { useInView } from "motion/react"
 import { useEffect, useRef, useState } from "react"
 import config from "../content/home.json"
 import { useVideo } from "../hooks/useVideo"
-import { globalOpenVideo } from "../hooks/useVideoOpenState"
 import heroVideoImage from "../images/tempHero.jpg?url"
 
 const buttonClasses = `size-3 lg:size-4 rounded-lg lg:rounded-xl py-3 px-4 box-content duration-200 fill-white bg-background/65 hover:bg-background/95 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-white/10`
@@ -12,7 +12,10 @@ export default function HeroVideo() {
   const video = useRef<HTMLVideoElement>(null)
   const [isLowerPowerMode, setIsLowPowerMode] = useState(false)
   const { play, pause, isPlaying, isMuted, mute, unmute } = useVideo(video)
-  const videoPlayerIsOpen = !!globalOpenVideo.value
+  const isInView = useInView(video, {
+    margin: "0px 0px 300px 0px",
+    amount: 0.5,
+  })
 
   useEffect(() => {
     video.current?.play().catch((error) => {
@@ -23,12 +26,16 @@ export default function HeroVideo() {
   }, [video])
 
   useEffect(() => {
-    if (videoPlayerIsOpen) {
-      pause()
-    } else {
+    if (isInView) {
       play()
+    } else {
+      pause()
     }
-  }, [videoPlayerIsOpen])
+
+    return () => {
+      pause()
+    }
+  }, [isInView])
 
   return (
     <div className="w-container mx-auto">
