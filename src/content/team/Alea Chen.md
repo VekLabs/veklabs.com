@@ -3,8 +3,7 @@ name: ALEA
 image: /src/images/vek-team-1.jpg
 competencies:
   - Editorial
-  - Storyline
-  - Project Planning
+  - Narrative
 title: Editor
 order: 4
 channel:
