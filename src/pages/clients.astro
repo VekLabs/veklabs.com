@@ -34,11 +34,20 @@ const testimonials = await getCollection("testimonials")
       </div>
     </div>
 
-    <div
-      class="grid gap-6"
-      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(450px, 1fr))" }}
-    >
+    <div class="grid gap-6">
       {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
+    </div>
+
+    <div class="group flex flex-wrap justify-center gap-6 pt-36">
+      {
+        logos.map((logo) => (
+          <img
+            class="h-12 rounded duration-500 group-[:has(img:hover)]:opacity-50 hover:opacity-100! md:h-28"
+            src={logo.src}
+            alt=""
+          />
+        ))
+      }
     </div>
 
     <div class="flex items-center gap-6 py-4 pt-36">

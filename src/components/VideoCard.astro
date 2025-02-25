@@ -23,10 +23,10 @@ const category = await getEntry("categories", data.type)
   onmouseleave="this.querySelector('video')?.pause()"
 >
   <div
-    class="spring-duration-700 spring-bounce-40 absolute bottom-4 left-3.5 isolate z-10 flex max-w-[calc(100%-30px)] flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6"
+    class="spring-duration-700 spring-bounce-40 absolute bottom-3 left-2.5 isolate z-10 flex max-w-[calc(100%-30px)] flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6"
   >
     <span
-      class="text-xxs line-clamp-1 inline-flex items-center tracking-widest uppercase opacity-50 md:text-xs"
+      class="text-xxs line-clamp-1 inline-flex w-full items-center tracking-widest uppercase duration-200 group-hover:opacity-50 md:text-xs"
     >
       {
         category && (
@@ -35,7 +35,7 @@ const category = await getEntry("categories", data.type)
           </span>
         )
       }
-      <div class="size-full overflow-hidden">
+      <div class="hidden size-full overflow-hidden md:block">
         <span
           class="spring-duration-1000 spring-bounce-20 inline-flex -translate-x-full items-center opacity-0 delay-200 group-hover:translate-x-0 group-hover:opacity-100"
         >
@@ -45,7 +45,7 @@ const category = await getEntry("categories", data.type)
       </div>
     </span>
     <span
-      class="text-shadow-lg text-md pointer-events-none line-clamp-1 flex w-full items-center text-ellipsis whitespace-nowrap sm:text-xl sm:font-semibold"
+      class="text-shadow-lg text-md pointer-events-none line-clamp-1 flex w-full items-center font-semibold text-ellipsis whitespace-nowrap sm:text-xl"
       transition:name={`video-title-${slug}`}
     >
       {data.title}

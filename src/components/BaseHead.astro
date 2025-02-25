@@ -54,25 +54,3 @@ const title =
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <ClientRouter />
-
-<script>
-  document.addEventListener("astro:before-swap", () => {
-    sessionStorage.setItem(
-      `scrollPosition-${window.location.pathname}`,
-      window.scrollY.toString(),
-    )
-  })
-
-  document.addEventListener("astro:after-swap", () => {
-    const scrollPosition = sessionStorage.getItem(
-      `scrollPosition-${window.location.pathname}`,
-    )
-    if (scrollPosition) {
-      window.scrollTo({
-        top: parseInt(scrollPosition, 10),
-        behavior: "instant",
-      })
-      sessionStorage.removeItem(`scrollPosition-${window.location.pathname}`)
-    }
-  })
-</script>
