@@ -37,17 +37,6 @@ const services = defineCollection({
     }),
 })
 
-const offerings = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      description: z.string(),
-      rel: reference("services"),
-    }),
-})
-
 const team = defineCollection({
   type: "content",
   schema: ({ image }) =>
@@ -107,7 +96,6 @@ export const collections = {
   reports,
   videos,
   services,
-  offerings,
   team,
   testimonials,
 }

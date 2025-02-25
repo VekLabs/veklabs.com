@@ -1,4 +1,4 @@
-# local_backend: true
+local_backend: true
 
 backend:
   name: git-gateway
@@ -76,6 +76,22 @@ collections:
           - { name: TOTAL_VIEWS, label: Total Views, widget: number }
           - { name: CLIENT_TITLE, label: Client Title, widget: string }
           - { name: CLIENT_SUB_TITLE, label: Client Sub Title, widget: string }
+          - name: featured-services
+            label: Featured Services
+            widget: list
+            required: false
+            fields:
+              - {
+                  label: Service,
+                  name: rel,
+                  widget: relation,
+                  collection: services,
+                  value_field: "{{slug}}",
+                  search_fields: ["title"],
+                }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: string }
+              - { name: image, label: Image, widget: image }
 
       - label: Features
         name: features

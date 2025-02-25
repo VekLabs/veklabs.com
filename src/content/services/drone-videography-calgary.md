@@ -1,5 +1,5 @@
 ---
-title: DRONE/AERIAL
+title: DRONE / AERIAL
 page_title: Aerial Drone Video & Photography
 image: /src/images/drone.jpg
 order: 5

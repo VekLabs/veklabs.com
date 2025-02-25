@@ -27,7 +27,7 @@ const { Content } = await service.render()
 
 <DefaultLayout>
   <main
-    class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pb-12 pt-4 md:max-w-[1200px] md:flex-row lg:p-10"
+    class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-[1200px] md:flex-row lg:p-10"
   >
     <div
       class="relative flex h-max w-full flex-col gap-4 md:sticky md:top-20 md:min-w-72"
@@ -35,23 +35,28 @@ const { Content } = await service.render()
       {
         image && (
           <Image
+            transition:name={`service-image-${service.slug}`}
             src={image}
             width={350}
             height={550}
             alt=""
-            class="w-full rounded-xl shadow-xl ring-1 ring-gray-700/30 spring-duration-150"
+            class="spring-duration-150 w-full rounded-xl object-cover ring-1 shadow-xl ring-white/10"
           />
         )
       }
 
       <h1
+        transition:name={`service-title-${service.slug}`}
         class="absolute bottom-0 m-2 rounded-lg bg-gray-950/60 p-4 text-xl font-semibold ring-1 ring-gray-700/30 backdrop-blur-lg backdrop-brightness-200 md:p-6"
       >
         {page_title || title}
       </h1>
     </div>
 
-    <article class="content">
+    <article
+      class="content"
+      transition:name={`service-description-${service.slug}`}
+    >
       <Content />
     </article>
   </main>

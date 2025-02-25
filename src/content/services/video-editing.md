@@ -4,9 +4,7 @@ page_title: "POST-PRODUCTION: Editorial"
 image: /src/images/editing.jpg
 order: 8
 speed: 5
-summary: Our team utilizes the finest in video editing technology and
-  post-production techniques to create compelling videos that create an impact
-  and drive emotion.
+summary: Our expert editors can transform your footage with advanced video finishing, sound editing, and motion graphics techniques. This is where the magic happens, and allows us to create a breathtaking experience that our directors and writers intended.
 ---
 
 ## Post-Production Services

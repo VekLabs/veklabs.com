@@ -13,25 +13,27 @@ body {
   margin: 0;
 }
 
-h1,
-.h1 {
-  margin: 0;
-  font-size: 3rem;
-  font-weight: 600;
-}
+.content {
+  h1,
+  .h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 600;
+  }
 
-h2,
-.h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
+  h2,
+  .h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
 
-h3,
-.h3 {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 500;
+  h3,
+  .h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
 }
 
 a {

@@ -60,6 +60,8 @@ const category = await getEntry("categories", data.type)
     preload="auto"
     muted
     playsinline
+    onplay="this.currentTime = 30;"
+    ontimeupdate="if(this.currentTime > 40) this.currentTime = 30;"
     loop></video>
 
   <div

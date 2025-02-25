@@ -4,9 +4,7 @@ page_title: PRODUCTION
 image: /src/images/production.jpg
 order: 4
 speed: -8
-summary: Calgary video production services that captivate viewers and invigorate
-  brands. Learn more about how we provide premium videos and painless
-  productions.
+summary: The Vek Labs crew is filled with professional film producers, editors, photographers, talent, and uses only the finest equipment available on the market today. Our team can help you get the most out of your video, increasing your engagement and views online or on the television screen.
 ---
 
 Having successfully produced hundreds of video projects for our clients, Vek Labs brings refined problem-solving and creative solutions when filming a wide range of content. At Vek Labs our motto is **“Premium Video. Painless Production."** and we live by this statement. The film industry has been changing. Gone are the days of burdensome processes and conventions. As leaders in the new era of video production, we balance quality, time, and cost for the benefit of our clients.

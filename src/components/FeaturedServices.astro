@@ -2,39 +2,49 @@
 import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
 
-const offerings = await getCollection("offerings")
+const services = await getCollection("services")
 ---
 
 <section class="py-8">
   <div>
     <div
-      class="no-scrollbar grid snap-x snap-proximity grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
+      class="no-scrollbar grid snap-x snap-mandatory grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
     >
       <div
         class="grid grid-cols-[repeat(var(--cards),90%)] content-start gap-(--gap) lg:grid-cols-[repeat(var(--cards),clamp(800px,40vw,1600px))]"
-        style={{ "--cards": offerings.length }}
+        style={{ "--cards": services.length }}
       >
         {
-          offerings.map((offering) => (
+          services.map((service) => (
             <div class="flex max-h-[600px] snap-center flex-col overflow-hidden rounded-2xl border border-neutral-800 bg-black lg:max-h-96 lg:flex-row">
               <Image
-                src={offering.data.image}
+                src={service.data.image}
                 width={280}
                 height={300}
-                decoding="async"
                 loading="lazy"
-                alt={offering.data.title}
+                alt=""
+                transition:name={`service-image-${service.slug}`}
                 class="relative w-full overflow-hidden rounded-2xl object-cover [mask-image:linear-gradient(#000_75%,transparent)] lg:h-full lg:w-1/2 lg:[mask-image:linear-gradient(90deg,#000_75%,transparent)]"
               />
 
               <div class="flex w-full flex-col content-start gap-6 p-10 lg:w-1/2">
-                <h2 class="text-2xl font-semibold">{offering.data.title}</h2>
+                <h2
+                  transition:name={`service-title-${service.slug}`}
+                  class="text-2xl font-semibold"
+                >
+                  {service.data.title}
+                </h2>
 
-                <p class="text-sm text-gray-500">{offering.data.description}</p>
+                <p
+                  transition:name={`service-description-${service.slug}`}
+                  class="text-sm text-gray-500"
+                >
+                  {service.data.summary}
+                </p>
 
                 <a
                   class="shadow-accent-600 ring-accent-500 hover:bg-accent-400/15 mt-auto ml-auto rounded-md px-4 py-2 text-sm ring-1 shadow-xs duration-200"
-                  href={`/services/${offering.data.rel.id}`}
+                  href={`/services/${service.slug}`}
                 >
                   Learn More
                 </a>
