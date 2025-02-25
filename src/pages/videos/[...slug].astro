@@ -1,10 +1,11 @@
 ---
-import type { CollectionEntry } from "astro:content"
-import { getCollection } from "astro:content"
-import DefaultLayout from "../../layouts/DefaultLayout.astro"
-import { getEntry } from "astro:content"
-import VideoJSONLD from "../../components/VideoJSONLD.astro"
+import { BM25Utils } from "astro-relatinator"
 import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+import { getCollection, getEntry } from "astro:content"
+import VideoJSONLD from "../../components/VideoJSONLD.astro"
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import SmallVideoCard from "../../components/SmallVideoCard.astro"
 
 export async function getStaticPaths() {
   const posts = await getCollection("videos")
@@ -19,6 +20,16 @@ const { slug, data, render } = Astro.props
 
 const category = await getEntry("categories", data.type)
 
+const relatedVideos = await BM25Utils.findRelated(
+  `${data.title} ${data.type} ${category}`,
+  Astro.props.data.title,
+  3,
+)
+
+const relatedVideoDocs = await getCollection("videos", ({ data: { title } }) =>
+  relatedVideos.includes(title),
+)
+
 const { Content } = await render()
 ---
 
@@ -27,10 +38,10 @@ const { Content } = await render()
   <div
     class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
   >
-    <div class="grid w-full grid-cols-[1fr_auto_1fr]">
+    <div class="w-container mx-auto grid grid-cols-[1fr_auto_1fr]">
       <div>
         <a
-          class="text-foreground hover:text-foreground sticky top-4 left-4 z-20 flex w-max translate-x-0 items-center gap-1 rounded-full bg-black/50 px-4 py-2 text-sm opacity-100 backdrop-blur-md transition-all delay-300 duration-300 hover:bg-black hover:ring-1 hover:ring-white/20 starting:translate-x-2 starting:opacity-0"
+          class="text-foreground hover:text-foreground fixed top-4 left-4 z-20 flex w-max translate-x-0 items-center gap-1 rounded-full bg-black/50 px-4 py-2 text-sm opacity-100 backdrop-blur-md transition-all delay-300 duration-300 hover:bg-black hover:ring-1 hover:ring-white/20 starting:translate-x-2 starting:opacity-0"
           href="javascript:history.back()"
         >
           <svg viewBox="0 0 24 24" class="w-[0.65rem] fill-current">
@@ -39,7 +50,7 @@ const { Content } = await render()
           Back
         </a>
       </div>
-      <div class="w-container relative mx-auto max-w-7xl md:p-10">
+      <div class="w-container relative mx-auto max-w-7xl py-4 md:p-10">
         <video
           transition:persist
           transition:name={`video-${slug}`}
@@ -61,7 +72,6 @@ const { Content } = await render()
           >
             {data.title}
           </span>
-          {/* <NextPrevVideo video={nextVideo} side="next" /> */}
         </div>
         <div
           class="spring-duration-500 spring-bounce-20 flex translate-y-0 flex-col gap-6 pt-14 starting:translate-y-56"
@@ -80,7 +90,23 @@ const { Content } = await render()
                   </>
                 )
               }
+
+              {
+                relatedVideoDocs && (
+                  <div class="flex flex-col gap-2">
+                    <span class="text-xs font-bold tracking-widest uppercase">
+                      Up Next
+                    </span>
+                    <div class="flex flex-nowrap gap-2 overflow-x-auto">
+                      {relatedVideoDocs.map((video) => (
+                        <SmallVideoCard {...video} />
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
             </div>
+
             <div class="flex flex-col flex-wrap gap-4">
               {
                 category?.data.title || data.meta ? (
@@ -93,6 +119,7 @@ const { Content } = await render()
                         <span>{category?.data.title}</span>
                       </div>
                     )}
+
                     {data.meta &&
                       data.meta.map(({ label, value }) => (
                         <div class="flex flex-col">
@@ -102,6 +129,7 @@ const { Content } = await render()
                           <span>{value}</span>
                         </div>
                       ))}
+
                     {(data.awards?.length ?? 0) > 0 && (
                       <div class="flex flex-wrap">
                         {data.awards!.map((awardImage) => (

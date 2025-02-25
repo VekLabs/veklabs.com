@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite"
 import readingTime from "astro-reading-time"
 import { defineConfig } from "astro/config"
 import netlify from "@astrojs/netlify"
+import relatinatorIntegration from "astro-relatinator"
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +16,12 @@ export default defineConfig({
   site: "https://veklabs.com",
   adapter: netlify(),
   integrations: [
+    relatinatorIntegration({
+      paths: ["src/content/videos"],
+      schema: ["title", "type"],
+      similarityMethod: "bm25",
+      debug: true,
+    }),
     readingTime(),
     mdx(),
     sitemap(),

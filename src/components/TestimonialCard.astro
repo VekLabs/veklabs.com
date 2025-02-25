@@ -11,7 +11,7 @@ const { Content } = await testimonial.render()
   <div class="flex flex-col justify-center gap-6">
     {
       testimonial.data.image && (
-        <div class="linear-gradient-mask -z-1 absolute right-0 top-0">
+        <div class="linear-gradient-mask absolute top-0 right-6">
           <Image
             class="aspect-square w-56 opacity-50"
             src={testimonial.data.image}
@@ -32,7 +32,7 @@ const { Content } = await testimonial.render()
       )
     }
     <div class="flex flex-col gap-2">
-      <p class="mt-auto max-w-xl text-pretty text-lg">
+      <p class="mt-auto max-w-xl text-lg text-pretty">
         <Content />
       </p>
       <div class="flex gap-2">

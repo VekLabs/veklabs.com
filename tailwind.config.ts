@@ -17,7 +17,7 @@ export default {
         accent: colors.blue,
       }),
       width: {
-        container: "calc(100vw - clamp(1.5rem, 2.5vw, 3rem))",
+        container: "calc(100vw - 3rem)",
       },
       borderWidth: {
         0.5: "0.5px",

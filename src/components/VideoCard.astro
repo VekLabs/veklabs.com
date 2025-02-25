@@ -1,11 +1,14 @@
 ---
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
+import { getEntry } from "astro:content"
 import { ArrowRight, Loader2 } from "lucide-astro"
 
 type Props = CollectionEntry<"videos"> & { className?: string }
 
 const { className, data, slug } = Astro.props
+
+const category = await getEntry("categories", data.type)
 ---
 
 <a
@@ -24,9 +27,9 @@ const { className, data, slug } = Astro.props
       class="text-xxs line-clamp-1 inline-flex items-center tracking-widest uppercase opacity-50 md:text-xs"
     >
       {
-        data.type && (
+        category && (
           <span class="mr-2 inline-flex gap-2 overflow-clip tracking-widest whitespace-nowrap uppercase">
-            {data.type}
+            {category.data.title}
           </span>
         )
       }

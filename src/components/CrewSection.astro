@@ -8,10 +8,10 @@ import CrewComponent from "./CrewComponent.tsx"
 const teamMembers = await getCollection("team")
 ---
 
-<section class="mx-auto mt-16 w-container py-16 md:mt-28">
+<section class="w-container mx-auto mt-16 py-16 md:mt-28">
   <h2 class="text-center text-4xl font-semibold">{config.TEAM_TITLE}</h2>
   <div
-    class="mx-auto flex w-full flex-wrap items-center justify-center gap-12 py-6 no-scrollbar"
+    class="no-scrollbar mx-auto flex w-full max-w-[800px] flex-wrap items-center justify-center gap-12 py-6"
   >
     {
       sortBy(teamMembers, "order").map((member) => (

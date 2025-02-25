@@ -1,7 +1,7 @@
 ---
 title: Chris Butler
 subtitle: Police & Defense Trainer
-image: /src/images/Raptor-Logo.webp
+image: /src/images/Raptor-Logo.svg
 ---
 
 Our US-based company is moving to adopt our in-person training content to the online and virtual environment. We needed to find a video production vendor that was professional and knowledgable in this area and also had the personality that fit well with our corporate culture. Our search led us to VekLabs in Calgary, Alberta.

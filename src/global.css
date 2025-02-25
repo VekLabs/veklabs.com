@@ -4,6 +4,8 @@
 
 @config '../tailwind.config.ts';
 
+@custom-variant sub-svg (& svg);
+
 body {
   font-family: var(--body-font);
   background-color: var(--gray6);

@@ -2,6 +2,7 @@ import z from "zod"
 import { BackgroundGradientAnimation } from "./BackgroundGradient"
 import type { CollectionEntry } from "astro:content"
 import { useEffect, useRef, useState, type CSSProperties } from "react"
+import { Check } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(3),
@@ -14,8 +15,10 @@ type FormSchema = z.infer<typeof formSchema>
 export default function ContactForm({
   services,
 }: {
-  services: { data: { title: string } }[]
+  services: { data: { title: string }; slug: string }[]
 }) {
+  const form = useRef<HTMLFormElement>(null)
+
   return (
     <section className="relative isolate flex h-full w-full flex-col space-y-6 p-10 lg:p-20">
       <BackgroundGradientAnimation containerClassName="opacity-50 absolute rounded-2xl shadow-md ring-1 ring-gray-100/20 ring-inset size-full z-[-1]" />
@@ -26,6 +29,10 @@ export default function ContactForm({
         Tell us more about yourself and what you've got in mind.
       </p>
       <form
+        ref={form}
+        onChange={(e) =>
+          console.log([...new FormData(e.currentTarget).entries()])
+        }
         name="contact-form"
         method="POST"
         data-netlify="true"
@@ -88,12 +95,17 @@ export default function ContactForm({
             </legend>
             <ul className="grid max-w-lg grid-cols-2 gap-y-4">
               {services.map((service) => (
-                <li>
+                <li
+                  key={service.data.title}
+                  className="has-checked:sub-svg:opacity-100 flex items-center gap-1 select-none"
+                >
                   <label
-                    key={service.data.title}
                     htmlFor={service.data.title}
-                    className="inline-flex cursor-pointer items-center justify-between rounded-lg text-gray-200 peer-checked:text-gray-600 before:mr-2 before:size-4 before:rounded-xs before:border peer-checked:before:border-blue-600 peer-checked:before:bg-blue-400 hover:text-gray-300"
+                    className="inline-flex cursor-pointer items-center justify-between gap-3 rounded-lg text-gray-200 hover:text-gray-300"
                   >
+                    <div className="size-4 rounded ring-2 ring-white/50">
+                      <Check className="size-4 opacity-0" />
+                    </div>
                     {service.data.title}
                   </label>
                   <input
@@ -101,7 +113,7 @@ export default function ContactForm({
                     name="services"
                     id={service.data.title}
                     value={service.data.title}
-                    className="peer hidden"
+                    className="sr-only"
                   />
                 </li>
               ))}

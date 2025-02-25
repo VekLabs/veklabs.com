@@ -13,9 +13,9 @@ const testimonials = await getCollection("testimonials")
 ---
 
 <DefaultLayout title={config.title}>
-  <section class="mx-auto w-container max-w-7xl py-14 pt-28">
+  <section class="w-container mx-auto max-w-7xl py-14 pt-28">
     <div class="flex flex-col justify-center gap-6 px-4 pb-24">
-      <h2 class="max-w-xl text-pretty text-3xl font-medium">
+      <h2 class="max-w-xl text-3xl font-medium text-pretty">
         {config.subtitle}
       </h2>
       <div class="flex items-center gap-4">
@@ -45,7 +45,10 @@ const testimonials = await getCollection("testimonials")
       <span class="text-3xl">
         {config.cta_text}
       </span>
-      <a class="ml-auto mt-1 flex items-center gap-1.5 text-lg" href="/contact">
+      <a
+        class="mt-1 ml-auto flex items-center gap-1.5 text-lg whitespace-nowrap"
+        href="/contact"
+      >
         {config.cta_link}
         <ChevronRight class="size-5" />
       </a>

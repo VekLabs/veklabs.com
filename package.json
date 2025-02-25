@@ -56,6 +56,7 @@
     "@preact/signals-react-transform": "^0.5.1",
     "@types/lodash-es": "^4.17.12",
     "astro-reading-time": "^0.1.13",
+    "astro-relatinator": "^2.0.1",
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
