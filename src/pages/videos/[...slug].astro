@@ -1,5 +1,5 @@
 ---
-import { BM25Utils } from "astro-relatinator"
+// import { BM25Utils } from "astro-relatinator"
 import { Image } from "astro:assets"
 import type { CollectionEntry } from "astro:content"
 import { getCollection, getEntry } from "astro:content"
@@ -20,14 +20,22 @@ const { slug, data, render } = Astro.props
 
 const category = await getEntry("categories", data.type)
 
-const relatedVideos = await BM25Utils.findRelated(
-  `${data.title} ${data.type} ${category}`,
-  Astro.props.data.title,
-  3,
-)
+// const relatedVideos = await BM25Utils.findRelated(
+//   `${data.title} ${data.type} ${category}`,
+//   Astro.props.data.title,
+//   3,
+// )
 
-const relatedVideoDocs = await getCollection("videos", ({ data: { title } }) =>
-  relatedVideos.includes(title),
+// const relatedVideoDocs = await getCollection("videos", ({ data: { title } }) =>
+//   relatedVideos.includes(title),
+// )
+const allVideos = await getCollection("videos")
+const indexOfCurrentVideo = allVideos.findIndex(
+  (video) => video.data.title === data.title,
+)
+const nextVideos = allVideos.slice(
+  indexOfCurrentVideo + 1,
+  indexOfCurrentVideo + 4,
 )
 
 const { Content } = await render()
@@ -92,13 +100,13 @@ const { Content } = await render()
               }
 
               {
-                relatedVideoDocs && (
+                nextVideos && (
                   <div class="flex flex-col gap-2">
                     <span class="text-xs font-bold tracking-widest uppercase">
                       Up Next
                     </span>
                     <div class="flex flex-nowrap gap-2 overflow-x-auto">
-                      {relatedVideoDocs.map((video) => (
+                      {nextVideos.map((video) => (
                         <SmallVideoCard {...video} />
                       ))}
                     </div>
