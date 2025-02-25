@@ -1,13 +1,16 @@
 ---
 import { Image } from "astro:assets"
 import { getCollection } from "astro:content"
+import { ScrollButton } from "./ScrollButton.tsx"
 
 const services = await getCollection("services")
 ---
 
 <section class="py-8">
-  <div>
+  <div class="relative" style="timeline-scope: --featured-services;">
     <div
+      id="featured-services"
+      style="scroll-timeline: --featured-services inline;"
       class="no-scrollbar grid snap-x snap-mandatory grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
     >
       <div
@@ -54,5 +57,18 @@ const services = await getCollection("services")
         }
       </div>
     </div>
+    <ScrollButton
+      client:idle
+      direction="left"
+      scrollElementId="featured-services"
+      className="pointer-coarse:hidden absolute top-1/2 left-14 -translate-y-1/2 transform"
+    />
+
+    <ScrollButton
+      client:idle
+      direction="right"
+      scrollElementId="featured-services"
+      className="pointer-coarse:hidden absolute top-1/2 right-10 -translate-y-1/2 transform"
+    />
   </div>
 </section>

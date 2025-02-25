@@ -17,11 +17,7 @@ export default defineConfig({
   server: { host: true },
   site: "https://veklabs.com",
   adapter: netlify(),
-  integrations: [
-    readingTime(),
-    sitemap(),
-    react({ babel: { plugins: [["module:@preact/signals-react-transform"]] } }),
-  ],
+  integrations: [readingTime(), sitemap(), react()],
   vite: { plugins: [tailwindcss()] },
   redirects: {
     "/reports": "/reports/page/1",

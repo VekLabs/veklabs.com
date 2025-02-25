@@ -44,6 +44,14 @@ export default {
           "0%": { opacity: "0", transform: "translateY(1rem)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
         parallax: {
           "0%": { transform: "translateY(var(--parallax-start, 0))" },
           "100%": { transform: "translateY(var(--parallax-end, 50%))" },
