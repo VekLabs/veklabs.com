@@ -6,7 +6,9 @@ import { Image } from "astro:assets"
 
 type Props = CollectionEntry<"reports"> & { featured?: boolean }
 
-const { featured = false, data, id } = Astro.props
+const { featured = false, data, id, render } = Astro.props
+
+const { remarkPluginFrontmatter } = await render()
 ---
 
 <a
@@ -62,13 +64,12 @@ const { featured = false, data, id } = Astro.props
           </span>
         )
       }
-      <!-- <p class="excerpt"><Content /></p> -->
-      <!-- <span
+      <span
         transition:name={`readtime-${id}`}
-        class="time-to-read mt-3 block whitespace-nowrap text-sm text-accent-500"
+        class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
       >
         {remarkPluginFrontmatter.minutesRead}
-      </span> -->
+      </span>
     </div>
   </article>
 </a>

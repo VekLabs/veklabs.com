@@ -116,7 +116,9 @@ export default {
         { values: theme("translate"), supportsNegativeValues: true },
       )
     }),
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities, addVariant }) => {
+      addVariant("pointer-coarse", "@media (pointer: coarse)")
+      addVariant("pointer-fine", "@media (pointer: fine)")
       addUtilities({
         ".timeline-root": { "animation-timeline": "scroll(root);" },
         ".parallax": { "animation-name": "parallax;" },

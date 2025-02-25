@@ -9,17 +9,17 @@ const { Content } = await testimonial.render()
 
 <div class="relative w-full rounded-xl bg-black p-8 ring-1 ring-gray-800">
   <div class="flex flex-col justify-center gap-6">
-    {
+    <!-- {
       testimonial.data.image && (
-        <div class="linear-gradient-mask absolute top-0 right-6">
+        <div class="absolute top-0 right-6">
           <Image
-            class="aspect-square w-56 opacity-50"
+            class="aspect-square w-56 opacity-20"
             src={testimonial.data.image}
             alt={testimonial.data.title}
           />
         </div>
       )
-    }
+    } -->
     {
       testimonial.data.image && (
         <div class="aspect-square max-w-12 rounded-sm bg-gray-800 p-2">

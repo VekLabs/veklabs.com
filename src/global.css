@@ -35,7 +35,7 @@ h3,
 }
 
 a {
-  @apply no-underline;
+  @apply no-underline hover:no-underline;
 
   &.link {
     @apply text-accent-400;
@@ -43,7 +43,7 @@ a {
 }
 
 .linear-gradient-mask {
-  --mask-start-deg: 45deg;
+  --mask-start-deg: 275deg;
   mask: linear-gradient(var(--mask-start-deg), rgba(0, 0, 0, 0) 0%, #000 100%);
 }
 

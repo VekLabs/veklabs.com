@@ -34,7 +34,7 @@ const testimonials = await getCollection("testimonials")
       </div>
     </div>
 
-    <div class="grid gap-6">
+    <div class="grid gap-6 md:grid-cols-[repeat(auto-fill,minmax(450px,1fr))]">
       {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
     </div>
 
@@ -42,7 +42,7 @@ const testimonials = await getCollection("testimonials")
       {
         logos.map((logo) => (
           <img
-            class="h-12 rounded duration-500 group-[:has(img:hover)]:opacity-50 hover:opacity-100! md:h-28"
+            class="h-20 rounded duration-500 group-[:has(img:hover)]:opacity-50 hover:opacity-100! md:h-28"
             src={logo.src}
             alt=""
           />
