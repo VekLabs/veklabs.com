@@ -38,18 +38,6 @@ const testimonials = await getCollection("testimonials")
       {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
     </div>
 
-    <div class="group flex flex-wrap justify-center gap-6 pt-36">
-      {
-        logos.map((logo) => (
-          <img
-            class="h-20 rounded duration-500 group-[:has(img:hover)]:opacity-50 hover:opacity-100! md:h-28"
-            src={logo.src}
-            alt=""
-          />
-        ))
-      }
-    </div>
-
     <div class="flex items-center gap-6 py-4 pt-36">
       <span class="text-3xl">
         {config.cta_text}
@@ -61,6 +49,18 @@ const testimonials = await getCollection("testimonials")
         {config.cta_link}
         <ChevronRight class="size-5" />
       </a>
+    </div>
+
+    <div class="group flex flex-wrap justify-center gap-6 pt-12">
+      {
+        logos.map((logo) => (
+          <img
+            class="h-[clamp(100px,15vw,200px)] rounded duration-500 group-[:has(img:hover)]:opacity-50 hover:opacity-100!"
+            src={logo.src}
+            alt=""
+          />
+        ))
+      }
     </div>
   </section>
 </DefaultLayout>
