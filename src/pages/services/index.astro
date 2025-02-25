@@ -19,13 +19,6 @@ const services = (await getCollection("services")).sort(
             <ServiceSummary i={i} {...service.data} {...service} />
           ))
         }
-
-        <!-- <div class="inventory">
-
-        <h1 class="title">Equipment Arsenal</h1>
-
-        {{.Content}}
-      </div> -->
       </div>
     </div>
   </section>

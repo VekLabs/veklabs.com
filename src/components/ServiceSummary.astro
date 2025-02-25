@@ -19,9 +19,9 @@ const end = Math.abs(speed) * -5
     "justify-center": [3, 6, 8, 10].includes(i + 1),
   }}
 >
-  <div class="block w-full max-w-[400px] text-foreground">
+  <div class="text-foreground block w-full max-w-[400px]">
     <div
-      class="absolute -z-10 h-56 w-40 animate-parallax overflow-hidden rounded-xl drop-shadow-2xl timeline-view -parallax-start-32 parallax-end-0 [animation-timing-function:linear] lg:h-[400px] lg:w-72"
+      class="animate-parallax timeline-view -parallax-start-32 parallax-end-0 absolute -z-10 size-52 overflow-hidden rounded-xl [animation-timing-function:linear] lg:size-[350px]"
       style={{
         animationTimeline: "scroll(root)",
         "--parallax-start": `${start}%`,
@@ -34,33 +34,37 @@ const end = Math.abs(speed) * -5
       }}
     >
       <Image
+        transition:name={`service-image-${slug}`}
         class="size-full rounded-xl object-cover"
         src={image}
         alt=""
-        width="280"
-        height="400"
+        width={400}
+        height={400}
       />
     </div>
 
     <div
-      class="relative flex flex-col gap-4"
+      class="text-shadow-sm relative flex flex-col gap-4"
       style={{
         zIndex: order ?? 2,
         filter: "drop-shadow(0 0 16px #000000) drop-shadow(0 0 48px #000000)",
       }}
     >
-      <h2 class="text-3xl">
+      <h2 class="text-3xl" transition:name={`service-title-${slug}`}>
         {title}
       </h2>
 
-      <div class="font-medium leading-5">
+      <div
+        class="leading-5 font-medium"
+        transition:name={`service-description-${slug}`}
+      >
         {summary}
       </div>
 
       {
         body.length > 1 && (
           <a
-            class="inline-flex w-max items-center rounded-lg bg-black/60 px-3 py-2 text-sm backdrop-blur-md duration-200 hover:bg-black hover:ring-1 hover:ring-blue-500/30"
+            class="inline-flex w-max items-center rounded-lg bg-black px-3 py-2 text-sm duration-200 hover:bg-black/90 hover:ring-1 hover:ring-blue-500/30"
             href={`/services/${slug}`}
           >
             Learn More
