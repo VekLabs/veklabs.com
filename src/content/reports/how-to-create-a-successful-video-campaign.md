@@ -37,8 +37,6 @@ Intrigued by our video editing process? Take a look at our [post-production](htt
 
 When you are trying to promote a product with video, you can’t spend time talking about your company. When we take a look at cult classic commercials such as Oxiclean or the Shamwow, do they spend any time talking about who they are? Not really. They get right to the point of their product straight away! These companies invest hundreds of thousands of dollars into their campaigns, and they only have a few minutes to try and sell you. The first 10 seconds are where they lock you in and keep you there for the duration of the commercial.
 
-{{< youtube 1Q39yfGLPkMY >}}
-
 ## Meaningful Storytelling and How To Engage Your Audience
 
 Telling a story to your audience goes a long way in video marketing. This is how marketing teams can extend their reach into a viewer’s heart and resonate within them.
@@ -52,8 +50,6 @@ Here are a few tips to creating a great story with your videos:
 Creating an emotional connection goes hand-in-hand with great storytelling! By tugging on the heartstrings of your audience, you create a memorable experience that will stay with them much longer than some trivial product advertisement.
 
 For an example check out this advertisement from Adidas about ‘breaking free’ from your constraints:
-
-{{< youtube "gXfLl3qYy0k&t" >}}
 
 ### Guide Them Through The Story
 
@@ -73,8 +69,6 @@ One way to do this is through humor, such as Old Spice has done throughout the y
 
 Just take a look at the Old Spice Terry Crews collaborations from a few years back:
 
-{{< youtube "Hq2SlCja3zo&t" >}}
-
 Here are a few tips for coming up with ways to highlight product/brand strengths:
 
 ### Find A Unique Way To Showcase Your Product
@@ -88,8 +82,6 @@ These are questions that you and your team need to answer in order to make yours
 Dollar Shave Club did a magnificent job highlighting their products in their amazing advertisements.
 
 I don’t know, something about men’s shaving product advertisements that just stick with me...
-
-{{< youtube ZUG9qYTJMsI >}}
 
 ## Conclusion
 

@@ -7,8 +7,6 @@ author: "Andrew Peloso"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube NJa5LDbSqco >}}
-
 What is the crew from Veklabs watching during this quarantine? A lot of people are watching content these days. We talk about what shows on netflix, amazon prime, and youtube we're digesting.
 
 ### [Full Podcast](https://anchor.fm/vek-labs)

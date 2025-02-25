@@ -7,8 +7,6 @@ author: "Riley Patten"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube fNIc1nYFP8U >}}
-
 John SanFilippo, owner and producer at Tyton Sound joins Andrew on the VEKCAST to discuss the importance of using audio production to level up your video content.
 
 ### [Full Podcast](https://anchor.fm/vek-labs)

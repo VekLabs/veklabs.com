@@ -7,8 +7,6 @@ author: "Jon Cubid"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube tfXhr06t2oI >}}
-
 In this segment on the VEKCAST we discuss why we chose Sony over Canon or any other camera brands. We delve into why the sony fs5 and sony a7iii are good choices for video production.
 
 ### [Full Podcast](https://anchor.fm/vek-labs)

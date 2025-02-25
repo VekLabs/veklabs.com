@@ -21,8 +21,6 @@ Before you begin writing your script it’s essential to find out and identify w
 
 By creating a script that is directed at your target demographic and audience you will increase your chances of creating an emotional impact with them and locking in their attention to your video. The content needs to resonate within the viewer, creating a connection between your brand and their needs. You want to avoid targeting a broad audience because this will rarely appeal to anyone.
 
-{{< youtube 5L6juLUkwuw >}}
-
 ### Make Your Video’s Purpose Clear and Concise
 
 Your video should have a clear and concise purpose and your audience should be able to see this right away. Your script is where this purpose is laid out and formulated before the video is even shot. The goal of your [video production](https://www.veklabs.com/) should be at the forefront of your scriptwriting. Make sure that every line of a script you write leads the viewer to the end goal of the video.
@@ -30,8 +28,6 @@ Your video should have a clear and concise purpose and your audience should be a
 Some questions you should ask yourself are “where does my video fit into the sales funnel of my campaign?” “What does my video want to achieve?” “How can I best guide my audience through the video to reach our end goal?"
 
 Make sure the video fits well into your sales funnel and is not put to waste or misses the mark. There should be a clear purpose for the video to achieve. You shouldn’t be creating this video for the sake of creating a video. Your script should also be built in a way that delivers the viewer straight to your end goal. Make sure that you build a call-to-action into the script so that you give them something to act on after the fact.
-
-{{< youtube C1nVUG3sTuE >}}
 
 [https://www.youtube.com/watch?v=C1nVUG3sTuE](https://www.youtube.com/watch?v=C1nVUG3sTuE "https://www.youtube.com/watch?v=C1nVUG3sTuE")
 
@@ -42,8 +38,6 @@ Your story cannot be all over the place focusing on many different characters an
 Always choose one person to be on the screen for the majority of the time, you shouldn’t be switching back and forth between multiple characters because this can confuse your audience and throw off the feel of the video and destroy the narrative.
 
 Companies create almost mascot-like characters for their videos because their audience becomes trusting and familiar with these spokespeople. So if you can, use the same person across your videos to act as your spokesperson.
-
-{{< youtube QTDm1kdwo >}}
 
 ## Now, Start Writing Your Script
 
@@ -70,8 +64,6 @@ Take what you have written and figure out a rough estimate of how much video foo
 Now it’s time to start shooting your video. We want to stick to the script as much as possible while making adjustments as needed. Avoid implementing large changes to the script, however. This can be costly and tarnish the theme or point of your script. Just because something seems like it will work better, doesn’t always pan out that way. Be sure that whatever you are adding to your script backs up the goal of your video and the purpose of the script.
 
 Keep an eye on your resources and if the script is asking for too much as well. Sometimes writers need to go back to the drawing board because their video simply takes up too much of their budget in order to complete the tasks at hand. This can lead to the script being changed or rewritten entirely if it doesn’t line up with the resources dedicated to the project.
-
-{{< youtube Su_4OjIjqok >}}
 
 ## Conclusion
 

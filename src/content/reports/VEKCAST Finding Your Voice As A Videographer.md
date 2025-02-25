@@ -7,8 +7,6 @@ author: "Andrew Peloso"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube SHxsEU7t168 >}}
-
 Great insight by Ryan on the journey to finding your voice and style within the film making. From keeping up with the latest video trends to searching deep within to pull out what you're really passionate about in video production, the process of finding your voice in film is a journey! [Ryan Bouman's Website](http://www.ryanboumanfilm.com/):
 
 ### [Full Podcast](https://anchor.fm/vek-labs)

@@ -7,8 +7,6 @@ author: "Andrew Peloso"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube lKbCvY0aFWU >}}
-
 In this segment, editor Jon Cubid discusses the process of editing the Finch, a short film written and directed by James McLane.
 
 ### [Full Podcast](https://anchor.fm/vek-labs)

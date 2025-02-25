@@ -6,7 +6,7 @@ const reports = defineCollection({
     z.object({
       title: z.string(),
       category: z.string().optional(),
-      author: z.string(),
+      author: reference("team"),
       keywords: z.string().optional(),
       date: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),

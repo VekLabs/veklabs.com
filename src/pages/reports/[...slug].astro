@@ -4,6 +4,7 @@ import DefaultLayout from "../../layouts/DefaultLayout.astro"
 import FormattedDate from "../../components/FormattedDate.astro"
 import CategoryBadge from "../../components/CategoryBadge.astro"
 import { Image } from "astro:assets"
+import { getEntry } from "astro:content"
 
 export async function getStaticPaths() {
   const posts = await getCollection("reports")
@@ -19,6 +20,8 @@ const {
   data: { title, date, category, image },
   id,
 } = post
+
+const author = await getEntry(post.data.author)
 
 const { Content, remarkPluginFrontmatter } = await post.render()
 ---
@@ -96,8 +99,11 @@ const { Content, remarkPluginFrontmatter } = await post.render()
         )
       }
 
-      <section class="content flex max-w-[80ch] flex-col gap-5">
-        <h1 transition:name={`title-${id}`} class="m-0 text-5xl font-semibold">
+      <section class="flex max-w-[80ch] flex-col gap-5 md:px-12">
+        <h1
+          transition:name={`title-${id}`}
+          class="m-0 text-3xl font-semibold md:text-5xl"
+        >
           {title}
         </h1>
 
@@ -108,10 +114,17 @@ const { Content, remarkPluginFrontmatter } = await post.render()
           {remarkPluginFrontmatter.minutesRead}
         </span>
 
-        <p class="animate-fade-up">
+        <p class="animate-fade-up content">
           <Content />
         </p>
 
+        {
+          author && (
+            <div class="">
+              <span>{author.data.name}</span>
+            </div>
+          )
+        }
         <!-- {{ if isset .Params "author" }}
          {{ partial "blog/author.html" . }}
          {{ end }} -->

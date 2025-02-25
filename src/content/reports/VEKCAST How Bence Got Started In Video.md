@@ -7,8 +7,6 @@ author: "Andrew Peloso"
 keywords: "calgary video production, video production calgary, calgary video company"
 ---
 
-{{< youtube iZ6Dn-kFeUg >}}
-
 Highlight from our podcast with [Bence Horvai](https://www.bencehorvai.com/) - He talks about how to he got interested in video and the process he took to get where he is now as a content creator in Calgary, Alberta Canada.
 
 ### [Full Podcast](https://anchor.fm/vek-labs)
