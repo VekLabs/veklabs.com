@@ -4,6 +4,7 @@ import VideoCard from "../components/VideoCard.astro"
 import VideoListJSONLD from "../components/VideoListJSONLD.astro"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 import { PortfolioFilter } from "../components/PortfolioFilter.tsx"
+import { sortBy } from "lodash-es"
 
 const videos = await getCollection("videos")
 const categories = await getCollection("categories", ({ slug }) =>
@@ -25,7 +26,11 @@ const categories = await getCollection("categories", ({ slug }) =>
         class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 px-4 sm:gap-5 xl:grid-cols-4"
         data-filter-content
       >
-        {videos.map((video) => <VideoCard {...video} />)}
+        {
+          sortBy(videos, "data.publishDate")
+            .toReversed()
+            .map((video) => <VideoCard {...video} />)
+        }
       </div>
     </div>
   </section>
