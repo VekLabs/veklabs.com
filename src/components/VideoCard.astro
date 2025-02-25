@@ -17,11 +17,13 @@ const category = await getEntry("categories", data.type)
     "group relative aspect-video size-full max-w-full cursor-pointer snap-start scroll-mx-6 rounded-xl border-neutral-300",
     className,
   ]}
+  transition:name={`video-card-${slug}`}
+  data-category={category?.slug}
   onmouseover="this.querySelector('video')?.play()"
   onmouseleave="this.querySelector('video')?.pause()"
 >
   <div
-    class="spring-duration-700 spring-bounce-40 absolute bottom-4 left-3.5 isolate z-10 flex flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6"
+    class="spring-duration-700 spring-bounce-40 absolute bottom-4 left-3.5 isolate z-10 flex max-w-[calc(100%-30px)] flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6"
   >
     <span
       class="text-xxs line-clamp-1 inline-flex items-center tracking-widest uppercase opacity-50 md:text-xs"

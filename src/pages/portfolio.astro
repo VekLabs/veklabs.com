@@ -1,10 +1,14 @@
 ---
 import { getCollection } from "astro:content"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
-import { PortfolioGrid } from "../components/PortfolioGrid.tsx"
+import VideoCard from "../components/VideoCard.astro"
 import VideoListJSONLD from "../components/VideoListJSONLD.astro"
+import DefaultLayout from "../layouts/DefaultLayout.astro"
+import { PortfolioFilter } from "../components/PortfolioFilter.tsx"
 
 const videos = await getCollection("videos")
+const categories = await getCollection("categories", ({ slug }) =>
+  videos.some((video) => video.data.type === slug),
+)
 ---
 
 <DefaultLayout title="Portfolio">
@@ -14,23 +18,15 @@ const videos = await getCollection("videos")
       <h2 class="text-3xl">Portfolio</h2>
     </div>
 
-    <PortfolioGrid
-      videos={videos.map((video, i, videos) => ({
-        ...video,
-        data: {
-          ...video.data,
+    <div class="flex w-full flex-col gap-8">
+      <PortfolioFilter client:load categories={categories} />
 
-          nextVideo:
-            i + 1 === videos.length
-              ? videos.at(0)?.data
-              : videos.at(i + 1)?.data,
-          prevVideo:
-            i === 0
-              ? videos.at(videos.length - 1)?.data
-              : videos.at(i - 1)?.data,
-        },
-      }))}
-      client:load
-    />
+      <div
+        class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-2 px-4 sm:gap-5 xl:grid-cols-4"
+        data-filter-content
+      >
+        {videos.map((video) => <VideoCard {...video} />)}
+      </div>
+    </div>
   </section>
 </DefaultLayout>

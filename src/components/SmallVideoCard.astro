@@ -11,6 +11,7 @@ const category = await getEntry("categories", data.type)
 
 <a
   href={`/videos/${slug}`}
+  data-astro-history="replace"
   class="group flex max-w-56 min-w-48 flex-col overflow-hidden rounded-lg"
 >
   <Image
