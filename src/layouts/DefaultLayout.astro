@@ -13,7 +13,7 @@ interface Props {
 const { title, description } = Astro.props
 ---
 
-<html lang="en" class="bg-background text-foreground min-h-full">
+<html lang="en" class="bg-background text-foreground no-scrollbar min-h-full">
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />

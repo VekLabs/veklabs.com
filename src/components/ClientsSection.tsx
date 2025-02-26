@@ -29,19 +29,24 @@ export function ClientsSection() {
   }, 3000)
 
   return (
-    <section className="mx-auto w-container py-8 text-center md:pb-20 md:pt-12">
-      <div className="flex flex-col items-center gap-2">
-        <h2 className="m-0">{config.CLIENT_TITLE}</h2>
-        <h4 className="m-0 font-normal text-accent-500">
-          {config.CLIENT_SUB_TITLE}
-        </h4>
-        <a className="mt-1 flex items-center gap-1.5 text-lg" href="/clients">
-          All Clients
-          <ChevronRight className="size-5" />
-        </a>
+    <section className="w-container mx-auto py-8 text-center md:pt-12 md:pb-20">
+      <div className="flex flex-col items-center gap-4">
+        <h2 className="m-0 text-3xl font-medium tracking-widest">
+          {config.CLIENT_TITLE}
+        </h2>
+        <div className="flex flex-col items-center gap-8">
+          <h4 className="m-0 text-xl font-light">{config.CLIENT_SUB_TITLE}</h4>
+          <a
+            className="mt-1 flex items-center justify-between gap-1.5 rounded-full bg-white/20 px-5 py-2"
+            href="/clients"
+          >
+            <span>All Clients</span>
+            <ChevronRight className="-mr-2 size-[1_cap]" />
+          </a>
+        </div>
       </div>
 
-      <div className="container relative mx-auto py-6">
+      <div className="relative container mx-auto py-6 pt-10">
         <motion.div className="relative mx-auto grid h-60 w-full max-w-3xl grid-cols-3 grid-rows-2 place-items-center">
           <AnimatePresence mode="popLayout">
             {logoChunks[currentChunkIndex].map((logo, i) => (
