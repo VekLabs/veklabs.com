@@ -21,15 +21,6 @@ const { slug, data, render } = Astro.props
 
 const category = await getEntry("categories", data.type)
 
-// const relatedVideos = await BM25Utils.findRelated(
-//   `${data.title} ${data.type} ${category}`,
-//   Astro.props.data.title,
-//   3,
-// )
-
-// const relatedVideoDocs = await getCollection("videos", ({ data: { title } }) =>
-//   relatedVideos.includes(title),
-// )
 const allVideos = await getCollection("videos")
 const indexOfCurrentVideo = allVideos.findIndex(
   (video) => video.data.title === data.title,
@@ -38,6 +29,11 @@ const nextVideos = allVideos.slice(
   indexOfCurrentVideo + 1,
   indexOfCurrentVideo + 4,
 )
+
+if (nextVideos.length < 3) {
+  const remainingVideos = allVideos.slice(0, 3 - nextVideos.length)
+  nextVideos.push(...remainingVideos)
+}
 
 const { Content } = await render()
 ---
