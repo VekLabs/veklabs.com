@@ -18,7 +18,7 @@ const { title, description } = Astro.props
     <BaseHead title={title} description={description} />
     <slot name="head" />
   </head>
-  <body class="size-full">
+  <body class="no-scrollbar size-full">
     <Header currentPath={Astro.url.pathname} client:load />
     <main class="size-full">
       <slot />

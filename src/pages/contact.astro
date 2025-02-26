@@ -5,6 +5,7 @@ import { getCollection } from "astro:content"
 import ContactPart from "../components/ContactPart.astro"
 import { MapPinned, MessagesSquare, Phone } from "lucide-astro"
 import siteConfig from "../content/config.json"
+import PageTitle from "../components/PageTitle.astro"
 
 const socialLogos = import.meta.glob("../images/*.svg")
 const socialLogoKeys = Object.keys(socialLogos)

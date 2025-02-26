@@ -6,6 +6,7 @@ import { getCollection, getEntry } from "astro:content"
 import VideoJSONLD from "../../components/VideoJSONLD.astro"
 import DefaultLayout from "../../layouts/DefaultLayout.astro"
 import SmallVideoCard from "../../components/SmallVideoCard.astro"
+import PageTitle from "../../components/PageTitle.astro"
 
 export async function getStaticPaths() {
   const posts = await getCollection("videos")
@@ -74,12 +75,12 @@ const { Content } = await render()
         <div
           class="flex w-full flex-col flex-wrap justify-between gap-8 md:flex-row md:items-center"
         >
-          <span
+          <PageTitle
             class="pointer-events-none z-50 order-2 flex h-5 items-center text-2xl font-semibold shadow-neutral-950 md:order-1"
             transition:name={`video-title-${slug}`}
           >
             {data.title}
-          </span>
+          </PageTitle>
         </div>
         <div
           class="spring-duration-500 spring-bounce-20 flex translate-y-0 flex-col gap-6 pt-14 starting:translate-y-56"
@@ -105,7 +106,7 @@ const { Content } = await render()
                     <span class="text-xs font-bold tracking-widest uppercase">
                       Up Next
                     </span>
-                    <div class="flex flex-nowrap gap-2 overflow-x-auto">
+                    <div class="no-scrollbar flex flex-nowrap gap-2 overflow-x-auto">
                       {nextVideos.map((video) => (
                         <SmallVideoCard {...video} />
                       ))}

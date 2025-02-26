@@ -5,6 +5,7 @@ import VideoListJSONLD from "../components/VideoListJSONLD.astro"
 import DefaultLayout from "../layouts/DefaultLayout.astro"
 import { PortfolioFilter } from "../components/PortfolioFilter.tsx"
 import { sortBy } from "lodash-es"
+import PageTitle from "../components/PageTitle.astro"
 
 const videos = await getCollection("videos")
 const categories = await getCollection("categories", ({ slug }) =>
@@ -16,7 +17,7 @@ const categories = await getCollection("categories", ({ slug }) =>
   <VideoListJSONLD videos={videos} />
   <section class="w-container mx-auto py-14">
     <div class="flex items-center gap-6 px-4 pb-4">
-      <h2 class="text-3xl">Portfolio</h2>
+      <PageTitle>Portfolio</PageTitle>
     </div>
 
     <div class="flex w-full flex-col gap-8">
