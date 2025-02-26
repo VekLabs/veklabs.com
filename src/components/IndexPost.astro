@@ -4,21 +4,27 @@ import CategoryBadge from "./CategoryBadge.astro"
 import FormattedDate from "./FormattedDate.astro"
 import { Image } from "astro:assets"
 
-type Props = CollectionEntry<"reports"> & { featured?: boolean }
+type Props = CollectionEntry<"reports"> & {
+  featured?: boolean
+  className?: string
+  "data-astro-history"?: string
+}
 
-const { featured = false, data, id, render } = Astro.props
+const { featured = false, data, className, slug, render } = Astro.props
 
 const { remarkPluginFrontmatter } = await render()
 ---
 
 <a
-  href={`/reports/${id}`}
+  href={`/reports/${slug}`}
+  data-astro-history={Astro.props["data-astro-history"]}
   class:list={[
     "listing group col-span-full w-full rounded-xl transition-all",
     {
       ["lg:col-span-full"]: featured,
       ["lg:col-span-5"]: !featured,
     },
+    className,
   ]}
 >
   <article class:list={["flex w-full flex-col", { ["lg:flex-row"]: featured }]}>
@@ -30,7 +36,7 @@ const { remarkPluginFrontmatter } = await render()
         },
       ]}
     >
-      {data.category && <CategoryBadge id={id} category={data.category} />}
+      {data.category && <CategoryBadge id={slug} category={data.category} />}
       {
         data.image && (
           <Image
@@ -53,19 +59,19 @@ const { remarkPluginFrontmatter } = await render()
     >
       <h2
         class="title m-0 text-2xl font-semibold"
-        transition:name={`title-${id}`}
+        transition:name={`title-${slug}`}
       >
         {data.title}
       </h2>
       {
         data.date instanceof Date && (
-          <span class="date" transition:name={`date-${id}`}>
+          <span class="date" transition:name={`date-${slug}`}>
             <FormattedDate date={data.date} />
           </span>
         )
       }
       <span
-        transition:name={`readtime-${id}`}
+        transition:name={`readtime-${slug}`}
         class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
       >
         {remarkPluginFrontmatter.minutesRead}

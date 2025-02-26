@@ -15,15 +15,14 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"service">
 
 const service = Astro.props
+
+const services = await getCollection("services")
+const indexOfCurrentService = services.findIndex((s) => s.slug === service.slug)
+const nextService = services[indexOfCurrentService + 1] || services[0]
+
 const { image, page_title, title } = service.data
 const { Content } = await service.render()
 ---
-
-<style is:global>
-  .content :is(h1, h2, h3, h4, h5, h6) {
-    margin-block: 1rem;
-  }
-</style>
 
 <DefaultLayout
   title={page_title || title}
@@ -34,7 +33,7 @@ const { Content } = await service.render()
     class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-[1200px] md:flex-row lg:p-10"
   >
     <div
-      class="relative flex h-max w-full flex-col gap-4 md:sticky md:top-20 md:min-w-72"
+      class="relative flex h-max w-full grow flex-col gap-4 md:sticky md:top-20 md:w-auto md:min-w-72 md:shrink"
     >
       {
         image && (
@@ -44,7 +43,7 @@ const { Content } = await service.render()
             width={400}
             height={400}
             alt=""
-            class="spring-duration-150 w-full max-w-[400px] rounded-xl object-cover ring-1 shadow-xl ring-white/10"
+            class="spring-duration-150 aspect-video w-full max-w-[400px] rounded-xl object-cover ring-1 shadow-xl ring-white/10 md:aspect-square"
           />
         )
       }
@@ -57,11 +56,38 @@ const { Content } = await service.render()
       </h1>
     </div>
 
-    <article
-      class="content"
-      transition:name={`service-description-${service.slug}`}
-    >
-      <Content />
-    </article>
+    <div class="flex w-full flex-col gap-4">
+      <article
+        class="content w-full overflow-x-scroll pb-20"
+        style="container-type: inline-size;"
+        transition:name={`service-description-${service.slug}`}
+      >
+        <Content />
+      </article>
+      {
+        nextService && (
+          <a
+            href={`/services/${nextService.slug}`}
+            class="group ml-auto flex items-center gap-6"
+          >
+            <div class="flex flex-col items-end justify-start gap-1 rounded-lg px-5 py-3 duration-300 group-hover:bg-gray-800">
+              <span class="text-xs tracking-widest uppercase">Next</span>
+              <span transition:name={`service-title-${nextService.slug}`}>
+                {nextService.data.title}
+              </span>
+            </div>
+
+            <Image
+              transition:name={`service-image-${nextService.slug}`}
+              src={nextService.data.image}
+              width={100}
+              height={100}
+              alt=""
+              class="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
+            />
+          </a>
+        )
+      }
+    </div>
   </main>
 </DefaultLayout>

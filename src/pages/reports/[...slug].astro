@@ -5,11 +5,12 @@ import FormattedDate from "../../components/FormattedDate.astro"
 import CategoryBadge from "../../components/CategoryBadge.astro"
 import { Image } from "astro:assets"
 import { getEntry } from "astro:content"
+import IndexPost from "../../components/IndexPost.astro"
 
 export async function getStaticPaths() {
   const posts = await getCollection("reports")
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.slug },
     props: post,
   }))
 }
@@ -18,10 +19,14 @@ type Props = CollectionEntry<"reports">
 const post = Astro.props
 const {
   data: { title, date, category, image },
-  id,
+  slug,
 } = post
 
 const author = await getEntry(post.data.author)
+
+const allPosts = await getCollection("reports")
+const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
+const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 
 const { Content, remarkPluginFrontmatter } = await post.render()
 ---
@@ -84,13 +89,13 @@ const { Content, remarkPluginFrontmatter } = await post.render()
             {category && (
               <CategoryBadge
                 class="right-8 left-[unset]"
-                id={id}
+                id={slug}
                 category={category}
               />
             )}
 
             <span
-              transition:name={`date-${id}`}
+              transition:name={`date-${slug}`}
               class="absolute right-4 bottom-8 z-20 font-mono text-xl font-bold text-orange-400 mix-blend-screen"
             >
               <FormattedDate date={date} />
@@ -101,14 +106,14 @@ const { Content, remarkPluginFrontmatter } = await post.render()
 
       <section class="flex max-w-[80ch] flex-col gap-5 md:px-12">
         <h1
-          transition:name={`title-${id}`}
+          transition:name={`title-${slug}`}
           class="m-0 text-3xl font-semibold md:text-5xl"
         >
           {title}
         </h1>
 
         <span
-          transition:name={`readtime-${id}`}
+          transition:name={`readtime-${slug}`}
           class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
         >
           {remarkPluginFrontmatter.minutesRead}
@@ -131,6 +136,32 @@ const { Content, remarkPluginFrontmatter } = await post.render()
       </section>
     </article>
 
-    <!-- // {{ partial "blog/more.html" . }} -->
+    {
+      nextPost && (
+        <div class="flex flex-col gap-4 pt-20">
+          <a
+            href={`/reports/${nextPost.slug}`}
+            data-astro-history="replace"
+            class="group ml-auto flex items-center gap-6"
+          >
+            <div class="flex flex-col items-end justify-start gap-1 rounded-lg px-5 py-3 duration-300 group-hover:bg-gray-800">
+              <span class="text-xs tracking-widest uppercase">Next</span>
+              <span transition:name={`title-${nextPost.slug}`}>
+                {nextPost.data.title}
+              </span>
+            </div>
+
+            <Image
+              transition:name={`image-${nextPost.data.title}`}
+              src={nextPost.data.image}
+              width={100}
+              height={100}
+              alt=""
+              class="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
+            />
+          </a>
+        </div>
+      )
+    }
   </div>
 </DefaultLayout>
