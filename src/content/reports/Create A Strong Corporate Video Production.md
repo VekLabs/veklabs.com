@@ -23,10 +23,6 @@ Typically, most consumers would rather watch a short video than read a blog post
 
 Brand awareness videos are extremely powerful if done correctly.
 
-### DWK Brand Awareness Video - Example
-
-{{< youtube  A-h1Edpdr0c>}}
-
 These videos can help extend the expertise and authority of your brand while bringing in new potential customers and catch the eye of people who were maybe not sold on your brand the first time around.
 
 The amount of people who retain information through video versus text content is dramatic. A report done by [Forbes Magazine](https://www.forbes.com/sites/yec/2017/07/13/how-to-incorporate-video-into-your-social-media-strategy/?sh=281442577f2e), says viewers retain 95% of a message when they watch it in a video format versus a 10% retention rate in a text format. In order to truly establish your brand within the minds of your consumers, it is imperative that you start [producing video content](https://www.veklabs.com/reports/how-to-create-a-successful-video-campaign/) that appeals to your audience.
