@@ -52,7 +52,7 @@ export default function CrewComponent(member: Props) {
     onOpenChange: setModalIsOpen,
   })
 
-  const dismiss = useDismiss(context, { ancestorScroll: true })
+  const dismiss = useDismiss(context)
 
   const { getFloatingProps } = useInteractions([dismiss])
 
@@ -60,7 +60,7 @@ export default function CrewComponent(member: Props) {
     <MotionConfig transition={{ type: "spring", bounce: 0.2 }}>
       <motion.div
         layoutId={id + "container"}
-        className="group relative flex w-full min-w-20 snap-center items-center gap-6 py-0.5 md:w-auto md:min-w-36 md:snap-start md:flex-col md:py-10"
+        className="group relative flex w-full snap-center flex-col items-center gap-6 py-0.5 sm:min-w-20 md:w-auto md:min-w-36 md:snap-start md:py-10"
         onClick={() => setModalIsOpen(true)}
       >
         <CrewImage
@@ -68,10 +68,7 @@ export default function CrewComponent(member: Props) {
           src={member.data.image.src}
           alt={member.data.name}
         />
-        <motion.div
-          layoutId={id + "text"}
-          className="center flex flex-col gap-2 md:text-center"
-        >
+        <motion.div className="center flex flex-col gap-2 text-center">
           <motion.h3
             layoutId={id + "name-title"}
             className="m-0 font-bold uppercase"
@@ -90,6 +87,7 @@ export default function CrewComponent(member: Props) {
       <AnimatePresence>
         {modalIsOpen ? (
           <MotionOverlay
+            onClickCapture={() => setModalIsOpen(false)}
             id="crew-popup"
             variants={{
               hidden: { opacity: 0 },
@@ -98,7 +96,7 @@ export default function CrewComponent(member: Props) {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed top-0 left-0 z-50 flex h-screen min-h-screen w-screen items-center justify-center overscroll-contain bg-black/30 backdrop-blur-lg"
+            className="fixed top-0 left-0 z-50 flex h-full min-h-screen w-screen justify-center bg-black/30 backdrop-blur-lg md:items-center"
           >
             <motion.div
               {...getFloatingProps()}
@@ -111,7 +109,7 @@ export default function CrewComponent(member: Props) {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="w-container my-0 flex max-w-[800px] flex-wrap items-center justify-center gap-8 p-10 text-center text-lg font-medium text-white md:flex-nowrap md:justify-start md:text-start"
+              className="w-container no-scrollbar my-0 flex max-w-[800px] flex-wrap items-center justify-center gap-8 overflow-y-auto p-4 py-12 text-center text-lg font-medium text-white md:flex-nowrap md:justify-start md:p-10 md:text-start"
             >
               <CrewImage
                 full
@@ -120,10 +118,7 @@ export default function CrewComponent(member: Props) {
                 alt={member.data.name}
               />
 
-              <motion.div
-                layoutId={id + "text"}
-                className="center flex w-full grow flex-col gap-2 self-start py-8 text-start"
-              >
+              <motion.div className="center flex w-full grow flex-col gap-2 self-start py-8 text-start">
                 <motion.h3
                   layoutId={id + "name-title"}
                   className="m-0 text-2xl font-bold uppercase"

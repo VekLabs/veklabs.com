@@ -42,7 +42,7 @@ function Stat({
   const [_stat, setStat] = useState(0)
   const ref = useRef(null)
 
-  const isInView = useInView(ref, { amount: "all" })
+  const isInView = useInView(ref, { once: true, amount: "all" })
 
   useEffect(() => {
     if (isInView) {
@@ -79,7 +79,7 @@ export default function Metrics() {
           {config.metrics_title}
         </h3>
 
-        <ul className="grid max-w-[1000px] grid-cols-[repeat(auto-fit,minmax(160px,1fr))] items-start justify-start gap-10">
+        <ul className="grid max-w-[1000px] grid-cols-2 items-start justify-start gap-10 md:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
           {Object.entries(METRICS).map(([key, { stat, unit }], i) => (
             <li
               key={key}

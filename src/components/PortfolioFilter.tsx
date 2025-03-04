@@ -46,7 +46,7 @@ export function PortfolioFilter({ categories }: PortfolioGridProps) {
 
   return (
     <div className="flex w-full flex-col gap-8">
-      <div className="no-scrollbar flex w-full flex-col gap-2 overflow-x-auto px-4 py-1">
+      <div className="no-scrollbar flex w-full flex-col gap-2 overflow-x-auto py-1">
         <h4 className="text-accent-300 sticky left-0 text-xs uppercase">
           Category
         </h4>

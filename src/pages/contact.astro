@@ -22,7 +22,7 @@ const services = (await getCollection("services")).map((service) => ({
     <div class="flex flex-col lg:flex-row">
       <div class="flex basis-2/5 flex-col gap-8">
         <div
-          class="flex flex-wrap gap-8 px-8 lg:min-h-[60vh] lg:flex-col lg:flex-nowrap lg:gap-20"
+          class="flex flex-wrap gap-8 px-8 pb-12 lg:min-h-[60vh] lg:flex-col lg:flex-nowrap lg:gap-20"
         >
           <div class="mb-auto hidden lg:block"></div>
           <ContactPart
@@ -53,7 +53,7 @@ const services = (await getCollection("services")).map((service) => ({
         </div>
 
         <div
-          class="mt-8 mb-8 inline-flex flex-wrap gap-3 px-8 text-right lg:mt-auto lg:gap-4"
+          class="mt-8 mb-8 hidden flex-wrap gap-3 px-8 text-right md:inline-flex lg:mt-auto lg:gap-4"
         >
           {
             siteConfig.social.channel.map(async ({ url, name, icon }) => {
