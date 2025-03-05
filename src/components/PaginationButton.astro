@@ -1,0 +1,27 @@
+---
+type Props = {
+  href: string
+  active?: boolean
+  disabled?: boolean
+}
+const { href, active = false, disabled = false } = Astro.props
+---
+
+<a
+  aria-disabled={disabled}
+  class:list={[
+    "flex size-8 cursor-pointer items-center justify-center rounded-sm bg-black/50 fill-foreground text-xs text-foreground duration-100 hover:text-foreground",
+    {
+      "hover:bg-black hover:text-foreground hover:ring-2 hover:ring-foreground/10":
+        !disabled && !active,
+    },
+    {
+      "pointer-events-none font-bold ring-2 ring-foreground/20 hover:ring-foreground/20":
+        active,
+    },
+    { "pointer-events-none opacity-50": disabled },
+  ]}
+  href={href}
+>
+  <slot />
+</a>

@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+import { getEntry } from "astro:content"
+
+type Props = CollectionEntry<"videos">
+const { slug, data } = Astro.props
+
+const category = await getEntry("categories", data.type)
+---
+
+<a
+  href={`/videos/${slug}`}
+  data-astro-history="replace"
+  class="group flex max-w-56 min-w-48 flex-col overflow-hidden rounded-lg"
+>
+  <Image
+    transition:name={`video-${slug}`}
+    width={400}
+    src={data.image}
+    alt={data.title}
+    class="aspect-video w-full rounded-lg object-cover duration-300 group-hover:opacity-75"
+  />
+  <div class="flex flex-col gap-1 p-2">
+    <span
+      class="text-xxs mr-2 inline-flex gap-2 overflow-clip tracking-widest whitespace-nowrap uppercase"
+    >
+      {category?.data?.title}
+    </span>
+    <span>
+      {data.title}
+    </span>
+  </div>
+</a>

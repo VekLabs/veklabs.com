@@ -1,4 +1,0 @@
-+++
- title = "Testimonials"
- type = "top"
-+++

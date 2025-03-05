@@ -1,6 +1,0 @@
-{{ $defines := dict "process.env.NODE_ENV" `"process.env.HUGO_ENVIRONMENT"` }}
-{{ $opts := dict "targetPath" "global.js" "defines" $defines }}
-
-{{ $s := resources.Get "js/global/index.ts" | js.Build $opts }}
-
-<script src="{{ $s.Permalink }}"></script>

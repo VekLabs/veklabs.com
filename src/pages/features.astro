@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content"
+import { kebabCase, sortBy } from "lodash-es"
+import featuresConfig from "../content/features.json"
+import DefaultLayout from "../layouts/DefaultLayout.astro"
+import VideoCard from "../components/VideoCard.astro"
+import PageTitle from "../components/PageTitle.astro"
+
+const features = await getCollection("videos", ({ id }) =>
+  featuresConfig.videos.includes(kebabCase(id.replace(".md", ""))),
+)
+---
+
+<DefaultLayout>
+  <section class="w-container mx-auto py-8 md:py-14">
+    <div class="mx-auto flex max-w-7xl flex-col gap-2 py-4 md:py-16">
+      <PageTitle>{featuresConfig.title}</PageTitle>
+      <p class="">{featuresConfig.description}</p>
+    </div>
+    <div
+      class="mx-auto grid max-w-7xl snap-y snap-mandatory grid-flow-row grid-cols-2 gap-6 overflow-y-auto py-10 md:gap-14"
+    >
+      {
+        sortBy(features, "data.publishDate")
+          .toReversed()
+          .map(async (feature) => (
+            <VideoCard showYear className="aspect-video w-full " {...feature} />
+          ))
+      }
+    </div>
+  </section>
+</DefaultLayout>

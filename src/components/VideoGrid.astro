@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content"
+import { ChevronRight } from "lucide-astro"
+import home from "../content/home.json"
+import VideoCard from "./VideoCard.astro"
+
+const videos = await getCollection("videos", ({ id }) =>
+  home.videos.includes(id.replace(".md", "")),
+)
+---
+
+<section class="w-container mx-auto">
+  <div class="flex items-center gap-6 py-4">
+    <h2 class="text-3xl">Portfolio</h2>
+    <a class="link mt-1 flex items-center gap-1.5 text-lg" href="/portfolio">
+      See All
+      <ChevronRight class="size-5" />
+    </a>
+  </div>
+  <div
+    class="xs:grid-cols-[repeat(auto-fit,_minmax(400px,1fr))] grid grid-cols-2 gap-2 sm:gap-5 lg:grid-cols-3"
+  >
+    {videos.map((video) => <VideoCard {...video} />)}
+  </div>
+</section>

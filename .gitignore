@@ -1,16 +1,28 @@
+# build output
+dist/
+# generated types
+.astro/
+pb_public/
 
-/public
-/node_modules
+# dependencies
+node_modules/
 
-/functions
-/resources
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
 
-/dist
+# jetbrains setting folder
+.idea/
+
 # Local Netlify folder
 .netlify
-scripts/cache.json
-yarn-error.log
-
-.astro
-hugo

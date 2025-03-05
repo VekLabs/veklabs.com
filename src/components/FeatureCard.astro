@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content"
+import VideoCard from "./VideoCardReact.tsx"
+import { render } from "astro:content"
+import { Image } from "astro:assets"
+
+type Props = CollectionEntry<"videos">
+const feature = Astro.props
+const { Content } = await render(feature)
+---
+
+<div class="snap-center">
+  <VideoCard
+    {...feature.data}
+    className="aspect-video w-full md:h-[80svh] md:min-h-96"
+    client:load
+  >
+    <Content slot="body" />
+    <Image src={feature.data.image} alt="" class="size-full object-cover" />
+  </VideoCard>
+</div>

@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from "astro:content"
+import CategoryBadge from "./CategoryBadge.astro"
+import FormattedDate from "./FormattedDate.astro"
+import { Image } from "astro:assets"
+
+type Props = CollectionEntry<"reports"> & {
+  featured?: boolean
+  className?: string
+  "data-astro-history"?: string
+}
+
+const { featured = false, data, className, slug, render } = Astro.props
+
+const { remarkPluginFrontmatter } = await render()
+---
+
+<a
+  href={`/reports/${slug}`}
+  data-astro-history={Astro.props["data-astro-history"]}
+  class:list={[
+    "listing group col-span-full w-full rounded-xl transition-all",
+    {
+      ["lg:col-span-full"]: featured,
+      ["lg:col-span-5"]: !featured,
+    },
+    className,
+  ]}
+>
+  <article class:list={["flex w-full flex-col", { ["lg:flex-row"]: featured }]}>
+    <div
+      class:list={[
+        "image relative",
+        {
+          ["basis-2/3"]: featured,
+        },
+      ]}
+    >
+      {data.category && <CategoryBadge id={slug} category={data.category} />}
+      {
+        data.image && (
+          <Image
+            transition:name={`image-${data.title}`}
+            src={data.image}
+            alt=""
+            class:list={[
+              "z-10 aspect-video w-full rounded-lg border border-gray-800 object-cover shadow-lg transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl md:h-60",
+              { ["md:h-80"]: featured },
+            ]}
+          />
+        )
+      }
+    </div>
+    <div
+      class:list={[
+        "content text-foreground rounded-l-lg rounded-b-lg p-6 pt-4 transition-all group-hover:bg-black/20 lg:mb-2 lg:pt-8",
+        { ["basis-1/3 rounded-tl-none rounded-bl-none"]: featured },
+      ]}
+    >
+      <h2
+        class="title m-0 text-2xl font-semibold"
+        transition:name={`title-${slug}`}
+      >
+        {data.title}
+      </h2>
+      {
+        data.date instanceof Date && (
+          <span class="date" transition:name={`date-${slug}`}>
+            <FormattedDate date={data.date} />
+          </span>
+        )
+      }
+      <span
+        transition:name={`readtime-${slug}`}
+        class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
+      >
+        {remarkPluginFrontmatter.minutesRead}
+      </span>
+    </div>
+  </article>
+</a>

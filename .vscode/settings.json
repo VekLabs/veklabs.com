@@ -1,13 +1,13 @@
 {
- "files.associations": {
-  "*.css": "postcss"
- },
-"postcss.validate": false,
-"cSpell.words": [
-    "Bence",
-    "Okotoks",
-    "headshots",
-    "shotlist",
-    "videography"
-]
+  "prettier.documentSelectors": ["**/*.astro"],
+  "prettier.configPath": ".prettierrc.mjs",
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["/src/content/offerings/**"],
+      "url": "./.astro/collections/offering.schema.json"
+    }
+  ]
 }

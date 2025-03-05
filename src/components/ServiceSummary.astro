@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets"
+import type { CollectionEntry } from "astro:content"
+
+type Props = CollectionEntry<"service">["data"] &
+  CollectionEntry<"service"> & { i: number }
+
+const { title, speed, summary, slug, order, i, body, image } = Astro.props
+
+const start = Math.abs(speed) * 5
+const end = Math.abs(speed) * -5
+---
+
+<div
+  class="relative flex max-w-[980px] pb-32"
+  class:list={{
+    "justify-end": [1, 4, 7].includes(i + 1),
+    "justify-start": [2, 5, 9].includes(i + 1),
+    "justify-center": [3, 6, 8, 10].includes(i + 1),
+  }}
+>
+  <div class="text-foreground block w-full max-w-[400px]">
+    <div
+      class="animate-parallax timeline-view -parallax-start-32 parallax-end-0 absolute -z-10 size-52 overflow-hidden rounded-xl [animation-timing-function:linear] lg:size-[350px]"
+      style={{
+        animationTimeline: "scroll(root)",
+        "--parallax-start": `${start}%`,
+        "--parallax-end": `${end}%`,
+      }}
+      class:list={{
+        "-right-32 md:-right-40": [1, 4, 7].includes(i + 1),
+        "-left-20": [2, 5, 9].includes(i + 1),
+        "-right-8": [3, 8, 6, 10].includes(i + 1),
+      }}
+    >
+      <Image
+        transition:name={`service-image-${slug}`}
+        class="size-full rounded-xl object-cover"
+        src={image}
+        alt=""
+        width={400}
+        height={400}
+      />
+    </div>
+
+    <div
+      class="text-shadow-sm relative flex flex-col gap-4"
+      style={{
+        zIndex: order ?? 2,
+        filter: "drop-shadow(0 0 16px #000000) drop-shadow(0 0 48px #000000)",
+      }}
+    >
+      <h2 class="text-3xl" transition:name={`service-title-${slug}`}>
+        {title}
+      </h2>
+
+      <div
+        class="leading-5 font-medium"
+        transition:name={`service-description-${slug}`}
+      >
+        {summary}
+      </div>
+
+      {
+        body.length > 1 && (
+          <a
+            class="inline-flex w-max items-center rounded-lg bg-black px-3 py-2 text-sm duration-200 hover:bg-black/90 hover:ring-1 hover:ring-blue-500/30"
+            href={`/services/${slug}`}
+          >
+            Learn More
+            <svg class="ml-2 size-[1cap] fill-current">
+              <use href="/assets/arrow-right.svg#icon" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

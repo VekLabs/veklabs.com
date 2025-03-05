@@ -1,31 +1,3 @@
 [build]
-  publish = "public"
-  command = "yarn build"
-
-[build.environment]
-  HUGO_VERSION = "0.133.0"
-  GO_VERSION = "1.15"
-
-[context.split1]
-  command = "yarn build:split"
-
-[context.production.environment]
-  HUGO_VERSION = "0.133.0"
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
-  NODE_ENV = "production"
-
-[context.deploy-preview]
-  command = "yarn build:deploy-preview"
-
-[context.deploy-preview.environment]
-  HUGO_VERSION = "0.133.0"
-
-[context.branch-deploy.environment]
-  HUGO_VERSION = "0.133.0"
-
-[context.next.environment]
-  HUGO_ENABLEGITINFO = "true"
-
-[[plugins]]
-package = "./plugins/generate-social-images"
+command = "npm run build"
+publish = "dist/"

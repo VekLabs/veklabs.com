@@ -1,70 +1,68 @@
-# Veklabs
+# Astro Starter Kit: Blog
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b8fd8ebd-5695-4874-a618-046c1b284833/deploy-status)](https://app.netlify.com/sites/veklabs/deploys)
-
-## Adding Content
-
-#### Videos
-
-Video data is stored in [content/videos](content/videos).
-
-Each video is made with an md file. You can either copy/paste to create new videos or use the terminal command `hugo new videos/{video name}.md`
-
-The structure is written in [TOML](https://learnxinyminutes.com/docs/toml/) but can also be in JSON or YAML and is as follows:
-
-```md
-+++ <- Indicates beginning/end of data
-title = 'Demo Reel'
-main = true <- Whether this is the hero video (set on only one video)
-url = "vimeo.com/x" <- vimeo url
-image = "1_Demo_Reel.jpg" <- thumbnail file name
-+++
+```sh
+npm create astro@latest -- --template blog
 ```
 
-_Place the thumbnail image in the [content](content) directory._
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
 
-#### Posts
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-Blog Posts are stored in [content/blog](content/blog)
+![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
 
-Frontmatter is also in [TOML](https://learnxinyminutes.com/docs/toml/) and currently has the following structure:
+Features:
 
-```md
-+++
- title = "Some Post" (required)
- date = 2020-03-23 (required)
- image = "images/andrew_1a.jpg" (required)
- category = "Marketing" (required)
-+++
+- ✅ Minimal styling (make it your own!)
+- ✅ 100/100 Lighthouse performance
+- ✅ SEO-friendly with canonical URLs and OpenGraph data
+- ✅ Sitemap support
+- ✅ RSS Feed support
+- ✅ Markdown & MDX support
+
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+├── public/
+├── src/
+│   ├── components/
+│   ├── content/
+│   ├── layouts/
+│   └── pages/
+├── astro.config.mjs
+├── README.md
+├── package.json
+└── tsconfig.json
 ```
 
-> The Hero Image occupies a 5:2 aspect ratio
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-Markdown in this blog follows the CommonMark Spec with some additions.
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-For a good markdown reference refer to: [Github Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
-This site also includes some quality-of-life improvements but also some workarounds to be aware of.
+Any static assets, like images, can be placed in the `public/` directory.
 
-##### Images
+## 🧞 Commands
 
-Images are shown with the syntax: `![float](url "caption")`.
+All commands are run from the root of the project, from a terminal:
 
-The float is either `left`, `right` or `full` for positioning images on the left or right of text in blog posts or spanning the across the whole post.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-The url specifies the url of the image and is required.
+## 👀 Want to learn more?
 
-The caption is optional and adds a caption.
+Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-> Important: The hero image is specified in the frontmatter as `title = "Your Title"` and must be placed in `assets/images` so that we can do some fancy SEO stuff. Images that are used in the markdown, i.e. in the content of the post, must be placed in `static/images` instead.
+## Credit
 
-#### Shortcodes
-
-There are a few shortcodes available for use.
-
-They are wrapped with `{{< shortcode >}}`
-
-All shortcodes can be found here: [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/#youtube)
-
-For vimeo use this shortcode with the video ID:
-`{{< vimeo 146022717 >}}`
+This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

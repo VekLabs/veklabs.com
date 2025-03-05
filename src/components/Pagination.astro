@@ -1,0 +1,30 @@
+---
+import PaginationButton from "./PaginationButton.astro"
+
+const { length, currentPage, prevUrl, nextUrl } = Astro.props
+const paginationList = Array.from({ length }, (_, i) => i + 1)
+---
+
+<ul
+  class="grid w-full list-none grid-flow-col items-center justify-center gap-2"
+>
+  <PaginationButton disabled={currentPage === 1} href={prevUrl}>
+    <svg viewBox="0 0 24 24" class="m-0 size-2">
+      <use href="/assets/arrow-left.svg#icon"></use>
+    </svg>
+  </PaginationButton>
+
+  {
+    paginationList.map((num) => (
+      <PaginationButton href={`${num}`} active={currentPage === num}>
+        {num}
+      </PaginationButton>
+    ))
+  }
+
+  <PaginationButton disabled={currentPage === length} href={nextUrl}>
+    <svg viewBox="0 0 24 24" class="m-0 size-2">
+      <use href="/assets/arrow-right.svg#icon"></use>
+    </svg>
+  </PaginationButton>
+</ul>

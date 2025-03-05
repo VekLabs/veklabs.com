@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content"
+import DefaultLayout from "../../../layouts/DefaultLayout.astro"
+import IndexPost from "../../../components/IndexPost.astro"
+import Pagination from "../../../components/Pagination.astro"
+import type { GetStaticPathsOptions } from "astro"
+import PageTitle from "../../../components/PageTitle.astro"
+
+const posts = (await getCollection("reports")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+)
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = (await getCollection("reports")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  )
+
+  return paginate(posts, {
+    pageSize: 5,
+  })
+}
+
+const { page } = Astro.props
+const pathname = new URL(Astro.request.url).pathname.split("/")
+const firstPath = pathname[1]
+---
+
+<DefaultLayout>
+  <section id="blog" class="p-6 lg:p-4">
+    <div
+      class="mx-auto min-h-[calc(100vh-135px)] max-w-[980px] pt-4 pb-12 lg:py-20"
+    >
+      <PageTitle>Lab Reports</PageTitle>
+
+      <div class="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-10">
+        {
+          page.data.map(async (post, i) => (
+            <IndexPost {...post} featured={i === 0} />
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      posts.length > 5 ? (
+        <div class="mt-4">
+          <Pagination
+            length={page.lastPage}
+            currentUrl={page.url.current}
+            currentPage={page.currentPage}
+            firstUrl={`/${firstPath}`}
+            prevUrl={page.url.prev}
+            nextUrl={page.url.next}
+            lastUrl={`/${firstPath}/${page.lastPage}`}
+          />
+        </div>
+      ) : null
+    }
+  </section>
+</DefaultLayout>

@@ -1,0 +1,92 @@
+---
+import Image from "astro/components/Image.astro"
+import home from "../content/home.json"
+import blackPaper from "../images/black-paper.jpg"
+import blackWall from "../images/black-wall.jpg"
+import getImageUrl from "../utils/getImageUrl"
+
+const logos = home.awards.map((awardImage) => ({
+  href: awardImage["href"],
+  src: awardImage.image,
+}))
+---
+
+<section class="w-container mx-auto my-16">
+  <div class="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3">
+    <div
+      class="col-span-1 h-full min-h-[500px] bg-black lg:col-span-2 lg:min-h-[300px]"
+    >
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
+        <Image
+          src={blackPaper}
+          alt=""
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-50"
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
+          <div class="flex flex-col gap-6">
+            <h2 class="text-2xl font-semibold lg:text-4xl">
+              {home.awards_title}
+            </h2>
+            <div class="z-10 flex w-full flex-wrap gap-8">
+              {
+                logos.map(async (logo) => (
+                  <a href={logo.href} class="w-5/12 max-w-32 shrink">
+                    <img alt="" src={getImageUrl(logo.src)} loading="lazy" />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1 min-h-[300px] bg-black">
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
+        <Image
+          src={blackWall}
+          alt=""
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-50"
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
+          <div class="flex flex-col gap-6">
+            <h2 class="text-2xl font-semibold lg:text-4xl">
+              {home.guarantee_title}
+            </h2>
+            <p class="text-xl">
+              {home.guarantee}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-span-1 min-h-[500px] bg-black lg:col-span-3 lg:min-h-[600px] xl:min-h-[300px]"
+    >
+      <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
+        <Image
+          src={blackWall}
+          alt=""
+          quality={40}
+          class="absolute inset-0 z-10 size-full object-cover opacity-50"
+        />
+        <div class="relative z-20 h-full px-4 py-20 sm:px-10">
+          <div class="flex flex-col gap-4">
+            <h2 class="max-w-prose text-2xl font-bold text-pretty lg:text-4xl">
+              {home.trust_title}
+            </h2>
+            <h4 class="text-xl text-pretty text-gray-400">
+              {home.trust_subtitle}
+            </h4>
+            <p class="max-w-prose text-pretty">
+              {home.trust_description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,106 @@
+{
+  "ISO8601": "2006-01-02T15:04:05JST",
+  "baseURL": "https://veklabs.com",
+  "languageCode": "en-ca",
+  "title": "Vek Labs",
+  "EMAIL": "info@veklabs.com",
+  "FOOTER_PRETEXT": "Proudly based in Canada",
+  "PHONE": "403-690-1291",
+  "description": "We are a team of award-winning videographers and editors working with people and on productions that inspire us. Meet Calgary's pro content team.",
+  "subtitle": "Video Production Company",
+  "menu": {
+    "main": [
+      {
+        "identifier": "features",
+        "name": "Features",
+        "url": "/features/"
+      },
+      {
+        "identifier": "portfolio",
+        "name": "Portfolio",
+        "url": "/portfolio/"
+      },
+      {
+        "identifier": "services",
+        "name": "Services",
+        "url": "/services/"
+      },
+      {
+        "identifier": "clients",
+        "name": "Clients",
+        "url": "/clients/"
+      },
+      {
+        "identifier": "reports",
+        "name": "Reports",
+        "url": "/reports/page/1"
+      }
+    ]
+  },
+  "disableAliases": true,
+  "disallow_search_engines": false,
+  "enableRobotsTXT": true,
+  "googleAnalytics": "GTM-MNN7HSW",
+  "images": ["/images/tempHero.jpg"],
+  "imgSizes": [2500, 1500, 1000, 500],
+  "invisibleSections": ["team", "videos", "category", "type"],
+  "locale": "en_CA",
+  "staticDir": ["static"],
+  "videos": [
+    "https://player.vimeo.com/external/407838186.hd.mp4?s=ddf843d553ee2d63b3c4c357ad3f59988342b03d&profile_id=175"
+  ],
+  "taxonomies": {
+    "category": "category",
+    "type": "type"
+  },
+  "mail": "PO Box 46068 Inglewood, Calgary, AB T2G5H7",
+  "social": {
+    "channel": [
+      {
+        "icon": "facebook.svg",
+        "name": "Facebook",
+        "url": "https://www.facebook.com/veklabs/"
+      },
+      {
+        "icon": "twitter.svg",
+        "name": "Twitter",
+        "url": "https://twitter.com/VekLabs"
+      },
+      {
+        "icon": "instagram.svg",
+        "name": "Instagram",
+        "url": "https://www.instagram.com/veklabs/"
+      },
+      {
+        "icon": "youtube.svg",
+        "name": "Youtube",
+        "url": "https://www.youtube.com/social.channel/UC_8CmynHCINGSOZftHJGoUQ"
+      },
+      {
+        "icon": "linkedin.svg",
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/company/veklabs/"
+      },
+      {
+        "icon": "camera.svg",
+        "name": "Unsplash",
+        "url": "https://unsplash.com/@veklabs"
+      },
+      {
+        "icon": "pinterest.svg",
+        "name": "Pinterest",
+        "url": "https://www.pinterest.ca/veklabs/"
+      },
+      {
+        "icon": "anchor.svg",
+        "name": "Anchor",
+        "url": "https://anchor.fm/vek-labs"
+      },
+      {
+        "icon": "vimeo.svg",
+        "name": "Vimeo",
+        "url": "https://vimeo.com/veklabs"
+      }
+    ]
+  }
+}

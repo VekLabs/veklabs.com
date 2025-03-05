@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+  <!-- Include the script that enables Netlify Identity on this page. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+</head>
+
+<body>
+  <!-- Include the script that builds the page and powers Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.0.0/date_fns.min.js"
+    integrity="sha512-19xjtkPohbL0pd4e1xuEmlc94yF5JfD5PgK5adDlHtMtrR2N5i71BHciPkNJG2zE60YTymYxJgxcV/TuDxmRLw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    const PostPreview = createClass({
+      render: function () {
+        const entry = this.props.entry
+        const image = entry.getIn(['data', 'image'])
+        const title = entry.getIn(['data', 'title'])
+        const authorName = entry.getIn(['data', 'author', 'name'])
+        const category = entry.getIn(['data', 'category'])
+        const content = this.props.widgetFor('body')
+        const publishDate = entry.getIn(['data', 'date'])
+
+        var authors = this.props.getCollection('team').then(authors => {
+          authors.forEach(a => a.get('name'))
+        })
+
+        return h('div', { id: 'post', className: 'padding' }, [
+          h('article', {}, [
+            h('div', { className: 'hero-image' }, [
+              h('img', { src: this.props.getAsset(image), alt: '' }),
+              h('span', { className: 'type {{ anchorize . }}' }, category),
+              h('span', { className: 'date' }, dateFns.format(publishDate, 'MM/DD/YY'))
+            ]),
+            h('section', { className: 'content' }, [
+              h('div', { className: 'title-container' }, [
+                h('h1', { className: 'title' }, title)
+              ]),
+              h('p', {}, content),
+              h('pre', {}, authorName)
+            ])
+          ]),
+          h('partial', { name: 'blog/more.html' }, '')
+        ])
+      }
+    })
+
+    const TeamPreview = createClass({
+      render: function () {
+        const entry = this.props.entry
+        const image = entry.getIn(['data', 'image'])
+        const content = this.props.widgetFor('body')
+
+        return h('div', { id: 'team' }, h('div', { className: 'member-info' }, [
+          h('div', { className: 'header' }, [
+            h('div', { className: 'avatar' }, [
+              h('div', { className: 'team-image' }, h('img', { src: this.props.getAsset(image), alt: '', }))
+            ]),
+            h('div', { className: 'name' }, [
+              h('h4', { className: 'h1' }, entry.getIn(['data', 'name'])),
+              h('h4', {}, entry.getIn(['data', 'title'])),
+              entry.getIn(['data', 'competencies']) && h('span', { className: 'competencies' }, entry.getIn(['data', 'competencies']).join(', '))
+            ])
+          ]),
+          h('span', {}, content),
+          /*  entry.getIn(['data', 'channel']) && h('div', { className: 'social-media' }, entry.getIn(['data', 'channel']).map((item) => {
+            return h('a', { href: item.url, target: '_blank', className: 'icon', rel: 'noopener' }, [
+              item.icon.startsWith('http') ? h('img', { src: item.icon, alt: item.name }) : h('img', { src: `${item.Site.BaseURL}/assets/${item.icon}`, alt: item.name })
+            ])
+          }))  */
+        ]))
+      }
+    })
+
+    const VideoPreview = createClass({
+      render: function () {
+        const entry = this.props.entry
+
+        return (
+          h('div', { className: 'video-grid-wrapper', style: { margin: 0 } }, [
+            h('div', { className: 'video-grid' }, [
+              h('div', { className: 'video', id: entry.getIn(['data', 'videoId']), style: { maxWidth: 480 } }, [
+                h('span', { className: 'title' }, [
+                  entry.getIn(['data', 'title'])
+                ]),
+                h('span', { className: 'type {{ anchorize . }}' }, [
+                  entry.getIn(['data', 'type'])
+                ]),
+                h('div', { className: 'image-wrapper' }, [
+                  h('img', { src: this.props.getAsset(entry.getIn(['data', 'image'])), width: 478, height: 269 })
+                ])
+              ])
+            ])
+          ])
+        )
+      }
+    })
+
+    CMS.registerPreviewTemplate("videos", VideoPreview);
+    CMS.registerPreviewTemplate("team", TeamPreview);
+    CMS.registerPreviewTemplate("reports", PostPreview);
+  </script>
+</body>
+
+</html>

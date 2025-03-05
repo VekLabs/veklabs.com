@@ -1,0 +1,29 @@
+---
+import classNames from "classnames"
+import { twMerge } from "tailwind-merge"
+type Props = {
+  id: string
+  class?: string
+  blurBackground?: boolean
+}
+const { id, class: classes, blurBackground } = Astro.props
+---
+
+<dialog
+  id={id}
+  class:list={twMerge(
+    classNames([
+      "fixed left-0 top-0 z-50 h-screen min-h-screen w-screen overscroll-contain bg-transparent allow-discrete",
+      {
+        "backdrop:backdrop-blur-3xl backdrop:backdrop-brightness-200 backdrop:backdrop-saturate-200":
+          blurBackground,
+      },
+      "backdrop:h-full backdrop:overflow-y-scroll backdrop:bg-neutral-950/70 backdrop:opacity-100 backdrop:duration-700 backdrop:allow-discrete starting:backdrop:opacity-0",
+      "[&.ending]:backdrop:opacity-0",
+      "outline-hidden",
+      classes,
+    ]),
+  )}
+>
+  <slot />
+</dialog>
