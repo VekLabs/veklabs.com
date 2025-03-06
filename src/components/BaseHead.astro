@@ -3,15 +3,21 @@ import { ClientRouter } from "astro:transitions"
 import config from "../content/config.json"
 import logo from "../images/logo.svg?url"
 import defaultImage from "../images/tempHero.jpg?url"
+
 interface Props {
   title?: string
   description?: string
   image?: string
+  video?: string
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
-const { description, image = defaultImage } = Astro.props
+const {
+  description = config.description,
+  image = defaultImage,
+  video = config.videos.at(0)!,
+} = Astro.props
 
 const menuTitle =
   Astro.props.title ??
@@ -46,6 +52,7 @@ const title =
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:video" content={new URL(video, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />

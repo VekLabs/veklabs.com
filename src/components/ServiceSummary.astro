@@ -11,7 +11,7 @@ const start = Math.abs(speed) * 5
 const end = Math.abs(speed) * -5
 ---
 
-<div
+<article
   class="relative flex max-w-[980px] pb-32"
   class:list={{
     "justify-end": [1, 4, 7].includes(i + 1),
@@ -50,9 +50,9 @@ const end = Math.abs(speed) * -5
         filter: "drop-shadow(0 0 16px #000000) drop-shadow(0 0 48px #000000)",
       }}
     >
-      <h2 class="text-3xl" transition:name={`service-title-${slug}`}>
+      <h1 class="text-3xl" transition:name={`service-title-${slug}`}>
         {title}
-      </h2>
+      </h1>
 
       <div
         class="leading-5 font-medium"
@@ -76,4 +76,4 @@ const end = Math.abs(speed) * -5
       }
     </div>
   </div>
-</div>
+</article>

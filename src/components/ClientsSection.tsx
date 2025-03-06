@@ -31,14 +31,15 @@ export function ClientsSection() {
   return (
     <section className="w-container mx-auto py-8 text-center md:pt-12 md:pb-20">
       <div className="flex flex-col items-center gap-4">
-        <h2 className="m-0 text-3xl font-medium tracking-widest">
+        <h1 className="m-0 text-3xl font-medium tracking-widest">
           {config.CLIENT_TITLE}
-        </h2>
+        </h1>
         <div className="flex flex-col items-center gap-8">
           <h4 className="m-0 text-xl font-light">{config.CLIENT_SUB_TITLE}</h4>
           <a
             className="mt-1 flex items-center justify-between gap-1.5 rounded-full bg-white/20 px-5 py-2"
             href="/clients"
+            title="All Clients"
           >
             <span>All Clients</span>
             <ChevronRight className="-mr-2 size-[1_cap]" />

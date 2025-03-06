@@ -25,9 +25,9 @@ const logos = home.awards.map((awardImage) => ({
         />
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-6">
-            <h2 class="text-2xl font-semibold lg:text-4xl">
+            <h1 class="text-2xl font-semibold lg:text-4xl">
               {home.awards_title}
-            </h2>
+            </h1>
             <div class="z-10 flex w-full flex-wrap gap-8">
               {
                 logos.map(async (logo) => (
@@ -42,7 +42,7 @@ const logos = home.awards.map((awardImage) => ({
       </div>
     </div>
 
-    <div class="col-span-1 min-h-[300px] bg-black">
+    <section class="col-span-1 min-h-[300px] bg-black">
       <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
         <Image
           src={blackWall}
@@ -52,18 +52,18 @@ const logos = home.awards.map((awardImage) => ({
         />
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-6">
-            <h2 class="text-2xl font-semibold lg:text-4xl">
+            <h1 class="text-2xl font-semibold lg:text-4xl">
               {home.guarantee_title}
-            </h2>
+            </h1>
             <p class="text-xl">
               {home.guarantee}
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div
+    <section
       class="col-span-1 min-h-[500px] bg-black lg:col-span-3 lg:min-h-[600px] xl:min-h-[300px]"
     >
       <div class="relative h-full rounded-lg border border-white/10 p-2 md:p-3">
@@ -75,9 +75,9 @@ const logos = home.awards.map((awardImage) => ({
         />
         <div class="relative z-20 h-full px-4 py-20 sm:px-10">
           <div class="flex flex-col gap-4">
-            <h2 class="max-w-prose text-2xl font-bold text-pretty lg:text-4xl">
+            <h1 class="max-w-prose text-2xl font-bold text-pretty lg:text-4xl">
               {home.trust_title}
-            </h2>
+            </h1>
             <h4 class="text-xl text-pretty text-gray-400">
               {home.trust_subtitle}
             </h4>
@@ -87,6 +87,6 @@ const logos = home.awards.map((awardImage) => ({
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </section>

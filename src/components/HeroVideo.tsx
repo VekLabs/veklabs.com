@@ -58,6 +58,7 @@ export default function HeroVideo() {
         {isLowerPowerMode && (
           <img
             src={heroVideoImage}
+            alt=""
             className="border-0.5 size-full max-h-[80vh] rounded-xl border-white/10 object-cover object-center"
           />
         )}
@@ -89,9 +90,9 @@ export default function HeroVideo() {
             )}
           </div>
         )}
-        <div className="bg-background/65 static right-8 bottom-8 mt-4 rounded-lg px-6 py-4 text-sm leading-normal font-medium ring-1 shadow-lg ring-white/10 lg:absolute lg:mt-0 lg:max-w-3xl lg:rounded-2xl lg:border-none lg:px-8 lg:py-6 lg:text-lg lg:shadow-none lg:backdrop-blur-xl">
+        <h2 className="bg-background/65 static right-8 bottom-8 mt-4 rounded-lg px-6 py-4 text-sm leading-normal font-medium ring-1 shadow-lg ring-white/10 lg:absolute lg:mt-0 lg:max-w-3xl lg:rounded-2xl lg:border-none lg:px-8 lg:py-6 lg:text-lg lg:shadow-none lg:backdrop-blur-xl">
           {config.HERO_EXCERPT}
-        </div>
+        </h2>
       </div>
     </div>
   )

@@ -80,7 +80,7 @@ const category = await getEntry("categories", data.type)
     <Image
       width={600}
       src={data.image}
-      alt={data.title}
+      alt={data.title || ""}
       loading="lazy"
       class="w-full object-cover"
     />
