@@ -19,10 +19,12 @@ export const { getStaticPaths, GET } = OGImageRoute({
   getImageOptions: async (path, page: CollectionEntry<"reports">["data"]) => ({
     title: page.title,
     description: "Report by Vek Labs".toLocaleUpperCase(),
-    bgImage: {
-      path: `./src/images/${page.image.src.match(/\/images\/(.*)/)![1].replace(/\?.*/, "")}`,
-      fit: "cover",
-    },
+    bgImage: page.image.src.match(/\/images\/(.*)/)
+      ? {
+          path: `./src/images/${page.image.src.match(/\/images\/(.*)/)![1].replace(/\?.*/, "")}`,
+          fit: "cover",
+        }
+      : undefined,
     font: {
       title: { families: ["Poppins"], weight: "Bold" },
       description: { families: ["Poppins"], weight: "Normal" },
