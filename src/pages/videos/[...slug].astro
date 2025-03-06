@@ -38,7 +38,11 @@ if (nextVideos.length < 3) {
 const { Content } = await render()
 ---
 
-<DefaultLayout video={data.videoURL} image={data.image.src} title={data.title}>
+<DefaultLayout
+  video={data.videoURL}
+  image={`/open-graph/videos/${slug}`}
+  title={data.title}
+>
   <VideoJSONLD {...Astro.props} />
   <div
     class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"

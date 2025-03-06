@@ -31,7 +31,7 @@ const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 const { Content, remarkPluginFrontmatter } = await post.render()
 ---
 
-<DefaultLayout>
+<DefaultLayout image={`/open-graph/reports/${slug}`} title={title}>
   <style is:global>
     #post .content {
       p {
