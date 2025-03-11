@@ -7,4 +7,4 @@ publishDate: 2025-03-11
 type: documentary
 image: /src/images/wildfire_thumb.jpg
 ---
-Step into the heart of nature’s fiercest element in “**Wildfire! From the Ground Up**.” This first episode reveals the powerful human stories behind the flames—from neighbors helping one another on the front lines to firefighters who rely on unbreakable bonds of trust and faith. Through raw interviews and stunning visuals, experience the courage it takes to face wildfire head-on and the resilience that ignites in its wake. More than a spectacle of destruction, this is a celebration of hope and unity, reminding us all of the strength found in community.
+Step into the heart of nature’s fiercest element in “**Wildfire! From the Ground Up**.” This first episode reveals the powerful human stories behind the flames—from neighbors helping one another on the front lines to firefighters who rely on unbreakable bonds. We are still in production as we get more episodes online. We will be taking the first episode of this series on the road across Alberta this spring 2025.
