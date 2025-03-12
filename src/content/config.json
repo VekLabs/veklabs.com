@@ -47,7 +47,7 @@
   "locale": "en_CA",
   "staticDir": ["static"],
   "videos": [
-    "https://player.vimeo.com/external/407838186.hd.mp4?s=ddf843d553ee2d63b3c4c357ad3f59988342b03d&profile_id=175"
+    "https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f"
   ],
   "taxonomies": {
     "category": "category",
