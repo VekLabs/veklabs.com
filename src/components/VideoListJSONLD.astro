@@ -18,6 +18,7 @@ const jsonLd = {
       "@type": "VideoObject",
       name: video.data.title,
       url: video.data.videoURL,
+      uploadDate: video.data.publishDate?.toISOString(),
     },
   })),
 }
