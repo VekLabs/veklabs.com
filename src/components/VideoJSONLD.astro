@@ -15,7 +15,6 @@ const {
     meta,
     publishDate,
     site,
-    awards,
   },
 } = Astro.props
 
@@ -38,6 +37,11 @@ const jsonLd = {
   datePublished: formattedDate,
   contentUrl: videoURL,
   encodingFormat: type,
+  keywords: [type],
+  countryOfOrigin: {
+    "@type": "Country",
+    name: "Canada",
+  },
   productionCompany: {
     name: "Vek Labs",
     slogan: config.description,
