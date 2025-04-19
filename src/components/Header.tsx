@@ -20,7 +20,7 @@ export default function Header({ currentPath }: HeaderProps) {
       >
         <div className="w-container mx-auto">
           <div className="relative hidden h-8 items-center justify-between md:flex">
-            <a href={baseURL}>
+            <a href="/">
               <img
                 className="w-full max-w-24 justify-self-start md:max-w-28"
                 src={logoFullSVG}
