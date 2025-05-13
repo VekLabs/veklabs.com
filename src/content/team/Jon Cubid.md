@@ -4,7 +4,7 @@ image: /src/images/vek-team-2.jpg
 competencies:
   - Post-Production/Advisor
 title: Advisor
-order: 7
+order: 8
 channel:
   - name: LinkedIn
     url: https://www.linkedin.com/in/jonathan-cubid-14a86a96/
