@@ -2,7 +2,7 @@
 name: DANIELLE
 image: /src/images/danielle.jpg
 competencies:
-  - Tone/Quality-Control
+  - Media Review Coordinator
 title: Research & Development
 order: 2
 channel:
