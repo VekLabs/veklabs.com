@@ -4,7 +4,7 @@ image: /src/images/vek-team-1.jpg
 competencies:
   - Editorial/Narrative
 title: Editor
-order: 4
+order: 3
 channel:
   - name: LinkedIn
     url: https://www.linkedin.com/company/veklabs/
