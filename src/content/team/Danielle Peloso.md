@@ -4,7 +4,7 @@ image: /src/images/danielle.jpg
 competencies:
   - Media Review Coordinator
 title: Research & Development
-order: 2
+order: 7
 channel:
   - name: LinkedIn
     url: https://www.linkedin.com/company/veklabs/
