@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import { formatISO } from "date-fns"
 
 type Props = { videos: CollectionEntry<"videos">[] }
 
@@ -18,7 +19,9 @@ const jsonLd = {
       "@type": "VideoObject",
       name: video.data.title,
       url: video.data.videoURL,
-      uploadDate: video.data.publishDate?.toISOString(),
+      uploadDate: video.data.publishDate
+        ? formatISO(video.data.publishDate)
+        : undefined,
       image: [video.data.image.src],
       keywords: [video.data.type],
     },

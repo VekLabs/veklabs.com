@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import { formatISO } from "date-fns"
 import config from "../content/config.json"
 
 type Props = CollectionEntry<"videos">
@@ -19,9 +20,8 @@ const {
 } = Astro.props
 
 // Format date to ISO 8601 if it exists
-const formattedDate = publishDate
-  ? publishDate.toISOString().split("T")[0]
-  : undefined
+
+const formattedDate = publishDate ? formatISO(publishDate) : undefined
 
 // Construct the JSON-LD object
 const jsonLd = {
