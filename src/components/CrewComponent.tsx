@@ -30,7 +30,7 @@ function CrewImage({
       loading="lazy"
       alt={alt}
       className={cn(
-        "aspect-square w-20 cursor-pointer rounded-full object-cover ring-1 shadow-2xl ring-gray-50/10 md:w-40 lg:w-52",
+        "aspect-square w-28 cursor-pointer rounded-full object-cover ring-1 shadow-2xl ring-gray-50/10 md:w-40 lg:w-52",
         { "w-40 lg:w-52": full },
       )}
     />
