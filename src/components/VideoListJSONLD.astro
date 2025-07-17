@@ -20,7 +20,10 @@ const jsonLd = {
       name: video.data.title,
       url: video.data.videoURL,
       uploadDate: video.data.publishDate
-        ? formatISO(video.data.publishDate)
+        ? formatISO(video.data.publishDate, {
+            format: "extended",
+            representation: "complete",
+          })
         : undefined,
       image: [video.data.image.src],
       keywords: [video.data.type],

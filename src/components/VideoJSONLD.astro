@@ -20,8 +20,9 @@ const {
 } = Astro.props
 
 // Format date to ISO 8601 if it exists
-
-const formattedDate = publishDate ? formatISO(publishDate) : undefined
+const formattedDate = publishDate
+  ? formatISO(publishDate, { format: "extended", representation: "complete" })
+  : undefined
 
 // Construct the JSON-LD object
 const jsonLd = {
