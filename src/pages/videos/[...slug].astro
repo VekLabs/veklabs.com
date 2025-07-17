@@ -135,7 +135,7 @@ const { Content } = await render()
                           <span class="text-xxs text-accent-300 tracking-widest uppercase">
                             {label}
                           </span>
-                          <span>{value}</span>
+                          <span set:html={value} />
                         </div>
                       ))}
 
