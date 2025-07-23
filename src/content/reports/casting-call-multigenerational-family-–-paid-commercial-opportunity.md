@@ -6,11 +6,14 @@ title: "Casting Call: Multigenerational Family – Paid Commercial Opportunity"
 author: Andrew Peloso
 keywords: commercial, casting call, acting calgary
 ---
-Vek Labs is casting for an upcoming **housing-focused** commercial and we are seeking a group of talented actors to portray a multigenerational family. This is a paid, one-time opportunity.
+Vek Labs is casting for an upcoming **housing-focused** commercial and we are seeking a group of talented actors to portray a multigenerational family. This is a paid, one-time opportunity.  
 
-Please review the details below and feel free to share with anyone who may be a good fit.
 
-**ROLES NEEDED**
+Please review the details below and feel free to share with anyone who may be a good fit.  
+
+
+**ROLES NEEDED**  
+
 
 We are casting a family unit composed of:
 
@@ -24,7 +27,8 @@ We are casting a family unit composed of:
 
 
 
-*This does not need to be a real family. Individual actors are welcome to apply. We are assembling a cast that can authentically reflect warmth, connection, and generational family life.*
+*This does not need to be a real family. Individual actors are welcome to apply. We are assembling a cast that can authentically reflect warmth, connection, and generational family life.* 
+
 
 **PROJECT DETAILS**
 
@@ -37,7 +41,8 @@ We are casting a family unit composed of:
 * **Schedule**: One-time filming commitment (shoot dates TBC)
 
 
-* **Experience**: All experience levels welcome; please indicate any on-camera or acting background
+* **Experience**: All experience levels welcome; please indicate any on-camera or acting background. 
+
 
 
 
@@ -51,7 +56,8 @@ Please send the following materials to **info@veklabs.com**:
 * A short summary of any acting or performance experience (if applicable)
 
 
-* Contact information (name, email, phone number)
+* Contact information (name, email, phone number). 
+
 
 
 
