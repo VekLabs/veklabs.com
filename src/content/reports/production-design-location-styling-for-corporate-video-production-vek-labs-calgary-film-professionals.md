@@ -12,13 +12,19 @@ keywords: calgary corporate video production, calgary video production company,
   video, calgary promotional video, corporate video design principles,
   professional video production calgary
 ---
-# Why Your Filming Environment Can Make or Break Your Corporate Brand Message
+## Why Your Filming Environment Can Make or Break Your Corporate Brand Message
 
 When most businesses think of **corporate video production in Calgary**, they picture cameras, lights, and maybe a drone sweeping overhead. But before we hit “record,” we focus on something equally important: the *space itself*.
 
+<br>
+
 In the film industry, we call this *production design and location styling*. It’s not just “decorating.” It’s creating an environment that strengthens your story, supports your brand, and looks exceptional on screen. From an SEO perspective, it’s also part of how Google understands your content as high-value, experience-driven, and relevant to your market.
 
+<br>
+
 According to [HubSpot’s 2024 State of Marketing Report](https://blog.hubspot.com/marketing/visual-content-marketing-strategy), visuals that align with brand identity can increase audience recall by over 60%. And Google’s own [Search Central documentation](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) makes it clear: helpful, original content earns trust and better rankings.
+
+<br>
 
 Below are six principles we use at **Vek Labs**, a Calgary-based video production agency, to help companies design film environments that connect both visually and emotionally.
 
