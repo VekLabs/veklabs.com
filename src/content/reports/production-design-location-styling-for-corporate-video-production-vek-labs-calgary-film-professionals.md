@@ -34,6 +34,8 @@ Below are six principles we use at **Vek Labs**, a Calgary-based video productio
 
 A balanced frame naturally guides the viewer’s eye to the subject. Symmetry often feels polished and formal, while asymmetry can feel dynamic or relaxed. The key is intention—nothing in the frame should feel “accidental.”
 
+<br>
+
 **Example:** In our [DWK Interiors](https://www.veklabs.com/videos/dwk-interiors/) shoot, carefully placed furniture and décor mirrored the brand’s refined design aesthetic. It was more than visual appeal—it was brand alignment.
 
 <br>
@@ -41,6 +43,8 @@ A balanced frame naturally guides the viewer’s eye to the subject. Symmetry of
 ## 2. Colour and Mood
 
 Colour affects emotion instantly. Warm tones feel approachable; cooler tones feel stable and professional. We match colour palettes to the **brand storytelling arc** of each project.
+
+<br>
 
 **Example:** In *[10 Years of CDN](https://www.veklabs.com/videos/10-year-cdn/)*, cool neutrals in the studio reinforced the company’s history and professionalism—subtle visual cues that spoke volumes.
 
@@ -50,6 +54,8 @@ Colour affects emotion instantly. Warm tones feel approachable; cooler tones fee
 
 Flat walls and sterile setups can feel lifeless on camera. Textures like wood, fabric, and metal add dimensionality, making the scene more cinematic.
 
+<br>
+
 **Example:** In *[Allan David Bespoke Tailoring](https://www.veklabs.com/videos/allan-david-bespoke-tailoring)*, the tactile richness of the shop—fabric rolls, cutting tools—added visual storytelling without a single spoken word.
 
 <br>
@@ -57,6 +63,8 @@ Flat walls and sterile setups can feel lifeless on camera. Textures like wood, f
 ## 4. Lighting and the Space
 
 Lighting must complement the space, not fight it. Reflective surfaces create glare, while dark matte finishes may absorb too much light. Balancing these elements is crucial for both aesthetic and technical quality.
+
+<br>
 
 **Example:** In *[Ella | MMA](https://www.veklabs.com/videos/ella/)*, we embraced the gym’s existing industrial lighting for a gritty, authentic atmosphere.
 
@@ -66,6 +74,8 @@ Lighting must complement the space, not fight it. Reflective surfaces create gla
 
 Every scene should have a visual anchor—a logo wall, a feature art piece, or a key architectural detail. This keeps the viewer’s attention centered and supports visual hierarchy.
 
+<br>
+
 **Example:** In our *[Alberta Classical Academy](https://www.veklabs.com/videos/alberta-classical-academy)* feature, classical artwork acted as a narrative anchor, reinforcing the school’s values.
 
 <br>
@@ -73,6 +83,8 @@ Every scene should have a visual anchor—a logo wall, a feature art piece, or a
 ## 6. Authenticity Over Perfection
 
 Sometimes, the most powerful settings aren’t polished. Real, lived-in spaces can create deeper emotional resonance and authenticity—especially in documentary-style corporate storytelling.
+
+<br>
 
 **Example:** In *[DOM LOUIS: Live](https://www.veklabs.com/videos/dom-louis-live/)*, tour venues and side-stage spaces were imperfect but true to the artist’s journey.
 
@@ -82,7 +94,11 @@ Sometimes, the most powerful settings aren’t polished. Real, lived-in spaces c
 
 Your filming environment is not just a backdrop—it’s a brand signal. At **Vek Labs**, we combine production design expertise with location styling strategies to create spaces that communicate your story before a single line is spoken.
 
+<br>
+
 Whether you’re planning an executive interview, a brand anthem, or a client testimonial, we design for visual impact and audience connection.
+
+<br>
 
 **Explore our portfolio:** [https://www.veklabs.com/](https://www.veklabs.com/)  
 **Learn more about corporate video production services in Calgary:** [https://www.veklabs.com/services/corporate-video-production](https://www.veklabs.com/services/corporate-video-production)
