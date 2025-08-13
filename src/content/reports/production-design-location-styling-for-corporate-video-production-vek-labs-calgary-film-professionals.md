@@ -12,13 +12,13 @@ keywords: calgary corporate video production, calgary video production company,
   video, calgary promotional video, corporate video design principles,
   professional video production calgary
 ---
-## Why Your Filming Environment Can Make or Break Your Corporate Brand Message
+## How Design Shapes Corporate Brand Messages
 
-When most businesses think of **corporate video production in Calgary**, they picture cameras, lights, and maybe a drone sweeping overhead. But before we hit “record,” we focus on something equally important: the *space itself*.
+When most businesses think of **corporate video production in Calgary** (or anywhere), they picture cameras, lights, drone footage etc. But before hitting “record,” it's important to focus on something equally important: the *space itself*.
 
 <br>
 
-In the film industry, we call this *production design and location styling*. It’s not just “decorating.” It’s creating an environment that strengthens your story, supports your brand, and looks exceptional on screen. From an SEO perspective, it’s also part of how Google understands your content as high-value, experience-driven, and relevant to your market.
+In the film industry, we call this *production design and location styling*. It’s not just “decorating.” It’s creating an environment that strengthens your story, supports your brand, and looks exceptional on screen. From an SEO (Search Engine Optimization) perspective, it’s also part of how Google understands your content as high-value, experience-driven, and relevant to your market.
 
 <br>
 
@@ -32,7 +32,7 @@ Below are six principles we use at **Vek Labs**, a Calgary-based video productio
 
 ## 1. Balance and Symmetry
 
-A balanced frame naturally guides the viewer’s eye to the subject. Symmetry often feels polished and formal, while asymmetry can feel dynamic or relaxed. The key is intention—nothing in the frame should feel “accidental.”
+A balanced frame naturally guides the viewer’s eye to the subject. Symmetry often feels polished and formal, while asymmetry can feel dynamic or relaxed. The key is intention—nothing in the frame should feel “accidental.” It is important to consider balance and overall weighting... and how it lends itself to your brands voice. Congruency comes from thoughtful planning. If you are in a rush, stop briefly and look at image on-camera. What can you do to balance the image further? 
 
 <br>
 
@@ -42,11 +42,11 @@ A balanced frame naturally guides the viewer’s eye to the subject. Symmetry of
 
 ## 2. Colour and Mood
 
-Colour affects emotion instantly. Warm tones feel approachable; cooler tones feel stable and professional. We match colour palettes to the **brand storytelling arc** of each project.
+Colour affects emotion instantly. Warm tones feel approachable; cooler tones feel stable and professional. We match colour palettes to the **brand storytelling arc** of each project. While this principle is heavily achieved in post-production, the colours in frame, time of year captured etc, is really important when shaping an image. 
 
 <br>
 
-**Example:** In *[10 Years of CDN](https://www.veklabs.com/videos/10-year-cdn/)*, cool neutrals in the studio reinforced the company’s history and professionalism—subtle visual cues that spoke volumes.
+**Example:** In *[10 Years of CDN](https://www.veklabs.com/videos/10-year-cdn/)*, cool neutrals in the office reinforced the company’s history and professionalism—subtle visual cues that spoke volumes.
 
 <br>
 
@@ -62,27 +62,27 @@ Flat walls and sterile setups can feel lifeless on camera. Textures like wood, f
 
 ## 4. Lighting and the Space
 
-Lighting must complement the space, not fight it. Reflective surfaces create glare, while dark matte finishes may absorb too much light. Balancing these elements is crucial for both aesthetic and technical quality.
+Lighting must complement the space, not fight it. Reflective surfaces create glare, while dark matte finishes may absorb too much light. Balancing these elements is crucial for both aesthetic and technical quality. Additionally, many think traditional lighting setups are essential for all video productions. This is not always the case... as professionals in the industry lean heavily on removing light. It is important to consider what your light sources should be, and the inclusion (or exclusion) of natural light is always a fascinating attribute to play with while filming. 
 
 <br>
 
-**Example:** In *[Ella | MMA](https://www.veklabs.com/videos/ella/)*, we embraced the gym’s existing industrial lighting for a gritty, authentic atmosphere.
+**Example:** In *[Ella | MMA](https://www.veklabs.com/videos/ella/)*, we embraced the gym’s existing industrial lighting (with accent lights added) for a gritty, authentic atmosphere.
 
 <br>
 
 ## 5. Focal Points
 
-Every scene should have a visual anchor—a logo wall, a feature art piece, or a key architectural detail. This keeps the viewer’s attention centered and supports visual hierarchy.
+Every scene should have a visual anchor—a logo wall, a feature art piece, or a key architectural detail. This often can be missed while crews focus on the talent or person being interviewed. Object focal points can be a nice and subtle way to enrich your production. This keeps the viewer’s attention centered and supports visual hierarchy.
 
 <br>
 
-**Example:** In our *[Alberta Classical Academy](https://www.veklabs.com/videos/alberta-classical-academy)* feature, classical artwork acted as a narrative anchor, reinforcing the school’s values.
+**Example:** In our *[Alberta Classical Academy](https://www.veklabs.com/videos/alberta-classical-academy)* feature, classical artwork acted as a subtle anchor, reinforcing the school’s values and traditional roots. 
 
 <br>
 
 ## 6. Authenticity Over Perfection
 
-Sometimes, the most powerful settings aren’t polished. Real, lived-in spaces can create deeper emotional resonance and authenticity—especially in documentary-style corporate storytelling.
+Sometimes, the most powerful settings aren’t polished. Real, lived-in spaces can create deeper emotional resonance and authenticity—especially in documentary-style corporate storytelling. Still, filming must be executed with a sense of order and care even if you are focusing on a "natural" or "impromptu" feel. 
 
 <br>
 
@@ -101,7 +101,7 @@ Whether you’re planning an executive interview, a brand anthem, or a client te
 <br>
 
 **Explore our portfolio:** [https://www.veklabs.com/](https://www.veklabs.com/)  
-**Learn more about corporate video production services in Calgary:** [https://www.veklabs.com/services/corporate-video-production](https://www.veklabs.com/services/corporate-video-production)
+**Learn more about corporate video production services in Calgary:** (https://www.veklabs.com/services/)
 
 <br>
 
