@@ -1,12 +1,12 @@
+import { Check } from "lucide-react"
+import { useRef, type CSSProperties } from "react"
 import z from "zod"
 import { BackgroundGradientAnimation } from "./BackgroundGradient"
-import type { CollectionEntry } from "astro:content"
-import { useEffect, useRef, useState, type CSSProperties } from "react"
-import { Check } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
+  phone: z.string().min(7),
   message: z.string().min(10),
 })
 
@@ -69,6 +69,19 @@ export default function ContactForm({
             type="email"
             name="email"
             id="email"
+            required
+            className="input"
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="phone" className="input-label">
+            Phone Number
+          </label>
+          <input
+            placeholder="Phone Number"
+            type="tel"
+            name="phone"
+            id="phone"
             required
             className="input"
           />
