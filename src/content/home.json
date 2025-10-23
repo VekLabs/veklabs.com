@@ -10,14 +10,34 @@
   "trust_title": "Cutting-edge Film & Storytelling For Businesses.",
   "TOTAL_VIEWS": 22,
   "trust_description": "At Vek Labs, we are a video production company that prides ourselves by offering production services to agencies, companies and organizations who want to create cinematic productions without hassle. We reverse-engineer a custom solution for your video project; consulting your budget, timeline and creative vision throughout the entire process.",
+  "awards": [
+    {
+      "image": "/src/images/finch_award_1.png"
+    },
+    {
+      "image": "/src/images/finch_award_2.png"
+    },
+    {
+      "image": "/src/images/GNIFF_LAUREL_2020_white.png"
+    },
+    {
+      "image": "/src/images/caff-official-selection.png"
+    },
+    {
+      "image": "/src/images/Award-Winner---Film-for-Peace---2020.png"
+    },
+    {
+      "image": "/src/images/okotoksfilmfestival.png"
+    }
+  ],
   "TEAM_TITLE": "CORE TEAM",
   "videos": [
     "we-are-cdn",
-    "meet-pierre-poilievre",
     "dwk-interiors",
     "Flames",
     "alberta-classical-academy",
-    "dom-louis-live"
+    "dom-louis-live",
+    "we-are-korth"
   ],
   "hero": {
     "videoUrl": "https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f",
@@ -28,13 +48,5 @@
   "VIDEOS_RENDERED": 1687,
   "HERO_EXCERPT": "We are a team of award-winning videographers and editors working with people and on productions that inspire us | Welcome to the lab.",
   "metrics_title": "Lab Metrics",
-  "trust_subtitle": "Premium Video. Painless Production.",
-  "awards": [
-    { "image": "/src/images/finch_award_1.png" },
-    { "image": "/src/images/finch_award_2.png" },
-    { "image": "/src/images/GNIFF_LAUREL_2020_white.png" },
-    { "image": "/src/images/caff-official-selection.png" },
-    { "image": "/src/images/Award-Winner---Film-for-Peace---2020.png" },
-    { "image": "/src/images/okotoksfilmfestival.png" }
-  ]
+  "trust_subtitle": "Premium Video. Painless Production."
 }
