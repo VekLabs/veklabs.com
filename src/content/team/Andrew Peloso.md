@@ -3,7 +3,7 @@ name: ANDREW
 image: /src/images/vek-team-4.jpg
 competencies:
   - Direction/Writing
-title: Executive Producer, Director
+title: Head of Post
 order: 1
 channel:
   - name: LinkedIn
