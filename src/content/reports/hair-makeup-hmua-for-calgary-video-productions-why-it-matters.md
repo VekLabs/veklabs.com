@@ -16,7 +16,6 @@ In the same way a set decorator considers colour palettes and textures, a profes
 
 In this article, we’ll look at why hair and makeup aren’t simply cosmetic, but strategic. We’ll also cover what to look for in a stylist, how their work ties into the broader production process, and how Calgary businesses can benefit from integrating this into their planning.<br><br>
 
----
 
 ## 1. Hair & Makeup as Part of Production Design<br><br>
 
@@ -24,7 +23,6 @@ In film terminology, production design refers to everything you see on screen—
 
 Professional stylists understand how foundation reads under soft-box lighting, how hair reacts to humid locations, and how colours shift under different white balances. Without that attention to detail, even the most carefully lit and composed shot can feel unpolished.<br><br>
 
----
 
 ## 2. How On-Set Styling Supports Location Styling<br><br>
 
@@ -34,7 +32,6 @@ For example, if your scene is a modern downtown office with cool tones and glass
 
 This synergy between subject and setting prevents jarring contrasts and helps the audience focus on your message, not distractions.<br><br>
 
----
 
 ## 3. Consistency Across Takes and Shooting Days<br><br>
 
@@ -42,7 +39,6 @@ In filmmaking, continuity is crucial—props, lighting, and framing must match f
 
 Shoots in Calgary (or anywhere really!) often stretch over hours or even multiple days. Without touch-ups, subtle changes like lipstick fading, hair shifting, or skin shine developing can break the illusion of a continuous scene. A stylist on set ensures that every take matches the last, making the editor’s job easier and the final cut more professional.<br><br>
 
----
 
 ## 4. Confidence and Performance on Camera<br><br>
 
@@ -50,7 +46,6 @@ On-set styling isn’t just about appearance—it’s about performance. When ta
 
 As the external source Spotty Yeti notes, a stylist’s work directly impacts comfort, confidence, and authenticity in front of the camera. The result? A more genuine connection with your audience.<br><br>
 
----
 
 ## 5. Efficiency and Professional Flow on Set<br><br>
 
@@ -58,7 +53,6 @@ Time is valuable during production. A stylist ready with blotting paper, a comb,
 
 For Calgary businesses filming in busy commercial spaces or restricted time windows, this efficiency can make the difference between getting all your shots or running over schedule.<br><br>
 
----
 
 ## Final Word<br><br>
 
@@ -66,7 +60,6 @@ Hair and makeup aren’t extras—they’re part of the storytelling infrastruct
 
 By considering hair and makeup early—alongside set design, lighting, and wardrobe—you create a seamless experience that makes your brand message stronger, clearer, and more memorable.<br><br>
 
----
 
 ## Quick Q&A<br><br>
 
