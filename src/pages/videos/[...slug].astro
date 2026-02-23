@@ -111,7 +111,12 @@ const aspectRatio =
     : 16 / 9
 ---
 
-<Layout video={videoURL} image={`/open-graph/videos/${slug}`} title={title}>
+<Layout
+  video={videoURL}
+  image={`/open-graph/videos/${slug}`}
+  title={title}
+  meta={video.meta}
+>
   <Schema
     item={{
       '@context': 'https://schema.org',

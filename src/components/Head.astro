@@ -28,7 +28,7 @@ type Props = {
   path?: string
 } & Partial<AstroSeoProps>
 
-const { meta = {}, pageTitle, path, ...rest } = Astro.props as Props
+const { meta = {}, pageTitle, path } = Astro.props as Props
 
 let title = `Vek Labs - Video Production Company`
 if (pageTitle) {
@@ -49,12 +49,14 @@ const keywords = meta.keywords || [
   'filmmaking',
   'video editing',
 ]
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 
 <AstroSeo
   title={title}
   description={description}
-  canonical={`https://veklabs.com${path}`}
+  canonical={canonicalURL.toString()}
   twitter={{
     cardType: 'summary_large_image',
     handle: '@veklabs',
@@ -107,6 +109,7 @@ const keywords = meta.keywords || [
 <Schema
   item={{
     '@context': 'https://schema.org',
+    '@type': 'Organization',
     name: siteSettings.title,
     award: 'Best Calgary Video Production Company',
     location: { '@type': 'City', name: 'Calgary' },
@@ -143,6 +146,5 @@ const keywords = meta.keywords || [
     foundingDate: '12-20-2017',
     image: siteSettings.meta.image?.url || logo.src,
     legalName: 'Vek Labs Inc.',
-    '@type': 'Organization',
-  } satisfies Organization}
+  }}
 />

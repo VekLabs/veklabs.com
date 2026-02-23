@@ -37,7 +37,7 @@ const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
 const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 ---
 
-<Layout title={title}>
+<Layout title={title} meta={post.meta}>
   <Schema
     item={{
       '@type': 'Article',

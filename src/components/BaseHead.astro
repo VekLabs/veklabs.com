@@ -6,12 +6,12 @@ import defaultImage from '../images/tempHero.jpg?url'
 import { getPayload } from '../payload'
 import Head from './Head.astro'
 
-interface Props {
+type Props = {
   title?: string
   description?: string
   image?: string
   video?: string
-}
+} & Parameters<typeof Head>['0']
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
@@ -60,7 +60,7 @@ const title =
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<Head />
+<Head title={title} description={description} />
 
 <GoogleTagManager gtmId={config.googleAnalytics} />
 
