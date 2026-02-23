@@ -121,7 +121,10 @@ const aspectRatio =
     item={{
       '@context': 'https://schema.org',
       '@type': 'VideoObject',
-      description: body ? convertLexicalToPlaintext({ data: body }) : undefined,
+      description:
+        video.meta?.description || body
+          ? convertLexicalToPlaintext({ data: body })
+          : undefined,
       name: title,
       thumbnailUrl: image.url,
       uploadDate: createdAt,

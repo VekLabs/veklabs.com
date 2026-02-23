@@ -3,6 +3,8 @@ import type { Testimonial } from '@/payload-types'
 import Image from './Image'
 import type { Populated } from '@/utils/typeChecks'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import { Schema } from 'astro-seo-schema'
 
 type Props = Populated<Testimonial>
 const testimonial = Astro.props
@@ -10,6 +12,21 @@ const testimonial = Astro.props
 
 <div class="relative w-full rounded-xl bg-black p-8 ring-1 ring-gray-800">
   <div class="flex flex-col justify-center gap-6">
+    <Schema
+      item={{
+        '@context': 'https://schema.org',
+        '@type': 'UserReview',
+        author: {
+          '@type': 'Person',
+          name: testimonial.title,
+          additionalName: testimonial.subtitle,
+        },
+        itemReviewed: { name: 'Vek Labs Video Production' },
+        reviewRating: { ratingValue: 5 },
+        reviewBody: convertLexicalToPlaintext({ data: testimonial.body }),
+        datePublished: testimonial.createdAt,
+      }}
+    />
     {
       testimonial.icon && (
         <div class=" max-w-12 rounded-sm bg-gray-800 p-2">
