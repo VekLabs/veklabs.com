@@ -2,7 +2,7 @@
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import { defineConfig, fontProviders } from 'astro/config'
-
+import cloudflare from '@astrojs/cloudflare'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
@@ -39,6 +39,8 @@ export default defineConfig({
       SITE_BASE_URL: { type: 'string', access: 'public', context: 'server' },
     },
   },
+
+  adapter: cloudflare(),
 
   integrations: [react(), sitemap()],
 
