@@ -1,6 +1,6 @@
 import { getPayload } from '@/payload'
 import { defineAction } from 'astro:actions'
-import env from 'astro:env/server'
+import { TURNSTILE_SECRET_KEY } from 'astro:env/server'
 import z from 'zod'
 
 export const server = {
@@ -38,7 +38,7 @@ export const server = {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              secret: env.TURNSTILE_SECRET_KEY,
+              secret: TURNSTILE_SECRET_KEY,
               response: input.turnstileResponse,
               remoteip: ip,
             }),
