@@ -4,12 +4,11 @@ import { getPayload } from '@/payload'
 import type { Report } from '@/payload-types'
 import { cn } from '@/utils/cn'
 import type { Populated } from '@/utils/typeChecks'
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { Schema } from 'astro-seo-schema'
 import CategoryBadge from '../../components/CategoryBadge.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import Layout from '../../layouts/Layout.astro'
-import { Schema } from 'astro-seo-schema'
-import { type BreadcrumbList, type Article } from 'schema-dts'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -37,7 +36,7 @@ const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
 const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 ---
 
-<Layout title={title} meta={post.meta}>
+<Layout title={title} meta={post.meta} image={`/open-graph/reports/${slug}`}>
   <Schema
     item={{
       '@type': 'Article',
