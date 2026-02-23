@@ -28,10 +28,10 @@ export default function ContactForm({
 
       {isPending && <SpinnerIcon className="animate-spin" />}
 
-      {message && (
+      {message?.data && (
         <div className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-green-500/30 px-6 py-3 text-sm font-medium text-green-200 shadow-xs">
           <CheckIcon className="size-5" />
-          {message}
+          {message.data}
         </div>
       )}
 

@@ -37,6 +37,11 @@ export default defineConfig({
       PAYLOAD_PASSWORD: { type: 'string', access: 'public', context: 'server' },
       PAYLOAD_URL: { type: 'string', access: 'public', context: 'server' },
       SITE_BASE_URL: { type: 'string', access: 'public', context: 'server' },
+      TURNSTILE_SECRET_KEY: {
+        type: 'string',
+        access: 'public',
+        context: 'server',
+      },
     },
   },
 
