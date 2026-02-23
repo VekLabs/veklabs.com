@@ -38,55 +38,53 @@ const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 ---
 
 <Layout title={title}>
-  <Fragment slot="head">
-    <Schema
-      item={{
-        '@type': 'Article',
-        '@context': 'https://schema.org',
+  <Schema
+    item={{
+      '@type': 'Article',
+      '@context': 'https://schema.org',
 
-        headline: post.title,
-        datePublished: post.createdAt,
-        dateModified: post.updatedAt,
-        url: `https://veklabs.com/reports/${post.slug}`,
-        author: [
-          {
-            '@type': 'Person',
-            name: post.author?.name,
-            image: post.author?.image ? post.author.image.url : undefined,
-          },
-          {
-            '@type': 'Organization',
-            name: 'Vek Labs',
-            url: 'https://veklabs.com',
-          },
-        ],
-        image: post.image ? post.image.url : undefined,
-        description: post.meta?.description,
-        isAccessibleForFree: true,
-      }}
-    />
-    <Schema
-      item={{
-        '@type': 'BreadcrumbList',
-        '@context': 'https://schema.org',
+      headline: post.title,
+      datePublished: post.createdAt,
+      dateModified: post.updatedAt,
+      url: `https://veklabs.com/reports/${post.slug}`,
+      author: [
+        {
+          '@type': 'Person',
+          name: post.author?.name,
+          image: post.author?.image ? post.author.image.url : undefined,
+        },
+        {
+          '@type': 'Organization',
+          name: 'Vek Labs',
+          url: 'https://veklabs.com',
+        },
+      ],
+      image: post.image ? post.image.url : undefined,
+      description: post.meta?.description,
+      isAccessibleForFree: true,
+    }}
+  />
+  <Schema
+    item={{
+      '@type': 'BreadcrumbList',
+      '@context': 'https://schema.org',
 
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Reports',
-            item: 'https://veklabs.com/reports',
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: post.title,
-            item: `https://veklabs.com/reports/${post.slug}`,
-          },
-        ],
-      }}
-    />
-  </Fragment>
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Reports',
+          item: 'https://veklabs.com/reports',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: post.title,
+          item: `https://veklabs.com/reports/${post.slug}`,
+        },
+      ],
+    }}
+  />
 
   <style is:global>
     #post .content {

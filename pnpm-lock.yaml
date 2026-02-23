@@ -17,6 +17,9 @@ importers:
       '@marsidev/react-turnstile':
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@mux/mux-player-astro':
+        specifier: ^3.11.4
+        version: 3.11.4(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(react@19.2.4)
       '@mux/mux-player-react':
         specifier: ^3.11.4
         version: 3.11.4(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1405,6 +1408,11 @@ packages:
 
   '@mux/mux-data-google-ima@0.3.4':
     resolution: {integrity: sha512-j8IOD5kw1qIOkbpipEQRGQ7vXB6+CArrhIAvtvj8YFqy0PHi7JcHk4WR3ZBVy5+5yaRCH+nzHkmJmGsg8g6O5g==}
+
+  '@mux/mux-player-astro@3.11.4':
+    resolution: {integrity: sha512-veRIe93ap+2J4cppAGeE/iw7LzLti3CD00LSe36LQLNwFYG6KtV1JA4Q48D9XtPD/G3XIALZ/tT9GQVDyBBwUQ==}
+    peerDependencies:
+      astro: ^4.0.0 || ^5.0.0
 
   '@mux/mux-player-react@3.11.4':
     resolution: {integrity: sha512-bW0k7eC1d2hmttdWrmRNjiVa77lQ30V8Lz199GnyhwQhBbMa3unEiO5NbcYBuYNZTuXqxgVRiehMktuzbvY7VA==}
@@ -5515,6 +5523,14 @@ snapshots:
   '@mux/mux-data-google-ima@0.3.4':
     dependencies:
       mux-embed: 5.16.1
+
+  '@mux/mux-player-astro@3.11.4(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(react@19.2.4)':
+    dependencies:
+      '@mux/mux-player': 3.11.4(react@19.2.4)
+      '@mux/playback-core': 0.33.1
+      astro: 5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - react
 
   '@mux/mux-player-react@3.11.4(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:

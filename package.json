@@ -12,6 +12,7 @@
   "dependencies": {
     "@floating-ui/react": "^0.27.3",
     "@marsidev/react-turnstile": "^1.4.2",
+    "@mux/mux-player-astro": "^3.11.4",
     "@mux/mux-player-react": "^3.11.4",
     "@number-flow/react": "^0.5.14",
     "@phosphor-icons/react": "^2.1.10",

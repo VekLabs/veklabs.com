@@ -1,12 +1,17 @@
 ---
-import Image from '@/components/Image.tsx'
+import Image, { getImageUrl } from '@/components/Image.tsx'
 import Layout from '@/layouts/Layout.astro'
-import type { Video } from '@/payload-types'
+import type { FeaturesPage, Video } from '@/payload-types'
 import type { Populated } from '@/utils/typeChecks'
 import PageTitle from '../../components/PageTitle.astro'
 import SmallVideoCard from '../../components/SmallVideoCard.astro'
 import { getPayload } from '@/payload'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { Schema } from 'astro-seo-schema'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import type { BreadcrumbList } from 'schema-dts'
+import { MuxPlayer } from '@mux/mux-player-astro'
+import { PhArrowLeft } from 'phosphor-icons-astro'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -18,18 +23,34 @@ export async function getStaticPaths() {
     })
   ).docs as Populated<Video>[]
 
+  const featuredPage = (await payload.findGlobal({
+    slug: 'features-page',
+  })) as Populated<FeaturesPage>
+
   return videos.map((video) => ({
     params: { slug: video.slug },
-    props: { video, allVideos: videos },
+    props: { video, allVideos: videos, featuredPage },
   }))
 }
 
-const { slug, type, videoURL, metadata, body, awards, image, title } =
-  Astro.props.video
+const video = Astro.props.video
+const {
+  slug,
+  id,
+  type,
+  videoURL,
+  metadata,
+  body,
+  awards,
+  image,
+  title,
+  createdAt,
+} = video
 
 const category = type
 
 const allVideos = Astro.props.allVideos
+const featuredPage = Astro.props.featuredPage
 
 const indexOfCurrentVideo = allVideos.findIndex(
   (video) => video.title === title,
@@ -43,9 +64,76 @@ if (nextVideos.length < 3) {
   const remainingVideos = allVideos.slice(0, 3 - nextVideos.length)
   nextVideos.push(...remainingVideos)
 }
+
+const breadcrumbList: BreadcrumbList[] = [
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Portfolio',
+        item: 'https://veklabs.com/portfolio',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: title,
+        item: `https://veklabs.com/videos/${slug}`,
+      },
+    ],
+  },
+]
+
+if (featuredPage.videos.find((v) => v.id === id)) {
+  breadcrumbList.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Features',
+        item: 'https://veklabs.com/features',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: title,
+        item: `https://veklabs.com/videos/${slug}`,
+      },
+    ],
+  })
+}
+
+const aspectRatio =
+  video.videoWidth && video.videoHeight
+    ? video.videoWidth / video.videoHeight
+    : 16 / 9
 ---
 
 <Layout video={videoURL} image={`/open-graph/videos/${slug}`} title={title}>
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      description: body ? convertLexicalToPlaintext({ data: body }) : undefined,
+      name: title,
+      thumbnailUrl: image.url,
+      uploadDate: createdAt,
+      author: 'Vek Labs',
+      embedUrl: videoURL,
+      type: 'VideoObject',
+      contentUrl: `https://veklabs.com/videos/${video.slug}`,
+      publisher: { '@type': 'Organization', name: 'Vek Labs' },
+    }}
+  />
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbList.flatMap((list) => list.itemListElement),
+    }}
+  />
   <div
     class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
   >
@@ -55,23 +143,27 @@ if (nextVideos.length < 3) {
           class="text-foreground hover:text-foreground fixed top-4 left-4 z-20 flex w-max translate-x-0 items-center gap-1 rounded-full bg-black/50 px-4 py-2 text-sm opacity-100 backdrop-blur-md transition-all delay-300 duration-300 hover:bg-black hover:ring-1 hover:ring-white/20 starting:translate-x-2 starting:opacity-0"
           href="javascript:history.back()"
         >
-          <svg viewBox="0 0 24 24" class="w-[0.65rem] fill-current">
-            <use href="/assets/arrow-left.svg#icon"></use>
-          </svg>
+          <PhArrowLeft size={16} />
           Back
         </a>
       </div>
       <div class="w-container relative mx-auto max-w-7xl py-4 md:p-10">
-        <video
-          transition:persist
-          transition:name={`video-${slug}`}
+        <MuxPlayer
           autoplay
-          controls
-          class="absolute aspect-video rounded-xl object-cover ring-2 shadow-lg shadow-neutral-950 ring-white/5 ring-inset md:w-[calc(100%-5rem)]"
-          src={videoURL}
-          poster={image.url}
-          preload="none"
-          playsinline></video>
+          accentColor="white"
+          class="absolute overflow-hidden rounded-xl object-cover shadow-lg ring-2 shadow-neutral-950 ring-white/5 [--media-object-fit:cover] ring-inset md:w-[calc(100%-5rem)]"
+          src={video.videom3u8 || video.videoURL}
+          style={{ aspectRatio }}
+          poster={getImageUrl({
+            alt: '',
+            media: image,
+            height: 500 / (16 / 9),
+            width: 500,
+          })}
+          preload="auto"
+          playsInline
+          theme="minimal"
+        />
 
         <div class="mb-20 aspect-video w-full"></div>
         <div

@@ -7,7 +7,7 @@ import MuxPlayer from '@mux/mux-player-react/lazy'
 import { ArrowRightIcon } from '@phosphor-icons/react/dist/ssr'
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
-import Image from './Image'
+import Image, { getImageUrl } from './Image'
 
 export default function VideoCard({
   video,
@@ -88,15 +88,12 @@ export default function VideoCard({
         ref={ref}
         className="size-full overflow-hidden rounded-xl object-cover opacity-0 duration-700 [--controls:none] [--media-object-fit:cover] group-hover:opacity-100"
         src={video.videom3u8 || video.previewURL}
-        // poster={
-        //   getImageProps({
-        //     alt: '',
-        //     src: image.url,
-        //     height: 500 / (16 / 9),
-        //     width: 500,
-        //     quality: 80,
-        //   }).props.src
-        // }
+        poster={getImageUrl({
+          alt: '',
+          media: image,
+          height: 500 / (16 / 9),
+          width: 500,
+        })}
         preload="auto"
         muted
         paused={!isPlaying}

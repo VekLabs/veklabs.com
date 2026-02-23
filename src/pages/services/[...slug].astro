@@ -5,6 +5,8 @@ import type { Service } from '@/payload-types'
 import { getPayload } from '@/payload'
 import Image from '@/components/Image'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
+import { Schema } from 'astro-seo-schema'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -39,6 +41,51 @@ const { image, page_title, title } = service
   description={service.summary}
   image={service.image.url}
 >
+  <Schema
+    item={{
+      '@id': `https://veklabs.com/services/${service.slug}`,
+      '@type': 'ProfessionalService',
+      '@context': 'https://schema.org',
+      brand: 'Vek Labs',
+      name: service.page_title || service.title,
+      description: convertLexicalToPlaintext({ data: service.body }),
+      areaServed: {
+        '@type': 'City',
+        name: 'Calgary',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Services',
+        itemListElement: services.map((service) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: service.title,
+          },
+        })),
+      },
+    }}
+  />
+  <Schema
+    item={{
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: 'https://veklabs.com/services',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: service.title,
+          item: `https://veklabs.com/services/${service.slug}`,
+        },
+      ],
+    }}
+  />
   <main
     class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-[1200px] md:flex-row lg:p-10"
   >
