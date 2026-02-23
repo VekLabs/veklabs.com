@@ -1,10 +1,11 @@
 ---
 import { getPayload } from '@/payload'
+import type { Service, SiteSetting } from '@/payload-types'
 import type { Populated } from '@/utils/typeChecks'
-import type { SiteSetting } from '@/payload-types'
-import vlLogoSVG from '@/images/logos/vl-logo-white.svg'
-import Image from './Image'
-import { PhTriangle } from 'phosphor-icons-astro'
+import logoFullSVG from '../images/logos/vl-logo-white.svg'
+import { Image } from 'astro:assets'
+import { cn } from '@/utils/cn'
+import { capitalize, take, takeRight } from 'lodash-es'
 
 const today = new Date()
 
@@ -13,112 +14,148 @@ const payload = await getPayload()
 const siteSettings = (await payload.findGlobal({
   slug: 'site-settings',
 })) as Populated<SiteSetting>
+
+const services = (await payload.find({ collection: 'services', limit: 100 }))
+  .docs as Populated<Service>[]
+
+const pathname = Astro.url.pathname
+
+const columnClasses = cn('flex flex-col gap-2')
+const columnHeaderClasses = cn('text-white mb-6 font-semibold')
+const linkClasses = cn(
+  'font-normal text-gray-400 hover:text-white transition data-[active="true"]:text-white data-[active="true"]:pointer-events-none',
+)
 ---
 
-<footer class="relative bg-black lg:h-[calc(100lvh-65px)]" role="contentinfo">
+<footer class="bg-background border-t border-t-gray-800" role="contentinfo">
   <div
-    class="w-container mx-auto flex h-full max-w-400 flex-col justify-between gap-16 py-18 lg:gap-0"
+    class="w-container mx-auto flex h-full max-w-260 flex-col justify-between gap-16 py-18"
   >
-    <div class="flex items-center gap-4">
-      <PhTriangle class="rotate-90" />
-      <span class="font-semibold tracking-wider uppercase"
-        >Let's get in touch.</span
-      >
-
-      <a
-        class="ml-auto w-max rounded-md bg-white px-4 py-2 font-semibold text-black shadow-xs ring-1 shadow-gray-600 ring-gray-500 duration-200 hover:bg-white/70"
-        href={`/contact`}
-        title={`Contact Vek Labs`}
-      >
-        Contact Us
-      </a>
-    </div>
-
-    <span
-      class="max-w-250 text-5xl leading-18 text-balance italic lg:text-7xl lg:leading-30"
+    <div
+      class="grid grid-cols-3 gap-x-20 gap-y-3 text-sm text-gray-300 lg:grid-cols-5"
     >
-      Premium Video. Painless Production.
-    </span>
+      <a href="/" class="hidden sm:block">
+        <Image
+          class="w-full max-w-8 justify-self-start md:max-w-10"
+          src={logoFullSVG}
+          alt="Vek Labs Logo"
+        />
+      </a>
+
+      <div class="row-start-2 row-end-2 hidden sm:block"></div>
+
+      <div class={columnClasses}>
+        <span class={columnHeaderClasses}>Explore</span>
+        {
+          [
+            { href: '/features', title: 'Features' },
+            {
+              href: '/portfolio',
+              title: 'Portfolio',
+            },
+            {
+              href: '/services',
+              title: 'Services',
+            },
+            {
+              href: '/clients',
+              title: 'Clients',
+            },
+            { href: '/reports', title: 'Reports' },
+          ].map(({ href, title }) => (
+            <a
+              href={href}
+              data-active={pathname !== '/' && href.includes(pathname)}
+              class={linkClasses}
+              title={`View Vek Labs ${title.toLowerCase()}`}
+            >
+              {title}
+            </a>
+          ))
+        }
+      </div>
+
+      <div class={columnClasses}>
+        <span class={columnHeaderClasses}>Services</span>
+        {
+          services?.map(async ({ slug, title }) => {
+            return (
+              <a
+                href={`/services/${slug}`}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                class={linkClasses}
+                title={`View Vek Labs ${title.toLowerCase()}`}
+              >
+                <div class="group relative flex items-center gap-4">
+                  {capitalize(title)}
+                </div>
+              </a>
+            )
+          })
+        }
+      </div>
+
+      <div class={columnClasses}>
+        <span class={columnHeaderClasses}>Connect</span>
+        <a
+          href="/contact"
+          data-active={'/contact' === pathname}
+          class={linkClasses}
+          title="View Vek Labs contact"
+        >
+          Contact
+        </a>
+        {
+          siteSettings.social?.map(async ({ url, name }, i) => {
+            return (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                class={cn(linkClasses, {
+                  'sm:hidden': i >= Math.ceil(siteSettings.social.length / 2),
+                })}
+                title={name}
+              >
+                <div class="group relative flex items-center gap-4">{name}</div>
+              </a>
+            )
+          })
+        }
+      </div>
+
+      <div class={cn(columnClasses, 'hidden sm:flex')}>
+        <span class={columnHeaderClasses + ' invisible'}>Connect Contd.</span>
+        {
+          takeRight(
+            siteSettings.social,
+            Math.floor(siteSettings.social.length / 2),
+          )?.map(async ({ url, name }) => {
+            return (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                class={linkClasses}
+                title={name}
+              >
+                <div class="group relative flex items-center gap-4">{name}</div>
+              </a>
+            )
+          })
+        }
+      </div>
+    </div>
 
     <div
-      class="grid max-w-240 grid-flow-col grid-cols-2 grid-rows-8 gap-x-20 gap-y-6 md:grid-cols-4 md:grid-rows-4"
+      class="flex flex-col gap-3 text-xs font-normal text-gray-500 sm:flex-row"
     >
-      {
-        siteSettings.social?.map(async ({ url, name }) => {
-          return (
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              class="font-normal text-white"
-              title={name}
-            >
-              <div class="group relative flex items-center gap-4">{name}</div>
-            </a>
-          )
-        })
-      }
-      {
-        [
-          { href: '/features', title: 'Features' },
-          {
-            href: '/portfolio',
-            title: 'Portfolio',
-          },
-          {
-            href: '/services',
-            title: 'Services',
-          },
-          {
-            href: '/clients',
-            title: 'Clients',
-          },
-          { href: '/reports', title: 'Reports' },
-          { href: '/contact', title: 'Contact' },
-        ].map(({ href, title }) => (
-          <a
-            href={href}
-            class="font-normal text-white"
-            title={`View Vek Labs ${title.toLowerCase()}`}
-          >
-            {title}
-          </a>
-        ))
-      }
-    </div>
-
-    <div class="grid max-w-240 grid-cols-1 gap-x-20 gap-y-6 md:grid-cols-4">
-      <span class="font-normal text-white/70">
+      <span>
         &copy; {today.getFullYear()} Vek Labs Inc.
       </span>
-      <a
-        href="mailto:info@veklabs.com"
-        class="font-normal text-white/70 hover:text-white"
-        title="Email Vek Labs"
-      >
-        info@veklabs.com
-      </a>
-      <a
-        href="tel:+14036901291"
-        class="font-normal text-white/70 hover:text-white"
-        title="Call Vek Labs"
-      >
-        +1 (403) 690-1291
-      </a>
-    </div>
-    <div class="grid max-w-240 grid-cols-2 gap-x-20 gap-y-6 md:grid-cols-4">
-      <span class="text-sm font-normal text-white/70"
-        >{siteSettings.FOOTER_PRETEXT}</span
-      >
-      <span class="col-span-2 text-sm font-normal text-white/70">
-        PO Box 46068 Inglewood, Calgary, AB T2G5H7
-      </span>
+      <span>{siteSettings.FOOTER_PRETEXT}</span>
+      <span> PO Box 46068 Inglewood, Calgary, AB T2G5H7</span>
     </div>
   </div>
-
-  <Image
-    className="absolute right-0 bottom-0 w-1/2 mask-t-from-0% mask-r-from-0% opacity-20"
-    media={vlLogoSVG}
-    alt=""
-  />
 </footer>
