@@ -1,9 +1,10 @@
-import type { CollectionEntry } from 'astro:content'
+import type { Type } from '@/payload-types'
 import classNames from 'classnames'
-import { useEffect, useMemo, useState } from 'react'
 
 export interface PortfolioGridProps {
-  categories: CollectionEntry<'categories'>[]
+  categories: Type[]
+  activeCategory?: Type['slug']
+  onChange: (categorySlug?: Type['slug']) => void
 }
 
 const categoryColors = [
@@ -17,33 +18,17 @@ const categoryColors = [
 
 const getCategoryColor = (category: string) => {
   const hash = category
-    ?.split('')
+    .split('')
     .reduce((acc, char) => acc + char.charCodeAt(0), 0)
 
   return categoryColors[hash % categoryColors.length]
 }
 
-export function PortfolioFilter({ categories }: PortfolioGridProps) {
-  const [categoriesState, setCategoriesState] = useState<string>()
-
-  useEffect(() => {
-    const elementsToFilter =
-      document.querySelectorAll<HTMLDivElement>('[data-category]') || []
-
-    elementsToFilter.forEach((element) => {
-      document.startViewTransition(() => {
-        if (categoriesState) {
-          element.classList.toggle(
-            'hidden',
-            !element.dataset.category?.includes(categoriesState),
-          )
-        } else {
-          element.classList.remove('hidden')
-        }
-      })
-    })
-  }, [categoriesState])
-
+export function PortfolioFilter({
+  categories,
+  activeCategory,
+  onChange,
+}: PortfolioGridProps) {
   return (
     <div className="flex w-full flex-col gap-8">
       <div className="no-scrollbar flex w-full flex-col gap-2 overflow-x-auto py-1">
@@ -52,29 +37,34 @@ export function PortfolioFilter({ categories }: PortfolioGridProps) {
         </h4>
         <ul className="flex w-full gap-2">
           <button
-            data-active={categoriesState === undefined ? 'true' : 'false'}
             className={classNames([
-              'bg-gray-400/20 hover:bg-gray-400/50 data-[active=true]:bg-white data-[active=true]:text-black',
+              activeCategory === undefined
+                ? 'bg-white text-black'
+                : 'bg-gray-400/20 hover:bg-gray-400/50',
+              'bg-gray-400/20 hover:bg-gray-400/50',
               'rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200',
             ])}
-            onClick={() => setCategoriesState(undefined)}
+            onClick={() => onChange(undefined)}
           >
             All
           </button>
-          {categories.map(({ slug, data: { title } = {} }) => (
+          {categories?.map(({ slug, title }) => (
             <li key={slug}>
               <button
-                data-active={categoriesState === slug ? 'true' : 'false'}
-                className={classNames([
-                  getCategoryColor(title),
-                  'rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200',
-                ])}
+                data-active={activeCategory === slug}
+                className={classNames(
+                  [
+                    getCategoryColor(title),
+                    'rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200',
+                  ],
+                  {},
+                )}
                 onClick={() => {
-                  if (categoriesState === slug) {
-                    setCategoriesState(undefined)
+                  if (activeCategory === slug) {
+                    onChange(undefined)
                     return
                   }
-                  setCategoriesState(slug)
+                  onChange(slug)
                 }}
               >
                 {title}

@@ -60,7 +60,7 @@ export default function VideoCard({
       onMouseOver={play}
       onMouseLeave={pause}
     >
-      <div className="spring-duration-700 spring-bounce-40 absolute bottom-3 left-2.5 isolate z-10 flex max-w-[calc(100%-30px)] flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6">
+      <div className="contain-inline-size w-full spring-duration-700 spring-bounce-40 absolute bottom-3 left-2.5 isolate z-10 flex max-w-[calc(100%-30px)] flex-col group-hover:bottom-2.5 group-hover:left-3.5 lg:bottom-9 lg:left-6 lg:group-hover:bottom-6 lg:group-hover:left-6">
         <span className="text-xxs line-clamp-1 inline-flex w-full items-center tracking-widest uppercase duration-200 group-hover:opacity-50 md:text-xs">
           {typeof video.type !== 'number' && 'title' in video.type && (
             <span className="mr-2 inline-flex gap-2 overflow-clip tracking-widest whitespace-nowrap uppercase">
@@ -79,7 +79,7 @@ export default function VideoCard({
             </span>
           </div>
         </span>
-        <span className="text-md pointer-events-none line-clamp-1 flex w-full items-center font-semibold text-ellipsis whitespace-nowrap text-shadow-lg sm:text-xl">
+        <span className="text-md pointer-events-none line-clamp-1 overflow-clip flex items-center font-semibold text-ellipsis whitespace-nowrap text-shadow-lg sm:text-xl w-full overflow-gradient-mask">
           {video.title}
         </span>
       </div>
