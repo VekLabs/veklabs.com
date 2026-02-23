@@ -1,13 +1,13 @@
 // @ts-check
-import react from '@astrojs/react'
-import sitemap from '@astrojs/sitemap'
+import cloudflare from "@astrojs/cloudflare";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 import {
   defineConfig,
   fontProviders,
   passthroughImageService,
-} from 'astro/config'
-import cloudflare from '@astrojs/cloudflare'
-import tailwindcss from '@tailwindcss/vite'
+} from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,39 +18,39 @@ export default defineConfig({
     fonts: [
       {
         provider: fontProviders.google(),
-        name: 'Montserrat',
-        cssVariable: '--font-montserrat',
-        display: 'swap',
-        subsets: ['latin'],
+        name: "Montserrat",
+        cssVariable: "--font-montserrat",
+        display: "swap",
+        subsets: ["latin"],
       },
     ],
   },
 
-  output: 'static',
+  output: "static",
   server: { host: true },
-  site: 'https://veklabs.com',
+  site: "https://veklabs.com",
 
   redirects: {
-    '/blog': '/reports/page/1',
-    '/reports': '/reports/page/1',
-    '/videos': '/portfolio',
+    "/blog": "/reports/page/1",
+    "/reports": "/reports/page/1",
+    "/videos": "/portfolio",
   },
 
   env: {
     schema: {
-      PAYLOAD_USERNAME: { type: 'string', access: 'public', context: 'server' },
-      PAYLOAD_PASSWORD: { type: 'string', access: 'public', context: 'server' },
-      PAYLOAD_URL: { type: 'string', access: 'public', context: 'server' },
-      SITE_BASE_URL: { type: 'string', access: 'public', context: 'server' },
+      PAYLOAD_USERNAME: { type: "string", access: "public", context: "server" },
+      PAYLOAD_PASSWORD: { type: "string", access: "public", context: "server" },
+      PAYLOAD_URL: { type: "string", access: "public", context: "server" },
+      SITE_BASE_URL: { type: "string", access: "public", context: "server" },
       TURNSTILE_SECRET_KEY: {
-        type: 'string',
-        access: 'public',
-        context: 'server',
+        type: "string",
+        access: "public",
+        context: "server",
       },
     },
   },
 
-  adapter: cloudflare({ imageService: 'cloudflare' }),
+  adapter: cloudflare({ imageService: "cloudflare" }),
   image: { service: passthroughImageService() },
 
   integrations: [react(), sitemap()],
@@ -58,4 +58,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-})
+});
