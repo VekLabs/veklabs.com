@@ -1,9 +1,16 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "main": "@astrojs/cloudflare/entrypoints/server",
+  "name": "veklabs-website",
   "compatibility_date": "2025-05-21",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
+  },
+  "vars": {
+    "PAYLOAD_USERNAME": "veklabs@hennessyevan.com",
+    "PAYLOAD_URL": "https://veklabs.com/api",
+    "SITE_BASE_URL": "https://veklabs.com",
   },
 }
