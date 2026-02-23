@@ -1,6 +1,6 @@
 import { getPayload } from '@/payload'
 import { defineAction } from 'astro:actions'
-import { env } from 'cloudflare:workers'
+const { env } = await import('cloudflare:workers')
 import z from 'zod'
 
 export const server = {
