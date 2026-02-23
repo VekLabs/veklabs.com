@@ -2,20 +2,24 @@
 import type { Type } from '@/payload-types'
 
 type Props = Type & {
+  category: Type
   class?: string
-}
+  style?: string
+} & astroHTML.JSX.HTMLAttributes
 
-const { id, ...props } = Astro.props
+const { class: className, style, category } = Astro.props
 ---
 
 <span
-  transition:name={`category-${id}`}
   class:list={[
-    'absolute left-4 top-4 z-10 rounded-sm bg-teal-400/20 px-2 py-1 text-xs font-medium uppercase text-foreground backdrop-blur-md backdrop-contrast-75 backdrop-saturate-0',
-    { 'bg-rose-400/20': props.slug === 'vekcast' },
-    { 'bg-blue-400/20': props.slug === 'reports' },
-    { 'bg-green-400/20': props.slug === 'film' },
-    { 'bg-yellow-400/20': props.slug === 'calgary' },
-    props.slug,
-  ]}>{props.title}</span
+    'text-foreground absolute top-4 left-4 z-10 rounded-sm bg-teal-400/20 px-2 py-1 text-xs font-medium uppercase backdrop-blur-md backdrop-contrast-75 backdrop-saturate-0',
+    { 'bg-rose-400/20': category.slug.toLowerCase() === 'vekcast' },
+    { 'bg-blue-400/20': category.slug.toLowerCase() === 'reports' },
+    { 'bg-green-400/20': category.slug.toLowerCase() === 'film' },
+    { 'bg-yellow-400/20': category.slug.toLowerCase() === 'calgary' },
+    className,
+  ]}
+  style={style}
 >
+  {category.title}
+</span>

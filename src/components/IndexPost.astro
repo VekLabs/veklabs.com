@@ -5,6 +5,8 @@ import FormattedDate from './FormattedDate.astro'
 import type { Populated } from '@/utils/typeChecks'
 import Image from './Image'
 import { cn } from '@/utils/cn'
+import getReadingTime from 'reading-time'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
 
 type Props = Populated<Report> & {
   featured?: boolean
@@ -36,11 +38,18 @@ const { featured = false, className, slug, body, ...data } = Astro.props
         },
       ]}
     >
-      {data.category && <CategoryBadge {...data.category} />}
+      {
+        data.category && (
+          <CategoryBadge
+            transition:name={`category-${slug}`}
+            category={data.category}
+          />
+        )
+      }
       {
         data.image && (
           <Image
-            transition:name={`image-${data.title}`}
+            transition:name={`image-${slug}`}
             media={data.image}
             alt=""
             className={cn([
@@ -70,12 +79,16 @@ const { featured = false, className, slug, body, ...data } = Astro.props
           </span>
         )
       }
-      <!-- <span
+      <span
         transition:name={`readtime-${slug}`}
         class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
       >
-        {remarkPluginFrontmatter.minutesRead}
-      </span> -->
+        {
+          Math.round(
+            getReadingTime(convertLexicalToPlaintext({ data: body })).minutes,
+          )
+        } min read
+      </span>
     </div>
   </article>
 </a>
