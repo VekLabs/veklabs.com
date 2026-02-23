@@ -8,10 +8,6 @@ import tailwindcss from '@tailwindcss/vite'
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
-  experimental: {
-    clientPrerender: true,
-    contentIntellisense: true,
-  },
 
   fonts: [
     {
