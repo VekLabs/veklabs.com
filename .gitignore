@@ -2,7 +2,6 @@
 dist/
 # generated types
 .astro/
-pb_public/
 
 # dependencies
 node_modules/
@@ -24,5 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Local Netlify folder
-.netlify
+.dev.vars
+(frontend)
+.wrangler

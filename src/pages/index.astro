@@ -1,22 +1,38 @@
 ---
-import { ClientsSection } from "../components/ClientsSection.tsx"
-import CrewSection from "../components/CrewSection.astro"
-import FeaturedServices from "../components/FeaturedServices.astro"
-import GuaranteeSection from "../components/GuaranteeSection.astro"
-import HeroVideo from "../components/HeroVideo.tsx"
-import Metrics from "../components/Metrics.tsx"
-import VideoGrid from "../components/VideoGrid.astro"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
+import type { Populated } from '@/utils/typeChecks'
+import HeroVideo from '../components/HeroVideo.tsx'
+import Layout from '../layouts/Layout.astro'
+import { getPayload } from '@/payload'
+import type { HomePage, Media, Video } from '@/payload-types'
+import VideoGrid from '@/components/VideoGrid.astro'
+import GuaranteeSection from '@/components/GuaranteeSection.astro'
+import Metrics from '@/components/Metrics.tsx'
+import FeaturedServices from '@/components/FeaturedServices.astro'
+import CrewSection from '@/components/CrewSection.astro'
+import { ClientsSection } from '@/components/ClientsSection'
+
+const payload = await getPayload()
+
+const homePageSettings = (await payload.findGlobal({
+  slug: 'home-page',
+})) as Populated<HomePage>
+
+const clientLogos = (await payload
+  .find({
+    collection: 'client-logos',
+    limit: 200,
+  })
+  .then((res) => res.docs)) as Populated<Media>[]
 ---
 
-<DefaultLayout>
+<Layout>
   <div class="my-6 flex flex-col gap-6">
-    <HeroVideo client:load />
-    <VideoGrid />
-    <GuaranteeSection />
-    <Metrics client:visible />
+    <HeroVideo client:load config={homePageSettings} />
+    <VideoGrid videos={homePageSettings.hero.videos as Populated<Video>[]} />
+    <GuaranteeSection home={homePageSettings} />
+    <Metrics home={homePageSettings} client:visible />
     <FeaturedServices />
-    <CrewSection />
-    <ClientsSection client:idle />
+    <CrewSection home={homePageSettings} />
+    <ClientsSection logos={clientLogos} home={homePageSettings} client:idle />
   </div>
-</DefaultLayout>
+</Layout>

@@ -1,63 +1,62 @@
-import cx from "classnames"
-import { Pause, Play, Volume2, VolumeX } from "lucide-react"
-import { useInView } from "motion/react"
-import { useEffect, useRef, useState } from "react"
-import config from "../content/home.json"
-import { useVideo } from "../hooks/useVideo"
-import heroVideoImage from "../images/tempHero.jpg?url"
+import { useMuxVideo } from '@/hooks/useVideo'
+import heroVideoImage from '@/images/tempHero.jpg'
+import type { HomePage } from '@/payload-types'
+import type { Populated } from '@/utils/typeChecks'
+import VideoPlayer, { type MuxPlayerRefAttributes } from '@mux/mux-player-react'
+import {
+  PauseIcon,
+  PlayIcon,
+  SpeakerSimpleHighIcon,
+  SpeakerSimpleSlashIcon,
+} from '@phosphor-icons/react/ssr'
+import cx from 'classnames'
+import { useEffect, useRef, useState } from 'react'
 
 const buttonClasses = `size-3 lg:size-4 rounded-lg lg:rounded-xl py-3 px-4 box-content duration-200 fill-white bg-background/65 hover:bg-background/95 backdrop-blur-xl backdrop-saturate-150 ring-1 ring-white/10`
 
-export default function HeroVideo() {
-  const video = useRef<HTMLVideoElement>(null)
+export default function HeroVideo({ config }: { config: Populated<HomePage> }) {
   const [isLowerPowerMode, setIsLowPowerMode] = useState(false)
-  const { play, pause, isPlaying, isMuted, mute, unmute } = useVideo(video)
-  const isInView = useInView(video, {
-    margin: "0px 0px 300px 0px",
-    amount: 0.5,
-  })
+  const video = useRef<MuxPlayerRefAttributes>(null)
+  const { play, pause, isPlaying, isMuted, mute, unmute } = useMuxVideo(video)
 
   useEffect(() => {
     video.current?.play().catch((error) => {
-      if (error.name === "NotAllowedError") {
+      if (error.name === 'NotAllowedError') {
         setIsLowPowerMode(true)
       }
     })
   }, [video])
 
-  useEffect(() => {
-    if (isInView) {
-      play()
-    } else {
-      pause()
-    }
-
-    return () => {
-      pause()
-    }
-  }, [isInView])
-
   return (
     <div className="w-container mx-auto">
-      <div className="rounded-3 relative max-h-[80vh] overflow-hidden shadow-lg duration-200 lg:shadow-2xl">
-        <video
-          ref={video}
+      <div className="rounded-3 relative max-h-[80vh] overflow-hidden shadow-lg duration-200 lg:shadow-2xl aspect-[2256/943.195] w-full">
+        <VideoPlayer
           className={cx(
-            "border-0.5 size-full max-h-[80vh] rounded-xl border-white/10 object-cover object-center",
+            '[--controls:none] [--media-object-fit:cover] overflow-hidden rounded-3 border-0.5 size-full max-h-[80vh] rounded-xl border-white/10 object-cover object-center aspect-[2256/943.195] w-full',
             {
               hidden: isLowerPowerMode,
             },
           )}
-          src={config.hero.videoUrl}
+          ref={video}
+          src={config.hero.videom3u8 || config.hero.videoURL}
+          // poster={
+          //   getImageProps({
+          //     alt: '',
+          //     src: config.hero.image?.url || '',
+          //     width: 1000,
+          //     height: 418,
+          //   }).props.src
+          // }
           autoPlay
           preload="auto"
           muted={isMuted}
+          paused={!isPlaying}
           loop
           playsInline
         />
         {isLowerPowerMode && (
           <img
-            src={heroVideoImage}
+            src={heroVideoImage.src}
             alt=""
             className="border-0.5 size-full max-h-[80vh] rounded-xl border-white/10 object-cover object-center"
           />
@@ -67,31 +66,31 @@ export default function HeroVideo() {
           <div className="absolute top-2 right-2 flex gap-3 lg:top-8 lg:right-8">
             {isMuted ? (
               <button onClick={unmute}>
-                <VolumeX className={buttonClasses} />
+                <SpeakerSimpleSlashIcon className={buttonClasses} />
                 <span className="sr-only">Turn volume on</span>
               </button>
             ) : (
               <button onClick={mute}>
-                <Volume2 className={buttonClasses} />
+                <SpeakerSimpleHighIcon className={buttonClasses} />
                 <span className="sr-only">Turn volume off</span>
               </button>
             )}
 
             {isPlaying ? (
               <button onClick={pause}>
-                <Pause className={buttonClasses} />
+                <PauseIcon className={buttonClasses} />
                 <span className="sr-only">Pause video</span>
               </button>
             ) : (
               <button onClick={play}>
-                <Play className={buttonClasses} />
+                <PlayIcon className={buttonClasses} />
                 <span className="sr-only">Play video</span>
               </button>
             )}
           </div>
         )}
         <h2 className="bg-background/65 static right-8 bottom-8 mt-4 rounded-lg px-6 py-4 text-sm leading-normal font-medium ring-1 shadow-lg ring-white/10 lg:absolute lg:mt-0 lg:max-w-3xl lg:rounded-2xl lg:border-none lg:px-8 lg:py-6 lg:text-lg lg:shadow-none lg:backdrop-blur-xl">
-          {config.HERO_EXCERPT}
+          {config.hero.HERO_EXCERPT}
         </h2>
       </div>
     </div>

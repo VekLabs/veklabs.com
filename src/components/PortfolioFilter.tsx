@@ -1,23 +1,23 @@
-import type { CollectionEntry } from "astro:content"
-import classNames from "classnames"
-import { useEffect, useMemo, useState } from "react"
+import type { CollectionEntry } from 'astro:content'
+import classNames from 'classnames'
+import { useEffect, useMemo, useState } from 'react'
 
 export interface PortfolioGridProps {
-  categories: CollectionEntry<"categories">[]
+  categories: CollectionEntry<'categories'>[]
 }
 
 const categoryColors = [
-  "ring-red-300 bg-red-400/20 hover:bg-red-400/50 data-[active=true]:bg-red-400/50 data-[active=true]:ring-2",
-  "ring-blue-300 bg-blue-400/20 hover:bg-blue-400/50 data-[active=true]:bg-blue-400/50 data-[active=true]:ring-2",
-  "ring-green-300 bg-green-400/20 hover:bg-green-400/50 data-[active=true]:bg-green-400/50 data-[active=true]:ring-2",
-  "ring-yellow-300 bg-yellow-400/20 hover:bg-yellow-400/50 data-[active=true]:bg-yellow-400/50 data-[active=true]:ring-2",
-  "ring-purple-300 bg-purple-400/20 hover:bg-purple-400/50 data-[active=true]:bg-purple-400/50 data-[active=true]:ring-2",
-  "ring-pink-300 bg-pink-400/20 hover:bg-pink-400/50 data-[active=true]:bg-pink-400/50 data-[active=true]:ring-2",
+  'ring-red-300 bg-red-400/20 hover:bg-red-400/50 data-[active=true]:bg-red-400/50 data-[active=true]:ring-2',
+  'ring-blue-300 bg-blue-400/20 hover:bg-blue-400/50 data-[active=true]:bg-blue-400/50 data-[active=true]:ring-2',
+  'ring-green-300 bg-green-400/20 hover:bg-green-400/50 data-[active=true]:bg-green-400/50 data-[active=true]:ring-2',
+  'ring-yellow-300 bg-yellow-400/20 hover:bg-yellow-400/50 data-[active=true]:bg-yellow-400/50 data-[active=true]:ring-2',
+  'ring-purple-300 bg-purple-400/20 hover:bg-purple-400/50 data-[active=true]:bg-purple-400/50 data-[active=true]:ring-2',
+  'ring-pink-300 bg-pink-400/20 hover:bg-pink-400/50 data-[active=true]:bg-pink-400/50 data-[active=true]:ring-2',
 ]
 
 const getCategoryColor = (category: string) => {
   const hash = category
-    .split("")
+    ?.split('')
     .reduce((acc, char) => acc + char.charCodeAt(0), 0)
 
   return categoryColors[hash % categoryColors.length]
@@ -28,17 +28,17 @@ export function PortfolioFilter({ categories }: PortfolioGridProps) {
 
   useEffect(() => {
     const elementsToFilter =
-      document.querySelectorAll<HTMLDivElement>("[data-category]") || []
+      document.querySelectorAll<HTMLDivElement>('[data-category]') || []
 
     elementsToFilter.forEach((element) => {
       document.startViewTransition(() => {
         if (categoriesState) {
           element.classList.toggle(
-            "hidden",
+            'hidden',
             !element.dataset.category?.includes(categoriesState),
           )
         } else {
-          element.classList.remove("hidden")
+          element.classList.remove('hidden')
         }
       })
     })
@@ -52,22 +52,22 @@ export function PortfolioFilter({ categories }: PortfolioGridProps) {
         </h4>
         <ul className="flex w-full gap-2">
           <button
-            data-active={categoriesState === undefined ? "true" : "false"}
+            data-active={categoriesState === undefined ? 'true' : 'false'}
             className={classNames([
-              "bg-gray-400/20 hover:bg-gray-400/50 data-[active=true]:bg-white data-[active=true]:text-black",
-              "rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200",
+              'bg-gray-400/20 hover:bg-gray-400/50 data-[active=true]:bg-white data-[active=true]:text-black',
+              'rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200',
             ])}
             onClick={() => setCategoriesState(undefined)}
           >
             All
           </button>
-          {categories.map(({ slug, data: { title } }) => (
+          {categories.map(({ slug, data: { title } = {} }) => (
             <li key={slug}>
               <button
-                data-active={categoriesState === slug ? "true" : "false"}
+                data-active={categoriesState === slug ? 'true' : 'false'}
                 className={classNames([
                   getCategoryColor(title),
-                  "rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200",
+                  'rounded-full px-3 py-1 text-xs font-medium whitespace-nowrap uppercase duration-200',
                 ])}
                 onClick={() => {
                   if (categoriesState === slug) {

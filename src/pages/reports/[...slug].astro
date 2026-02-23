@@ -1,37 +1,51 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content"
-import DefaultLayout from "../../layouts/DefaultLayout.astro"
-import FormattedDate from "../../components/FormattedDate.astro"
-import CategoryBadge from "../../components/CategoryBadge.astro"
-import { Image } from "astro:assets"
-import { getEntry } from "astro:content"
-import IndexPost from "../../components/IndexPost.astro"
+import Image from '@/components/Image'
+import { getPayload } from '@/payload'
+import type { Report } from '@/payload-types'
+import { cn } from '@/utils/cn'
+import type { Populated } from '@/utils/typeChecks'
+import { RichText } from '@payload-bites/astro-richtext-renderer'
+import CategoryBadge from '../../components/CategoryBadge.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import Layout from '../../layouts/Layout.astro'
 
 export async function getStaticPaths() {
-  const posts = await getCollection("reports")
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
+  const payload = await getPayload()
+  const reports =
+    ((
+      await payload.find({
+        collection: 'reports',
+        where: { slug: { exists: true } },
+        limit: 100,
+      })
+    ).docs as Populated<Report>[]) ?? []
+
+  return reports.map((report) => ({
+    params: { slug: report.slug },
+    props: report,
   }))
 }
-type Props = CollectionEntry<"reports">
 
 const post = Astro.props
-const {
-  data: { title, date, category, image },
-  slug,
-} = post
+const { body, title, createdAt: date, category, image, slug } = post
 
-const author = await getEntry(post.data.author)
+const author = post.author
 
-const allPosts = await getCollection("reports")
+const payload = await getPayload()
+const allPosts =
+  ((
+    await payload.find({
+      collection: 'reports',
+      where: { slug: { exists: true } },
+      limit: 100,
+    })
+  ).docs as Populated<Report>[]) ?? []
+
 const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
 const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
-
-const { Content, remarkPluginFrontmatter } = await post.render()
 ---
 
-<DefaultLayout image={`/open-graph/reports/${slug}`} title={title}>
+<Layout image={`/open-graph/reports/${slug}`} title={title}>
   <style is:global>
     #post .content {
       p {
@@ -39,7 +53,7 @@ const { Content, remarkPluginFrontmatter } = await post.render()
       }
 
       p::before {
-        content: "";
+        content: '';
         display: table;
         width: 160px;
       }
@@ -64,8 +78,8 @@ const { Content, remarkPluginFrontmatter } = await post.render()
         image && (
           <div
             class:list={[
-              "hero-image relative z-10 w-full overflow-hidden rounded-xl shadow-xl",
-              { "": !image },
+              'hero-image relative z-10 w-full overflow-hidden rounded-xl shadow-xl',
+              { '': !image },
             ]}
           >
             <a
@@ -79,26 +93,22 @@ const { Content, remarkPluginFrontmatter } = await post.render()
             </a>
             <Image
               transition:name={`image-${title}`}
-              src={image}
+              media={image}
               alt=""
-              class:list={[
-                "aspect-video w-full rounded-lg border border-gray-800 object-cover shadow-lg transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl",
-              ]}
+              className={cn([
+                'aspect-video w-full rounded-lg border border-gray-800 object-cover shadow-lg transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl',
+              ])}
             />
 
             {category && (
-              <CategoryBadge
-                class="right-8 left-[unset]"
-                id={slug}
-                category={category}
-              />
+              <CategoryBadge class="right-8 left-[unset]" {...category} />
             )}
 
             <span
               transition:name={`date-${slug}`}
               class="absolute right-4 bottom-8 z-20 font-mono text-xl font-bold text-orange-400 mix-blend-screen"
             >
-              <FormattedDate date={date} />
+              <FormattedDate date={new Date(date)} />
             </span>
           </div>
         )
@@ -112,21 +122,14 @@ const { Content, remarkPluginFrontmatter } = await post.render()
           {title}
         </h1>
 
-        <span
-          transition:name={`readtime-${slug}`}
-          class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
-        >
-          {remarkPluginFrontmatter.minutesRead}
-        </span>
-
         <div class="animate-fade-up content">
-          <Content />
+          <RichText data={body} />
         </div>
 
         {
           author && (
             <div class="">
-              <span>{author.data.name}</span>
+              <span>{author.name}</span>
             </div>
           )
         }
@@ -147,21 +150,21 @@ const { Content, remarkPluginFrontmatter } = await post.render()
             <div class="flex flex-col items-end justify-start gap-1 rounded-lg px-5 py-3 duration-300 group-hover:bg-gray-800">
               <span class="text-xs tracking-widest uppercase">Next</span>
               <span transition:name={`title-${nextPost.slug}`}>
-                {nextPost.data.title}
+                {nextPost.title}
               </span>
             </div>
 
             <Image
-              transition:name={`image-${nextPost.data.title}`}
-              src={nextPost.data.image}
+              transition:name={`image-${nextPost.title}`}
+              media={nextPost.image}
               width={100}
               height={100}
               alt=""
-              class="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
+              className="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
             />
           </a>
         </div>
       )
     }
   </div>
-</DefaultLayout>
+</Layout>

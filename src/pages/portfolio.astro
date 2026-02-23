@@ -1,38 +1,37 @@
 ---
-import { getCollection } from "astro:content"
-import VideoCard from "../components/VideoCard.astro"
-import VideoListJSONLD from "../components/VideoListJSONLD.astro"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
-import { PortfolioFilter } from "../components/PortfolioFilter.tsx"
-import { sortBy } from "lodash-es"
-import PageTitle from "../components/PageTitle.astro"
+import { getPayload } from '@/payload'
+import type { Video } from '@/payload-types'
+import type { Populated } from '@/utils/typeChecks'
+import { uniqBy } from 'lodash-es'
+import PageTitle from '../components/PageTitle.astro'
+import { FilteredVideoGrid } from '../components/FilteredVideoGrid.tsx'
+import DefaultLayout from '../layouts/Layout.astro'
 
-const videos = await getCollection("videos")
-const categories = await getCollection("categories", ({ slug }) =>
-  videos.some((video) => video.data.type === slug),
+const payload = await getPayload()
+
+const videos =
+  ((
+    await payload.find({
+      collection: 'videos',
+      limit: 100,
+      sort: '-publishDate',
+      where: { slug: { exists: true } },
+    })
+  ).docs as Populated<Video>[]) ?? []
+
+const categories = uniqBy(
+  videos.filter((video) => !!video.type).map((video) => video.type),
+  'id',
 )
 ---
 
 <DefaultLayout title="Portfolio">
-  <VideoListJSONLD videos={videos} />
   <section class="w-container mx-auto py-14">
     <div class="flex items-center gap-6 pb-4">
       <PageTitle>Portfolio</PageTitle>
     </div>
-
-    <div class="flex w-full flex-col gap-8">
-      <PortfolioFilter client:load categories={categories} />
-
-      <div
-        class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5 xl:grid-cols-4"
-        data-filter-content
-      >
-        {
-          sortBy(videos, "data.publishDate")
-            .toReversed()
-            .map((video) => <VideoCard {...video} />)
-        }
-      </div>
+    <div class="min-h-140">
+      <FilteredVideoGrid categories={categories} videos={videos} client:idle />
     </div>
   </section>
 </DefaultLayout>

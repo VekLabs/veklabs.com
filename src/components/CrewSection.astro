@@ -1,22 +1,35 @@
 ---
-import { getCollection } from "astro:content"
+import { sortBy } from 'lodash-es'
+import CrewComponent from './CrewComponent.tsx'
+import { getPayload } from '@/payload'
+import type { Populated } from '@/utils/typeChecks'
+import type { HomePage, Team } from '@/payload-types'
 
-import config from "../content/home.json"
-import { sortBy } from "lodash-es"
-import CrewComponent from "./CrewComponent.tsx"
+const payload = await getPayload()
 
-const teamMembers = await getCollection("team")
+const teamMembers =
+  (await payload
+    .find({
+      collection: 'team',
+      sort: ['order'],
+      limit: 100,
+    })
+    .then((res) => res.docs as Populated<Team>[])) ?? []
+
+type Props = { home: Populated<HomePage> }
+const { home } = Astro.props
 ---
 
 <section class="w-container mx-auto mt-16 py-16 md:mt-28">
-  <h1 class="text-center text-4xl font-semibold">{config.TEAM_TITLE}</h1>
+  <h2 class="text-center text-4xl font-extrabold">{home.TEAM_TITLE}</h2>
   <div
-    class="no-scrollbar mx-auto flex w-full max-w-[800px] flex-wrap items-center justify-center gap-12 py-6"
+    class="no-scrollbar mx-auto flex w-full max-w-200 flex-wrap items-center justify-center gap-12 py-6"
   >
     {
-      sortBy(teamMembers, "order").map((member) => (
-        <CrewComponent client:visible {...member} />
+      sortBy(teamMembers, 'order')?.map((member) => (
+        <CrewComponent client:idle {...member} />
       ))
     }
   </div>
 </section>
+)

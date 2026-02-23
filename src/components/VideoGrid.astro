@@ -1,25 +1,27 @@
 ---
-import { getCollection } from "astro:content"
-import { ChevronRight } from "lucide-astro"
-import home from "../content/home.json"
-import VideoCard from "./VideoCard.astro"
+import type { Populated } from '@/utils/typeChecks'
+import type { Video } from '@/payload-types'
+import VideoCard from './VideoCard'
+import { PhCaretRight } from 'phosphor-icons-astro'
 
-const videos = await getCollection("videos", ({ id }) =>
-  home.videos.includes(id.replace(".md", "")),
-)
+type Props = {
+  videos: Populated<Video>[]
+}
+
+const { videos } = Astro.props
 ---
 
 <section class="w-container mx-auto">
   <div class="flex items-center gap-6 py-4">
-    <h1 class="text-3xl">Portfolio</h1>
+    <h1 class="text-3xl font-extrabold">Portfolio</h1>
     <a class="link mt-1 flex items-center gap-1.5 text-lg" href="/portfolio">
       See All
-      <ChevronRight class="size-5" />
+      <PhCaretRight class="size-5" />
     </a>
   </div>
   <div
     class="xs:grid-cols-[repeat(auto-fit,_minmax(400px,1fr))] grid grid-cols-2 gap-2 sm:gap-5 lg:grid-cols-3"
   >
-    {videos.map((video) => <VideoCard {...video} />)}
+    {videos?.map((video) => <VideoCard video={video} client:load />)}
   </div>
 </section>

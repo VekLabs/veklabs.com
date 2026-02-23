@@ -1,0 +1,37 @@
+---
+import '../styles/global.css'
+
+import Header from '@/components/Header'
+import BaseHead from '../components/BaseHead.astro'
+import Font from 'astro/components/Font.astro'
+import Footer from '@/components/Footer.astro'
+
+type Props = Parameters<typeof BaseHead>['0'] & {
+  title?: string
+  description?: string
+}
+
+const { title, description, ...headProps } = Astro.props
+---
+
+<html
+  lang="en"
+  class:list={[
+    'font-[--font-montserrat]',
+    'bg-background text-foreground no-scrollbar min-h-full font-sans font-normal',
+  ]}
+>
+  <head>
+    <BaseHead title={title} description={description} {...headProps} />
+    <Font cssVariable="--font-montserrat" preload />
+    <slot name="head" />
+  </head>
+
+  <body class="no-scrollbar size-full">
+    <Header currentPath={Astro.url.pathname} client:load />
+    <main class="size-full">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

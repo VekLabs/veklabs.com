@@ -1,33 +1,43 @@
 ---
-import { Image } from "astro:assets"
-import type { CollectionEntry } from "astro:content"
-import { getCollection } from "astro:content"
-import DefaultLayout from "../../layouts/DefaultLayout.astro"
+import Layout from '../../layouts/Layout.astro'
+import type { Populated } from '@/utils/typeChecks'
+import type { Service } from '@/payload-types'
+import { getPayload } from '@/payload'
+import Image from '@/components/Image'
+import { RichText } from '@payload-bites/astro-richtext-renderer'
 
 export async function getStaticPaths() {
-  const services = await getCollection("services")
+  const payload = await getPayload()
+  const services = (
+    await payload.find({
+      collection: 'services',
+      limit: 100,
+    })
+  ).docs as Populated<Service>[]
+
   return services.map((service) => ({
     params: { slug: service.slug },
-    props: service,
+    props: { service, services },
   }))
 }
 
-type Props = CollectionEntry<"service">
+type Props = {
+  service: Populated<Service>
+  services: Populated<Service>[]
+}
 
-const service = Astro.props
+const { service, services } = Astro.props
 
-const services = await getCollection("services")
 const indexOfCurrentService = services.findIndex((s) => s.slug === service.slug)
 const nextService = services[indexOfCurrentService + 1] || services[0]
 
-const { image, page_title, title } = service.data
-const { Content } = await service.render()
+const { image, page_title, title } = service
 ---
 
-<DefaultLayout
+<Layout
   title={page_title || title}
   description={service.summary}
-  image={service.data.image.src}
+  image={service.image.url}
 >
   <main
     class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-[1200px] md:flex-row lg:p-10"
@@ -38,12 +48,11 @@ const { Content } = await service.render()
       {
         image && (
           <Image
-            transition:name={`service-image-${service.slug}`}
-            src={image}
+            media={image}
             width={400}
             height={400}
             alt=""
-            class="spring-duration-150 aspect-video w-full max-w-[400px] rounded-xl object-cover ring-1 shadow-xl ring-white/10 md:aspect-square"
+            className="spring-duration-150 aspect-video w-full max-w-[400px] rounded-xl object-cover ring-1 shadow-xl ring-white/10 md:aspect-square"
           />
         )
       }
@@ -62,7 +71,7 @@ const { Content } = await service.render()
         style="container-type: inline-size;"
         transition:name={`service-description-${service.slug}`}
       >
-        <Content />
+        <RichText data={service.body} />
       </article>
       {
         nextService && (
@@ -73,21 +82,20 @@ const { Content } = await service.render()
             <div class="flex flex-col items-end justify-start gap-1 rounded-lg px-5 py-3 duration-300 group-hover:bg-gray-800">
               <span class="text-xs tracking-widest uppercase">Next</span>
               <span transition:name={`service-title-${nextService.slug}`}>
-                {nextService.data.title}
+                {nextService.title}
               </span>
             </div>
 
             <Image
-              transition:name={`service-image-${nextService.slug}`}
-              src={nextService.data.image}
+              media={nextService.image}
               width={100}
               height={100}
               alt=""
-              class="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
+              className="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
             />
           </a>
         )
       }
     </div>
   </main>
-</DefaultLayout>
+</Layout>

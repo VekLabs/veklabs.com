@@ -1,15 +1,46 @@
-import { Menu } from "lucide-react"
-import { baseURL, menu, title } from "../content/config.json"
-import { HeaderProvider } from "../context/headerContext"
-import logoFullSVG from "../images/logo-full.svg?url"
-import HeaderLink from "./HeaderLink"
-import { useEffect, useState } from "react"
-import { animate, AnimatePresence, easeInOut, motion } from "motion/react"
-import { FloatingPortal } from "@floating-ui/react"
+import { FloatingPortal } from '@floating-ui/react'
+import { AnimatePresence, easeInOut, motion } from 'motion/react'
+import { useState } from 'react'
+import { HeaderProvider } from '../context/headerContext'
+import logoFullSVG from '../images/logo-full.svg?url'
+import HeaderLink from './HeaderLink'
+import { ListIcon } from '@phosphor-icons/react/ssr'
 
 export interface HeaderProps {
   currentPath: string
 }
+
+const menu = {
+  main: [
+    {
+      identifier: 'features',
+      name: 'Features',
+      url: '/features/',
+    },
+    {
+      identifier: 'portfolio',
+      name: 'Portfolio',
+      url: '/portfolio/',
+    },
+    {
+      identifier: 'services',
+      name: 'Services',
+      url: '/services/',
+    },
+    {
+      identifier: 'clients',
+      name: 'Clients',
+      url: '/clients/',
+    },
+    {
+      identifier: 'reports',
+      name: 'Reports',
+      url: '/reports',
+    },
+  ],
+} as const
+
+const title = 'Vek Labs'
 
 export default function Header({ currentPath }: HeaderProps) {
   return (
@@ -28,7 +59,6 @@ export default function Header({ currentPath }: HeaderProps) {
               />
             </a>
             <div className="absolute left-1/2 flex -translate-x-1/2 flex-nowrap gap-4 overflow-auto">
-              {currentPath !== "/" && <HeaderLink href="/">Home</HeaderLink>}
               {menu.main.map((menuItem) => (
                 <HeaderLink key={menuItem.url} href={menuItem.url}>
                   {menuItem.name}
@@ -50,7 +80,7 @@ function MobileHeader({ currentPath }: HeaderProps) {
 
   return (
     <div className="flex items-center justify-between md:hidden">
-      <a href={baseURL}>
+      <a href={'/'}>
         <img
           className="w-full max-w-24 justify-self-start"
           src={logoFullSVG}
@@ -65,18 +95,18 @@ function MobileHeader({ currentPath }: HeaderProps) {
               animate="show"
               exit="hide"
               variants={{
-                show: { opacity: 1, backdropFilter: "blur(16px)" },
-                hide: { opacity: 0, backdropFilter: "blur(0px)" },
+                show: { opacity: 1, backdropFilter: 'blur(16px)' },
+                hide: { opacity: 0, backdropFilter: 'blur(0px)' },
               }}
               transition={{
                 duration: 0.2,
                 staggerChildren: 0.05,
-                type: "tween",
+                type: 'tween',
                 ease: easeInOut,
               }}
               className="bg-background/90 fixed top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg"
             >
-              {currentPath !== "/" && <HeaderLink href="/">Home</HeaderLink>}
+              {currentPath !== '/' && <HeaderLink href="/">Home</HeaderLink>}
               {menu.main.map((menuItem) => (
                 <HeaderLink key={menuItem.url} href={menuItem.url}>
                   {menuItem.name}
@@ -89,7 +119,7 @@ function MobileHeader({ currentPath }: HeaderProps) {
       </FloatingPortal>
 
       <button onClick={() => setMenuOpen(!menuOpen)}>
-        <Menu size="24" />
+        <ListIcon size="24" />
       </button>
     </div>
   )

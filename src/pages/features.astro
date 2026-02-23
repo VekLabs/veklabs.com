@@ -1,32 +1,40 @@
 ---
-import { getCollection } from "astro:content"
-import { kebabCase, sortBy } from "lodash-es"
-import featuresConfig from "../content/features.json"
-import DefaultLayout from "../layouts/DefaultLayout.astro"
-import VideoCard from "../components/VideoCard.astro"
-import PageTitle from "../components/PageTitle.astro"
+import { getPayload } from '@/payload'
+import Layout from '@/layouts/Layout.astro'
+import PageTitle from '@/components/PageTitle.astro'
+import type { Populated } from '@/utils/typeChecks'
+import type { FeaturesPage, Video } from '@/payload-types'
+import VideoCard from '@/components/VideoCard'
 
-const features = await getCollection("videos", ({ id }) =>
-  featuresConfig.videos.includes(kebabCase(id.replace(".md", ""))),
-)
+const payload = await getPayload()
+
+const featuredPageSettings = (await payload.findGlobal({
+  slug: 'features-page',
+})) as Populated<FeaturesPage>
 ---
 
-<DefaultLayout>
+<Layout
+  title={featuredPageSettings.title}
+  description={featuredPageSettings.description}
+>
   <section class="w-container mx-auto py-8 md:py-14">
     <div class="mx-auto flex max-w-7xl flex-col gap-2 py-4 md:py-16">
-      <PageTitle>{featuresConfig.title}</PageTitle>
-      <p class="">{featuresConfig.description}</p>
+      <PageTitle>{featuredPageSettings.title}</PageTitle>
+      <p>{featuredPageSettings.description}</p>
     </div>
     <div
       class="mx-auto grid max-w-7xl snap-y snap-mandatory grid-flow-row grid-cols-2 gap-6 overflow-y-auto py-10 md:gap-14"
     >
       {
-        sortBy(features, "data.publishDate")
-          .toReversed()
-          .map(async (feature) => (
-            <VideoCard showYear className="aspect-video w-full " {...feature} />
-          ))
+        featuredPageSettings.videos?.map(async (video) => (
+          <VideoCard
+            client:idle
+            showYear
+            className="aspect-video w-full"
+            video={video as Populated<Video>}
+          />
+        ))
       }
     </div>
   </section>
-</DefaultLayout>
+</Layout>

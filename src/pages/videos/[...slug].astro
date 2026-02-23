@@ -1,29 +1,46 @@
 ---
-// import { BM25Utils } from "astro-relatinator"
-import { Image } from "astro:assets"
-import type { CollectionEntry } from "astro:content"
-import { getCollection, getEntry } from "astro:content"
-import VideoJSONLD from "../../components/VideoJSONLD.astro"
-import DefaultLayout from "../../layouts/DefaultLayout.astro"
-import SmallVideoCard from "../../components/SmallVideoCard.astro"
-import PageTitle from "../../components/PageTitle.astro"
+import Image from '@/components/Image.tsx'
+import Layout from '@/layouts/Layout.astro'
+import type { Video } from '@/payload-types'
+import type { Populated } from '@/utils/typeChecks'
+import PageTitle from '../../components/PageTitle.astro'
+import SmallVideoCard from '../../components/SmallVideoCard.astro'
+import { getPayload } from '@/payload'
+import { RichText } from '@payload-bites/astro-richtext-renderer'
 
 export async function getStaticPaths() {
-  const posts = await getCollection("videos")
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
+  const payload = await getPayload()
+  const videos = (
+    await payload.find({
+      collection: 'videos',
+      limit: 100,
+      where: { slug: { exists: true } },
+    })
+  ).docs as Populated<Video>[]
+
+  return videos.map((video) => ({
+    params: { slug: video.slug },
+    props: video,
   }))
 }
 
-type Props = CollectionEntry<"videos">
-const { slug, data, render } = Astro.props
+const payload = await getPayload()
 
-const category = await getEntry("categories", data.type)
+const { slug, type, videoURL, metadata, body, awards, image, title } =
+  Astro.props
 
-const allVideos = await getCollection("videos")
+const category = type
+
+const allVideos = (
+  await payload.find({
+    collection: 'videos',
+    limit: 100,
+    where: { slug: { exists: true } },
+  })
+).docs as Populated<Video>[]
+
 const indexOfCurrentVideo = allVideos.findIndex(
-  (video) => video.data.title === data.title,
+  (video) => video.title === title,
 )
 const nextVideos = allVideos.slice(
   indexOfCurrentVideo + 1,
@@ -34,16 +51,9 @@ if (nextVideos.length < 3) {
   const remainingVideos = allVideos.slice(0, 3 - nextVideos.length)
   nextVideos.push(...remainingVideos)
 }
-
-const { Content } = await render()
 ---
 
-<DefaultLayout
-  video={data.videoURL}
-  image={`/open-graph/videos/${slug}`}
-  title={data.title}
->
-  <VideoJSONLD {...Astro.props} />
+<Layout video={videoURL} image={`/open-graph/videos/${slug}`} title={title}>
   <div
     class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
   >
@@ -66,8 +76,8 @@ const { Content } = await render()
           autoplay
           controls
           class="absolute aspect-video rounded-xl object-cover ring-2 shadow-lg shadow-neutral-950 ring-white/5 ring-inset md:w-[calc(100%-5rem)]"
-          src={data.videoURL}
-          poster={data.image.src}
+          src={videoURL}
+          poster={image.url}
           preload="none"
           playsinline></video>
 
@@ -79,7 +89,7 @@ const { Content } = await render()
             class="pointer-events-none z-50 order-2 flex h-5 items-center text-2xl font-semibold shadow-neutral-950 md:order-1"
             transition:name={`video-title-${slug}`}
           >
-            {data.title}
+            {title}
           </PageTitle>
         </div>
         <div
@@ -88,14 +98,12 @@ const { Content } = await render()
           <div class="flex flex-col justify-between gap-5 md:flex-row">
             <div class="flex max-w-prose flex-col gap-3">
               {
-                Content && (
+                body && (
                   <>
                     <span class="text-xs font-bold tracking-widest uppercase">
                       Description
                     </span>
-                    <p>
-                      <Content />
-                    </p>
+                    <RichText data={body} />
                   </>
                 )
               }
@@ -118,19 +126,19 @@ const { Content } = await render()
 
             <div class="flex flex-col flex-wrap gap-4">
               {
-                category?.data.title || data.meta ? (
+                category?.title || metadata ? (
                   <div class="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
-                    {category?.data.title && (
+                    {category?.title && (
                       <div class="flex flex-col gap-3">
                         <span class="text-xs font-bold tracking-widest uppercase">
                           Category
                         </span>
-                        <span>{category?.data.title}</span>
+                        <span>{category?.title}</span>
                       </div>
                     )}
 
-                    {data.meta &&
-                      data.meta.map(({ label, value }) => (
+                    {metadata &&
+                      metadata.map(({ label, value }) => (
                         <div class="flex flex-col">
                           <span class="text-xxs text-accent-300 tracking-widest uppercase">
                             {label}
@@ -139,13 +147,13 @@ const { Content } = await render()
                         </div>
                       ))}
 
-                    {(data.awards?.length ?? 0) > 0 && (
+                    {(awards?.length ?? 0) > 0 && (
                       <div class="flex flex-wrap">
-                        {data.awards!.map((awardImage) => (
+                        {awards!.map((awardImage) => (
                           <Image
-                            src={awardImage}
+                            media={awardImage}
                             alt=""
-                            class="spring-duration-200 spring-bounce-20 w-20 rounded-2xl hover:z-10 hover:scale-200 hover:bg-black"
+                            className="spring-duration-200 spring-bounce-20 w-20 rounded-2xl hover:z-10 hover:scale-200 hover:bg-black"
                           />
                         ))}
                       </div>
@@ -160,4 +168,4 @@ const { Content } = await render()
       <div></div>
     </div>
   </div>
-</DefaultLayout>
+</Layout>
