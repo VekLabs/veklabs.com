@@ -1,7 +1,11 @@
 // @ts-check
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
-import { defineConfig, fontProviders } from 'astro/config'
+import {
+  defineConfig,
+  fontProviders,
+  passthroughImageService,
+} from 'astro/config'
 import cloudflare from '@astrojs/cloudflare'
 import tailwindcss from '@tailwindcss/vite'
 
@@ -46,7 +50,8 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: 'cloudflare' }),
+  image: { service: passthroughImageService() },
 
   integrations: [react(), sitemap()],
 
