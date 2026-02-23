@@ -6,12 +6,9 @@ import { cn } from '@/utils/cn'
 import type { Populated } from '@/utils/typeChecks'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import { Schema } from 'astro-seo-schema'
-import CategoryBadge from '../../components/CategoryBadge.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
 import Layout from '../../layouts/Layout.astro'
-import { PhArrowLeft } from 'phosphor-icons-astro'
-import getReadingTime from 'reading-time'
-import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import AuthorHover from '@/components/AuthorHover.astro'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -26,17 +23,13 @@ export async function getStaticPaths() {
 
   return reports.map((report) => ({
     params: { slug: report.slug },
-    props: { report, allReports: reports },
+    props: { report },
   }))
 }
 
 const post = Astro.props.report
-const allPosts = Astro.props.allReports
 
 const { body, title, createdAt: date, category, image, slug, author } = post
-
-const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
-const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 ---
 
 <Layout title={title} meta={post.meta} image={`/open-graph/reports/${slug}`}>
@@ -88,97 +81,58 @@ const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
     }}
   />
 
-  <div
-    id="post"
-    class="mx-auto w-[calc(100%-24px)] overflow-hidden pt-6 pb-20 lg:max-w-245"
-  >
-    <article class="flex flex-col gap-8">
+  <div id="post" class="mx-auto w-[calc(100%-24px)] pt-10 pb-20 lg:max-w-245">
+    <article class="flex flex-col gap-10 pt-12">
+      <div class="mx-auto flex gap-2 text-sm text-gray-400">
+        <a href="/reports" class="hover:text-white"> Reports </a>
+        <span>/</span>
+        <span>{category.title}</span>
+      </div>
+
+      <h1
+        class="m-0 text-center text-2xl font-semibold md:text-4xl"
+        transition:name={`report-${slug}-title`}
+      >
+        {title}
+      </h1>
+
+      <div></div>
+
       {
         image && (
           <div
             class={cn([
               'hero-image relative z-10 w-full overflow-hidden rounded-xl shadow-xl',
             ])}
+            transition:name={`image-${slug}`}
           >
-            <a
-              class="text-foreground hover:text-foreground absolute top-4 left-4 z-20 flex translate-x-0 items-center gap-1 rounded-full bg-black/50 px-4 py-2 text-sm opacity-100 backdrop-blur-md transition-all delay-300 duration-300 hover:bg-black hover:ring-1 hover:ring-white/20 starting:translate-x-2 starting:opacity-0"
-              href="javascript:history.back()"
-            >
-              <PhArrowLeft size={16} />
-              All Posts
-            </a>
             <Image
               media={image}
-              transition:name={`image-${slug}`}
-              className="aspect-video w-full rounded-lg border border-gray-800 object-cover shadow-lg transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl"
+              className="aspect-5/2 w-full rounded-xl border border-white/10 object-cover"
             />
-
-            {category && (
-              <CategoryBadge
-                transition:name={`category-${slug}`}
-                class="right-8 left-[unset]"
-                category={category}
-              />
-            )}
-
-            <span
-              class="absolute right-4 bottom-8 z-20 font-mono text-xl font-bold text-orange-400 mix-blend-screen"
-              transition:name={`date-${slug}`}
-            >
-              <FormattedDate date={new Date(date)} />
-            </span>
           </div>
         )
       }
 
-      <section class="flex max-w-[80ch] flex-col gap-5 md:px-12">
-        <h1
-          class="m-0 text-3xl font-semibold md:text-5xl"
-          transition:name={`report-${slug}-title`}
-        >
-          {title}
-        </h1>
+      <div class="mx-auto flex gap-2 text-sm text-gray-400">
+        <AuthorHover author={author} id={author.slug} />
+        <span>•</span>
+        <FormattedDate date={new Date(date)} />
+      </div>
 
-        <span
-          transition:name={`readtime-${slug}`}
-          class="time-to-read text-accent-500 mt-3 block text-sm whitespace-nowrap"
-        >
-          {
-            Math.round(
-              getReadingTime(convertLexicalToPlaintext({ data: body })).minutes,
-            )
-          } min read
-        </span>
-
+      <section class="mx-auto flex max-w-[80ch] flex-col gap-5 md:px-12">
         <div
-          class="animate-fade-up content"
+          class="content mx-auto max-w-156"
           set:html={convertLexicalToHTML({ data: body })}
         />
 
-        {
-          author && (
-            <div class="mt-12 rounded-2xl bg-white/10 p-8 px-12">
-              <div class="flex flex-col items-start gap-6 md:flex-row">
-                <Image
-                  media={author.image}
-                  width={160}
-                  className="w-40 rounded-full"
-                />
-                <div class="flex flex-col">
-                  <span class="font-semibold">{author.name}</span>
-                  <span class="text-accent-300 text-xs uppercase">
-                    {author.title}
-                  </span>
-                  <div class="h-3" />
-                  <p
-                    set:html={convertLexicalToHTML({ data: author.bio })}
-                    class="text-sm text-gray-400"
-                  />
-                </div>
-              </div>
-            </div>
-          )
-        }
+        <hr class="my-8 border-gray-700" />
+
+        <div class="flex gap-2 text-sm text-gray-400">
+          <AuthorHover author={author} id={author.slug + 'bottom'} />
+          <span>•</span>
+          <FormattedDate date={new Date(date)} />
+        </div>
       </section>
     </article>
   </div>

@@ -1,7 +1,7 @@
 ---
-import type { HTMLAttributes } from "astro/types"
+import type { HTMLAttributes } from 'astro/types'
 
-type Props = HTMLAttributes<"h1">
+type Props = HTMLAttributes<'h1'>
 
 const props = Astro.props
 ---
@@ -9,7 +9,7 @@ const props = Astro.props
 <h1
   {...props}
   class:list={[
-    "m-0 text-[clamp(2rem,5vw,2.65rem)] font-medium tracking-wider uppercase",
+    'm-0 text-[clamp(2rem,5vw,2.65rem)] font-bold tracking-wide',
     props.class,
   ]}
 >

@@ -1,7 +1,7 @@
-import type { Config } from "tailwindcss"
-import plugin from "tailwindcss/plugin"
-import scrollDrivenAnimations from "@adam.plesnik/tailwindcss-scroll-driven-animations"
-import spring from "tailwindcss-spring"
+import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+import scrollDrivenAnimations from "@adam.plesnik/tailwindcss-scroll-driven-animations";
+import spring from "tailwindcss-spring";
 
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx,vue}"],
@@ -96,7 +96,7 @@ export default {
     spring,
     scrollDrivenAnimations,
     plugin(({ addVariant }) => {
-      addVariant("starting", "@starting-style")
+      addVariant("starting", "@starting-style");
     }),
     plugin(({ matchUtilities, theme }) => {
       matchUtilities(
@@ -106,7 +106,7 @@ export default {
           }),
         },
         { values: theme("textShadow") },
-      )
+      );
       matchUtilities(
         {
           "parallax-start": (value) => ({
@@ -114,7 +114,7 @@ export default {
           }),
         },
         { values: theme("translate"), supportsNegativeValues: true },
-      )
+      );
       matchUtilities(
         {
           "parallax-end": (value) => ({
@@ -122,11 +122,11 @@ export default {
           }),
         },
         { values: theme("translate"), supportsNegativeValues: true },
-      )
+      );
     }),
     plugin(({ addUtilities, addVariant }) => {
-      addVariant("pointer-coarse", "@media (pointer: coarse)")
-      addVariant("pointer-fine", "@media (pointer: fine)")
+      addVariant("pointer-coarse", "@media (pointer: coarse)");
+      addVariant("pointer-fine", "@media (pointer: fine)");
       addUtilities({
         ".timeline-root": { "animation-timeline": "scroll(root);" },
         ".parallax": { "animation-name": "parallax;" },
@@ -136,7 +136,7 @@ export default {
           "scrollbar-width": "none",
           "-ms-overflow-style": "none",
         },
-      })
+      });
     }),
   ],
-} satisfies Config
+} satisfies Config;

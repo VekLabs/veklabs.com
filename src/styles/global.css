@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'tailwindcss/theme' layer(theme);
-@import 'tailwindcss/preflight' layer(base);
+@import "tailwindcss";
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/preflight" layer(base);
 
 @config '../../tailwind.config.ts';
 
@@ -14,25 +14,47 @@ body {
 }
 
 .content {
+  word-break: break-word;
+
   h1,
   .h1 {
     margin: 1rem 0;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 600;
   }
 
   h2,
   .h2 {
     margin: 1rem 0;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 600;
   }
 
   h3,
   .h3 {
     margin: 1rem 0;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 500;
+  }
+
+  p {
+    line-height: 1.8;
+    @apply text-gray-300;
+  }
+
+  p::before {
+    content: "";
+    display: table;
+    width: 160px;
+  }
+
+  a,
+  a:hover {
+    text-decoration: underline;
+  }
+
+  iframe {
+    padding-block: 16px;
   }
 }
 
@@ -103,7 +125,7 @@ table {
   }
 
   th:first-child::after {
-    content: '';
+    content: "";
     position: absolute;
     inset-block-start: 0;
     inset-inline-end: 0;

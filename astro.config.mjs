@@ -33,8 +33,8 @@ export default defineConfig({
   site: "https://veklabs.com",
 
   redirects: {
-    "/blog": "/reports/page/1",
-    "/reports": "/reports/page/1",
+    "/blog": "/reports",
+    "/reports/page/1": "/reports",
     "/videos": "/portfolio",
   },
 

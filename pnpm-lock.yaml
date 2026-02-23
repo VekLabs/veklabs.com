@@ -102,6 +102,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.2.0
         version: 4.2.0(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.77.4)(tsx@4.21.0)(yaml@2.8.2))
+      '@toolwind/anchors':
+        specifier: ^1.0.10
+        version: 1.0.10(tailwindcss@4.2.0)
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -1852,6 +1855,11 @@ packages:
 
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
+
+  '@toolwind/anchors@1.0.10':
+    resolution: {integrity: sha512-F3J/lxGGPUy+GIpT49NmYMF1X7l0d7UzdDASni29il2ro5sT4cYfPBFHBAfOM0lpgKOr/HnqINlomngt8BcvnA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >=4.0.0'
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -5964,6 +5972,10 @@ snapshots:
       vite: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.77.4)(tsx@4.21.0)(yaml@2.8.2)
 
   '@tokenizer/token@0.3.0': {}
+
+  '@toolwind/anchors@1.0.10(tailwindcss@4.2.0)':
+    dependencies:
+      tailwindcss: 4.2.0
 
   '@types/acorn@4.0.6':
     dependencies:
