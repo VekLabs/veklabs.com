@@ -1,16 +1,18 @@
 import { PayloadSDK } from '@payloadcms/sdk'
 import type { Config } from '../../veklabs-5/src/payload-types'
-const { env } = await import('cloudflare:workers')
+import { PAYLOAD_URL, PAYLOAD_USERNAME, getSecret } from 'astro:env/server'
 
 let payloadSingleton: PayloadSDK<Config> | null = null
 let _token: string | null = null
 export async function getPayload() {
   if (!payloadSingleton) {
     const _payload = new PayloadSDK<Config>({
-      baseURL: env.PAYLOAD_URL || 'http://localhost:3000',
+      baseURL: PAYLOAD_URL || 'http://localhost:3000',
     })
 
-    if (!env.PAYLOAD_USERNAME || !env.PAYLOAD_PASSWORD) {
+    const PAYLOAD_PASSWORD = getSecret('PAYLOAD_PASSWORD')
+
+    if (!PAYLOAD_USERNAME || !PAYLOAD_PASSWORD) {
       throw new Error(
         'PAYLOAD_USERNAME and PAYLOAD_PASSWORD must be set in .dev.vars',
       )
@@ -19,8 +21,8 @@ export async function getPayload() {
     const token = await _payload.login({
       collection: 'users',
       data: {
-        email: env.PAYLOAD_USERNAME,
-        password: env.PAYLOAD_PASSWORD,
+        email: PAYLOAD_USERNAME,
+        password: PAYLOAD_PASSWORD,
       },
     })
 
