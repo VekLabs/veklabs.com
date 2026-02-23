@@ -20,24 +20,16 @@ export async function getStaticPaths() {
 
   return videos.map((video) => ({
     params: { slug: video.slug },
-    props: video,
+    props: { video, allVideos: videos },
   }))
 }
 
-const payload = await getPayload()
-
 const { slug, type, videoURL, metadata, body, awards, image, title } =
-  Astro.props
+  Astro.props.video
 
 const category = type
 
-const allVideos = (
-  await payload.find({
-    collection: 'videos',
-    limit: 100,
-    where: { slug: { exists: true } },
-  })
-).docs as Populated<Video>[]
+const allVideos = Astro.props.allVideos
 
 const indexOfCurrentVideo = allVideos.findIndex(
   (video) => video.title === title,

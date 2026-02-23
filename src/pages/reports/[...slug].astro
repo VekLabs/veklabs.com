@@ -22,24 +22,14 @@ export async function getStaticPaths() {
 
   return reports.map((report) => ({
     params: { slug: report.slug },
-    props: report,
+    props: { report, allReports: reports },
   }))
 }
 
-const post = Astro.props
-const { body, title, createdAt: date, category, image, slug } = post
+const post = Astro.props.report
+const allPosts = Astro.props.allReports
 
-const author = post.author
-
-const payload = await getPayload()
-const allPosts =
-  ((
-    await payload.find({
-      collection: 'reports',
-      where: { slug: { exists: true } },
-      limit: 100,
-    })
-  ).docs as Populated<Report>[]) ?? []
+const { body, title, createdAt: date, category, image, slug, author } = post
 
 const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
 const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]

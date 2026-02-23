@@ -1,5 +1,4 @@
 // @ts-check
-import cloudflare from '@astrojs/cloudflare'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import { defineConfig, fontProviders } from 'astro/config'
@@ -32,19 +31,12 @@ export default defineConfig({
     '/videos': '/portfolio',
   },
 
-  adapter: cloudflare(),
-
   env: {
     schema: {
       PAYLOAD_USERNAME: { type: 'string', access: 'public', context: 'server' },
       PAYLOAD_PASSWORD: { type: 'string', access: 'public', context: 'server' },
       PAYLOAD_URL: { type: 'string', access: 'public', context: 'server' },
       SITE_BASE_URL: { type: 'string', access: 'public', context: 'server' },
-      TURNSTILE_SECRET_KEY: {
-        type: 'string',
-        access: 'public',
-        context: 'server',
-      },
     },
   },
 
