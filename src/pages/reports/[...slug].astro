@@ -8,6 +8,8 @@ import CategoryBadge from '../../components/CategoryBadge.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
 import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import Layout from '../../layouts/Layout.astro'
+import { Schema } from 'astro-seo-schema'
+import { type BreadcrumbList, type Article } from 'schema-dts'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -35,7 +37,57 @@ const indexOfCurrentPost = allPosts.findIndex((p) => p.slug === post.slug)
 const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
 ---
 
-<Layout image={`/open-graph/reports/${slug}`} title={title}>
+<Layout title={title}>
+  <Fragment slot="head">
+    <Schema
+      item={{
+        '@type': 'Article',
+        '@context': 'https://schema.org',
+
+        headline: post.title,
+        datePublished: post.createdAt,
+        dateModified: post.updatedAt,
+        url: `https://veklabs.com/reports/${post.slug}`,
+        author: [
+          {
+            '@type': 'Person',
+            name: post.author?.name,
+            image: post.author?.image ? post.author.image.url : undefined,
+          },
+          {
+            '@type': 'Organization',
+            name: 'Vek Labs',
+            url: 'https://veklabs.com',
+          },
+        ],
+        image: post.image ? post.image.url : undefined,
+        description: post.meta?.description,
+        isAccessibleForFree: true,
+      }}
+    />
+    <Schema
+      item={{
+        '@type': 'BreadcrumbList',
+        '@context': 'https://schema.org',
+
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Reports',
+            item: 'https://veklabs.com/reports',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.title,
+            item: `https://veklabs.com/reports/${post.slug}`,
+          },
+        ],
+      }}
+    />
+  </Fragment>
+
   <style is:global>
     #post .content {
       p {

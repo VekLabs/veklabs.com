@@ -1,0 +1,148 @@
+---
+import logo from '@/images/logos/vl-logo-white.jpg'
+import tempHero from '@/images/tempHero.jpg'
+import { getPayload } from '@/payload'
+import type { HomePage, SiteSetting, Team } from '@/payload-types'
+import type { Populated } from '@/utils/typeChecks'
+import { AstroSeo, type AstroSeoProps } from '@astrolib/seo'
+import { Schema } from 'astro-seo-schema'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import { type Organization } from 'schema-dts'
+
+const payload = await getPayload()
+
+const siteSettings = (await payload.findGlobal({
+  slug: 'site-settings',
+})) as Populated<SiteSetting>
+
+const teamMembers = (
+  await payload.find({
+    collection: 'team',
+    limit: 100,
+  })
+).docs as Populated<Team>[]
+
+type Props = {
+  meta?: Partial<Populated<HomePage>['meta']>
+  pageTitle?: string
+  path?: string
+} & Partial<AstroSeoProps>
+
+const { meta = {}, pageTitle, path, ...rest } = Astro.props as Props
+
+let title = `Vek Labs - Video Production Company`
+if (pageTitle) {
+  title = `${pageTitle} | ${title}`
+}
+if (meta.title) {
+  title = meta.title
+}
+
+const description =
+  meta.description ||
+  "We're a Calgary video production company working with people on productions that inspire us. Meet Calgary's pro content team."
+const keywords = meta.keywords || [
+  'video production',
+  'calgary video production',
+  'content creation',
+  'videography',
+  'filmmaking',
+  'video editing',
+]
+---
+
+<AstroSeo
+  title={title}
+  description={description}
+  canonical={`https://veklabs.com${path}`}
+  twitter={{
+    cardType: 'summary_large_image',
+    handle: '@veklabs',
+  }}
+  openGraph={{
+    site_name: 'Vek Labs',
+    images: [
+      {
+        url: meta.image?.url || tempHero.src,
+        alt: 'Vek Labs - Video Production Company',
+        height: meta.image?.height || 630,
+        width: meta.image?.width || 1200,
+        type: meta.image?.mimeType || 'image/jpeg',
+      },
+    ],
+    type: 'website',
+    description,
+    locale: 'en_CA',
+    title,
+    profile: { username: '@veklabs' },
+    url: 'https://veklabs.com',
+    videos: [
+      {
+        url: 'https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f',
+      },
+    ],
+  }}
+  additionalLinkTags={[
+    {
+      rel: 'icon',
+      href: logo.src,
+      type: logo.format,
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: logo.src,
+      type: logo.format,
+    },
+  ]}
+  additionalMetaTags={[
+    {
+      name: 'keywords',
+      content: keywords.join(', '),
+    },
+  ]}
+  nofollow={false}
+  noindex={false}
+/>
+
+<Schema
+  item={{
+    '@context': 'https://schema.org',
+    name: siteSettings.title,
+    award: 'Best Calgary Video Production Company',
+    location: { '@type': 'City', name: 'Calgary' },
+    areaServed: {
+      '@type': 'City',
+      name: 'Calgary',
+    },
+    '@id': 'https://veklabs.com/#organization',
+    description: siteSettings.description,
+    url: 'https://veklabs.com',
+    telephone: siteSettings.PHONE,
+    employee: teamMembers.map((member) => ({
+      '@type': 'Person',
+      name: member.name,
+      '@id': `https://veklabs.com/team/${member.slug}`,
+      jobTitle: member.title,
+      image: member.image?.url,
+      description: convertLexicalToPlaintext({ data: member.bio }),
+      skills: member.competencies,
+      worksFor: {
+        name: siteSettings.title,
+        '@id': 'https://veklabs.com/#organization',
+      },
+    })),
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Calgary',
+      addressRegion: 'AB',
+      postalCode: 'T2G 5H7',
+      addressCountry: 'CA',
+    },
+    logo: logo.src,
+    email: siteSettings.EMAIL,
+    foundingDate: '12-20-2017',
+    image: siteSettings.meta.image?.url || logo.src,
+    legalName: 'Vek Labs Inc.',
+    '@type': 'Organization',
+  } satisfies Organization}
+/>

@@ -1,8 +1,10 @@
 ---
+import { GoogleTagManager } from 'astro-gtm'
 import { ClientRouter } from 'astro:transitions'
 import logo from '../images/logo.svg?url'
 import defaultImage from '../images/tempHero.jpg?url'
 import { getPayload } from '../payload'
+import Head from './Head.astro'
 
 interface Props {
   title?: string
@@ -16,16 +18,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const payload = await getPayload()
 
 const config = await payload.findGlobal({ slug: 'site-settings' })
-
-const {
-  description = config.description,
-  image = defaultImage,
-  // video = config.videos.at(0)!,
-} = Astro.props
+const { description = config.description, image = defaultImage } = Astro.props
 
 const menuTitle = Astro.props.title
-// ??
-// config.menu.main.find((menuItem) => menuItem.url === Astro.url.pathname)?.name
 
 const title =
   !menuTitle || Astro.url.pathname === '/'
@@ -64,5 +59,9 @@ const title =
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<Head />
+
+<GoogleTagManager gtmId={config.googleAnalytics} />
 
 <ClientRouter />

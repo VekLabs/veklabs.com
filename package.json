@@ -54,6 +54,7 @@
     "prettier": "^3.4.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "schema-dts": "^1.1.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.2.0",
     "tailwindcss-spring": "^1.0.1",
