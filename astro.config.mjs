@@ -30,7 +30,7 @@ export default defineConfig({
     '/reports': '/reports/page/1',
     '/videos': '/portfolio',
   },
-  // adapter: cloudflare(),
+  adapter: cloudflare(),
   env: {
     schema: {
       PAYLOAD_USERNAME: { type: 'string', access: 'public', context: 'server' },
