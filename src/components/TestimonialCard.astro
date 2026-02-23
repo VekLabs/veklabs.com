@@ -21,8 +21,11 @@ const testimonial = Astro.props
           name: testimonial.title,
           additionalName: testimonial.subtitle,
         },
-        itemReviewed: { name: 'Vek Labs Video Production' },
-        reviewRating: { ratingValue: 5 },
+        itemReviewed: {
+          '@type': 'Service',
+          name: 'Vek Labs Video Production',
+          description: 'Video production services for brands and agencies',
+        },
         reviewBody: convertLexicalToPlaintext({ data: testimonial.body }),
         datePublished: testimonial.createdAt,
       }}
