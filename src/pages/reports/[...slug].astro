@@ -4,9 +4,9 @@ import { getPayload } from '@/payload'
 import type { Report } from '@/payload-types'
 import { cn } from '@/utils/cn'
 import type { Populated } from '@/utils/typeChecks'
-import { RichText } from '@payload-bites/astro-richtext-renderer'
 import CategoryBadge from '../../components/CategoryBadge.astro'
 import FormattedDate from '../../components/FormattedDate.astro'
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import Layout from '../../layouts/Layout.astro'
 
 export async function getStaticPaths() {
@@ -122,9 +122,10 @@ const nextPost = allPosts[indexOfCurrentPost + 1] || allPosts[0]
           {title}
         </h1>
 
-        <div class="animate-fade-up content">
-          <RichText data={body} />
-        </div>
+        <div
+          class="animate-fade-up content"
+          set:html={convertLexicalToHTML({ data: body })}
+        />
 
         {
           author && (

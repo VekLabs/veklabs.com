@@ -1,8 +1,6 @@
 import { PayloadSDK } from '@payloadcms/sdk'
 import type { Config } from '../../veklabs-5/src/payload-types'
-// import { env } from 'cloudflare:workers'
-
-const env = import.meta.env
+import { env } from 'cloudflare:workers'
 
 let payloadSingleton: PayloadSDK<Config> | null = null
 let _token: string | null = null

@@ -6,7 +6,7 @@ import type { Populated } from '@/utils/typeChecks'
 import PageTitle from '../../components/PageTitle.astro'
 import SmallVideoCard from '../../components/SmallVideoCard.astro'
 import { getPayload } from '@/payload'
-import { RichText } from '@payload-bites/astro-richtext-renderer'
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -103,7 +103,8 @@ if (nextVideos.length < 3) {
                     <span class="text-xs font-bold tracking-widest uppercase">
                       Description
                     </span>
-                    <RichText data={body} />
+                    <p />
+                    <div set:html={convertLexicalToHTML({ data: body })} />
                   </>
                 )
               }

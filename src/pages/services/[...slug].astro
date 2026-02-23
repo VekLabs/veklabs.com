@@ -4,7 +4,7 @@ import type { Populated } from '@/utils/typeChecks'
 import type { Service } from '@/payload-types'
 import { getPayload } from '@/payload'
 import Image from '@/components/Image'
-import { RichText } from '@payload-bites/astro-richtext-renderer'
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 
 export async function getStaticPaths() {
   const payload = await getPayload()
@@ -70,9 +70,8 @@ const { image, page_title, title } = service
         class="content w-full overflow-x-scroll pb-20"
         style="container-type: inline-size;"
         transition:name={`service-description-${service.slug}`}
-      >
-        <RichText data={service.body} />
-      </article>
+        set:html={convertLexicalToHTML({ data: service.body })}
+      />
       {
         nextService && (
           <a
