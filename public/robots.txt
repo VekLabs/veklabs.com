@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /admin
 Allow: /
-Sitemap: https://veklabs.com/sitemap.xml
+Sitemap: https://veklabs.com/sitemap-index.xml
