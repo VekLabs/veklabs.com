@@ -178,3 +178,8 @@ a {
 .input-label {
   @apply spring-bounce-40 spring-duration-300 block font-normal text-white/80;
 }
+
+.flex-wrap-balance {
+  flex-wrap: wrap;
+  flex-wrap: balance;
+}
