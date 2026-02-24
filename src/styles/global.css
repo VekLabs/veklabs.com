@@ -8,8 +8,6 @@
 
 body {
   font-family: var(--font-montserrat);
-  background-color: var(--gray6);
-  color: var(--white);
   margin: 0;
 }
 
