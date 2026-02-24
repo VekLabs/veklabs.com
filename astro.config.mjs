@@ -9,6 +9,8 @@ import {
   passthroughImageService,
 } from "astro/config";
 
+import partytown from "@astrojs/partytown";
+
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
@@ -54,7 +56,7 @@ export default defineConfig({
   adapter: cloudflare({ imageService: "cloudflare" }),
   image: { service: passthroughImageService() },
 
-  integrations: [react(), sitemap()],
+  integrations: [react(), sitemap(), partytown()],
 
   vite: {
     plugins: [tailwindcss()],

@@ -10,6 +10,8 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.1.4",
+    "@digi4care/astro-google-tagmanager": "^1.6.0",
     "@floating-ui/react": "^0.27.3",
     "@marsidev/react-turnstile": "^1.4.2",
     "@mux/mux-player-astro": "^3.11.4",
@@ -46,7 +48,6 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@unpic/react": "^1.0.2",
-    "astro-gtm": "^1.1.0",
     "astro-seo-schema": "^5.2.0",
     "phosphor-icons-astro": "2.1.1-17042025",
     "prettier": "^3.4.2",
