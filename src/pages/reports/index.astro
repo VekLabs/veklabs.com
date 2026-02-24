@@ -5,10 +5,9 @@ import { getPayload } from '@/payload'
 import type { Report } from '@/payload-types'
 import { cn } from '@/utils/cn'
 import type { Populated } from '@/utils/typeChecks'
+import { capitalize } from 'lodash-es'
 import PageTitle from '../../components/PageTitle.astro'
 import Layout from '../../layouts/Layout.astro'
-import AuthorHover from '@/components/AuthorHover.astro'
-import { capitalize } from 'lodash-es'
 
 const payload = await getPayload()
 const reports = await payload
@@ -72,7 +71,7 @@ const reports = await payload
                       media={report.image}
                       alt=""
                       className={cn([
-                        'z-10 w-full rounded-lg border border-gray-800 object-cover shadow-lg transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl',
+                        'z-10 w-full rounded-lg border border-gray-800 object-cover shadow-lg grayscale transition-all duration-200 group-hover:scale-[1.0125] group-hover:shadow-2xl',
                         `${i > 3 ? 'md:h-52' : 'md:h-72'}`,
                       ])}
                     />
