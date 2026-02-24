@@ -15,8 +15,8 @@ importers:
         specifier: ^2.1.4
         version: 2.1.4
       '@digi4care/astro-google-tagmanager':
-        specifier: ^1.6.0
-        version: 1.6.0(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))
+        specifier: ^1.6.1-beta.1
+        version: 1.6.1-beta.1(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))
       '@floating-ui/react':
         specifier: ^0.27.3
         version: 0.27.18(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -427,8 +427,8 @@ packages:
   '@date-fns/tz@1.2.0':
     resolution: {integrity: sha512-LBrd7MiJZ9McsOgxqWX7AaxrDjcFVjWH/tIKJd7pnR7McaslGYOP1QmmiBXdJH/H/yLCT+rcQ7FaPBUxRGUtrg==}
 
-  '@digi4care/astro-google-tagmanager@1.6.0':
-    resolution: {integrity: sha512-xBEYnswcLPNDu62zRGh8W8hbRW97nK02O+SyellcopT4/NMkevygrvxv49xl0ZQeBd6dfJpwbktlBYDJDaRvWg==}
+  '@digi4care/astro-google-tagmanager@1.6.1-beta.1':
+    resolution: {integrity: sha512-oHIOuWhlOQMCilO8doVKKR9AYG4x5ZvTGqGX7FuHb9+N0NG/rqmOYKXuvpuPqnaGJdX8+6v70NizHsXNu0U+qQ==}
     peerDependencies:
       astro: ^1.2.1 || ^2.0.0 || ^3.0.0-beta.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
 
@@ -4724,7 +4724,7 @@ snapshots:
 
   '@date-fns/tz@1.2.0': {}
 
-  '@digi4care/astro-google-tagmanager@1.6.0(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))':
+  '@digi4care/astro-google-tagmanager@1.6.1-beta.1(astro@5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))':
     dependencies:
       astro: 5.17.3(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(sass@1.77.4)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
 

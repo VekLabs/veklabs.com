@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",
-    "@digi4care/astro-google-tagmanager": "^1.6.0",
+    "@digi4care/astro-google-tagmanager": "^1.6.1-beta.1",
     "@floating-ui/react": "^0.27.3",
     "@marsidev/react-turnstile": "^1.4.2",
     "@mux/mux-player-astro": "^3.11.4",
