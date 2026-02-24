@@ -29,6 +29,7 @@ export default defineConfig({
   },
 
   output: "static",
+
   server: { host: true },
   site: "https://veklabs.com",
 
