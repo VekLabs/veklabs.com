@@ -5,9 +5,8 @@ import { getPayload } from '@/payload'
 import type { HomePage, SiteSetting, Team } from '@/payload-types'
 import type { Populated } from '@/utils/typeChecks'
 import { AstroSeo, type AstroSeoProps } from '@astrolib/seo'
-import { Schema } from 'astro-seo-schema'
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
-import { type Organization } from 'schema-dts'
+import { Schema } from 'astro-seo-schema'
 
 const payload = await getPayload()
 

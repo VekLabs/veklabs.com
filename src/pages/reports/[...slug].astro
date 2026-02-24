@@ -9,6 +9,7 @@ import { Schema } from 'astro-seo-schema'
 import FormattedDate from '../../components/FormattedDate.astro'
 import Layout from '../../layouts/Layout.astro'
 import AuthorHover from '@/components/AuthorHover.astro'
+import { slide } from 'astro:transitions'
 
 export async function getStaticPaths() {
   const payload = await getPayload()

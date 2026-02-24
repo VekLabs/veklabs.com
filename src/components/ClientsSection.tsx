@@ -1,54 +1,56 @@
-import type { ClientLogo, HomePage } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import { CaretRightIcon } from '@phosphor-icons/react/ssr'
-import { chunk } from 'lodash-es'
-import { AnimatePresence, motion, steps } from 'motion/react'
-import { useEffect, useState } from 'react'
-import { useInterval } from 'usehooks-ts'
-import Image, { getImageUrl } from './Image'
+import type { ClientLogo, HomePage } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import { CaretRightIcon } from "@phosphor-icons/react/ssr";
+import { chunk } from "lodash-es";
+import { AnimatePresence, motion, steps } from "motion/react";
+import { useEffect, useState } from "react";
+import { useInterval } from "usehooks-ts";
+import Image, { getImageUrl } from "./Image";
 
-const MotionImage = motion.create(Image)
+const MotionImage = motion.create(Image);
 
 export function ClientsSection({
   logos,
   home,
 }: {
-  logos: ClientLogo[]
-  home: Populated<HomePage>
+  logos: ClientLogo[];
+  home: Populated<HomePage>;
 }) {
-  const chunkSize = 6
-  const easing = steps(chunkSize)
+  const chunkSize = 6;
+  const easing = steps(chunkSize);
 
   const logoChunks = chunk(logos, chunkSize).map((chunk, i, chunks) => {
     if (chunk.length < chunkSize) {
-      const diff = chunkSize - chunk.length
-      const fill = chunks[i - 1].slice(0, diff)
-      return chunk.concat(fill)
+      const diff = chunkSize - chunk.length;
+      const fill = chunks[i - 1].slice(0, diff);
+      return chunk.concat(fill);
     }
-    return chunk
-  })
-  const [currentChunkIndex, setCurrentChunkIndex] = useState(0)
+    return chunk;
+  });
+  const [currentChunkIndex, setCurrentChunkIndex] = useState(0);
 
   useEffect(() => {
-    logos.forEach((logo) => {
+    logoChunks[currentChunkIndex + 1].forEach((logo) => {
+      if (document.getElementById(`preload-${logo.id}`)) return;
+
       const resolvedURL = getImageUrl({
         media: logo,
-        alt: '',
+        alt: "",
         width: 144,
         height: 144,
-      })
-      const link = document.createElement('link')
-      link.id = `preload-${logo.id}`
-      link.rel = 'preload'
-      link.as = 'image'
-      link.href = resolvedURL
-      document.head.appendChild(link)
-    })
-  }, [logos])
+      });
+      const link = document.createElement("link");
+      link.id = `preload-${logo.id}`;
+      link.rel = "preload";
+      link.as = "image";
+      link.href = resolvedURL;
+      document.head.appendChild(link);
+    });
+  }, [logos]);
 
   useInterval(() => {
-    setCurrentChunkIndex((prev) => (prev + 1) % logoChunks.length)
-  }, 3000)
+    setCurrentChunkIndex((prev) => (prev + 1) % logoChunks.length);
+  }, 3000);
 
   return (
     <section className="w-container mx-auto py-8 text-center md:pt-12 md:pb-20">
@@ -79,9 +81,9 @@ export function ClientsSection({
                 priority
                 media={logo}
                 key={logo.url}
-                initial={{ filter: 'blur(10px)', opacity: 0, scale: 0.25 }}
-                animate={{ filter: 'blur(0px)', opacity: 1, scale: 1 }}
-                exit={{ filter: 'blur(10px)', opacity: 0, scale: 0.25 }}
+                initial={{ filter: "blur(10px)", opacity: 0, scale: 0.25 }}
+                animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+                exit={{ filter: "blur(10px)", opacity: 0, scale: 0.25 }}
                 transition={{ delay: easing(i * 0.1) }}
                 className="w-16 md:block md:w-36"
                 width={144}
@@ -93,5 +95,5 @@ export function ClientsSection({
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
