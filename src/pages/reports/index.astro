@@ -51,14 +51,14 @@ const reports = await payload
 
       <div class="flex gap-4"></div>
 
-      <div class="mt-12 grid grid-cols-1 gap-6 gap-y-10 lg:grid-cols-12">
+      <div class="mt-12 grid grid-cols-1 gap-6 gap-y-10 md:grid-cols-12">
         {
           reports.map((report, i) => (
             <a
               href={`/reports/${report.slug}`}
               class:list={[
                 'listing group col-span-full w-full rounded-xl transition-all',
-                `${i > 3 ? 'lg:col-span-4' : 'lg:col-span-6'}`,
+                `${i > 3 ? 'md:col-span-4' : 'md:col-span-6'}`,
               ]}
             >
               <article class:list={['flex w-full flex-col']}>
