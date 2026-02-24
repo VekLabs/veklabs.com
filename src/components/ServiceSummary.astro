@@ -2,6 +2,7 @@
 import type { Service } from '@/payload-types'
 import type { Populated } from '@/utils/typeChecks'
 import Image from './Image'
+import { PhArrowRight } from 'phosphor-icons-astro'
 
 type Props = Populated<Service> & { i: number }
 
@@ -21,14 +22,14 @@ const end = Math.abs(speed) * -5
 ---
 
 <article
-  class="relative flex max-w-[980px] pb-32"
+  class="relative flex max-w-245 pb-32"
   class:list={{
     'justify-end': [1, 4, 7].includes(i + 1),
     'justify-start': [2, 5, 9].includes(i + 1),
     'justify-center': [3, 6, 8, 10].includes(i + 1),
   }}
 >
-  <div class="text-foreground block w-full max-w-[400px]">
+  <div class="text-foreground block w-full max-w-100">
     <div
       class="animate-parallax timeline-view -parallax-start-32 parallax-end-0 absolute -z-10 size-52 overflow-hidden rounded-xl [animation-timing-function:linear] lg:size-[350px]"
       style={{
@@ -52,7 +53,7 @@ const end = Math.abs(speed) * -5
     </div>
 
     <div
-      class="text-shadow-sm relative flex flex-col gap-4"
+      class="relative flex flex-col gap-4 text-shadow-sm"
       style={{
         zIndex: order ?? 2,
         filter: 'drop-shadow(0 0 16px #000000) drop-shadow(0 0 48px #000000)',
@@ -72,13 +73,11 @@ const end = Math.abs(speed) * -5
       {
         body && (
           <a
-            class="inline-flex w-max items-center rounded-lg bg-black px-3 py-2 text-sm duration-200 hover:bg-black/90 hover:ring-1 hover:ring-blue-500/30"
+            class="inline-flex w-max items-center gap-1.5 rounded-lg bg-black px-3 py-2 text-sm duration-200 hover:bg-black/90 hover:ring-1 hover:ring-blue-500/30"
             href={`/services/${slug}`}
           >
-            Learn More
-            <svg class="ml-2 size-[1cap] fill-current">
-              <use href="/assets/arrow-right.svg#icon" />
-            </svg>
+            <span>Learn More</span>
+            <PhArrowRight class="mt-0.5" />
           </a>
         )
       }
