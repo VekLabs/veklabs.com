@@ -28,10 +28,9 @@ const services = (await payload.find({ collection: 'services', limit: 100 }))
               <Image
                 media={service.image}
                 width={280}
-                height={300}
                 loading="lazy"
                 alt=""
-                className="relative w-full overflow-hidden rounded-2xl mask-[linear-gradient(#000_75%,transparent)] object-cover lg:h-full lg:w-1/2 lg:mask-[linear-gradient(90deg,#000_75%,transparent)]"
+                className="relative w-full h-full overflow-hidden rounded-2xl mask-[linear-gradient(#000_75%,transparent)] object-cover lg:h-full lg:w-1/2 lg:mask-[linear-gradient(90deg,#000_75%,transparent)]"
               />
 
               <div class="flex w-full flex-col content-start gap-6 p-10 lg:w-1/2">
