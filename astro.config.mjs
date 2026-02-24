@@ -12,9 +12,7 @@ import {
 // https://astro.build/config
 export default defineConfig({
   prefetch: true,
-
   experimental: {
-    clientPrerender: true,
     fonts: [
       {
         provider: fontProviders.google(),
