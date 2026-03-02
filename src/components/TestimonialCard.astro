@@ -1,30 +1,32 @@
 ---
-import type { Testimonial } from '@/payload-types'
-import Image from './Image'
-import type { Populated } from '@/utils/typeChecks'
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
-import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
-import { Schema } from 'astro-seo-schema'
+import type { Testimonial } from "@/payload-types";
+import Image from "./Image";
+import type { Populated } from "@/utils/typeChecks";
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
+import { convertLexicalToPlaintext } from "@payloadcms/richtext-lexical/plaintext";
+import { Schema } from "astro-seo-schema";
 
-type Props = Populated<Testimonial>
-const testimonial = Astro.props
+type Props = Populated<Testimonial>;
+const testimonial = Astro.props;
 ---
 
-<div class="relative w-full rounded-xl bg-black p-8 ring-1 ring-gray-800">
+<div
+  class="testimonial-card group relative max-h-94 w-full overflow-clip rounded-xl bg-black p-8 ring-1 ring-gray-800 has-[input:checked]:max-h-max has-[input:checked]:overflow-visible"
+>
   <div class="flex flex-col justify-center gap-6">
     <Schema
       item={{
-        '@context': 'https://schema.org',
-        '@type': 'UserReview',
+        "@context": "https://schema.org",
+        "@type": "UserReview",
         author: {
-          '@type': 'Person',
+          "@type": "Person",
           name: testimonial.title,
           additionalName: testimonial.subtitle,
         },
         itemReviewed: {
-          '@type': 'Service',
-          name: 'Vek Labs Video Production',
-          description: 'Video production services for brands and agencies',
+          "@type": "Service",
+          name: "Vek Labs Video Production",
+          description: "Video production services for brands and agencies",
         },
         reviewBody: convertLexicalToPlaintext({ data: testimonial.body }),
         datePublished: testimonial.createdAt,
@@ -32,11 +34,11 @@ const testimonial = Astro.props
     />
     {
       testimonial.icon && (
-        <div class=" max-w-12 rounded-sm bg-gray-800 p-2">
+        <div class="sticky top-2 max-w-12 rounded-sm bg-gray-800 p-2">
           <Image
-            objectFit="contain"
+            objectFit="fill"
             width={48}
-            operations={{ fit: 'contain' }}
+            operations={{ fit: "contain" }}
             media={testimonial.icon}
             className="aspect-square w-full"
           />
@@ -50,9 +52,21 @@ const testimonial = Astro.props
       />
       <div class="flex gap-2">
         <span class="text-sm text-gray-400">
-          {[testimonial.title, testimonial.subtitle].join(' • ')}
+          {[testimonial.title, testimonial.subtitle].join(" • ")}
         </span>
       </div>
     </div>
   </div>
+
+  <div
+    class="pointer-events-none absolute bottom-0 left-0 z-10 h-30 w-full bg-linear-0 from-black to-transparent opacity-0 group-[.overflowing]:opacity-100"
+  >
+  </div>
+
+  <label
+    class="absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 cursor-pointer text-white transition group-[.overflowing]:block hover:text-gray-300"
+  >
+    <input type="checkbox" class="sr-only" />
+    Read More
+  </label>
 </div>

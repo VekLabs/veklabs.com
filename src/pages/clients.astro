@@ -1,40 +1,65 @@
 ---
-import Image from '@/components/Image'
-import { getPayload } from '@/payload'
-import type { ClientLogo, Testimonial } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import { PhCaretRight } from 'phosphor-icons-astro'
-import PageTitle from '../components/PageTitle.astro'
-import TestimonialCard from '../components/TestimonialCard.astro'
-import Layout from '../layouts/Layout.astro'
+import Image from "@/components/Image";
+import { getPayload } from "@/payload";
+import type { ClientLogo, Testimonial } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import { PhCaretRight } from "phosphor-icons-astro";
+import PageTitle from "../components/PageTitle.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import Layout from "../layouts/Layout.astro";
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const config = (await payload.findGlobal({
-  slug: 'clients-page',
-})) as any
+  slug: "clients-page",
+})) as any;
 
 const testimonials =
   ((
     await payload.find({
-      collection: 'testimonials',
+      collection: "testimonials",
       limit: 100,
     })
-  ).docs as Populated<Testimonial>[]) ?? []
+  ).docs as Populated<Testimonial>[]) ?? [];
 
 const clientLogos =
   ((
     await payload.find({
-      collection: 'client-logos',
+      collection: "client-logos",
 
       limit: 200,
     })
-  ).docs as Populated<ClientLogo>[]) ?? []
+  ).docs as Populated<ClientLogo>[]) ?? [];
 ---
 
+<script>
+  // MARK: For sizing cards to be a reasonable size
+  const isOverflowing = (element: HTMLElement) => {
+    return element.scrollHeight > element.clientHeight;
+  };
+  const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      const target = entry.target as HTMLElement;
+      if (isOverflowing(target)) {
+        target.classList.add("overflowing");
+      } else {
+        target.classList.remove("overflowing");
+      }
+    }
+  });
+
+  document
+    .querySelectorAll<HTMLDivElement>(`.testimonial-card`)
+    .forEach((card) => {
+      observer.observe(card);
+    });
+</script>
+
 <Layout title={config.title} meta={config.meta}>
-  <section class="w-container mx-auto max-w-7xl py-14 pt-28">
-    <div class="flex flex-col justify-center gap-6 px-4 pb-24">
+  <section class="py-14 pt-28">
+    <div
+      class="w-container mx-auto flex max-w-7xl flex-col justify-center gap-6 px-4 pb-24"
+    >
       <PageTitle>{config.title}</PageTitle>
       <h2 class="max-w-xl text-3xl font-medium text-pretty">
         {config.subtitle}
@@ -55,16 +80,21 @@ const clientLogos =
       </div>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-[repeat(auto-fill,minmax(450px,1fr))]">
+    <div
+      style={`--card-count: ${testimonials.length}`}
+      class="grid w-full gap-6 overflow-x-auto px-8 py-1 min-[1872px]:justify-center md:grid-cols-[repeat(var(--card-count),450px)]"
+    >
       {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
     </div>
 
-    <div class="flex items-center gap-6 py-4 pt-36">
-      <span class="text-3xl">
+    <div
+      class="w-container mx-auto flex max-w-7xl flex-col items-center gap-6 py-4 pt-36 lg:flex-row"
+    >
+      <span class="text-center text-3xl lg:text-left">
         {config.cta_text}
       </span>
       <a
-        class="mt-1 ml-auto flex items-center gap-1.5 text-lg whitespace-nowrap"
+        class="mt-1 flex items-center gap-1.5 text-lg whitespace-nowrap lg:ml-auto"
         href="/contact"
       >
         {config.cta_link}
@@ -72,7 +102,9 @@ const clientLogos =
       </a>
     </div>
 
-    <div class="group flex flex-wrap justify-center gap-6 pt-12">
+    <div
+      class="group w-container flex-wrap-balance mx-auto flex max-w-7xl justify-center gap-6 pt-12"
+    >
       {
         clientLogos.map((logo) => (
           <Image
