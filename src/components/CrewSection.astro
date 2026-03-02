@@ -23,7 +23,7 @@ const { home } = Astro.props;
 <section class="w-container mx-auto mt-16 py-16 md:mt-28">
   <h2 class="text-center text-4xl font-bold">{home.TEAM_TITLE}</h2>
   <div
-    class="no-scrollbar mx-auto flex w-full max-w-200 flex-wrap items-center justify-center gap-12 py-6"
+    class="no-scrollbar flex-wrap-balance mx-auto flex w-full max-w-400 items-start justify-center gap-12 py-6"
   >
     {
       sortBy(teamMembers, "order")?.map((member) => (
