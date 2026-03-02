@@ -1,28 +1,28 @@
 ---
-import type { Populated } from '@/utils/typeChecks'
-import HeroVideo from '../components/HeroVideo.tsx'
-import Layout from '../layouts/Layout.astro'
-import { getPayload } from '@/payload'
-import type { HomePage, Media, Video } from '@/payload-types'
-import VideoGrid from '@/components/VideoGrid.astro'
-import GuaranteeSection from '@/components/GuaranteeSection.astro'
-import Metrics from '@/components/Metrics.tsx'
-import FeaturedServices from '@/components/FeaturedServices.astro'
-import CrewSection from '@/components/CrewSection.astro'
-import { ClientsSection } from '@/components/ClientsSection'
+import type { Populated } from "@/utils/typeChecks";
+import HeroVideo from "../components/HeroVideo.tsx";
+import Layout from "../layouts/Layout.astro";
+import { getPayload } from "@/payload";
+import type { HomePage, Media, Video } from "@/payload-types";
+import VideoGrid from "@/components/VideoGrid.astro";
+import GuaranteeSection from "@/components/GuaranteeSection.astro";
+import Metrics from "@/components/Metrics.tsx";
+import FeaturedServices from "@/components/FeaturedServices.astro";
+import CrewSection from "@/components/CrewSection.astro";
+import { ClientsSection } from "@/components/ClientsSection";
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const homePageSettings = (await payload.findGlobal({
-  slug: 'home-page',
-})) as Populated<HomePage>
+  slug: "home-page",
+})) as Populated<HomePage>;
 
 const clientLogos = (await payload
   .find({
-    collection: 'client-logos',
+    collection: "client-logos",
     limit: 200,
   })
-  .then((res) => res.docs)) as Populated<Media>[]
+  .then((res) => res.docs)) as Populated<Media>[];
 ---
 
 <Layout meta={homePageSettings.meta}>
@@ -30,7 +30,6 @@ const clientLogos = (await payload
     <HeroVideo client:load config={homePageSettings} />
     <VideoGrid videos={homePageSettings.hero.videos as Populated<Video>[]} />
     <GuaranteeSection home={homePageSettings} />
-    <Metrics home={homePageSettings} client:visible />
     <FeaturedServices />
     <CrewSection home={homePageSettings} />
     <ClientsSection logos={clientLogos} home={homePageSettings} client:idle />

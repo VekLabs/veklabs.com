@@ -55,7 +55,7 @@ export function ClientsSection({
   return (
     <section className="w-container mx-auto py-8 text-center md:pt-12 md:pb-20">
       <div className="flex flex-col items-center gap-4">
-        <h2 className="m-0 text-3xl font-extrabold tracking-widest">
+        <h2 className="m-0 text-3xl font-bold tracking-widest">
           {home.clients_section.CLIENT_TITLE}
         </h2>
         <div className="flex flex-col items-center gap-8">

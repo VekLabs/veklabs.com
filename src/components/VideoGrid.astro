@@ -1,19 +1,19 @@
 ---
-import type { Populated } from '@/utils/typeChecks'
-import type { Video } from '@/payload-types'
-import VideoCard from './VideoCard'
-import { PhCaretRight } from 'phosphor-icons-astro'
+import type { Populated } from "@/utils/typeChecks";
+import type { Video } from "@/payload-types";
+import VideoCard from "./VideoCard";
+import { PhCaretRight } from "phosphor-icons-astro";
 
 type Props = {
-  videos: Populated<Video>[]
-}
+  videos: Populated<Video>[];
+};
 
-const { videos } = Astro.props
+const { videos } = Astro.props;
 ---
 
 <section class="w-container mx-auto">
   <div class="flex items-center gap-6 py-4">
-    <h1 class="text-3xl font-extrabold">Portfolio</h1>
+    <h1 class="text-3xl font-bold">Portfolio</h1>
     <a class="link mt-1 flex items-center gap-1.5 text-lg" href="/portfolio">
       See All
       <PhCaretRight class="size-5" />

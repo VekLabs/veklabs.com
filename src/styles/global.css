@@ -203,3 +203,13 @@ a {
   flex-wrap: wrap;
   flex-wrap: balance;
 }
+
+.bg-stripes-diagonal {
+  background-image: repeating-linear-gradient(
+    var(--bg-stripes-angle, 45deg),
+    rgba(255, 255, 255, 0.075) 0,
+    rgba(255, 255, 255, 0.075) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
