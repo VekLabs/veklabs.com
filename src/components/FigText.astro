@@ -1,0 +1,17 @@
+---
+import { twMerge } from "tailwind-merge";
+
+type Props = {
+  class?: string;
+};
+---
+
+<span
+  role="none"
+  class:list={twMerge(
+    "text-xs tracking-widest text-white/20",
+    Astro.props.class,
+  )}
+>
+  <slot />
+</span>

@@ -2,6 +2,7 @@
 import type { HomePage } from "@/payload-types";
 import type { Populated } from "@/utils/typeChecks";
 import Image from "./Image.tsx";
+import FigText from "./FigText.astro";
 
 type Props = { home: Populated<HomePage> };
 const { home } = Astro.props;
@@ -17,6 +18,7 @@ const { home } = Astro.props;
           <div
             class="relative z-20 flex h-full flex-col gap-6 px-4 py-20 sm:px-10"
           >
+            <FigText class="absolute -mt-4 -translate-y-full">FIG. 1.1</FigText>
             <div class="gap-4 text-3xl font-bold text-pretty lg:text-5xl">
               <span>
                 {home.trust_subtitle}
@@ -30,8 +32,11 @@ const { home } = Astro.props;
 
             <div></div>
             <div
-              class="bg-stripes-diagonal flex flex-col gap-3 border border-gray-900 p-6 px-8"
+              class="bg-stripes-diagonal relative flex flex-col gap-3 border border-gray-900 p-6 px-8"
             >
+              <FigText class="absolute right-8 bottom-6 text-gray-700"
+                >FIG. 1.2</FigText
+              >
               <span class="text-2xl font-medium lg:text-3xl">
                 {home.guarantee_title}
               </span>

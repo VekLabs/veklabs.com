@@ -207,9 +207,26 @@ a {
 .bg-stripes-diagonal {
   background-image: repeating-linear-gradient(
     var(--bg-stripes-angle, 45deg),
-    rgba(255, 255, 255, 0.075) 0,
-    rgba(255, 255, 255, 0.075) 1px,
+    var(--bg-stripes-color, rgba(255, 255, 255, 0.075)) 0,
+    var(--bg-stripes-color, rgba(255, 255, 255, 0.075)) 1px,
     transparent 1px,
     transparent 4px
   );
+}
+
+.featured-service-container {
+  @supports (container-type: scroll-state) {
+    container-type: scroll-state;
+    span {
+      transform-origin: center left;
+      color: rgb(255 255 255 / 0.5);
+    }
+
+    @container scroll-state(snapped: x) {
+      span {
+        scale: 1.2;
+        color: white;
+      }
+    }
+  }
 }
