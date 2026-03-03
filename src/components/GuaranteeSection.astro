@@ -53,14 +53,14 @@ const { home } = Astro.props;
               <h1 class="text-3xl font-bold lg:text-4xl">
                 {home.awards_title}
               </h1>
-              <div class="flex-wrap-balance z-10 flex w-full gap-8">
+              <div class="z-10 flex w-full flex-wrap gap-8">
                 {
                   home.awards?.map((awardImage) => (
                     <Image
                       media={awardImage}
                       width={175}
                       alt={""}
-                      className="shrink"
+                      className="shrink max-w-[45%]! xs:max-w-full"
                     />
                   ))
                 }

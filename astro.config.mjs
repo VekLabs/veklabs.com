@@ -30,7 +30,7 @@ export default defineConfig({
 
   output: "static",
 
-  server: { host: true },
+  server: { host: true, allowedHosts: ["evans-macbook-pro.local"] },
   site: "https://veklabs.com",
 
   redirects: {

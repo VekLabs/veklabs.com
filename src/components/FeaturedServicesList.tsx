@@ -153,7 +153,7 @@ export function FeaturedServicesList({
       {/* MARK: MOBILE */}
       <div className="block lg:hidden">
         <div
-          className="no-scrollbar grid h-[50vh] snap-x snap-mandatory scroll-px-5 grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
+          className="no-scrollbar grid h-[60vh] snap-x snap-mandatory scroll-px-5 grid-cols-[var(--gap)_1fr_var(--gap)] gap-(--gap) overflow-x-scroll overscroll-x-none [--gap:8px] before:content-end after:content-end lg:[--gap:20px]"
           style={{
             scrollTimeline: "--featured-services inline",
             gridTemplateColumns: `var(--gap) repeat(${services.length}, min(90vw,500px)) var(--gap)`,
@@ -178,11 +178,11 @@ export function FeaturedServicesList({
                 alt=""
                 className="absolute inset-0 size-full object-cover"
               />
-              <div className="bg-stripes-diagonal absolute right-4 bottom-4 left-4 z-20 max-w-180 border border-gray-900/30 bg-black/40 p-6 px-8 pt-3 text-pretty backdrop-blur-xs [--bg-stripes-color:rgba(0,0,0,0.2)]">
+              <div className="bg-stripes-diagonal absolute right-1 bottom-1 left-1 z-20 max-w-180 border border-gray-900/30 bg-black/40 p-3 px-4 pt-3 text-pretty backdrop-blur-xs [--bg-stripes-color:rgba(0,0,0,0.2)] md:right-4 md:bottom-4 md:left-4 md:p-6 md:px-8">
                 <span className="inset-4 z-20 text-xs tracking-widest text-white/50">
                   FIG. 3.{i + 1}
                 </span>
-                <p className="text-lg font-medium">{service.summary}</p>
+                <p className="font-medium md:text-lg">{service.summary}</p>
               </div>
             </a>
           ))}
