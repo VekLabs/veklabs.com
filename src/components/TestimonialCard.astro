@@ -14,24 +14,6 @@ const testimonial = Astro.props;
   class="testimonial-card group relative max-h-94 w-full overflow-clip rounded-xl bg-black p-8 ring-1 ring-gray-800 has-[input:checked]:max-h-max has-[input:checked]:overflow-visible"
 >
   <div class="flex flex-col justify-center gap-6">
-    <Schema
-      item={{
-        "@context": "https://schema.org",
-        "@type": "UserReview",
-        author: {
-          "@type": "Person",
-          name: testimonial.title,
-          additionalName: testimonial.subtitle,
-        },
-        itemReviewed: {
-          "@type": "Service",
-          name: "Vek Labs Video Production",
-          description: "Video production services for brands and agencies",
-        },
-        reviewBody: convertLexicalToPlaintext({ data: testimonial.body }),
-        datePublished: testimonial.createdAt,
-      }}
-    />
     {
       testimonial.icon && (
         <div class="sticky top-2 max-w-12 rounded-sm bg-gray-800 p-2">
