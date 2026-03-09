@@ -229,4 +229,13 @@ a {
       }
     }
   }
+
+  @supports not (container-type: scroll-state) {
+    span {
+      transform-origin: center left;
+      color: rgb(255 255 255 / 0.5);
+      scale: 1.2;
+      color: white;
+    }
+  }
 }

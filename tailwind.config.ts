@@ -38,6 +38,8 @@ export default {
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
+        "fixed-scrolled-appearance":
+          "fixed-scrolled-appearance 0.3s ease forwards",
       },
       keyframes: {
         "fade-up": {
@@ -65,6 +67,23 @@ export default {
           },
           "100%": {
             transform: "translateX(-50%) translateY(-10%)",
+          },
+        },
+        "fixed-scrolled-appearance": {
+          "0%": {
+            backgroundColor: "transparent",
+            borderColor: "transparent",
+            paddingTop: "24px",
+          },
+          "1%": {
+            backdropFilter: "blur(4px)",
+          },
+          "100%": {
+            paddingTop: "12px",
+            backdropFilter: "blur(20px)",
+            backgroundColor: "oklch(14.5% 0 0)",
+            border: "solid 1px rgba(255, 255, 255, 0.1)",
+            borderWidth: "0 0 0.5px 0",
           },
         },
         moveInCircle: {

@@ -9,9 +9,17 @@ import Footer from "@/components/Footer.astro";
 type Props = Parameters<typeof BaseHead>["0"] & {
   title?: string;
   description?: string;
+  header?: {
+    appearance?: "sticky" | "fixed";
+  };
 };
 
-const { title, description, ...headProps } = Astro.props;
+const {
+  title,
+  description,
+  header = { appearance: "sticky" },
+  ...headProps
+} = Astro.props;
 ---
 
 <html
@@ -27,7 +35,7 @@ const { title, description, ...headProps } = Astro.props;
   </head>
 
   <body class="no-scrollbar size-full">
-    <Header currentPath={Astro.url.pathname} client:load />
+    <Header currentPath={Astro.url.pathname} {...header} client:load />
     <main class="size-full">
       <slot />
     </main>

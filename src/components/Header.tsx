@@ -5,9 +5,11 @@ import { HeaderProvider } from "../context/headerContext";
 import logoFullSVG from "../images/logo-full.svg?url";
 import HeaderLink from "./HeaderLink";
 import { ListIcon } from "@phosphor-icons/react/ssr";
+import { cn } from "@/utils/cn";
 
 export interface HeaderProps {
   currentPath: string;
+  appearance?: "sticky" | "fixed";
 }
 
 const menu = {
@@ -37,35 +39,65 @@ const menu = {
       name: "Reports",
       url: "/reports",
     },
+    {
+      identifier: "contact",
+      name: "Contact",
+      url: "/contact",
+    },
   ],
 } as const;
 
 const title = "Vek Labs";
 
-export default function Header({ currentPath }: HeaderProps) {
+export default function Header({
+  currentPath,
+  appearance = "sticky",
+}: HeaderProps) {
+  const firstHalfOfMenu = menu.main.slice(0, Math.ceil(menu.main.length / 2));
+  const secondHalfOfMenu = menu.main.slice(Math.ceil(menu.main.length / 2));
+
   return (
     <HeaderProvider currentPath={currentPath}>
       <header
-        className="border-b-0.5 bg-background sticky top-0 z-40 border-white/10 py-3 md:py-4"
+        className={cn([
+          "top-0 z-40 py-3 md:py-4",
+          {
+            "bg-background border-b-0.5 sticky border-white/10":
+              appearance === "sticky",
+            "animate-fixed-scrolled-appearance range/0px_100px timeline fixed top-0 left-0 w-full":
+              appearance === "fixed",
+          },
+        ])}
         role="banner"
       >
         <div className="w-container mx-auto">
-          <div className="relative hidden h-8 items-center justify-between md:flex">
-            <a href="/">
-              <img
-                className="w-full max-w-24 justify-self-start md:max-w-28"
-                src={logoFullSVG}
-                alt={title}
-              />
-            </a>
-            <div className="absolute left-1/2 flex -translate-x-1/2 flex-nowrap gap-4 overflow-auto">
-              {menu.main.map((menuItem) => (
+          <div
+            className="relative hidden h-8 items-center justify-between md:grid"
+            style={{ gridTemplateColumns: "1fr auto 1fr" }}
+          >
+            <div className="flex flex-nowrap gap-4 overflow-auto">
+              {firstHalfOfMenu.map((menuItem) => (
                 <HeaderLink key={menuItem.url} href={menuItem.url}>
                   {menuItem.name}
                 </HeaderLink>
               ))}
             </div>
-            <HeaderLink href="/contact">Contact</HeaderLink>
+
+            <a href="/">
+              <img
+                className="w-full max-w-24 justify-self-center md:max-w-28"
+                src={logoFullSVG}
+                alt={title}
+              />
+            </a>
+
+            <div className="ml-auto flex flex-nowrap gap-4 overflow-auto">
+              {secondHalfOfMenu.map((menuItem) => (
+                <HeaderLink key={menuItem.url} href={menuItem.url}>
+                  {menuItem.name}
+                </HeaderLink>
+              ))}
+            </div>
           </div>
 
           <MobileHeader currentPath={currentPath} />
@@ -75,7 +107,7 @@ export default function Header({ currentPath }: HeaderProps) {
   );
 }
 
-function MobileHeader({ currentPath }: HeaderProps) {
+function MobileHeader({ currentPath, appearance = "sticky" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

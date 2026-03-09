@@ -18,7 +18,7 @@ export function FeaturedServicesList({
   return (
     <div className="mx-auto flex size-full min-h-[30vh] max-w-400 flex-col lg:min-h-[80vh] lg:flex-row">
       <div className="grow flex-col gap-6 border-gray-800 px-5 py-16 lg:w-1/5 lg:border-x 2xl:-ml-5 2xl:w-1/6 2xl:pl-5">
-        <div className="text-3xl font-semibold text-balance lg:text-2xl lg:font-normal">
+        <div className="text-3xl font-semibold text-balance lg:mb-5 lg:text-2xl lg:font-normal">
           <span>We've got you covered</span>
           <span className="text-gray-400"> from start to finish</span>
         </div>

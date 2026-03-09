@@ -1,39 +1,39 @@
 ---
-import Image, { getImageUrl } from '@/components/Image.tsx'
-import Layout from '@/layouts/Layout.astro'
-import type { FeaturesPage, Video } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import PageTitle from '../../components/PageTitle.astro'
-import SmallVideoCard from '../../components/SmallVideoCard.astro'
-import { getPayload } from '@/payload'
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
-import { Schema } from 'astro-seo-schema'
-import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
-import type { BreadcrumbList } from 'schema-dts'
-import { MuxPlayer } from '@mux/mux-player-astro'
-import { PhArrowLeft } from 'phosphor-icons-astro'
+import Image, { getImageUrl } from "@/components/Image.tsx";
+import Layout from "@/layouts/Layout.astro";
+import type { FeaturesPage, Video } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import PageTitle from "../../components/PageTitle.astro";
+import SmallVideoCard from "../../components/SmallVideoCard.astro";
+import { getPayload } from "@/payload";
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
+import { Schema } from "astro-seo-schema";
+import { convertLexicalToPlaintext } from "@payloadcms/richtext-lexical/plaintext";
+import type { BreadcrumbList } from "schema-dts";
+import { MuxPlayer } from "@mux/mux-player-astro";
+import { PhArrowLeft } from "phosphor-icons-astro";
 
 export async function getStaticPaths() {
-  const payload = await getPayload()
+  const payload = await getPayload();
   const videos = (
     await payload.find({
-      collection: 'videos',
+      collection: "videos",
       limit: 100,
       where: { slug: { exists: true } },
     })
-  ).docs as Populated<Video>[]
+  ).docs as Populated<Video>[];
 
   const featuredPage = (await payload.findGlobal({
-    slug: 'features-page',
-  })) as Populated<FeaturesPage>
+    slug: "features-page",
+  })) as Populated<FeaturesPage>;
 
   return videos.map((video) => ({
     params: { slug: video.slug },
     props: { video, allVideos: videos, featuredPage },
-  }))
+  }));
 }
 
-const video = Astro.props.video
+const video = Astro.props.video;
 const {
   slug,
   id,
@@ -45,77 +45,77 @@ const {
   image,
   title,
   createdAt,
-} = video
+} = video;
 
-const category = type
+const category = type;
 
-const allVideos = Astro.props.allVideos
-const featuredPage = Astro.props.featuredPage
+const allVideos = Astro.props.allVideos;
+const featuredPage = Astro.props.featuredPage;
 
 const indexOfCurrentVideo = allVideos.findIndex(
   (video) => video.title === title,
-)
+);
 const nextVideos = allVideos.slice(
   indexOfCurrentVideo + 1,
   indexOfCurrentVideo + 4,
-)
+);
 
 if (nextVideos.length < 3) {
-  const remainingVideos = allVideos.slice(0, 3 - nextVideos.length)
-  nextVideos.push(...remainingVideos)
+  const remainingVideos = allVideos.slice(0, 3 - nextVideos.length);
+  nextVideos.push(...remainingVideos);
 }
 
 const breadcrumbList: BreadcrumbList[] = [
   {
-    '@type': 'BreadcrumbList',
+    "@type": "BreadcrumbList",
     itemListElement: [
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 1,
-        name: 'Portfolio',
-        item: 'https://veklabs.com/portfolio',
+        name: "Portfolio",
+        item: "https://veklabs.com/portfolio",
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 2,
         name: title,
         item: `https://veklabs.com/videos/${slug}`,
       },
     ],
   },
-]
+];
 
 if (featuredPage.videos.find((v) => v.id === id)) {
   breadcrumbList.push({
-    '@type': 'BreadcrumbList',
+    "@type": "BreadcrumbList",
     itemListElement: [
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 1,
-        name: 'Features',
-        item: 'https://veklabs.com/features',
+        name: "Features",
+        item: "https://veklabs.com/features",
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 2,
         name: title,
         item: `https://veklabs.com/videos/${slug}`,
       },
     ],
-  })
+  });
 }
 
 const aspectRatio =
   video.videoWidth && video.videoHeight
     ? video.videoWidth / video.videoHeight
-    : 16 / 9
+    : 16 / 9;
 ---
 
 <Layout video={videoURL} title={title} meta={video.meta}>
   <Schema
     item={{
-      '@context': 'https://schema.org',
-      '@type': 'VideoObject',
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
       description:
         video.meta?.description || body
           ? convertLexicalToPlaintext({ data: body })
@@ -123,22 +123,22 @@ const aspectRatio =
       name: title,
       thumbnailUrl: image.url,
       uploadDate: createdAt,
-      author: 'Vek Labs',
+      author: "Vek Labs",
       embedUrl: videoURL,
-      type: 'VideoObject',
+      type: "VideoObject",
       contentUrl: `https://veklabs.com/videos/${video.slug}`,
-      publisher: { '@type': 'Organization', name: 'Vek Labs' },
+      publisher: { "@type": "Organization", name: "Vek Labs" },
     }}
   />
   <Schema
     item={{
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
       itemListElement: breadcrumbList.flatMap((list) => list.itemListElement),
     }}
   />
   <div
-    class="fixed inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
+    class="inset-0 z-50 h-full overflow-y-scroll bg-black pt-12 opacity-100 backdrop-blur-3xl backdrop-brightness-200 backdrop-saturate-200 md:pt-0 starting:opacity-0 starting:backdrop-blur-none"
   >
     <div class="w-container mx-auto grid grid-cols-[1fr_auto_1fr]">
       <div>
@@ -158,7 +158,7 @@ const aspectRatio =
           src={video.videom3u8 || video.videoURL}
           style={{ aspectRatio }}
           poster={getImageUrl({
-            alt: '',
+            alt: "",
             media: image,
             height: 500 / (16 / 9),
             width: 500,
@@ -198,7 +198,7 @@ const aspectRatio =
 
               {
                 nextVideos && (
-                  <div class="flex flex-col gap-2">
+                  <div class="flex flex-col gap-2 pt-6">
                     <span class="text-xs font-bold tracking-widest uppercase">
                       Up Next
                     </span>

@@ -25,10 +25,10 @@ const clientLogos = (await payload
   .then((res) => res.docs)) as Populated<Media>[];
 ---
 
-<Layout meta={homePageSettings.meta}>
-  <div class="my-6 flex flex-col gap-6">
+<Layout meta={homePageSettings.meta} header={{ appearance: "fixed" }}>
+  <div class="mb-6 flex flex-col gap-6">
     <HeroVideo client:load config={homePageSettings} />
-    <VideoGrid videos={homePageSettings.hero.videos as Populated<Video>[]} />
+    <!-- <VideoGrid videos={homePageSettings.hero.videos as Populated<Video>[]} /> -->
     <GuaranteeSection home={homePageSettings} />
     <FeaturedServices />
     <CrewSection home={homePageSettings} />
