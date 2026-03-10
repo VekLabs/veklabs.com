@@ -10,6 +10,4 @@ const services = (await payload.find({ collection: "services", limit: 100 }))
   .docs as Populated<Service>[];
 ---
 
-<section class="my-8 border-y border-gray-800">
-  <FeaturedServicesList services={services} client:visible />
-</section>
+<FeaturedServicesList services={services} client:visible />

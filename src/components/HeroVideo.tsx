@@ -16,12 +16,14 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useResizeObserver } from "usehooks-ts";
 import logoFullSVG from "../images/logo-full.svg?url";
 import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import { FigText } from "./FigText";
 import Image from "./Image";
+import type { Icon } from "@phosphor-icons/react";
+import { BigBlockButton } from "./BigBlockButton";
 
 const VIDEO_PLAY_DURATION = 20;
 const VIDEO_START_TIME = 30;
@@ -135,70 +137,11 @@ export default function HeroVideo({ config }: { config: Populated<HomePage> }) {
           </span>
         </div>
 
-        <motion.div
-          className="w-full basis-1/3 overflow-clip border border-gray-800"
-          whileHover="hovered"
-        >
-          <MotionConfig
-            transition={{
-              type: "spring",
-              bounce: 0.3,
-              bounceDamping: 20,
-              visualDuration: 0.3,
-            }}
-          >
-            <motion.a
-              className="relative flex h-full w-full cursor-pointer items-center py-10 text-2xl font-medium"
-              href="/portfolio"
-            >
-              <motion.div
-                className="absolute inset-0 flex size-full items-center px-10"
-                variants={{
-                  hovered: { translateY: "-100%" },
-                }}
-                initial={{ translateY: "0%" }}
-              >
-                <motion.span
-                  className="origin-bottom-left"
-                  initial={{ rotateZ: 0, translateY: "0%" }}
-                  variants={{
-                    hovered: { rotateZ: -10, translateY: "-100%" },
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                    delay: 0.1,
-                  }}
-                >
-                  Portfolio
-                </motion.span>
-                <ArrowUpRightIcon className="ml-auto" />
-              </motion.div>
-
-              <motion.div
-                className="absolute inset-0 flex size-full items-center bg-white px-10 text-black"
-                initial={{ translateY: "100%" }}
-                variants={{ hovered: { translateY: "0%" } }}
-              >
-                <motion.span
-                  className="z-10 origin-bottom-left text-black"
-                  initial={{ translateY: "100%", rotateZ: 10 }}
-                  variants={{ hovered: { translateY: "0%", rotateZ: 0 } }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                    delay: 0.1,
-                  }}
-                >
-                  Portfolio
-                </motion.span>
-                <ArrowUpRightIcon className="ml-auto" />
-              </motion.div>
-            </motion.a>
-          </MotionConfig>
-        </motion.div>
+        <BigBlockButton
+          label="Portfolio"
+          icon={ArrowUpRightIcon}
+          className="basis-1/3"
+        />
       </div>
     </>
   );
@@ -222,10 +165,10 @@ function VideoList({
       <div className="w-32" />
       {videos?.map((video) => (
         <VideoListCard
-          key={video.id}
+          key={video.videoID}
           video={video}
           muxVideo={muxVideo}
-          isActive={activeVideo.id === video.id}
+          isActive={activeVideo.videoID === video.videoID}
           setActiveVideo={setActiveVideo}
           videoRef={videoRef}
           isBrandVideo={video.videoID === videos[0].videoID}
