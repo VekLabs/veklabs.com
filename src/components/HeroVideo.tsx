@@ -16,14 +16,17 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
+import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import { useResizeObserver } from "usehooks-ts";
 import logoFullSVG from "../images/logo-full.svg?url";
-import scrollIntoView from "smooth-scroll-into-view-if-needed";
+import { BigBlockButton } from "./BigBlockButton";
 import { FigText } from "./FigText";
 import Image from "./Image";
-import type { Icon } from "@phosphor-icons/react";
-import { BigBlockButton } from "./BigBlockButton";
+import {
+  SpeakerSimpleHighIcon,
+  SpeakerSimpleSlashIcon,
+} from "@phosphor-icons/react";
 
 const VIDEO_PLAY_DURATION = 20;
 const VIDEO_START_TIME = 30;
@@ -51,7 +54,6 @@ export default function HeroVideo({ config }: { config: Populated<HomePage> }) {
           }}
         />
 
-        {/* TODO: Hide when the logo comes in on the brand video */}
         <MotionConfig
           transition={{
             duration: 0.5,
@@ -63,7 +65,7 @@ export default function HeroVideo({ config }: { config: Populated<HomePage> }) {
             layout
             className="w-container absolute bottom-48 left-1/2 mx-auto flex h-full max-w-380 -translate-x-1/2 flex-col justify-end gap-3 overflow-clip px-4 py-2 lg:bottom-40"
           >
-            <motion.div layout className="flex gap-2 opacity-30">
+            <motion.div layout className="flex items-center gap-2 opacity-30">
               <motion.img
                 layout
                 className="w-full max-w-20 justify-self-start"
@@ -71,9 +73,22 @@ export default function HeroVideo({ config }: { config: Populated<HomePage> }) {
                 alt=""
               />
               <motion.span layout>•</motion.span>
-              <motion.span layout className="tracking-widest uppercase">
-                Now Playing
-              </motion.span>
+
+              <motion.button
+                className="allow-discrete flex cursor-pointer items-center gap-2 rounded-full bg-transparent px-3 py-0.5 ring ring-white transition-all duration-200 hover:bg-white hover:text-black"
+                onClick={() => {
+                  muxVideo.isMuted ? muxVideo.unmute() : muxVideo.mute();
+                }}
+              >
+                {muxVideo.isMuted ? (
+                  <SpeakerSimpleSlashIcon className="text-sm" />
+                ) : (
+                  <SpeakerSimpleHighIcon className="text-sm" />
+                )}
+                <motion.span className="text-xs tracking-widest uppercase">
+                  {muxVideo.isMuted ? "Unmute" : "Mute"}
+                </motion.span>
+              </motion.button>
             </motion.div>
 
             <AnimatePresence mode="popLayout">
