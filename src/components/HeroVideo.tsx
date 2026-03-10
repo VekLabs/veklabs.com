@@ -289,7 +289,7 @@ function VideoListCard({
         ? target.currentTime
         : target.currentTime - VIDEO_START_TIME;
 
-      const progress = Math.min((currentTime + 2) / duration, 1);
+      const progress = Math.min((currentTime + 0.5) / duration, 1);
 
       if (
         [duration, currentTime].some(
