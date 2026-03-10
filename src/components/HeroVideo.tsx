@@ -17,11 +17,11 @@ import {
   useTransform,
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import { useResizeObserver } from "usehooks-ts";
 import logoFullSVG from "../images/logo-full.svg?url";
-import Image from "./Image";
+import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import { FigText } from "./FigText";
+import Image from "./Image";
 
 const VIDEO_PLAY_DURATION = 20;
 const VIDEO_START_TIME = 30;
@@ -217,12 +217,10 @@ function VideoList({
   videoRef: React.RefObject<MuxPlayerRefAttributes>;
   muxVideo: ReturnType<typeof useMuxVideo>;
 }) {
-  videos.map((video) => console.log(video.videoURL));
-
   return (
     <div className="no-scrollbar static mx-auto flex w-full max-w-390 snap-x snap-mandatory gap-4 overflow-x-auto py-6 xl:absolute xl:bottom-0 xl:left-1/2 xl:-translate-x-1/2">
       <div className="w-32" />
-      {videos?.map((video, i) => (
+      {videos?.map((video) => (
         <VideoListCard
           key={video.id}
           video={video}
@@ -320,8 +318,6 @@ function VideoListCard({
   return (
     <motion.div
       ref={ref}
-      layout
-      layoutId="progress"
       onClick={() => {
         if (isActive) {
           if (isPlaying) {
@@ -353,12 +349,12 @@ function VideoListCard({
       )}
 
       <motion.svg
-        width={width + 3}
-        height={height + 3}
+        width={width + 2}
+        height={height + 2}
         viewBox={`0 0 ${width} ${height}`}
         style={{ opacity }}
         className={cn(
-          "pointer-events-none absolute inset-0 z-3 -mt-0.5 -ml-0.5",
+          "pointer-events-none absolute inset-0 z-3 -mt-px -ml-px",
           {
             hidden: !isActive,
           },
@@ -445,6 +441,7 @@ function VideoPlayer({
           "aspect-3/4 h-full w-full overflow-clip border-white/10 object-cover object-center [--controls:none] [--media-object-fit:cover] lg:aspect-[2256/943.195] lg:max-h-[80vh]",
           {
             hidden: isLowerPowerMode,
+            "scale-125 lg:scale-100": video.hasCropMarks,
           },
         )}
         ref={ref}
