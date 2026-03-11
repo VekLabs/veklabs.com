@@ -1,24 +1,25 @@
 ---
-import { getPayload } from '@/payload'
-import type { Service } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import PageTitle from '../../components/PageTitle.astro'
-import ServiceSummary from '../../components/ServiceSummary.astro'
-import Layout from '../../layouts/Layout.astro'
+import { getPayload } from "@/payload";
+import type { Service } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import PageTitle from "../../components/PageTitle.astro";
+import ServiceSummary from "../../components/ServiceSummary.astro";
+import Layout from "../../layouts/Layout.astro";
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const services = (
   await payload.find({
-    collection: 'services',
+    collection: "services",
     limit: 100,
+    sort: "_order",
   })
-).docs as Populated<Service>[]
+).docs as Populated<Service>[];
 ---
 
 <Layout title="Services">
   <section class="overflow-y-hidden">
-    <div class="container mx-auto max-w-[980px] px-6 pt-20 lg:px-12">
+    <div class="container mx-auto max-w-245 px-6 pt-20 lg:px-12">
       <div>
         <PageTitle>Services</PageTitle>
 
