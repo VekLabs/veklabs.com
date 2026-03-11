@@ -1,6 +1,7 @@
 ---
 import logo from "@/images/logos/vl-logo-white.jpg";
 import ogImage from "@/images/ogimage.webp";
+import ogImageAnimated from "@/images/ogimage-animated.gif";
 import { getPayload } from "@/payload";
 import type { HomePage, SiteSetting, Team } from "@/payload-types";
 import type { Populated } from "@/utils/typeChecks";
@@ -27,7 +28,7 @@ type Props = {
   path?: string;
 } & Partial<AstroSeoProps>;
 
-const { meta = {}, pageTitle, path } = Astro.props as Props;
+const { meta = {}, pageTitle } = Astro.props as Props;
 
 let title = `Vek Labs - Video Production Company`;
 if (pageTitle) {
@@ -63,6 +64,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   openGraph={{
     site_name: "Vek Labs",
     images: [
+      {
+        url: meta.image?.url || ogImageAnimated.src,
+        alt: "Vek Labs - Video Production Company",
+        height: meta.image?.height || 630,
+        width: meta.image?.width || 1200,
+        type: meta.image?.mimeType || "image/gif",
+      },
       {
         url: meta.image?.url || ogImage.src,
         alt: "Vek Labs - Video Production Company",
