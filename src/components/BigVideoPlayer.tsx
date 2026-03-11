@@ -1,3 +1,5 @@
+import "@mux/mux-player/themes/minimal";
+
 import { useMuxVideo } from "@/hooks/useVideo";
 import type { Video } from "@/payload-types";
 import { cn } from "@/utils/cn";
@@ -57,6 +59,8 @@ export default function BigVideoPlayer({
   const [isShowingUI, setIsShowingUI] = useState(true);
   const [isUILocked, setIsUILocked] = useState(false);
   const [showingInfo, setShowingInfo] = useState(false);
+  const [userUnmuted, setUserUnmuted] = useState(false);
+
   const ref = useRef<MuxPlayerRefAttributes>(null);
   const muxVideo = useMuxVideo(ref);
 
@@ -106,6 +110,7 @@ export default function BigVideoPlayer({
     >
       <motion.div
         className="relative overflow-clip"
+        id="bvp-wrapper"
         onPointerMove={(e) => {
           debouncedHide.cancel();
           setIsShowingUI(true);
@@ -122,6 +127,8 @@ export default function BigVideoPlayer({
           // if we're not hovering over some UI element inside the video player, start the debounce to hide the UI
           if (!(e.target as HTMLElement).closest(".bvp-ui")) {
             debouncedHide();
+          } else {
+            debouncedHide.cancel();
           }
         }}
         onTouchEnd={(e) => {
@@ -148,6 +155,21 @@ export default function BigVideoPlayer({
           }}
         />
 
+        {mode === "full" && !userUnmuted && (
+          <motion.button
+            className="bvp-ui absolute top-1/2 left-1/2 z-50 flex aspect-square -translate-1/2 cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-black/30 p-8 text-sm font-medium text-white backdrop-blur-lg transition-all duration-200 hover:bg-black/50 active:bg-black"
+            onClick={() => {
+              muxVideo.unmute();
+              setUserUnmuted(true);
+            }}
+          >
+            <SpeakerSimpleSlashIcon className="text-sm" />
+            <motion.span className="text-xs tracking-widest uppercase">
+              Unmute
+            </motion.span>
+          </motion.button>
+        )}
+
         <motion.div className="bvp-ui contents">
           <MotionConfig
             transition={{
@@ -158,7 +180,12 @@ export default function BigVideoPlayer({
           >
             <motion.div
               layout
-              className="w-container absolute bottom-48 left-1/2 mx-auto flex h-auto max-w-380 -translate-x-1/2 flex-col justify-end gap-3 overflow-clip px-4 py-2 lg:bottom-40"
+              className={cn(
+                "w-container absolute bottom-48 left-1/2 mx-auto flex h-auto max-w-380 -translate-x-1/2 flex-col justify-end gap-3 overflow-clip px-4 py-2 lg:bottom-40",
+                {
+                  "bottom:60 lg:bottom-70": mode === "full",
+                },
+              )}
               variants={{
                 rest: {
                   opacity: 0,
@@ -451,7 +478,7 @@ function VideoList({
       )}
       variants={{
         hover: {
-          y: "0%",
+          y: mode === "full" ? -40 : 0,
         },
         rest: {
           y: "100%",
@@ -652,11 +679,17 @@ function VideoPlayer({
   muxVideo: ReturnType<typeof useMuxVideo>;
   ref?: React.RefObject<MuxPlayerRefAttributes>;
 }) {
-  const { mode } = useContext(BigVideoPlayerContext);
+  const { mode, isShowingUI } = useContext(BigVideoPlayerContext);
   const [isLowerPowerMode, setIsLowPowerMode] = useState(false);
-  const { isPlaying, isMuted, play } = muxVideo;
+  const { isPlaying, isMuted } = muxVideo;
 
   useEffect(() => {
+    console.log(
+      ref.current.shadowRoot
+        .querySelector("media-theme")
+        .shadowRoot.querySelector("media-controller")
+        .shadowRoot.host.setAttribute("autohide", "-1"),
+    );
     ref.current?.play().catch((error) => {
       if (error.name === "NotAllowedError") {
         setIsLowPowerMode(true);
@@ -666,30 +699,34 @@ function VideoPlayer({
 
   return (
     <motion.div
-      className={cn(
-        "relative size-full overflow-clip duration-2000 [--controls:none]",
-        {
-          "h-dvh max-h-dvh": mode === "full",
-          "aspect-3/4 max-h-[80vh] lg:aspect-[2256/943.195]":
-            mode === "preview",
-        },
-      )}
+      className={cn("relative size-full overflow-clip duration-2000", {
+        "h-dvh max-h-dvh": mode === "full",
+        "aspect-3/4 max-h-[80vh] lg:aspect-[2256/943.195]": mode === "preview",
+      })}
     >
       <MuxPlayer
         className={cx("size-full overflow-clip object-cover object-center", {
           hidden: isLowerPowerMode,
           "scale-125 lg:scale-100": video.hasCropMarks,
           "h-dvh max-h-dvh 2xl:[--media-object-fit:cover]": mode === "full",
-          "aspect-3/4 [--controls:none] [--media-object-fit:cover] lg:aspect-[2256/943.195] lg:max-h-[80vh]":
+          "aspect-3/4 [--media-object-fit:cover] lg:aspect-[2256/943.195] lg:max-h-[80vh]":
             mode === "preview",
+          "[--controls:none]": mode === "preview" || !isShowingUI,
         })}
+        fullscreenElement="bvp-wrapper"
         ref={ref}
         src={video.videom3u8 || video.videoURL}
         autoPlay
+        accentColor="#ffffff"
+        metadata={{
+          videoTitle: video.title,
+        }}
+        theme="minimal"
+        capRenditionToPlayerSize
         preload="auto"
         muted={isMuted}
         paused={!isPlaying}
-        defaultHiddenCaptions
+        defaultHiddenCaptions={mode === "preview"}
         onEnded={() => {
           if (isBrandVideo || mode === "full") {
             onVideoEnd?.();

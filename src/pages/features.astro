@@ -20,7 +20,6 @@ const featuredPageSettings = (await payload.findGlobal({
 >
   <BigVideoPlayer
     videos={featuredPageSettings.videos as Populated<Video>[]}
-    maxHeight="100dvh"
     mode="full"
     client:load
   />

@@ -60,7 +60,7 @@ export default function Header({
     <HeaderProvider currentPath={currentPath}>
       <header
         className={cn([
-          "top-0 z-999 py-3 md:py-4",
+          "top-0 z-50 py-3 md:py-4",
           {
             "bg-background border-b-0.5 sticky border-white/10":
               appearance === "sticky",
