@@ -1,6 +1,6 @@
 ---
 import logo from "@/images/logos/vl-logo-white.jpg";
-import tempHero from "@/images/tempHero.jpg";
+import ogImage from "@/images/ogimage.webp";
 import { getPayload } from "@/payload";
 import type { HomePage, SiteSetting, Team } from "@/payload-types";
 import type { Populated } from "@/utils/typeChecks";
@@ -64,7 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     site_name: "Vek Labs",
     images: [
       {
-        url: meta.image?.url || tempHero.src,
+        url: meta.image?.url || ogImage.src,
         alt: "Vek Labs - Video Production Company",
         height: meta.image?.height || 630,
         width: meta.image?.width || 1200,
