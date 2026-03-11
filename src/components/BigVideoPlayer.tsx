@@ -223,6 +223,13 @@ export default function BigVideoPlayer({
                           opacity: 0,
                           filter: "blur(5px)",
                         }}
+                        transition={{
+                          layout: {
+                            type: "spring",
+                            bounceDamping: 20,
+                            bounce: 0.2,
+                          },
+                        }}
                         className="text-3xl font-semibold opacity-30 lg:text-5xl"
                       >
                         {activeVideo.title || ""}
@@ -244,7 +251,8 @@ export default function BigVideoPlayer({
                 <motion.div className="relative" initial="compact">
                   <motion.div
                     layout
-                    layoutId={`video-body-${activeVideo.videoID}`}
+                    layoutCrossfade
+                    layoutId={`video-body`}
                     className="bvp-ui text-white/50"
                     dangerouslySetInnerHTML={{
                       __html: convertLexicalToHTML({ data: activeVideo.body }),
@@ -259,6 +267,13 @@ export default function BigVideoPlayer({
                         webkitLineClamp: 3,
                         display: "-webkit-box",
                         webkitBoxOrient: "vertical",
+                      },
+                    }}
+                    transition={{
+                      layout: {
+                        type: "spring",
+                        bounceDamping: 20,
+                        bounce: 0.2,
                       },
                     }}
                   />
@@ -278,7 +293,7 @@ export default function BigVideoPlayer({
                       },
                     }}
                   >
-                    {isUILocked ? "Unlock" : "Read More"}
+                    Read More
                   </motion.button>
                 </motion.div>
               )}
@@ -321,13 +336,14 @@ export default function BigVideoPlayer({
               <motion.span
                 layout
                 layoutId={`video-title-${activeVideo.videoID}`}
-                className="text-shadow sticky top-0 z-20 rounded-2xl from-black to-transparent px-16 py-8 text-3xl font-semibold max-lg:bg-linear-180 lg:pt-16 lg:text-5xl"
+                className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-16 py-8 text-3xl font-semibold lg:pt-16 lg:text-5xl"
               >
                 {activeVideo.title || ""}
               </motion.span>
               <motion.div
                 layout
-                layoutId={`video-body-${activeVideo.videoID}`}
+                layoutId={`video-body`}
+                layoutCrossfade
                 className="bvp-ui px-16 text-white"
                 dangerouslySetInnerHTML={{
                   __html: convertLexicalToHTML({ data: activeVideo.body }),
@@ -367,20 +383,16 @@ export default function BigVideoPlayer({
                           <span dangerouslySetInnerHTML={{ __html: value }} />
                         </div>
                       ))}
-
-                    {(activeVideo.awards?.length ?? 0) > 0 && (
-                      <div className="flex flex-wrap">
-                        {activeVideo.awards!.map((awardImage) => (
-                          <Image
-                            media={awardImage}
-                            alt=""
-                            className="spring-duration-200 spring-bounce-20 w-20 rounded-2xl hover:z-10 hover:scale-200 hover:bg-black"
-                          />
-                        ))}
-                      </div>
-                    )}
                   </div>
                 ) : null}
+
+                {(activeVideo.awards?.length ?? 0) > 0 && (
+                  <div className="flex flex-wrap pt-8">
+                    {activeVideo.awards!.map((awardImage) => (
+                      <Image media={awardImage} width={150} alt="" />
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>
