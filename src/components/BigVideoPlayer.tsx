@@ -1,5 +1,4 @@
 import "@mux/mux-player/themes/minimal";
-
 import { useMuxVideo } from "@/hooks/useVideo";
 import type { Video } from "@/payload-types";
 import { cn } from "@/utils/cn";
@@ -712,9 +711,9 @@ function VideoPlayer({
   useEffect(() => {
     console.log(
       ref.current.shadowRoot
-        .querySelector("media-theme")
-        .shadowRoot.querySelector("media-controller")
-        .shadowRoot.host.setAttribute("autohide", "-1"),
+        ?.querySelector("media-theme")
+        ?.shadowRoot.querySelector("media-controller")
+        ?.shadowRoot.host.setAttribute("autohide", "-1"),
     );
     ref.current?.play().catch((error) => {
       if (error.name === "NotAllowedError") {
