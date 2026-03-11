@@ -260,7 +260,20 @@ export default function BigVideoPlayer({
                         }}
                         className="text-3xl font-semibold opacity-30 lg:text-5xl"
                       >
-                        {activeVideo.title || ""}
+                        {activeVideo.logo ? (
+                          <motion.div className="mr-auto flex w-full justify-start">
+                            <Image
+                              media={activeVideo.logo}
+                              height={100}
+                              style={{ width: "max-content" }}
+                              objectFit="contain"
+                              operations={{ dpr: 2 }}
+                              className="h-14 w-max lg:h-26"
+                            />
+                          </motion.div>
+                        ) : (
+                          activeVideo.title || ""
+                        )}
                       </motion.span>
                     ),
                 )}
@@ -393,7 +406,20 @@ function VideoInfoModal() {
           layoutId={`video-title-${activeVideo.videoID}`}
           className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-8 py-8 text-2xl font-semibold lg:px-16 lg:pt-16 lg:text-5xl"
         >
-          {activeVideo.title || ""}
+          {activeVideo.logo ? (
+            <motion.div className="mr-auto flex w-full justify-start">
+              <Image
+                media={activeVideo.logo}
+                height={100}
+                style={{ width: "max-content" }}
+                objectFit="contain"
+                operations={{ dpr: 2 }}
+                className="h-14 w-max lg:h-26"
+              />
+            </motion.div>
+          ) : (
+            activeVideo.title || ""
+          )}
         </motion.span>
         <motion.div
           layout
