@@ -1,11 +1,12 @@
 import { FloatingPortal } from "@floating-ui/react";
 import { AnimatePresence, easeInOut, motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HeaderProvider } from "../context/headerContext";
 import logoFullSVG from "../images/logo-full.svg?url";
 import HeaderLink from "./HeaderLink";
-import { ListIcon } from "@phosphor-icons/react/ssr";
+import { ListIcon, XIcon } from "@phosphor-icons/react/ssr";
 import { cn } from "@/utils/cn";
+import { useScrollLock } from "usehooks-ts";
 
 export interface HeaderProps {
   currentPath: string;
@@ -110,6 +111,19 @@ export default function Header({
 function MobileHeader({ currentPath, appearance = "sticky" }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const scrollLock = useScrollLock({ autoLock: false });
+  useEffect(() => {
+    if (menuOpen) {
+      scrollLock.lock();
+    } else {
+      scrollLock.unlock();
+    }
+
+    return () => {
+      scrollLock.unlock();
+    };
+  }, [menuOpen, scrollLock]);
+
   return (
     <div className="flex items-center justify-between md:hidden">
       <a href={"/"}>
@@ -136,7 +150,7 @@ function MobileHeader({ currentPath, appearance = "sticky" }: HeaderProps) {
                 type: "tween",
                 ease: easeInOut,
               }}
-              className="bg-background/90 fixed top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg"
+              className="bg-background/90 fixed top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg backdrop-brightness-125 backdrop-saturate-150"
             >
               {currentPath !== "/" && <HeaderLink href="/">Home</HeaderLink>}
               {menu.main.map((menuItem) => (
@@ -144,15 +158,27 @@ function MobileHeader({ currentPath, appearance = "sticky" }: HeaderProps) {
                   {menuItem.name}
                 </HeaderLink>
               ))}
-              <HeaderLink href="/contact">Contact</HeaderLink>
+
+              <motion.button
+                layout
+                layoutId="mobile-menu-button"
+                className="absolute top-5 right-5 rounded p-2 duration-150 hover:bg-white/20"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                <XIcon size="36" />
+              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
       </FloatingPortal>
 
-      <button onClick={() => setMenuOpen(!menuOpen)}>
-        <ListIcon size="24" />
-      </button>
+      <motion.button
+        layout
+        layoutId="mobile-menu-button"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <ListIcon size="30" />
+      </motion.button>
     </div>
   );
 }
