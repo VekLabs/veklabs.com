@@ -125,6 +125,7 @@ export default function BigVideoPlayer({
           }
         }}
         onTouchEnd={(e) => {
+          if (mode === "preview") return;
           if (!(e.target as HTMLElement).closest(".bvp-ui")) {
             e.preventDefault();
             e.stopPropagation();
@@ -215,7 +216,7 @@ export default function BigVideoPlayer({
                         }}
                         animate={{
                           translateY: "0%",
-                          opacity: mode ==='full'?1: 0.5,
+                          opacity: mode === "full" ? 1 : 0.5,
                           filter: "blur(0px)",
                         }}
                         exit={{
