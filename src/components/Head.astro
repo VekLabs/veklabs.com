@@ -71,6 +71,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         width: meta.image?.width || 1200,
         type: meta.image?.mimeType || "image/gif",
       },
+      {
+        url: meta.image?.url || ogImage.src,
+        alt: "Vek Labs - Video Production Company",
+        height: meta.image?.height || 630,
+        width: meta.image?.width || 1200,
+        type: meta.image?.mimeType || "image/jpeg",
+      },
     ],
     type: "website",
     description,
@@ -78,6 +85,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     title,
     profile: { username: "@veklabs" },
     url: "https://veklabs.com",
+    // videos: [
+    // {
+    //   url: "https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f",
+    //   type: "video/mp4",
+    //   height: 1080,
+    //   width: 1920,
+    //   alt: "Vek Labs Showreel",
+    //   secureUrl:
+    //     "https://player.vimeo.com/progressive_redirect/playback/686488451/rendition/1080p?loc=external&signature=251f8452368ca0ca7ba6b373f9fc7d2a22f65d0d56968214545cd30a07f7af5f",
+    // },
+    // ],
   }}
   additionalLinkTags={[
     {
