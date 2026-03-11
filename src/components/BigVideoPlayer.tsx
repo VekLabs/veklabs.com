@@ -10,13 +10,7 @@ import {
 } from "@phosphor-icons/react";
 import { PauseCircleIcon, PlayCircleIcon } from "@phosphor-icons/react/ssr";
 import cx from "classnames";
-import {
-  AnimatePresence,
-  motion,
-  MotionConfig,
-  useSpring,
-  useTransform,
-} from "motion/react";
+import { AnimatePresence, motion, MotionConfig, useSpring } from "motion/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import scrollIntoView from "smooth-scroll-into-view-if-needed";
 import {
@@ -39,14 +33,20 @@ export type BigVideoPlayerProps = {
 const BigVideoPlayerContext = createContext<
   Pick<BigVideoPlayerProps, "mode"> & {
     isShowingUI: boolean;
+    isShowingInfo: boolean;
+    setIsShowingInfo: (value: boolean) => void;
+    activeVideo: Populated<Video> & { isBrandVideo?: boolean };
     isUILocked: boolean;
     setIsUILocked: (value: boolean) => void;
   }
 >({
   mode: "preview",
+  activeVideo: null,
   isShowingUI: true,
   isUILocked: false,
   setIsUILocked: () => {},
+  isShowingInfo: false,
+  setIsShowingInfo: () => {},
 });
 
 export default function BigVideoPlayer({
@@ -59,7 +59,6 @@ export default function BigVideoPlayer({
   const [showingInfo, setShowingInfo] = useState(false);
   const ref = useRef<MuxPlayerRefAttributes>(null);
   const muxVideo = useMuxVideo(ref);
-  const infoRef = useRef(null);
 
   const debouncedHide = useDebounceCallback(() => setIsShowingUI(false), 4000);
 
@@ -93,27 +92,17 @@ export default function BigVideoPlayer({
     debouncedHide();
   }, []);
 
-  useOnClickOutside(infoRef, () => {
-    setShowingInfo(false);
-  });
-
-  useEffect(() => {
-    if (showingInfo) {
-      scrollLock.lock();
-    } else {
-      scrollLock.unlock();
-    }
-
-    return () => {
-      scrollLock.unlock();
-    };
-  }, [showingInfo]);
-
-  const scrollLock = useScrollLock({ autoLock: false });
-
   return (
     <BigVideoPlayerContext.Provider
-      value={{ mode, isShowingUI, isUILocked, setIsUILocked }}
+      value={{
+        mode,
+        isShowingUI,
+        isUILocked,
+        setIsUILocked,
+        activeVideo,
+        isShowingInfo: showingInfo,
+        setIsShowingInfo: setShowingInfo,
+      }}
     >
       <motion.div
         className="relative overflow-clip"
@@ -311,95 +300,119 @@ export default function BigVideoPlayer({
         </motion.div>
       </motion.div>
 
-      <AnimatePresence>
-        {showingInfo && (
-          <motion.div
-            ref={infoRef}
-            className="w-container fixed right-4 left-4 z-50 mt-auto ml-auto h-full max-h-1/2 max-w-200 rounded-2xl bg-black/60 text-white ring ring-white/10 backdrop-blur-2xl backdrop-brightness-150 backdrop-saturate-150 max-lg:top-4 max-lg:bottom-4 lg:top-1/2 lg:right-16 lg:max-h-[80vh] lg:-translate-y-1/2"
-            initial={{
-              translateX: "100%",
-              opacity: 0,
-              filter: "blur(5px)",
-            }}
-            animate={{
-              translateX: "0%",
-              opacity: 1,
-              filter: "blur(0px)",
-            }}
-            exit={{
-              translateX: "100%",
-              opacity: 0,
-              filter: "blur(5px)",
-            }}
-            transition={{ type: "spring", visualDuration: 0.5, bounce: 0.15 }}
-          >
-            <motion.div className="flex h-full flex-col overflow-y-auto rounded-2xl">
-              <motion.span
-                layout
-                layoutId={`video-title-${activeVideo.videoID}`}
-                className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-8 py-8 text-2xl font-semibold lg:px-16 lg:pt-16 lg:text-5xl"
-              >
-                {activeVideo.title || ""}
-              </motion.span>
-              <motion.div
-                layout
-                layoutId={`video-body`}
-                layoutCrossfade
-                className="bvp-ui px-8 text-white lg:px-16"
-                dangerouslySetInnerHTML={{
-                  __html: convertLexicalToHTML({ data: activeVideo.body }),
-                }}
-                variants={{
-                  expanded: {
-                    maxHeight: "100%",
-                  },
-                  compact: {
-                    maxHeight: "3lh",
-                    overflow: "hidden",
-                    webkitLineClamp: 3,
-                    display: "-webkit-box",
-                    webkitBoxOrient: "vertical",
-                  },
-                }}
-              />
-
-              <div className="flex flex-col flex-wrap gap-4 p-8 lg:p-16">
-                {activeVideo.type?.title || activeVideo.metadata ? (
-                  <div className="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
-                    {activeVideo.type?.title && (
-                      <div className="flex flex-col gap-3">
-                        <span className="text-xs font-bold tracking-widest uppercase">
-                          Category
-                        </span>
-                        <span>{activeVideo.type?.title}</span>
-                      </div>
-                    )}
-
-                    {activeVideo.metadata &&
-                      activeVideo.metadata.map(({ label, value }) => (
-                        <div className="flex flex-col">
-                          <span className="text-xxs text-accent-300 tracking-widest uppercase">
-                            {label}
-                          </span>
-                          <span dangerouslySetInnerHTML={{ __html: value }} />
-                        </div>
-                      ))}
-                  </div>
-                ) : null}
-
-                {(activeVideo.awards?.length ?? 0) > 0 && (
-                  <div className="flex flex-wrap pt-8">
-                    {activeVideo.awards!.map((awardImage) => (
-                      <Image media={awardImage} width={150} alt="" />
-                    ))}
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{showingInfo && <VideoInfoModal />}</AnimatePresence>
     </BigVideoPlayerContext.Provider>
+  );
+}
+
+function VideoInfoModal() {
+  const { activeVideo, isShowingInfo, setIsShowingInfo } = useContext(
+    BigVideoPlayerContext,
+  );
+  const infoRef = useRef(null);
+
+  useOnClickOutside(infoRef, () => {
+    setIsShowingInfo(false);
+  });
+
+  const scrollLock = useScrollLock({ autoLock: false });
+  useEffect(() => {
+    if (isShowingInfo) {
+      scrollLock.lock();
+    } else {
+      scrollLock.unlock();
+    }
+
+    return () => {
+      scrollLock.unlock();
+    };
+  }, [isShowingInfo]);
+
+  return (
+    <motion.div
+      ref={infoRef}
+      className="w-container fixed right-4 left-4 z-50 mt-auto ml-auto h-full max-h-2/3 max-w-200 rounded-2xl bg-black/60 text-white ring ring-white/10 backdrop-blur-2xl backdrop-brightness-150 backdrop-saturate-150 max-lg:top-4 max-lg:bottom-4 lg:top-1/2 lg:right-16 lg:max-h-[80vh] lg:-translate-y-1/2"
+      initial={{
+        translateX: "100%",
+        opacity: 0,
+        filter: "blur(5px)",
+      }}
+      animate={{
+        translateX: "0%",
+        opacity: 1,
+        filter: "blur(0px)",
+      }}
+      exit={{
+        translateX: "100%",
+        opacity: 0,
+        filter: "blur(5px)",
+      }}
+      transition={{ type: "spring", visualDuration: 0.5, bounce: 0.15 }}
+    >
+      <motion.div className="flex h-full flex-col overflow-y-auto rounded-2xl">
+        <motion.span
+          layout
+          layoutId={`video-title-${activeVideo.videoID}`}
+          className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-8 py-8 text-2xl font-semibold lg:px-16 lg:pt-16 lg:text-5xl"
+        >
+          {activeVideo.title || ""}
+        </motion.span>
+        <motion.div
+          layout
+          layoutId={`video-body`}
+          layoutCrossfade
+          className="bvp-ui px-8 text-white lg:px-16"
+          dangerouslySetInnerHTML={{
+            __html: convertLexicalToHTML({ data: activeVideo.body }),
+          }}
+          variants={{
+            expanded: {
+              maxHeight: "100%",
+            },
+            compact: {
+              maxHeight: "3lh",
+              overflow: "hidden",
+              webkitLineClamp: 3,
+              display: "-webkit-box",
+              webkitBoxOrient: "vertical",
+            },
+          }}
+        />
+
+        <div className="flex flex-col flex-wrap gap-4 p-8 lg:p-16">
+          {activeVideo.type?.title || activeVideo.metadata ? (
+            <div className="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
+              {activeVideo.type?.title && (
+                <div className="flex flex-col gap-3">
+                  <span className="text-xs font-bold tracking-widest uppercase">
+                    Category
+                  </span>
+                  <span>{activeVideo.type?.title}</span>
+                </div>
+              )}
+
+              {activeVideo.metadata &&
+                activeVideo.metadata.map(({ label, value }) => (
+                  <div className="flex flex-col">
+                    <span className="text-xxs text-accent-300 tracking-widest uppercase">
+                      {label}
+                    </span>
+                    <span dangerouslySetInnerHTML={{ __html: value }} />
+                  </div>
+                ))}
+            </div>
+          ) : null}
+
+          {(activeVideo.awards?.length ?? 0) > 0 && (
+            <div className="flex flex-wrap pt-8">
+              {activeVideo.awards!.map((awardImage) => (
+                <Image media={awardImage} width={150} alt="" />
+              ))}
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
