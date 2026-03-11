@@ -106,7 +106,7 @@ export default function BigVideoPlayer({
     >
       <motion.div
         className="relative overflow-clip"
-        onMouseMove={(e) => {
+        onPointerMove={(e) => {
           debouncedHide.cancel();
           setIsShowingUI(true);
 
@@ -115,12 +115,20 @@ export default function BigVideoPlayer({
             mode !== "full" ||
             !muxVideo.isPlaying ||
             showingInfo
-          )
+          ) {
             return;
+          }
 
           // if we're not hovering over some UI element inside the video player, start the debounce to hide the UI
           if (!(e.target as HTMLElement).closest(".bvp-ui")) {
             debouncedHide();
+          }
+        }}
+        onTouchEnd={(e) => {
+          if (!(e.target as HTMLElement).closest(".bvp-ui")) {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsShowingUI((s) => !s);
           }
         }}
         animate={isShowingUI ? "hover" : "rest"}
@@ -149,7 +157,7 @@ export default function BigVideoPlayer({
           >
             <motion.div
               layout
-              className="w-container absolute bottom-48 left-1/2 mx-auto flex h-full max-w-380 -translate-x-1/2 flex-col justify-end gap-3 overflow-clip px-4 py-2 lg:bottom-40"
+              className="w-container absolute bottom-48 left-1/2 mx-auto flex h-auto max-w-380 -translate-x-1/2 flex-col justify-end gap-3 overflow-clip px-4 py-2 lg:bottom-40"
               variants={{
                 rest: {
                   opacity: 0,
@@ -161,7 +169,9 @@ export default function BigVideoPlayer({
             >
               <motion.div
                 layout
-                className="flex items-center gap-2 opacity-30"
+                className={cn("flex items-center gap-2 opacity-30", {
+                  "opacity-100": mode === "full",
+                })}
                 variants={{ infoShowing: { opacity: 0 } }}
                 animate={showingInfo ? "infoShowing" : ""}
               >
@@ -205,7 +215,7 @@ export default function BigVideoPlayer({
                         }}
                         animate={{
                           translateY: "0%",
-                          opacity: 0.5,
+                          opacity: mode ==='full'?1: 0.5,
                           filter: "blur(0px)",
                         }}
                         exit={{
