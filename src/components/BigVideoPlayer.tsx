@@ -89,6 +89,7 @@ export default function BigVideoPlayer({
   }, [isUILocked]);
 
   useEffect(() => {
+    if (mode !== "full") return;
     debouncedHide();
   }, []);
 
