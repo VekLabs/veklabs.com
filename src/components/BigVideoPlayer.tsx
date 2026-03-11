@@ -1,4 +1,4 @@
-import "@mux/mux-player/themes/minimal";
+import "@mux/mux-player-react/themes/minimal";
 import { useMuxVideo } from "@/hooks/useVideo";
 import type { Video } from "@/payload-types";
 import { cn } from "@/utils/cn";
