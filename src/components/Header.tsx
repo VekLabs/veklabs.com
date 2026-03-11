@@ -60,7 +60,7 @@ export default function Header({
     <HeaderProvider currentPath={currentPath}>
       <header
         className={cn([
-          "top-0 z-40 py-3 md:py-4",
+          "top-0 z-999 py-3 md:py-4",
           {
             "bg-background border-b-0.5 sticky border-white/10":
               appearance === "sticky",
@@ -136,7 +136,7 @@ function MobileHeader({ currentPath, appearance = "sticky" }: HeaderProps) {
                 type: "tween",
                 ease: easeInOut,
               }}
-              className="bg-background/90 fixed top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg"
+              className="bg-background/90 fixed top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-8 p-4 pb-14 backdrop-blur-lg"
             >
               {currentPath !== "/" && <HeaderLink href="/">Home</HeaderLink>}
               {menu.main.map((menuItem) => (
