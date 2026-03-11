@@ -1,15 +1,15 @@
-import type { Icon } from "@phosphor-icons/react";
+import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import type { ReactNode } from "react";
 import { MotionConfig, motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 
 export function BigBlockButton({
   label,
-  icon: Icon,
+
   className,
 }: {
   label: ReactNode;
-  icon?: Icon;
+
   className?: string;
 }) {
   return (
@@ -54,7 +54,7 @@ export function BigBlockButton({
             >
               {label}
             </motion.span>
-            {Icon && <Icon className="ml-auto" />}
+            <ArrowUpRightIcon className="ml-auto" />
           </motion.div>
 
           <motion.div
@@ -75,7 +75,7 @@ export function BigBlockButton({
             >
               {label}
             </motion.span>
-            {Icon && <Icon className="ml-auto" />}
+            <ArrowUpRightIcon className="ml-auto" />
           </motion.div>
         </motion.a>
       </MotionConfig>

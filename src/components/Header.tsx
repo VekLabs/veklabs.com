@@ -64,7 +64,7 @@ export default function Header({
           {
             "bg-background border-b-0.5 sticky border-white/10":
               appearance === "sticky",
-            "animate-fixed-scrolled-appearance range/0px_100px timeline fixed top-0 left-0 w-full":
+            "animate-fixed-scrolled-appearance range/0px_100px timeline spring-duration-500 spring-bounce-40 fixed top-0 left-0 w-full data-[hide=true]:-translate-y-full":
               appearance === "fixed",
           },
         ])}

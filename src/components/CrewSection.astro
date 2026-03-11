@@ -11,7 +11,7 @@ const teamMembers =
   (await payload
     .find({
       collection: "team",
-      sort: ["order"],
+      sort: "_order",
       limit: 100,
     })
     .then((res) => res.docs as Populated<Team>[])) ?? [];

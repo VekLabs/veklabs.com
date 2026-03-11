@@ -1,41 +1,27 @@
 ---
-import { getPayload } from '@/payload'
-import Layout from '@/layouts/Layout.astro'
-import PageTitle from '@/components/PageTitle.astro'
-import type { Populated } from '@/utils/typeChecks'
-import type { FeaturesPage, Video } from '@/payload-types'
-import VideoCard from '@/components/VideoCard'
+import BigVideoPlayer from "@/components/BigVideoPlayer";
+import Layout from "@/layouts/Layout.astro";
+import { getPayload } from "@/payload";
+import type { FeaturesPage, Video } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const featuredPageSettings = (await payload.findGlobal({
-  slug: 'features-page',
-})) as Populated<FeaturesPage>
+  slug: "features-page",
+})) as Populated<FeaturesPage>;
 ---
 
 <Layout
   title={featuredPageSettings.title}
   description={featuredPageSettings.description}
   meta={featuredPageSettings.meta}
+  header={{ appearance: "fixed" }}
 >
-  <section class="w-container mx-auto py-8 md:py-14">
-    <div class="mx-auto flex max-w-7xl flex-col gap-2 py-4 md:py-16">
-      <PageTitle>{featuredPageSettings.title}</PageTitle>
-      <p>{featuredPageSettings.description}</p>
-    </div>
-    <div
-      class="mx-auto grid max-w-7xl snap-y snap-mandatory grid-flow-row grid-cols-2 gap-6 overflow-y-auto py-10 md:gap-14"
-    >
-      {
-        featuredPageSettings.videos?.map(async (video) => (
-          <VideoCard
-            client:idle
-            showYear
-            className="aspect-video w-full"
-            video={video as Populated<Video>}
-          />
-        ))
-      }
-    </div>
-  </section>
+  <BigVideoPlayer
+    videos={featuredPageSettings.videos as Populated<Video>[]}
+    maxHeight="100dvh"
+    mode="full"
+    client:load
+  />
 </Layout>

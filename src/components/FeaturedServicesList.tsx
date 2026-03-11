@@ -54,7 +54,6 @@ export function FeaturedServicesList({
 
             <BigBlockButton
               label="Contact Us"
-              icon={ArrowUpRightIcon}
               className="mt-auto w-full border-0 border-t border-gray-800"
             />
           </div>

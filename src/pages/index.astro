@@ -1,15 +1,15 @@
 ---
-import type { Populated } from "@/utils/typeChecks";
-import HeroVideo from "../components/HeroVideo.tsx";
-import Layout from "../layouts/Layout.astro";
+import { BigBlockButton } from "@/components/BigBlockButton";
+import { ClientsSection } from "@/components/ClientsSection";
+import CrewSection from "@/components/CrewSection.astro";
+import FeaturedServices from "@/components/FeaturedServices.astro";
+import FigText from "@/components/FigText.astro";
+import GuaranteeSection from "@/components/GuaranteeSection.astro";
 import { getPayload } from "@/payload";
 import type { HomePage, Media, Video } from "@/payload-types";
-import VideoGrid from "@/components/VideoGrid.astro";
-import GuaranteeSection from "@/components/GuaranteeSection.astro";
-import Metrics from "@/components/Metrics.tsx";
-import FeaturedServices from "@/components/FeaturedServices.astro";
-import CrewSection from "@/components/CrewSection.astro";
-import { ClientsSection } from "@/components/ClientsSection";
+import type { Populated } from "@/utils/typeChecks";
+import BigVideoPlayer from "../components/BigVideoPlayer.tsx";
+import Layout from "../layouts/Layout.astro";
 
 const payload = await getPayload();
 
@@ -27,8 +27,28 @@ const clientLogos = (await payload
 
 <Layout meta={homePageSettings.meta} header={{ appearance: "fixed" }}>
   <div class="mb-6 flex flex-col gap-6">
-    <HeroVideo client:load config={homePageSettings} />
-    <!-- <VideoGrid videos={homePageSettings.hero.videos as Populated<Video>[]} /> -->
+    <BigVideoPlayer
+      client:load
+      videos={[
+        { ...homePageSettings.hero, isBrandVideo: true },
+        ...homePageSettings.hero.videos,
+      ] as Populated<Video & { isBrandVideo: boolean }>[]}
+      mode="preview"
+    />
+    <div class="w-container mx-auto flex max-w-370 flex-col pt-16 xl:flex-row">
+      <div
+        class="bg-stripes-diagonal relative flex basis-2/3 flex-col gap-3 border border-gray-900 p-6 px-8"
+      >
+        <FigText class="absolute right-6 bottom-3 text-gray-700">
+          FIG. 1.0
+        </FigText>
+        <span class="leading-11 font-medium lg:text-xl">
+          {homePageSettings.hero.HERO_EXCERPT}
+        </span>
+      </div>
+
+      <BigBlockButton client:idle label="Portfolio" className="basis-1/3" />
+    </div>
     <GuaranteeSection home={homePageSettings} />
     <FeaturedServices />
     <CrewSection home={homePageSettings} />
