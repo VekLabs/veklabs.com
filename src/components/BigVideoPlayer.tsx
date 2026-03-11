@@ -337,7 +337,7 @@ export default function BigVideoPlayer({
               <motion.span
                 layout
                 layoutId={`video-title-${activeVideo.videoID}`}
-                className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-16 py-8 text-3xl font-semibold lg:pt-16 lg:text-5xl"
+                className="text-shadow sticky top-0 z-20 rounded-2xl bg-linear-180 from-black to-transparent px-8 py-8 text-2xl font-semibold lg:px-16 lg:pt-16 lg:text-5xl"
               >
                 {activeVideo.title || ""}
               </motion.span>
@@ -345,7 +345,7 @@ export default function BigVideoPlayer({
                 layout
                 layoutId={`video-body`}
                 layoutCrossfade
-                className="bvp-ui px-16 text-white"
+                className="bvp-ui px-8 text-white lg:px-16"
                 dangerouslySetInnerHTML={{
                   __html: convertLexicalToHTML({ data: activeVideo.body }),
                 }}
@@ -363,7 +363,7 @@ export default function BigVideoPlayer({
                 }}
               />
 
-              <div className="flex flex-col flex-wrap gap-4 p-16">
+              <div className="flex flex-col flex-wrap gap-4 p-8 lg:p-16">
                 {activeVideo.type?.title || activeVideo.metadata ? (
                   <div className="mb-auto flex min-h-36 w-full flex-col gap-3 rounded-xl bg-neutral-200/10 p-6 ring-1 ring-white/15 md:w-72">
                     {activeVideo.type?.title && (
