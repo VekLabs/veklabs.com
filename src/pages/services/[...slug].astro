@@ -1,39 +1,42 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import type { Populated } from '@/utils/typeChecks'
-import type { Service } from '@/payload-types'
-import { getPayload } from '@/payload'
-import Image from '@/components/Image'
-import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
-import { Schema } from 'astro-seo-schema'
-import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import Layout from "../../layouts/Layout.astro";
+import type { Populated } from "@/utils/typeChecks";
+import type { Service } from "@/payload-types";
+import { getPayload } from "@/payload";
+import Image from "@/components/Image";
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
+import { Schema } from "astro-seo-schema";
+import { convertLexicalToPlaintext } from "@payloadcms/richtext-lexical/plaintext";
+import FigText from "@/components/FigText.astro";
 
 export async function getStaticPaths() {
-  const payload = await getPayload()
+  const payload = await getPayload();
   const services = (
     await payload.find({
-      collection: 'services',
+      collection: "services",
       limit: 100,
     })
-  ).docs as Populated<Service>[]
+  ).docs as Populated<Service>[];
 
   return services.map((service) => ({
     params: { slug: service.slug },
     props: { service, services },
-  }))
+  }));
 }
 
 type Props = {
-  service: Populated<Service>
-  services: Populated<Service>[]
-}
+  service: Populated<Service>;
+  services: Populated<Service>[];
+};
 
-const { service, services } = Astro.props
+const { service, services } = Astro.props;
 
-const indexOfCurrentService = services.findIndex((s) => s.slug === service.slug)
-const nextService = services[indexOfCurrentService + 1] || services[0]
+const indexOfCurrentService = services.findIndex(
+  (s) => s.slug === service.slug,
+);
+const nextService = services[indexOfCurrentService + 1] || services[0];
 
-const { image, page_title, title } = service
+const { image, page_title, title } = service;
 ---
 
 <Layout
@@ -44,23 +47,23 @@ const { image, page_title, title } = service
 >
   <Schema
     item={{
-      '@id': `https://veklabs.com/services/${service.slug}`,
-      '@type': 'ProfessionalService',
-      '@context': 'https://schema.org',
-      brand: 'Vek Labs',
+      "@id": `https://veklabs.com/services/${service.slug}`,
+      "@type": "ProfessionalService",
+      "@context": "https://schema.org",
+      brand: "Vek Labs",
       name: service.page_title || service.title,
       description: convertLexicalToPlaintext({ data: service.body }),
       areaServed: {
-        '@type': 'City',
-        name: 'Calgary',
+        "@type": "City",
+        name: "Calgary",
       },
       hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Services',
+        "@type": "OfferCatalog",
+        name: "Services",
         itemListElement: services.map((service) => ({
-          '@type': 'Offer',
+          "@type": "Offer",
           itemOffered: {
-            '@type': 'Service',
+            "@type": "Service",
             name: service.title,
           },
         })),
@@ -69,17 +72,17 @@ const { image, page_title, title } = service
   />
   <Schema
     item={{
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
       itemListElement: [
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 2,
-          name: 'Services',
-          item: 'https://veklabs.com/services',
+          name: "Services",
+          item: "https://veklabs.com/services",
         },
         {
-          '@type': 'ListItem',
+          "@type": "ListItem",
           position: 3,
           name: service.title,
           item: `https://veklabs.com/services/${service.slug}`,
@@ -88,49 +91,49 @@ const { image, page_title, title } = service
     }}
   />
   <main
-    class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-[1200px] md:flex-row lg:p-10"
+    class="mx-auto flex max-w-[calc(100vw-40px)] flex-col gap-10 pt-4 pb-12 md:max-w-300 md:flex-row lg:p-10"
   >
     <div
-      class="relative flex h-max w-full grow flex-col gap-4 md:sticky md:top-20 md:w-auto md:min-w-72 md:shrink"
+      class="flex h-max w-full grow flex-col gap-4 md:sticky md:top-20 md:w-auto md:min-w-72 md:shrink"
     >
-      {
-        image && (
-          <Image
-            media={image}
-            width={400}
-            height={400}
-            alt=""
-            className="spring-duration-150 aspect-video w-full max-w-[400px] rounded-xl object-cover ring-1 shadow-xl ring-white/10 md:aspect-square"
-          />
-        )
-      }
+      <div class="relative">
+        {
+          image && (
+            <Image
+              media={image}
+              width={400}
+              height={400}
+              alt=""
+              className="spring-duration-150 aspect-video w-full  object-cover ring-1 shadow-xl ring-white/10 md:aspect-square max-w-full!"
+            />
+          )
+        }
 
-      <h1
-        transition:name={`service-title-${service.slug}`}
-        class="absolute bottom-0 m-2 rounded-lg bg-gray-950/60 p-4 text-xl font-semibold ring-1 ring-gray-700/30 backdrop-blur-lg backdrop-brightness-200 md:p-6"
-      >
-        {page_title || title}
-      </h1>
-    </div>
+        <div class="absolute right-2 bottom-2 left-2">
+          <FigText class="absolute top-2 right-2 z-10 text-white/80"
+            >Fig. 3.{indexOfCurrentService + 1}</FigText
+          >
+          <h1
+            transition:name={`service-title-${service.slug}`}
+            class="bg-stripes-diagonal border-gray-900/30 bg-black/40 p-4 text-xl font-semibold text-pretty ring-1 ring-gray-700/30 backdrop-blur-xs [--bg-stripes-color:rgba(0,0,0,0.2)] md:p-6"
+          >
+            {page_title || title}
+          </h1>
+        </div>
+      </div>
 
-    <div class="flex w-full flex-col gap-4">
-      <article
-        class="content w-full overflow-x-scroll pb-20"
-        style="container-type: inline-size;"
-        transition:name={`service-description-${service.slug}`}
-        set:html={convertLexicalToHTML({ data: service.body })}
-      />
       {
         nextService && (
           <a
             href={`/services/${nextService.slug}`}
-            class="group ml-auto flex items-center gap-6"
+            class="hover:bg-stripes-diagonal hidden items-center gap-6 border-2 border-gray-900/60 md:flex"
           >
-            <div class="flex flex-col items-end justify-start gap-1 rounded-lg px-5 py-3 duration-300 group-hover:bg-gray-800">
+            <div
+              class="ml-auto flex flex-col items-end justify-start gap-1 px-5 py-3 duration-300"
+              transition:name={`service-title-${nextService.slug}`}
+            >
               <span class="text-xs tracking-widest uppercase">Next</span>
-              <span transition:name={`service-title-${nextService.slug}`}>
-                {nextService.title}
-              </span>
+              <span class="whitespace-nowrap">{nextService.title}</span>
             </div>
 
             <Image
@@ -138,7 +141,36 @@ const { image, page_title, title } = service
               width={100}
               height={100}
               alt=""
-              className="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 rounded-xl object-cover ring-1 shadow-xl ring-white/10 group-hover:scale-105"
+              className="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 object-cover ring-1 shadow-xl ring-white/10 "
+            />
+          </a>
+        )
+      }
+    </div>
+
+    <div class="flex w-full flex-col gap-4">
+      <article
+        class="content w-full overflow-x-scroll pb-20"
+        style="container-type: inline-size;"
+        set:html={convertLexicalToHTML({ data: service.body })}
+      />
+      {
+        nextService && (
+          <a
+            href={`/services/${nextService.slug}`}
+            class="hover:bg-stripes-diagonal ml-auto flex items-center gap-6 border-2 border-transparent hover:border-gray-900/30 md:hidden"
+          >
+            <div class="flex flex-col items-end justify-start gap-1 px-5 py-3 duration-300">
+              <span class="text-xs tracking-widest uppercase">Next</span>
+              <span class="whitespace-nowrap">{nextService.title}</span>
+            </div>
+
+            <Image
+              media={nextService.image}
+              width={100}
+              height={100}
+              alt=""
+              className="spring-duration-300 spring-bounce-40 aspect-video h-20 w-20 object-cover ring-1 shadow-xl ring-white/10 "
             />
           </a>
         )
