@@ -1,7 +1,6 @@
 import type { Service } from "@/payload-types";
 import { cn } from "@/utils/cn";
 import type { Populated } from "@/utils/typeChecks";
-import { ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { capitalize } from "lodash-es";
 import { motion } from "motion/react";
 import { useState } from "react";

@@ -21,10 +21,11 @@ import {
   useScrollLock,
 } from "usehooks-ts";
 import logoFullSVG from "../images/logo-full.svg?url";
-import Image from "./Image";
+import Image, { getImageUrl } from "./Image";
+import { preload } from "react-dom";
 
 const VIDEO_PLAY_DURATION = 20;
-const VIDEO_START_TIME = 30;
+const VIDEO_START_TIME = 4;
 
 export type BigVideoPlayerProps = {
   videos: Populated<Video & { isBrandVideo?: boolean }>[];
@@ -626,6 +627,9 @@ function VideoListCard({
       className={cn(
         "group relative flex aspect-video min-w-50 cursor-pointer flex-col rounded-xl duration-300 select-none hover:opacity-100",
       )}
+      onHoverStart={() => {
+        preload(video.videom3u8);
+      }}
     >
       <div className="absolute inset-0 z-1 size-full rounded-xl border border-white/10 backdrop-blur-3xl backdrop-brightness-75 backdrop-saturate-150" />
 
@@ -751,12 +755,15 @@ function VideoPlayer({
         preload="auto"
         muted={isMuted}
         paused={!isPlaying}
+        preferPlayback="mse"
         defaultHiddenCaptions={mode === "preview"}
         onEnded={() => {
           if (isBrandVideo || mode === "full") {
             onVideoEnd?.();
           }
         }}
+        poster={isBrandVideo ? getImageUrl({ media: video.image }) : undefined}
+        defaultDuration={mode === "preview" ? VIDEO_PLAY_DURATION : undefined}
         onPlay={(e) => {
           if (isBrandVideo || mode === "full") return;
           const target = e.currentTarget as HTMLVideoElement;
