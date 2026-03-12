@@ -3,8 +3,11 @@ import { getPayload } from "@/payload";
 import type { Service } from "@/payload-types";
 import type { Populated } from "@/utils/typeChecks";
 import PageTitle from "../../components/PageTitle.astro";
-import ServiceSummary from "../../components/ServiceSummary.astro";
-import Layout from "../../layouts/Layout.astro";
+import Image from "@/components/Image";
+import { PhArrowRight } from "phosphor-icons-astro";
+import Layout from "@/layouts/Layout.astro";
+import FigText from "@/components/FigText.astro";
+import { BackgroundGradientAnimation } from "@/components/BackgroundGradient";
 
 const payload = await getPayload();
 
@@ -18,13 +21,86 @@ const services = (
 ---
 
 <Layout title="Services">
-  <section class="overflow-y-hidden">
-    <div class="container mx-auto max-w-245 px-6 pt-20 lg:px-12">
-      <div>
-        <PageTitle>Services</PageTitle>
-
-        {services.map((service, i) => <ServiceSummary i={i} {...service} />)}
-      </div>
+  <div class="container mx-auto max-w-350 px-6 py-20 lg:px-12">
+    <div class="flex flex-col py-12">
+      <FigText>Fig. 3.0</FigText>
+      <PageTitle>Services</PageTitle>
+      <span class="text-lg font-semibold text-gray-500 italic"
+        >Premium Video. Painless Production.</span
+      >
     </div>
-  </section>
+
+    <div
+      class="relative grid grid-cols-1 border border-gray-700 lg:grid-cols-2"
+    >
+      <div
+        id="centerline"
+        class="absolute top-0 left-1/2 z-10 hidden h-full w-px -translate-x-1/2 bg-gray-700 lg:block"
+      >
+      </div>
+
+      {
+        services.map((service, i) => (
+          <a
+            href={`/services/${service.slug}`}
+            class="hover:bg-stripes-diagonal group relative flex w-full appearance-none flex-col border-b border-gray-700 duration-300 last:border-0 sm:flex-row lg:flex-col"
+          >
+            <FigText class="absolute top-4 left-4 text-gray-500/80">
+              Fig. 3.{i + 1}
+            </FigText>
+            <div class="absolute top-0 left-0 z-10 size-full bg-linear-60 from-white to-transparent opacity-10 duration-300 group-hover:opacity-40 lg:bg-linear-180 lg:opacity-20" />
+
+            <Image
+              className="size-full object-cover max-w-full! mask-b-from-0 to-100%"
+              media={service.image}
+              alt=""
+              operations={{ dpr: 2 }}
+              width={400}
+              height={400}
+            />
+            <div class="flex grow flex-col gap-4 p-8">
+              <h1 class="text-2xl font-semibold">{service.title}</h1>
+
+              <div class="leading-5 text-gray-400">{service.summary}</div>
+
+              {service.body && (
+                <span class="bg-background mt-auto inline-flex w-max items-center gap-1.5 rounded-lg px-3 py-2 text-sm duration-200">
+                  <span>Learn More</span>
+                  <PhArrowRight class="mt-0.5" />
+                </span>
+              )}
+            </div>
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        class="hover:bg-stripes-diagonal group relative flex w-full appearance-none flex-col border-b border-gray-700 duration-300 last:border-0"
+      >
+        <BackgroundGradientAnimation
+          client:visible
+          containerClassName="opacity-50 group-hover:opacity-70 duration-300 absolute size-full z-[-1]"
+        />
+        <FigText class="absolute top-4 left-4 text-gray-500/80"
+          >Fig. 3.{services.length + 1}</FigText
+        >
+
+        <div class="h-100"></div>
+        <div class="flex grow flex-col gap-4 p-8">
+          <h1 class="text-2xl font-semibold">Got a project in mind?</h1>
+
+          <div class="leading-5 text-gray-400">
+            We've got the skills. Let's team up.
+          </div>
+
+          <span
+            class="bg-background mt-auto inline-flex w-max items-center gap-1.5 rounded-lg px-3 py-2 text-sm duration-200"
+          >
+            <span>Contact Us</span>
+            <PhArrowRight class="mt-0.5" />
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
 </Layout>

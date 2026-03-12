@@ -155,6 +155,15 @@ export default {
           "scrollbar-width": "none",
           "-ms-overflow-style": "none",
         },
+        ".bg-stripes-diagonal": {
+          "background-image": `repeating-linear-gradient(
+                                var(--bg-stripes-angle, 45deg),
+                                var(--bg-stripes-color, rgba(255, 255, 255, 0.075)) 0,
+                                var(--bg-stripes-color, rgba(255, 255, 255, 0.075)) 1px,
+                                transparent 1px,
+                                transparent 4px
+                              )`,
+        },
       });
     }),
   ],

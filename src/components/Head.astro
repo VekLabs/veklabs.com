@@ -28,7 +28,7 @@ type Props = {
   path?: string;
 } & Partial<AstroSeoProps>;
 
-const { meta = {}, pageTitle } = Astro.props as Props;
+const { meta = {}, pageTitle, path } = Astro.props as Props;
 
 let title = `Vek Labs - Video Production Company`;
 if (pageTitle) {
@@ -36,6 +36,16 @@ if (pageTitle) {
 }
 if (meta.title) {
   title = meta.title;
+}
+
+// Replace | Vek Labs | with | Vek Labs - Video Production Company | for better SEO
+title = title.replace(
+  /Vek Labs(?! - Video Production Company)/g,
+  "Vek Labs - Video Production Company",
+);
+
+if (path === "/") {
+  title = `Vek Labs - Video Production Company`;
 }
 
 const description =

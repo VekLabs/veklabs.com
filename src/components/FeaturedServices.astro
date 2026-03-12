@@ -6,8 +6,9 @@ import { FeaturedServicesList } from "./FeaturedServicesList.tsx";
 
 const payload = await getPayload();
 
-const services = (await payload.find({ collection: "services", limit: 100 }))
-  .docs as Populated<Service>[];
+const services = (
+  await payload.find({ collection: "services", limit: 100, sort: "_order" })
+).docs as Populated<Service>[];
 ---
 
 <FeaturedServicesList services={services} client:visible />
