@@ -1,30 +1,30 @@
 ---
-import { getPayload } from '@/payload'
-import type { Service, SiteSetting } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import logoFullSVG from '../images/logos/vl-logo-white.svg'
-import { Image } from 'astro:assets'
-import { cn } from '@/utils/cn'
-import { capitalize, take, takeRight } from 'lodash-es'
+import { getPayload } from "@/payload";
+import type { Service, SiteSetting } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import logoFullSVG from "../images/logos/vl-logo-white.svg";
+import { Image } from "astro:assets";
+import { cn } from "@/utils/cn";
+import { capitalize, take, takeRight } from "lodash-es";
 
-const today = new Date()
+const today = new Date();
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const siteSettings = (await payload.findGlobal({
-  slug: 'site-settings',
-})) as Populated<SiteSetting>
+  slug: "site-settings",
+})) as Populated<SiteSetting>;
 
-const services = (await payload.find({ collection: 'services', limit: 100 }))
-  .docs as Populated<Service>[]
+const services = (await payload.find({ collection: "services", limit: 100 }))
+  .docs as Populated<Service>[];
 
-const pathname = Astro.url.pathname
+const pathname = Astro.url.pathname;
 
-const columnClasses = cn('flex flex-col gap-2')
-const columnHeaderClasses = cn('text-white mb-6 font-semibold')
+const columnClasses = cn("flex flex-col gap-2");
+const columnHeaderClasses = cn("text-white mb-6 font-semibold");
 const linkClasses = cn(
   'font-normal text-gray-400 hover:text-white transition data-[active="true"]:text-white data-[active="true"]:pointer-events-none',
-)
+);
 ---
 
 <footer class="bg-background border-t border-t-gray-800" role="contentinfo">
@@ -48,24 +48,24 @@ const linkClasses = cn(
         <span class={columnHeaderClasses}>Explore</span>
         {
           [
-            { href: '/features', title: 'Features' },
+            { href: "/features", title: "Features" },
             {
-              href: '/portfolio',
-              title: 'Portfolio',
+              href: "/portfolio",
+              title: "Portfolio",
             },
             {
-              href: '/services',
-              title: 'Services',
+              href: "/services",
+              title: "Services",
             },
             {
-              href: '/clients',
-              title: 'Clients',
+              href: "/clients",
+              title: "Clients",
             },
-            { href: '/reports', title: 'Reports' },
+            { href: "/reports", title: "Reports" },
           ].map(({ href, title }) => (
             <a
               href={href}
-              data-active={pathname !== '/' && href.includes(pathname)}
+              data-active={pathname !== "/" && href.includes(pathname)}
               class={linkClasses}
               title={`View Vek Labs ${title.toLowerCase()}`}
             >
@@ -82,7 +82,6 @@ const linkClasses = cn(
             return (
               <a
                 href={`/services/${slug}`}
-                target="_blank"
                 rel="noopener noreferrer nofollow"
                 class={linkClasses}
                 title={`View Vek Labs ${title.toLowerCase()}`}
@@ -91,7 +90,7 @@ const linkClasses = cn(
                   {capitalize(title)}
                 </div>
               </a>
-            )
+            );
           })
         }
       </div>
@@ -100,7 +99,7 @@ const linkClasses = cn(
         <span class={columnHeaderClasses}>Connect</span>
         <a
           href="/contact"
-          data-active={'/contact' === pathname}
+          data-active={"/contact" === pathname}
           class={linkClasses}
           title="View Vek Labs contact"
         >
@@ -114,19 +113,19 @@ const linkClasses = cn(
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 class={cn(linkClasses, {
-                  'sm:hidden': i >= Math.ceil(siteSettings.social.length / 2),
+                  "sm:hidden": i >= Math.ceil(siteSettings.social.length / 2),
                 })}
                 title={name}
               >
                 <div class="group relative flex items-center gap-4">{name}</div>
               </a>
-            )
+            );
           })
         }
       </div>
 
-      <div class={cn(columnClasses, 'hidden sm:flex')}>
-        <span class={columnHeaderClasses + ' invisible'}>Connect Contd.</span>
+      <div class={cn(columnClasses, "hidden sm:flex")}>
+        <span class={columnHeaderClasses + " invisible"}>Connect Contd.</span>
         {
           takeRight(
             siteSettings.social,
@@ -142,7 +141,7 @@ const linkClasses = cn(
               >
                 <div class="group relative flex items-center gap-4">{name}</div>
               </a>
-            )
+            );
           })
         }
       </div>
