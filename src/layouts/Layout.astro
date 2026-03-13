@@ -12,12 +12,16 @@ type Props = Parameters<typeof BaseHead>["0"] & {
   header?: {
     appearance?: "sticky" | "fixed";
   };
+  footer?: {
+    hide?: boolean;
+  };
 };
 
 const {
   title,
   description,
   header = { appearance: "sticky" },
+  footer = { hide: false },
   ...headProps
 } = Astro.props;
 ---
@@ -39,6 +43,6 @@ const {
     <main class="size-full">
       <slot />
     </main>
-    <Footer />
+    {!footer.hide && <Footer />}
   </body>
 </html>

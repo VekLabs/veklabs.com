@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 import { isMedia, type Populated } from "@/utils/typeChecks";
 import { type MuxPlayerRefAttributes } from "@mux/mux-player-react";
 import MuxPlayer from "@mux/mux-player-react/lazy";
-import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Image, { getImageUrl } from "./Image";
@@ -92,7 +92,6 @@ export default function VideoCard({
           height: 500 / (16 / 9),
           width: 500,
         })}
-        preload="auto"
         muted
         paused={!isPlaying}
         currentTime={currentTime}

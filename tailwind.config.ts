@@ -40,6 +40,8 @@ export default {
         fifth: "moveInCircle 20s ease infinite",
         "fixed-scrolled-appearance":
           "fixed-scrolled-appearance 0.3s ease forwards",
+        "watch-scroll": "watch-scroll 1s linear forwards",
+        appear: "appear 1s ease-out forwards",
       },
       keyframes: {
         "fade-up": {
@@ -57,6 +59,44 @@ export default {
         parallax: {
           "0%": { transform: "translateY(var(--parallax-start, 0))" },
           "100%": { transform: "translateY(var(--parallax-end, 50%))" },
+        },
+        "watch-scroll": {
+          "entry 0%": {
+            opacity: "0",
+            transform: "scale(0.6)",
+            filter: "blur(10px)",
+            zIndex: "-1",
+          },
+          "entry 20%": {
+            opacity: "0",
+          },
+          "entry 90%": {
+            zIndex: "-1",
+          },
+          "entry 100%": {
+            opacity: "1",
+            transform: " scale(1)",
+            filter: "blur(0px)",
+            zIndex: "1",
+          },
+          "exit 0%": {
+            opacity: "1",
+            transform: " scale(1)",
+            filter: "blur(0px)",
+            zIndex: "1",
+          },
+          "exit 79%": {
+            zIndex: "-1",
+          },
+          "exit 80%": {
+            opacity: "0",
+          },
+          "exit 100%": {
+            opacity: "0",
+            transform: "scale(0.6)",
+            filter: "blur(10px)",
+            zIndex: "-1",
+          },
         },
         moveHorizontal: {
           "0%": {

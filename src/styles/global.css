@@ -6,6 +6,11 @@
 
 @custom-variant sub-svg (& svg);
 
+/* :root {
+  -webkit-text-size-adjust: none;
+  touch-action: pan-y; 
+} */
+
 body {
   font-family: var(--font-montserrat);
   margin: 0;

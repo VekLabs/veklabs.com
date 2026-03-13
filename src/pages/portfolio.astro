@@ -1,37 +1,36 @@
 ---
-import { getPayload } from '@/payload'
-import type { Video } from '@/payload-types'
-import type { Populated } from '@/utils/typeChecks'
-import { uniqBy } from 'lodash-es'
-import PageTitle from '../components/PageTitle.astro'
-import { FilteredVideoGrid } from '../components/FilteredVideoGrid.tsx'
-import DefaultLayout from '../layouts/Layout.astro'
+import { getPayload } from "@/payload";
+import type { Video } from "@/payload-types";
+import type { Populated } from "@/utils/typeChecks";
+import { uniqBy } from "lodash-es";
+import PageTitle from "../components/PageTitle.astro";
+import { FilteredVideoGrid } from "../components/FilteredVideoGrid.tsx";
+import DefaultLayout from "../layouts/Layout.astro";
 
-const payload = await getPayload()
+const payload = await getPayload();
 
 const videos =
   ((
     await payload.find({
-      collection: 'videos',
+      collection: "videos",
       limit: 100,
-      sort: '-publishDate',
+      sort: "-publishDate",
       where: { slug: { exists: true } },
     })
-  ).docs as Populated<Video>[]) ?? []
+  ).docs as Populated<Video>[]) ?? [];
 
 const categories = uniqBy(
   videos.filter((video) => !!video.type).map((video) => video.type),
-  'id',
-)
+  "id",
+);
 ---
 
-<DefaultLayout title="Portfolio">
-  <section class="w-container mx-auto py-14">
-    <div class="flex items-center gap-6 pb-4">
-      <PageTitle>Portfolio</PageTitle>
-    </div>
-    <div class="min-h-140">
-      <FilteredVideoGrid categories={categories} videos={videos} client:idle />
-    </div>
+<DefaultLayout
+  title="Portfolio"
+  header={{ appearance: "fixed" }}
+  footer={{ hide: true }}
+>
+  <section class="w-container mx-auto">
+    <FilteredVideoGrid categories={categories} videos={videos} client:idle />
   </section>
 </DefaultLayout>
