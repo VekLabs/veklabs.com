@@ -15,6 +15,7 @@ type Props = Parameters<typeof BaseHead>["0"] & {
   footer?: {
     hide?: boolean;
   };
+  className?: string;
 };
 
 const {
@@ -22,6 +23,7 @@ const {
   description,
   header = { appearance: "sticky" },
   footer = { hide: false },
+  className = "",
   ...headProps
 } = Astro.props;
 ---
@@ -31,6 +33,7 @@ const {
   class:list={[
     "font-[--font-montserrat]",
     "bg-background text-foreground no-scrollbar min-h-full font-sans font-normal",
+    className,
   ]}
 >
   <head>
@@ -39,7 +42,7 @@ const {
   </head>
 
   <body class="no-scrollbar size-full">
-    <Header currentPath={Astro.url.pathname} {...header} client:load />
+    <!-- <Header currentPath={Astro.url.pathname} {...header} client:load /> -->
     <main class="size-full">
       <slot />
     </main>

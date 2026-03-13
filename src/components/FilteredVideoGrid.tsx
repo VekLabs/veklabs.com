@@ -28,7 +28,7 @@ export function FilteredVideoGrid({
         activeCategory={activeCategory}
       /> */}
 
-      <div className="no-scrollbar flex h-screen snap-y snap-mandatory flex-col gap-8 overflow-y-auto">
+      <div className="no-scrollbar flex flex-col gap-8">
         <div className="flex items-center gap-6 pb-4">
           <h1 className="m-0 text-[clamp(2rem,5vw,2.65rem)] font-bold tracking-wide">
             Portfolio

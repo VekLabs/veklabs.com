@@ -29,8 +29,20 @@ const categories = uniqBy(
   title="Portfolio"
   header={{ appearance: "fixed" }}
   footer={{ hide: true }}
+  className="w-container mx-auto h-dvh snap-y snap-mandatory"
 >
-  <section class="w-container mx-auto">
-    <FilteredVideoGrid categories={categories} videos={videos} client:idle />
-  </section>
+  <!-- <section class="w-container mx-auto"> -->
+  <style is:global>
+    :root,
+    body,
+    main {
+      -webkit-text-size-adjust: none;
+      touch-action: pan-y; /*prevent user scaling*/
+    }
+    main {
+      scroll-snap-type: y mandatory;
+    }
+  </style>
+  <FilteredVideoGrid categories={categories} videos={videos} client:idle />
+  <!-- </section> -->
 </DefaultLayout>
