@@ -10,7 +10,7 @@ type Props = Parameters<typeof BaseHead>["0"] & {
   title?: string;
   description?: string;
   header?: {
-    appearance?: "sticky" | "fixed";
+    appearance?: "sticky" | "fixed" | "overlay";
   };
   footer?: {
     hide?: boolean;
@@ -42,7 +42,7 @@ const {
   </head>
 
   <body class="no-scrollbar size-full">
-    <!-- <Header currentPath={Astro.url.pathname} {...header} client:load /> -->
+    <Header currentPath={Astro.url.pathname} {...header} client:load />
     <main class="size-full">
       <slot />
     </main>

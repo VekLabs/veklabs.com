@@ -62,6 +62,9 @@ importers:
       scroll-snap-api:
         specifier: ^1.0.2
         version: 1.0.2
+      scrollsnap-events:
+        specifier: ^0.1.1
+        version: 0.1.1
       smooth-scroll-into-view-if-needed:
         specifier: ^2.0.2
         version: 2.0.2
@@ -3634,6 +3637,9 @@ packages:
 
   scroll-snap-api@1.0.2:
     resolution: {integrity: sha512-MRYDydb4sPIma744L682TmeXQaR7pgWFJArMCsgJB08tUnjZjxz5Y7U84l6+lPRALQZW2STzqJ8NXvHfy7WcfQ==}
+
+  scrollsnap-events@0.1.1:
+    resolution: {integrity: sha512-Df1kg+oOU15vBefjgYBTJ2KhTVZm7LEYj9mY2KIVcGBp34Fse5c6b/xqviIbkWHnjv8/vJbTktEBAnBtTsqKaA==}
 
   secure-json-parse@4.1.0:
     resolution: {integrity: sha512-l4KnYfEyqYJxDwlNVyRfO2E4NTHfMKAWdUuA8J0yve2Dz/E/PdBepY03RvyJpssIpRFwJoCD55wA+mEDs6ByWA==}
@@ -8118,6 +8124,8 @@ snapshots:
       compute-scroll-into-view: 3.1.1
 
   scroll-snap-api@1.0.2: {}
+
+  scrollsnap-events@0.1.1: {}
 
   secure-json-parse@4.1.0: {}
 

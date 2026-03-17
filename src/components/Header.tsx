@@ -10,7 +10,7 @@ import { useScrollLock } from "usehooks-ts";
 
 export interface HeaderProps {
   currentPath: string;
-  appearance?: "sticky" | "fixed";
+  appearance?: "sticky" | "fixed" | "overlay";
 }
 
 const menu = {
@@ -67,6 +67,8 @@ export default function Header({
               appearance === "sticky",
             "animate-fixed-scrolled-appearance range/0px_100px timeline spring-duration-500 spring-bounce-40 fixed top-0 left-0 w-full data-[hide=true]:-translate-y-full":
               appearance === "fixed",
+            "spring-duration-500 spring-bounce-40 fixed top-0 left-0 w-full data-[hide=true]:-translate-y-full":
+              appearance === "overlay",
           },
         ])}
         role="banner"

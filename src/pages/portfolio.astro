@@ -3,7 +3,6 @@ import { getPayload } from "@/payload";
 import type { Video } from "@/payload-types";
 import type { Populated } from "@/utils/typeChecks";
 import { uniqBy } from "lodash-es";
-import PageTitle from "../components/PageTitle.astro";
 import { FilteredVideoGrid } from "../components/FilteredVideoGrid.tsx";
 import DefaultLayout from "../layouts/Layout.astro";
 
@@ -25,9 +24,13 @@ const categories = uniqBy(
 );
 ---
 
+<script>
+  import "scrollsnap-events";
+</script>
+
 <DefaultLayout
   title="Portfolio"
-  header={{ appearance: "fixed" }}
+  header={{ appearance: "overlay" }}
   footer={{ hide: true }}
   className="w-container mx-auto h-dvh snap-y snap-mandatory"
 >
@@ -40,7 +43,7 @@ const categories = uniqBy(
       touch-action: pan-y; /*prevent user scaling*/
     }
     main {
-      scroll-snap-type: y mandatory;
+      scroll-snap-type: mandatory;
     }
   </style>
   <FilteredVideoGrid categories={categories} videos={videos} client:idle />
