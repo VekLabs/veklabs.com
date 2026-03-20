@@ -56,7 +56,9 @@ const { home } = Astro.props;
               <h1 class="text-3xl font-bold lg:text-4xl">
                 {home.awards_title}
               </h1>
-              <div class="z-10 flex w-full flex-wrap gap-8">
+              <div
+                class="flex-wrap-balance z-10 grid w-full grid-cols-2 gap-8 md:flex"
+              >
                 {
                   home.awards?.map((awardImage) => (
                     <Image
