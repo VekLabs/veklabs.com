@@ -1,23 +1,18 @@
-import { useMuxVideo } from "@/hooks/useVideo";
 import type { Type, Video } from "@/payload-types";
 import { cn } from "@/utils/cn";
 import { isMedia, type Populated } from "@/utils/typeChecks";
 import type { MuxPlayerRefAttributes } from "@mux/mux-player-react";
 import MuxPlayer from "@mux/mux-player-react/lazy";
 import "@mux/mux-player-react/themes/minimal";
-import {
-  FolderSimpleStarIcon,
-  FunnelIcon,
-  FunnelSimpleIcon,
-  PlayIcon,
-} from "@phosphor-icons/react/ssr";
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
+import { FunnelIcon, PlayIcon } from "@phosphor-icons/react/ssr";
 import { motion } from "motion/react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { getSnapTargetVertical } from "scrollsnap-events/core";
 import scrollIntoView from "smooth-scroll-into-view-if-needed";
+import { useMediaQuery, useOnClickOutside, useScrollLock } from "usehooks-ts";
 import Image, { getImageUrl } from "./Image";
 import { PortfolioFilter } from "./PortfolioFilter";
-import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
 
 const VideoGridContext = createContext<{
   isUIVisible: boolean;
@@ -136,13 +131,12 @@ export function FilteredVideoGrid({
             />
           ))}
         </div>
-
-        <VideoList
-          videos={videos}
-          snappedVideoId={snappedVideoId}
-          categories={categories}
-        />
       </motion.div>
+      <VideoList
+        videos={videos}
+        snappedVideoId={snappedVideoId}
+        categories={categories}
+      />
     </VideoGridContext.Provider>
   );
 }
@@ -156,8 +150,16 @@ function VideoList({
   snappedVideoId?: string | number;
   categories: Type[];
 }) {
+  const ref = useRef(null);
   const [activeCategory, setActiveCategory] = useState<string>();
-  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(true);
+  const isMobile = useMediaQuery("(width < 64rem)");
+
+  const { lock, unlock } = useScrollLock();
+
+  useOnClickOutside(ref, () => {
+    setIsFilterMenuOpen(false);
+  });
 
   // If a video is snapped, scroll it into view in the list if it's not already
   useEffect(() => {
@@ -178,47 +180,75 @@ function VideoList({
     }
   }, [snappedVideoId]);
 
+  useEffect(() => {
+    if (isFilterMenuOpen) {
+      lock();
+    } else {
+      unlock();
+    }
+
+    return () => {
+      unlock();
+    };
+  }, [isFilterMenuOpen]);
+
   const filteredVideos = videos.filter((video) => {
     if (!activeCategory) return true;
 
     return video.type.slug === activeCategory;
   });
 
-  return isFilterMenuOpen ? (
+  return isMobile && !isFilterMenuOpen ? (
     <motion.div
       layout
       layoutId="filter-menu"
-      className="fixed right-2.5 bottom-[calc(env(safe-area-inset-bottom)+10px)] z-10 flex items-center gap-2 rounded-full bg-gray-200/20 px-7 py-4 text-sm font-medium ring ring-white/10 backdrop-blur-lg duration-150 ring-inset active:bg-gray-200/40 lg:hidden"
-      variants={{
-        uiVisible: { opacity: 0, x: 100 },
-        uiHidden: { opacity: 1, x: 0 },
-      }}
+      className="fixed right-2.5 bottom-[calc(env(safe-area-inset-bottom)+30px)] z-40 flex items-center gap-2 rounded-full bg-gray-200/20 px-7 py-4 text-sm font-medium ring ring-white/10 backdrop-blur-lg duration-150 ring-inset active:bg-gray-200/40"
       onTap={() => {
         setIsFilterMenuOpen(true);
       }}
     >
       <FunnelIcon weight="bold" />
-      <span>Filter</span>
+      <motion.span layout layoutId="filter-menu-title">
+        Filter
+      </motion.span>
     </motion.div>
   ) : (
     <motion.div
+      ref={ref}
       layout
       layoutId="filter-menu"
-      className="fixed top-0 right-0 z-10 ml-auto hidden h-screen w-100 flex-col gap-3 overflow-y-auto pr-4 xl:flex"
-      style={{
-        mask: `linear-gradient(var(--mask-start-deg, 0deg),rgba(0, 0, 0, 0) 0%,#000 5%,#000 6%,96%,rgba(0, 0, 0, 0) 100%)`,
-      }}
-      variants={{
-        uiVisible: { opacity: 1, x: 0 },
-        uiHidden: { opacity: 0, x: "100%" },
-      }}
+      className="fixed top-20 bottom-0 left-0 z-10 flex h-[calc(100svh-30px)] w-screen flex-col gap-3 overflow-y-auto rounded-4xl bg-gray-900/90 backdrop-blur-2xl max-lg:p-8 lg:top-0 lg:right-0 lg:ml-auto lg:h-screen lg:w-100 lg:bg-transparent"
+      // style={
+      //   isMobile
+      //     ? {}
+      //     : {
+      //         mask: `linear-gradient(var(--mask-start-deg, 0deg),rgba(0, 0, 0, 0) 0%,#000 3%,#000 4%,98%,rgba(0, 0, 0, 0) 100%)`,
+      //       }
+      // }
+      variants={
+        isMobile
+          ? {}
+          : {
+              uiVisible: { opacity: 1, x: 0 },
+              uiHidden: { opacity: 0, x: "100%" },
+            }
+      }
     >
-      <div className="block max-h-20 min-h-20" />
-      <PortfolioFilter
-        onChange={setActiveCategory}
-        categories={categories}
-        activeCategory={activeCategory}
-      />
+      <div className="hidden max-h-20 min-h-20 lg:block" />
+      <div className="sticky top-0 left-0 z-20 flex flex-col gap-4 lg:top-20">
+        <motion.span
+          className="text-xl font-bold"
+          layout
+          layoutId="filter-menu-title"
+        >
+          Filter
+        </motion.span>
+        <PortfolioFilter
+          onChange={setActiveCategory}
+          categories={categories}
+          activeCategory={activeCategory}
+        />
+      </div>
       {filteredVideos.map((video, i) => (
         <motion.div
           data-list-id={video.id}
@@ -226,6 +256,7 @@ function VideoList({
           onTap={() => {
             const element = document.querySelector(`[data-id="${video.id}"]`);
             if (element) {
+              setIsFilterMenuOpen(false);
               element.scrollIntoView({
                 behavior: "smooth",
                 block: "center",
@@ -271,6 +302,13 @@ function VideoCard({
   const [isPreview, setIsPreview] = useState(true);
   const { setIsUIVisible } = useContext(VideoGridContext);
 
+  useOnClickOutside(ref, () => {
+    if (snapped && !isPreview) {
+      setIsPreview(true);
+      setIsUIVisible(true);
+    }
+  });
+
   useEffect(() => {
     if (!snapped) {
       setIsPreview(true);
@@ -293,7 +331,7 @@ function VideoCard({
         <MuxPlayer
           ref={ref}
           className={cn("size-full rounded-xl object-cover duration-700", {
-            "[--controls:none] [--media-object-fit:cover]": isPreview,
+            "[--media-object-fit:cover]": isPreview,
             "scale-125": video.hasCropMarks && isPreview,
           })}
           defaultHiddenCaptions={isPreview}
@@ -377,7 +415,7 @@ function VideoCard({
 
                 {video.body && (
                   <div
-                    className="relative z-10 hidden max-w-200 pt-4 text-sm font-medium text-gray-200 lg:block"
+                    className="relative z-10 hidden max-w-250 pt-4 text-sm font-medium text-gray-200 lg:block"
                     dangerouslySetInnerHTML={{
                       __html: convertLexicalToHTML({ data: video.body }),
                     }}

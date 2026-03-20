@@ -46,6 +46,6 @@ const categories = uniqBy(
       scroll-snap-type: mandatory;
     }
   </style>
-  <FilteredVideoGrid categories={categories} videos={videos} client:idle />
+  <FilteredVideoGrid categories={categories} videos={videos} client:load />
   <!-- </section> -->
 </DefaultLayout>
